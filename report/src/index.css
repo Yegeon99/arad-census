@@ -1,23 +1,32 @@
 @import "tailwindcss";
 
-/* 디자인 토큰 — 라이트 "리포트/논문" 무드 (Market Analyst의 형제 프로젝트,
-   대시보드 vs 리포트로 형태 구분. 단일 액센트 + 데이터 잉크 중심) */
+/* 디자인 토큰 — "데이터 저널리즘 에디토리얼" 무드
+   웜 오프화이트 지면 + 딥 네이비 잉크 + 단일 액센트(강조 1곳).
+   구획은 박스 대신 여백 + 0.5px 헤어라인. */
 :root {
-  --bg-base: #FAFAF8;      /* 종이 느낌의 웜 화이트 */
-  --bg-surface: #FFFFFF;
-  --border: #E6E4DE;
-  --text-primary: #1F2430;
-  --text-secondary: #5A6172;
-  --text-muted: #989DAB;
-  --accent: #2450A8;       /* 형제 프로젝트와 동일 포인트 블루 (단일 액센트) */
-  --accent-soft: #E8EEF9;
-  --ink-1: #DDE5F3;        /* 데이터 잉크 농도 스케일 (액센트 계열 단색) */
-  --ink-2: #B9C9E8;
-  --ink-3: #8AA5D9;
-  --ink-4: #5C7FC4;
-  --ink-5: #2450A8;
-  --ink-6: #17376F;
-  --masked: #EFEDE8;       /* 마스킹 셀 */
+  --bg-base: #FAF8F4;                 /* 웜 오프화이트 지면 */
+  --bg-surface: #FAF8F4;              /* 표면 = 지면 (박스 제거) */
+  --ink: #14213D;                     /* 딥 네이비 잉크 */
+  --text-primary: #14213D;
+  --text-secondary: rgba(20, 33, 61, 0.7);
+  --text-muted: rgba(20, 33, 61, 0.55);
+  --border: rgba(20, 33, 61, 0.12);   /* 헤어라인 */
+  --accent: #2450A8;                  /* 단일 액센트 — 강조 1곳에만 */
+  --accent-soft: rgba(36, 80, 168, 0.08);
+  --masked: rgba(20, 33, 61, 0.05);   /* 마스킹 셀 */
+  /* 잉크 램프 (차트 공통 5단계, 8% → 100%) */
+  --ink-8: rgba(20, 33, 61, 0.08);
+  --ink-12: rgba(20, 33, 61, 0.12);
+  --ink-15: rgba(20, 33, 61, 0.15);
+  --ink-20: rgba(20, 33, 61, 0.2);
+  --ink-25: rgba(20, 33, 61, 0.25);
+  --ink-30: rgba(20, 33, 61, 0.3);
+  --ink-35: rgba(20, 33, 61, 0.35);
+  --ink-45: rgba(20, 33, 61, 0.45);
+  --ink-55: rgba(20, 33, 61, 0.55);
+  --ink-65: rgba(20, 33, 61, 0.65);
+  --ink-70: rgba(20, 33, 61, 0.7);
+  --ink-80: rgba(20, 33, 61, 0.8);
 }
 
 html {
@@ -35,7 +44,7 @@ body { margin: 0; min-height: 100vh; }
 
 h1, h2, h3, .serif {
   font-family: "Noto Serif KR", "Pretendard Variable", serif;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.2;
   word-break: keep-all;
 }
@@ -45,34 +54,80 @@ h1, h2, h3, .serif {
   font-feature-settings: "tnum";
 }
 
-.prose-block {
-  color: var(--text-secondary);
+.prose-block { color: var(--text-secondary); }
+
+/* 타이포 위계 5단계 */
+.display-num {
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
 }
 
-/* 섹션 리드 문단 — 이 섹션이 답하는 질문 */
 .lead {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-secondary);
+  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink-80);
+  word-break: keep-all;
 }
 
-/* '발견' 인용 블록 — 본문 흐름 속 왼쪽 액센트 바 */
+.overline-label {
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-55);
+}
+
+.caption { font-size: 13px; color: var(--ink-55); }
+
+/* 섹션 마지널리아 — 세리프 큰 숫자 */
+.section-no {
+  font-family: "Noto Serif KR", serif;
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-20);
+  letter-spacing: -0.02em;
+}
+
+/* '발견' 인용 블록 — 왼쪽 1px 잉크 선, 박스 없음 */
 .finding-quote {
-  border-left: 3px solid var(--accent);
-  padding: 2px 0 2px 14px;
+  border-left: 1px solid var(--ink-30);
+  padding: 2px 0 2px 16px;
   margin: 0;
 }
 
-/* 캡션·각주 */
-.caption { font-size: 13px; color: var(--text-muted); }
-.footnote {
-  font-size: 12.5px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  padding-top: 8px;
-  margin-top: 16px;
+/* 선언문 — 세리프 인용 */
+.declaration {
+  font-family: "Noto Serif KR", serif;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--text-primary);
+  border-left: 1px solid var(--ink);
+  padding: 4px 0 4px 18px;
 }
 
-a { color: var(--accent); }
+.footnote {
+  font-size: 13px;
+  color: var(--ink-55);
+  border-top: 0.5px solid var(--border);
+  padding-top: 10px;
+  margin-top: 18px;
+}
+
+/* 헤어라인 구획 */
+.hairline-t { border-top: 0.5px solid var(--border); }
+.hairline-b { border-bottom: 0.5px solid var(--border); }
+
+/* 링크 — 파랑 글자 금지, 잉크 + 연한 밑줄 */
+a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--ink-30);
+  text-underline-offset: 3px;
+}
 
 section { scroll-margin-top: 24px; }

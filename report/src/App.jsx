@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import census from "./data/census.json";
 import seedYield from "./data/seed_yield.json";
-import { HBarList, CompareBars, Heatmap, StackBar, StackBar100, Legend, HeatScaleLegend, FlowDiagram } from "./components/charts.jsx";
+import { HBarList, CompareBars, Heatmap, StackBar, StackBar100, Legend, HeatScaleLegend, FlowDiagram, IndexTable, HeroPyramid } from "./components/charts.jsx";
 
 // Phase별 실측치 (파이프라인 로그 기준 — 게이트 보고와 동일 수치)
 const MEASURED = {
@@ -13,22 +13,25 @@ const MEASURED = {
 };
 
 const SECTIONS = [
-  { id: "s1", no: "1", title: "직업 분포" },
-  { id: "s2", no: "2", title: "성장 피라미드" },
-  { id: "s3", no: "3", title: "활성도" },
-  { id: "s4", no: "4", title: "직업 × 명성 격차" },
-  { id: "s5", no: "5", title: "AI 인사이트" },
-  { id: "s6", no: "6", title: "방법론과 한계" },
+  { id: "s1", no: "01", title: "직업 분포" },
+  { id: "s2", no: "02", title: "성장 피라미드" },
+  { id: "s3", no: "03", title: "활성도" },
+  { id: "s4", no: "04", title: "직업 × 명성 격차" },
+  { id: "s5", no: "05", title: "AI 인사이트" },
+  { id: "s6", no: "06", title: "방법론과 한계" },
 ];
 
 const ACT_ORDER = ["주간 활성", "월간 활성", "저활성", "휴면"];
+// 잉크 단색 램프 (§3·§4 공통 톤)
 const ACT_COLORS = {
-  "주간 활성": "var(--ink-6)",
-  "월간 활성": "var(--ink-4)",
-  "저활성": "var(--ink-3)",
-  "휴면": "#D8D5CE",
+  "주간 활성": "rgba(20,33,61,1)",
+  "월간 활성": "rgba(20,33,61,0.7)",
+  "저활성": "rgba(20,33,61,0.35)",
+  "휴면": "rgba(20,33,61,0.12)",
 };
 const ACT_DARK = { "주간 활성": true, "월간 활성": true, "저활성": false, "휴면": false };
+
+const fmt1 = (v) => (+v).toFixed(1);
 
 function useScrollSpy(ids) {
   const [active, setActive] = useState(ids[0]);
@@ -51,10 +54,10 @@ function useScrollSpy(ids) {
 
 function SectionTitle({ no, title, lead }) {
   return (
-    <div className="mb-6">
-      <p className="num m-0 text-[13px] font-semibold tracking-widest" style={{ color: "var(--accent)" }}>§{no}</p>
-      <h2 className="m-0 mt-0.5 text-[26px] font-bold" style={{ color: "var(--text-primary)" }}>{title}</h2>
-      {lead && <p className="lead m-0 mt-2.5">{lead}</p>}
+    <div className="mb-8">
+      <p className="section-no num m-0">{no}</p>
+      <h2 className="m-0 mt-1 text-[34px] font-bold" style={{ color: "var(--text-primary)" }}>{title}</h2>
+      {lead && <p className="lead m-0 mt-4">{lead}</p>}
     </div>
   );
 }
@@ -62,26 +65,23 @@ function SectionTitle({ no, title, lead }) {
 function FindingQuote({ title, children }) {
   return (
     <blockquote className="finding-quote text-[14px]">
-      {title && <p className="m-0 font-semibold" style={{ color: "var(--text-primary)" }}>{title}</p>}
-      <p className="prose-block m-0 mt-0.5">{children}</p>
+      {title && <p className="overline-label m-0">{title}</p>}
+      <p className="prose-block m-0 mt-1">{children}</p>
     </blockquote>
   );
 }
 
 function SmallBadge({ children }) {
   return (
-    <span className="ml-1.5 rounded-sm px-1.5 py-0.5 text-[10.5px]" style={{ background: "var(--masked)", color: "var(--text-secondary)" }}>
+    <span className="ml-1.5 px-1.5 py-0.5 text-[10.5px]" style={{ background: "var(--masked)", color: "var(--text-secondary)" }}>
       {children}
     </span>
   );
 }
 
-function ConfidenceBadge({ value }) {
+function ConfidenceLabel({ value }) {
   return (
-    <span className="rounded-full px-2 py-0.5 text-[11px] font-semibold"
-      style={value === "관찰"
-        ? { background: "var(--accent)", color: "#fff" }
-        : { background: "transparent", color: "var(--text-secondary)", border: "1px solid var(--text-muted)" }}>
+    <span className="text-[11px] font-semibold" style={{ letterSpacing: "0.08em", color: value === "관찰" ? "var(--accent)" : "var(--ink-55)" }}>
       {value}
     </span>
   );
@@ -132,9 +132,9 @@ export default function App() {
     };
   }, [d]);
 
-  const topJobs = heat.ranked.slice(0, 15).map((r) => ({ label: r.job, value: +(r.total / fameN * 100).toFixed(2) }));
+  const topJobs = heat.ranked.slice(0, 15).map((r) => ({ label: r.job, value: +(r.total / fameN * 100).toFixed(1) }));
   const top5Share = heat.ranked.slice(0, 5).reduce((s, r) => s + r.total, 0);
-  const bottomJobs = heat.ranked.slice(-5).reverse().map((r) => ({ label: r.job, value: +(r.total / fameN * 100).toFixed(2) }));
+  const bottomJobs = heat.ranked.slice(-5).reverse().map((r) => ({ label: r.job, value: +(r.total / fameN * 100).toFixed(1) }));
 
   // §4 상위 구간 대표성: 직업별 상위 3구간(미카엘라 입장~하드) 비중 vs 전체 평균
   const gap = useMemo(() => {
@@ -151,6 +151,10 @@ export default function App() {
     rows.sort((a, b) => b.index - a.index);
     return { overallUpper, top: rows.slice(0, 5), bottom: rows.slice(-5).reverse() };
   }, [d, heat]);
+  const maxDev = useMemo(
+    () => Math.max(...[...gap.top, ...gap.bottom].map((r) => Math.abs(r.index - 1))),
+    [gap]
+  );
 
   const seedStats = useMemo(() => {
     const s = seedYield.seeds;
@@ -169,11 +173,11 @@ export default function App() {
   const summary = [
     {
       href: "#s2", confidence: "관찰", title: "상한 도달 검색의 고명성 쏠림",
-      text: `검색 288콜 중 132콜(45.8%)이 상한(200건)에 도달했고, 상한 미도달 검색에서만 발견된 비상한 표본은 레기온 미만이 ${fameCompare[0].unc}%로 전체 표본(${fameCompare[0].full}%)보다 훨씬 저명성 중심 — 본 조사 최대 편향.`,
+      text: `검색 288콜 중 132콜(45.8%)이 상한(200건)에 도달했고, 상한 미도달 검색에서만 발견된 비상한 표본은 레기온 미만이 ${fmt1(fameCompare[0].unc)}%로 전체 표본(${fmt1(fameCompare[0].full)}%)보다 훨씬 저명성 중심 — 본 조사 최대 편향.`,
     },
     {
       href: "#s3", confidence: "가설", title: "편향 보정 재추정 시 휴면 40% → 65%",
-      text: `비상한 표본의 명성 분포를 가중치로 재추정하면 휴면 비율이 원 수치 ${dormantRaw}%에서 ${dormantRw}%로 커진다. 검색 상한 편향이 활성도도 끌어올리고 있을 가능성.`,
+      text: `비상한 표본의 명성 분포를 가중치로 재추정하면 휴면 비율이 원 수치 ${fmt1(dormantRaw)}%에서 ${fmt1(dormantRw)}%로 커진다. 검색 상한 편향이 활성도도 끌어올리고 있을 가능성.`,
     },
     {
       href: "#s4", confidence: "가설", title: "직업별 레이드권 과대/과소 대표",
@@ -181,67 +185,81 @@ export default function App() {
     },
   ];
 
+  const heroStats = [
+    ["전체 표본", meta.sample_size.toLocaleString(), "명"],
+    ["비상한 표본", meta.uncapped_sample_size.toLocaleString(), "명"],
+    ["타임라인 서브샘플", act.subsample_size.toLocaleString(), "명"],
+    ["API 호출", MEASURED.apiCalls.toLocaleString(), "회"],
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
-      {/* 히어로 헤더 */}
-      <header className="border-b" style={{ background: "var(--bg-surface)", borderColor: "var(--border)" }}>
-        <div className="mx-auto max-w-[840px] px-5 pt-14 pb-12">
-          <p className="m-0 text-[13px] font-semibold tracking-widest" style={{ color: "var(--accent)" }}>ARAD CENSUS · 2026-08 조사 회차</p>
-          <h1 className="mt-2 mb-4 text-[40px] font-bold sm:text-[44px]" style={{ color: "var(--text-primary)" }}>
-            아라드 센서스
-          </h1>
-          <p className="prose-block m-0 max-w-[620px] text-[16px]">
-            한국어 음절 시드 검색으로 추출한 던전앤파이터 캐릭터 표본의 직업·명성·활성도 분포 조사 — {MEASURED.surveyedAt}.
-          </p>
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              ["전체 표본", meta.sample_size.toLocaleString(), "명"],
-              ["비상한 표본", meta.uncapped_sample_size.toLocaleString(), "명"],
-              ["타임라인 서브샘플", act.subsample_size.toLocaleString(), "명"],
-              ["API 호출", MEASURED.apiCalls.toLocaleString(), "회"],
-            ].map(([label, value, unit]) => (
-              <div key={label} className="rounded-md border px-4 py-3" style={{ borderColor: "var(--border)", background: "var(--bg-base)" }}>
-                <p className="caption m-0">{label}</p>
-                <p className="num m-0 mt-0.5 text-[24px] font-bold leading-tight" style={{ color: "var(--text-primary)" }}>
-                  {value}<span className="text-[13px] font-normal" style={{ color: "var(--text-muted)" }}> {unit}</span>
+      {/* 히어로 */}
+      <header className="hairline-b" style={{ borderColor: "var(--border)" }}>
+        <div className="mx-auto max-w-[960px] px-5 pt-16 pb-14">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+            <div className="min-w-0">
+              <p className="overline-label m-0 text-[11px]">ARAD CENSUS · 2026-08 조사 회차</p>
+              <h1 className="mt-3 mb-5 text-[44px] font-bold sm:text-[64px]" style={{ color: "var(--text-primary)", letterSpacing: "-0.02em", lineHeight: 1.1 }}>
+                아라드 센서스
+              </h1>
+              <p className="m-0 max-w-[560px] text-[18px]" style={{ color: "var(--ink-70)" }}>
+                한국어 음절 시드 검색으로 추출한 던전앤파이터 캐릭터 표본의 직업·명성·활성도 분포 조사
+              </p>
+              <p className="overline-label m-0 mt-2 text-[11px]">조사일 {MEASURED.surveyedAt}</p>
+            </div>
+            <div className="shrink-0 md:pt-10">
+              <HeroPyramid fullPcts={fameCompare.map((b) => b.full)} uncPcts={fameCompare.map((b) => b.unc)} />
+            </div>
+          </div>
+
+          <div className="mt-10 grid grid-cols-2 gap-y-6 sm:flex sm:items-stretch">
+            {heroStats.map(([label, value, unit], i) => (
+              <div key={label} className="pr-6 sm:px-6"
+                   style={i > 0 ? { borderLeft: "0.5px solid var(--border)" } : { paddingLeft: 0 }}>
+                <p className="overline-label m-0 text-[11px]">{label}</p>
+                <p className="display-num m-0 mt-1 text-[32px] sm:text-[44px]" style={{ color: "var(--text-primary)" }}>
+                  {value}<span className="text-[13px] font-normal" style={{ color: "var(--ink-55)", letterSpacing: 0 }}> {unit}</span>
                 </p>
               </div>
             ))}
           </div>
-          <p className="caption num m-0 mt-2">
+          <p className="caption num m-0 mt-3">
             명성 표본 {fameN.toLocaleString()}명 (결측 {meta.fame_missing.toLocaleString()} 제외) · 비상한 명성 표본 {uncFameN.toLocaleString()}명
           </p>
-          <p className="mt-6 rounded-md border px-4 py-3 text-[14px]" style={{ borderColor: "var(--border)", color: "var(--text-secondary)", background: "var(--bg-base)" }}>
+
+          <p className="declaration mt-10">
             이 조사는 모집단 추정이 아니라 <b>표본조사 방법론의 시연</b>이다. 표본 추출 방식의 편향과 한계를 §6에서 그대로 공개한다.
           </p>
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-[1080px] flex-1 gap-8 px-5">
+      <div className="mx-auto flex w-full max-w-[1080px] flex-1 gap-10 px-5">
         {/* 목차 사이드 내비 (스크롤 스파이) */}
-        <nav className="sticky top-6 hidden h-fit w-[170px] shrink-0 pt-12 lg:block" aria-label="목차">
+        <nav className="sticky top-6 hidden h-fit w-[132px] shrink-0 pt-14 lg:block" aria-label="목차">
           {SECTIONS.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="block border-l-2 py-1.5 pl-3 text-[13px] no-underline"
+            <a key={s.id} href={`#${s.id}`} className="block py-1.5 pl-3 text-[12px]"
                style={{
-                 borderColor: active === s.id ? "var(--accent)" : "var(--border)",
-                 color: active === s.id ? "var(--accent)" : "var(--text-secondary)",
+                 textDecoration: "none",
+                 borderLeft: active === s.id ? "2px solid var(--accent)" : "2px solid transparent",
+                 color: active === s.id ? "var(--text-primary)" : "var(--ink-45)",
                  fontWeight: active === s.id ? 700 : 400,
                }}>
-              §{s.no} {s.title}
+              {s.no} {s.title}
             </a>
           ))}
         </nav>
 
-        <main className="min-w-0 max-w-[840px] flex-1 pt-12 pb-16">
+        <main className="min-w-0 max-w-[800px] flex-1 pt-14 pb-20">
           {/* 요약 — 핵심 발견 3가지 */}
-          <section className="mb-24">
-            <h2 className="m-0 text-[20px] font-bold" style={{ color: "var(--text-primary)" }}>요약 — 핵심 발견 3가지</h2>
-            <div className="mt-4 space-y-4">
+          <section className="mb-32">
+            <h2 className="m-0 text-[22px] font-bold" style={{ color: "var(--text-primary)" }}>요약 — 핵심 발견 3가지</h2>
+            <div className="mt-5 space-y-5">
               {summary.map((s) => (
                 <blockquote key={s.href} className="finding-quote text-[14px]">
-                  <p className="m-0 flex items-center gap-2 font-semibold" style={{ color: "var(--text-primary)" }}>
-                    <ConfidenceBadge value={s.confidence} />
-                    <a href={s.href} className="no-underline" style={{ color: "var(--text-primary)" }}>{s.title} ↓</a>
+                  <p className="m-0 flex items-center gap-2.5 font-semibold" style={{ color: "var(--text-primary)" }}>
+                    <ConfidenceLabel value={s.confidence} />
+                    <a href={s.href}>{s.title} ↓</a>
                   </p>
                   <p className="prose-block m-0 mt-1">{s.text}</p>
                 </blockquote>
@@ -250,21 +268,22 @@ export default function App() {
           </section>
 
           {/* §1 직업 분포 */}
-          <section id="s1" className="mb-24">
-            <SectionTitle no="1" title="직업 분포"
+          <section id="s1" className="mb-32">
+            <SectionTitle no="01" title="직업 분포"
               lead="지금 아라드에서 어떤 직업이 가장 많이 플레이되고 있는가? 명성 표본 30,082명의 정규화된 최종 전직명 기준 상위 15개 직업." />
-            <HBarList items={topJobs} accentCount={5} valueFmt={(v) => `${v}%`} />
-            <div className="mt-5 space-y-4">
+            <p className="overline-label m-0 mb-3">상위 15개 직업 · 명성 표본 비중</p>
+            <HBarList items={topJobs} accentCount={5} valueFmt={(v) => `${fmt1(v)}%`} />
+            <div className="mt-6 space-y-5">
               <FindingQuote title="상위 발견">
-                크루세이더가 {topJobs[0].value}%로 최다. 상위 5개 직업(크루세이더·다크템플러·넨마스터·브레이커·스위프트 마스터)이
+                크루세이더가 {fmt1(topJobs[0].value)}%로 최다. 상위 5개 직업(크루세이더·다크템플러·넨마스터·브레이커·스위프트 마스터)이
                 명성 표본의 {(top5Share / fameN * 100).toFixed(1)}%(n={top5Share.toLocaleString()})를 차지한다.
               </FindingQuote>
               <FindingQuote title="하위 발견">
-                공개 직업 중 하위: {bottomJobs.map((j) => `${j.label} ${j.value}%`).join(", ")}.
+                공개 직업 중 하위: {bottomJobs.map((j) => `${j.label} ${fmt1(j.value)}%`).join(", ")}.
                 표본 10명 미만 직업과 외전 캐릭터는 "기타"로 합산했다.
               </FindingQuote>
               <FindingQuote>
-                각성 단계 분포: 眞 {d.stage.find((s) => s.stage === "眞")?.pct}% — 표본 대부분이 최종 각성 상태다.
+                각성 단계 분포: 眞 {fmt1(d.stage.find((s) => s.stage === "眞")?.pct)}% — 표본 대부분이 최종 각성 상태다.
                 검색 노출·상한 편향으로 성장 완료 캐릭터가 과대 대표되었을 가능성이 있다 (§6).
               </FindingQuote>
             </div>
@@ -276,9 +295,9 @@ export default function App() {
           </section>
 
           {/* §2 성장 피라미드 */}
-          <section id="s2" className="mb-24">
-            <SectionTitle no="2" title="성장 피라미드 — 전체 표본 vs 비상한 표본"
-              lead={`검색 상한(200건)에 도달한 검색은 어떤 캐릭터를 돌려주는가? 상한 도달 시 선별 기준은 비공개인데, 실측 결과 고명성 쪽으로 크게 쏠린다. 상한에 걸리지 않은 검색에서만 발견된 비상한 표본은 레기온 미만이 ${fameCompare[0].unc}%로, 전체 표본(${fameCompare[0].full}%)보다 훨씬 저명성 중심이다.`} />
+          <section id="s2" className="mb-32">
+            <SectionTitle no="02" title="성장 피라미드 — 전체 표본 vs 비상한 표본"
+              lead={`검색 상한(200건)에 도달한 검색은 어떤 캐릭터를 돌려주는가? 상한 도달 시 선별 기준은 비공개인데, 실측 결과 고명성 쪽으로 크게 쏠린다. 상한에 걸리지 않은 검색에서만 발견된 비상한 표본은 레기온 미만이 ${fmt1(fameCompare[0].unc)}%로, 전체 표본(${fmt1(fameCompare[0].full)}%)보다 훨씬 저명성 중심이다.`} />
             <CompareBars bins={fameCompare} leftKey="full" rightKey="unc"
               leftLabel={`전체 표본 n=${fameN.toLocaleString()} (명성 결측 제외)`}
               rightLabel={`비상한 표본 n=${uncFameN.toLocaleString()} (명성 결측 제외)`}
@@ -290,8 +309,8 @@ export default function App() {
           </section>
 
           {/* §3 활성도 */}
-          <section id="s3" className="mb-24">
-            <SectionTitle no="3" title="활성도 — 원 수치와 편향 보정 재추정"
+          <section id="s3" className="mb-32">
+            <SectionTitle no="03" title="활성도 — 원 수치와 편향 보정 재추정"
               lead={`표본 캐릭터들은 지금도 플레이 중인가? 층화 서브샘플 ${act.subsample_size}명(명성 구간 비례)의 최근 90일 타임라인으로 판정한 원 수치와, 검색 상한 편향을 보정한 방향의 재추정을 나란히 놓는다.`} />
             <div className="mb-3"><Legend entries={actLegend} /></div>
             <div className="space-y-2">
@@ -303,31 +322,33 @@ export default function App() {
               <StackBar100 label="가중 재추정" sub="비상한 분포 가중"
                 parts={ACT_ORDER.map((k) => ({ label: k, value: act.reweighted_by_uncapped.pct[k], color: ACT_COLORS[k], dark: ACT_DARK[k] }))} />
             </div>
-            <FindingQuote>
-              휴면 비율이 원 수치 {dormantRaw}%에서 재추정 {dormantRw}%로 커진다. 두 수치 모두 §6의 교란 요인
-              (타임라인 기록 밀도, 검색 노출 조건)을 제거하지 못한다.
-            </FindingQuote>
+            <div className="mt-5">
+              <FindingQuote>
+                휴면 비율이 원 수치 {fmt1(dormantRaw)}%에서 재추정 {fmt1(dormantRw)}%로 커진다. 두 수치 모두 §6의 교란 요인
+                (타임라인 기록 밀도, 검색 노출 조건)을 제거하지 못한다.
+              </FindingQuote>
+            </div>
 
-            <h3 className="mt-8 mb-2 text-[16px] font-bold">명성 구간별 활성 구성 (구간별 n 병기)</h3>
-            <p className="caption m-0 mb-2">색 구분은 섹션 상단 범례와 동일.</p>
-            <div className="space-y-2">
+            <p className="overline-label m-0 mt-10 mb-1">명성 구간별 활성 구성 (구간별 n 병기)</p>
+            <p className="caption m-0 mb-3">색 구분은 섹션 상단 범례와 동일.</p>
+            <div className="space-y-2.5">
               {act.by_fame_bin.map((b) => (
                 <div key={b.bin} className="text-[12.5px]">
-                  <div className="mb-0.5 flex justify-between" style={{ color: "var(--text-secondary)" }}>
+                  <div className="mb-1 flex justify-between" style={{ color: "var(--text-secondary)" }}>
                     <span>
-                      {b.bin} <span className="num" style={{ color: "var(--text-muted)" }}>(n={b.n})</span>
+                      {b.bin} <span className="num" style={{ color: "var(--ink-55)" }}>(n={b.n})</span>
                       {b.small_sample && <SmallBadge>표본 소</SmallBadge>}
                     </span>
-                    <span className="num">휴면 {b.pct["휴면"]}%</span>
+                    <span className="num">휴면 {fmt1(b.pct["휴면"])}%</span>
                   </div>
                   <StackBar parts={ACT_ORDER.map((k) => ({ label: k, value: b.counts[k], color: ACT_COLORS[k] }))} />
                 </div>
               ))}
             </div>
-            <div className="mt-4">
-              <FindingQuote>
-                발견 경로별 비교<SmallBadge>표본 소</SmallBadge> — 비상한 표본의 휴면율 <b className="num">{act.by_capped.uncapped.pct["휴면"]}%</b> (n={act.by_capped.uncapped.n})
-                vs 상한 표본 <b className="num">{act.by_capped.capped_only.pct["휴면"]}%</b> (n={act.by_capped.capped_only.n}) —
+            <div className="mt-6">
+              <FindingQuote title="발견 경로별 비교">
+                <SmallBadge>표본 소</SmallBadge> 비상한 표본의 휴면율 <b className="num">{fmt1(act.by_capped.uncapped.pct["휴면"])}%</b> (n={act.by_capped.uncapped.n})
+                vs 상한 표본 <b className="num">{fmt1(act.by_capped.capped_only.pct["휴면"])}%</b> (n={act.by_capped.capped_only.n}) —
                 검색 상한 편향이 활성도 수치도 끌어올리고 있음을 시사한다. 서브샘플 내 비상한 수(82명)가 작아 불확실성이 크다.
               </FindingQuote>
             </div>
@@ -339,30 +360,23 @@ export default function App() {
           </section>
 
           {/* §4 직업 × 명성 격차 */}
-          <section id="s4" className="mb-24">
-            <SectionTitle no="4" title="직업 × 명성 격차"
+          <section id="s4" className="mb-32">
+            <SectionTitle no="04" title="직업 × 명성 격차"
               lead="어떤 직업이 최상위 컨텐츠까지 성장해 있는가? 명성 표본 상위 20개 직업의 명성 구간 구성과, 레이드권 구간의 과대·과소 대표를 본다." />
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <p className="caption num m-0">n(명성 표본) · 표본 10명 미만 셀은 마스킹</p>
               <HeatScaleLegend maxPct={Math.round(heat.maxShare * 100)} />
             </div>
             <Heatmap rows={heat.rows} cols={heat.cols} cell={heat.cell} rowTotal={heat.rowTotal} />
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="mt-8 grid gap-8 sm:grid-cols-2">
               {[
                 { title: "상위 구간 과대 대표", rows: gap.top, accent: true },
                 { title: "상위 구간 과소 대표", rows: gap.bottom, accent: false },
               ].map((card) => (
-                <div key={card.title} className="rounded-md border p-3.5 text-[13px]" style={{ borderColor: "var(--border)", background: "var(--bg-surface)" }}>
-                  <p className="m-0 font-semibold" style={{ color: "var(--text-primary)" }}>{card.title}</p>
-                  <p className="caption num m-0 mt-0.5">지수 = 직업 내 레이드권(미카엘라 입장 이상) 비중 ÷ 전체 평균 {(gap.overallUpper * 100).toFixed(1)}%</p>
-                  <ul className="prose-block m-0 mt-1.5 list-none p-0">
-                    {card.rows.map((r) => (
-                      <li key={r.job} className="flex justify-between py-0.5">
-                        <span>{r.job} <span className="num text-[11px]" style={{ color: "var(--text-muted)" }}>(n={r.total.toLocaleString()})</span></span>
-                        <span className="num font-semibold" style={card.accent ? { color: "var(--accent)" } : undefined}>×{r.index.toFixed(2)}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div key={card.title}>
+                  <p className="overline-label m-0">{card.title}</p>
+                  <p className="caption num m-0 mt-0.5 mb-2">지수 = 직업 내 레이드권(미카엘라 입장 이상) 비중 ÷ 전체 평균 {(gap.overallUpper * 100).toFixed(1)}%</p>
+                  <IndexTable rows={card.rows} accent={card.accent} maxDev={maxDev} />
                 </div>
               ))}
             </div>
@@ -372,37 +386,39 @@ export default function App() {
           </section>
 
           {/* §5 AI 인사이트 */}
-          <section id="s5" className="mb-24">
-            <SectionTitle no="5" title="AI 인사이트"
+          <section id="s5" className="mb-32">
+            <SectionTitle no="05" title="AI 인사이트"
               lead="집계 전체와 편향 노트를 입력으로 AI가 생성한 8개 인사이트. 인용 수치는 집계 원본과 전수 대조 후 교정했고, 발견 → 해석 → 필요한 추가 검증의 구조로 단정 없이 서술한다." />
-            <div className="space-y-4">
+            <div>
               {census.insights.map((ins, i) => (
-                <div key={i} className="rounded-md border p-4" style={{ borderColor: "var(--border)", background: "var(--bg-surface)" }}>
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="num text-[12px] font-bold" style={{ color: "var(--text-muted)" }}>#{i + 1}</span>
-                    <ConfidenceBadge value={ins.confidence} />
+                <article key={i} className={i > 0 ? "hairline-t pt-8 mt-8" : ""} style={{ borderColor: "var(--border)" }}>
+                  <div className="mb-2 flex items-baseline gap-3">
+                    <span className="serif num text-[20px] font-semibold" style={{ color: "var(--ink-30)" }}>{String(i + 1).padStart(2, "0")}</span>
+                    <ConfidenceLabel value={ins.confidence} />
                   </div>
-                  <p className="m-0 text-[18px] font-bold leading-normal" style={{ color: "var(--text-primary)" }}>{ins.finding}</p>
-                  <p className="prose-block m-0 mt-2.5 text-[14px]">
-                    <span className="caption mr-1.5 font-semibold">해석</span>{ins.interpretation}
+                  <h3 className="m-0 text-[20px] font-bold" style={{ color: ins.confidence === "가설" ? "var(--ink-80)" : "var(--text-primary)", lineHeight: 1.45 }}>
+                    {ins.finding}
+                  </h3>
+                  <p className="prose-block m-0 mt-3 text-[14px]">
+                    <span className="overline-label mr-2">해석</span>{ins.interpretation}
                   </p>
                   <p className="m-0 mt-2 text-[13px]" style={{ color: "var(--text-secondary)" }}>
-                    <span className="caption mr-1.5 font-semibold">검증에 필요한 것</span>{ins.needed_validation}
+                    <span className="overline-label mr-2">검증에 필요한 것</span>{ins.needed_validation}
                   </p>
-                  <p className="m-0 mt-2.5 border-l-2 pl-2.5 text-[13px]" style={{ borderColor: "var(--accent)", color: "var(--accent)" }}>
-                    <span className="caption mr-1.5 font-semibold">후속 질문</span>{ins.follow_up}
+                  <p className="serif m-0 mt-3 text-[14.5px]" style={{ color: "var(--ink-70)", lineHeight: 1.6 }}>
+                    → {ins.follow_up}
                   </p>
-                </div>
+                </article>
               ))}
             </div>
           </section>
 
           {/* §6 방법론과 한계 */}
-          <section id="s6" className="mb-10">
-            <SectionTitle no="6" title="방법론과 한계"
+          <section id="s6" className="mb-12">
+            <SectionTitle no="06" title="방법론과 한계"
               lead="이 숫자들은 어떻게 만들어졌고, 어디까지 믿을 수 있는가? 표본 설계 · 확인된 편향 · 윤리 원칙 · 실측치. 이 섹션이 본 조사의 핵심이다." />
 
-            <h3 className="mb-2 text-[16px] font-bold">표본 설계</h3>
+            <p className="overline-label m-0 mb-3">표본 설계</p>
             <FlowDiagram />
             <p className="footnote m-0">
               시드: 한국어 2글자 {seedStats.common + seedStats.rare}개(흔한 조합 {seedStats.common} + 희귀 조합 {seedStats.rare}) ×
@@ -413,7 +429,7 @@ export default function App() {
               AI 인사이트는 집계 JSON + 편향 노트 입력으로 배치 생성 후 인용 수치 전수 대조.
             </p>
 
-            <h3 className="mt-8 mb-2 text-[16px] font-bold">확인된 편향 (실측 근거 있음)</h3>
+            <p className="overline-label m-0 mt-10 mb-2">확인된 편향 (실측 근거 있음)</p>
             <ul className="prose-block m-0 list-disc space-y-1.5 pl-5 text-[14px]">
               <li><b>검색 상한 고명성 쏠림</b> — 상한 도달 시 선별 기준 비공개. 비상한 표본은 레기온 미만 79.5% vs 전체 44.8% (§2). 본 조사 최대 편향.</li>
               <li><b>명성 결측 제외의 상향 편향</b> — 결측 1,441명 중 43.5%가 100 미만 저레벨. 제외로 피라미드가 실제보다 위로 치우칠 가능성.</li>
@@ -424,14 +440,14 @@ export default function App() {
               <li><b>조사 단위 = 캐릭터</b> — 동일 유저의 다중 캐릭터 중복 가능. 유저 분포가 아님.</li>
             </ul>
 
-            <h3 className="mt-8 mb-2 text-[16px] font-bold">확인 불가 항목</h3>
+            <p className="overline-label m-0 mt-10 mb-2">확인 불가 항목</p>
             <ul className="prose-block m-0 list-disc space-y-1 pl-5 text-[14px]">
               <li>검색 노출의 "최근 접속 여부" 조건 — 문서·실측 모두에서 확인 불가</li>
               <li>상한 도달 시 200명 선별 기준 (명성순·레벨순 아님까지만 실측 확인)</li>
               <li>서버별 전체 모집단 크기 — 표본 비율 산정 불가</li>
             </ul>
 
-            <h3 className="mt-8 mb-2 text-[16px] font-bold">개인정보·윤리 원칙</h3>
+            <p className="overline-label m-0 mt-10 mb-2">개인정보·윤리 원칙</p>
             <ul className="prose-block m-0 list-disc space-y-1 pl-5 text-[14px]">
               <li>캐릭터명·모험단명·길드명은 수집·저장하지 않음. characterId는 타임라인 조사 직후 sha256 해시로 치환 폐기, 직업 UUID도 폐기</li>
               <li>공개 산출물은 집계 수치만 포함 — 식별 정보 잔존 자동 스캔 0건 통과</li>
@@ -439,28 +455,26 @@ export default function App() {
               <li>호출 간 0.3초 대기·재시도 1회·1회성 배치 — 상시 스케줄 아님</li>
             </ul>
 
-            <h3 className="mt-8 mb-2 text-[16px] font-bold">실측치</h3>
-            <div className="overflow-x-auto rounded-md border" style={{ borderColor: "var(--border)", background: "var(--bg-surface)" }}>
-              <table className="w-full text-[13px]">
-                <tbody>
-                  {[
-                    ["표본 크기", `전체 ${meta.sample_size.toLocaleString()}명 · 명성 표본 ${fameN.toLocaleString()}명 · 비상한 ${meta.uncapped_sample_size.toLocaleString()}명 (명성 있음 ${uncFameN.toLocaleString()}명)`],
-                    ["타임라인 서브샘플", `${act.subsample_size}명 (층화 비례, 최소 구간 n=11)`],
-                    ["API 호출 (누적)", `약 ${MEASURED.apiCalls}회 — 검증 43 + 직업 트리 1 + 검색 ${seedStats.calls + 1} + 타임라인 600, 실패 0`],
-                    ["LLM 비용", `$${MEASURED.llmCostUsd} (인사이트 배치 2회 — 재생성 1회 포함, claude-haiku-4-5)`],
-                    ["수집 소요", `검색 ${MEASURED.collectSec}초 + 타임라인 ${MEASURED.timelineSec}초`],
-                    ["식별 정보 스캔", "커밋 산출물·체크포인트 모두 0건"],
-                  ].map(([k, v]) => (
-                    <tr key={k} className="border-b last:border-0" style={{ borderColor: "var(--border)" }}>
-                      <td className="w-[160px] px-3 py-2 font-medium" style={{ color: "var(--text-secondary)" }}>{k}</td>
-                      <td className="num px-3 py-2">{v}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <p className="overline-label m-0 mt-10 mb-2">실측치</p>
+            <table className="w-full text-[13px]">
+              <tbody>
+                {[
+                  ["표본 크기", `전체 ${meta.sample_size.toLocaleString()}명 · 명성 표본 ${fameN.toLocaleString()}명 · 비상한 ${meta.uncapped_sample_size.toLocaleString()}명 (명성 있음 ${uncFameN.toLocaleString()}명)`],
+                  ["타임라인 서브샘플", `${act.subsample_size}명 (층화 비례, 최소 구간 n=11)`],
+                  ["API 호출 (누적)", `약 ${MEASURED.apiCalls}회 — 검증 43 + 직업 트리 1 + 검색 ${seedStats.calls + 1} + 타임라인 600, 실패 0`],
+                  ["LLM 비용", `$${MEASURED.llmCostUsd} (인사이트 배치 2회 — 재생성 1회 포함, claude-haiku-4-5)`],
+                  ["수집 소요", `검색 ${MEASURED.collectSec}초 + 타임라인 ${MEASURED.timelineSec}초`],
+                  ["식별 정보 스캔", "커밋 산출물·체크포인트 모두 0건"],
+                ].map(([k, v]) => (
+                  <tr key={k} className="hairline-b" style={{ borderColor: "var(--border)" }}>
+                    <td className="w-[160px] py-2 pr-3 font-medium" style={{ color: "var(--text-secondary)" }}>{k}</td>
+                    <td className="num py-2 text-right">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-            <p className="prose-block mt-5 text-[13px]">
+            <p className="prose-block mt-6 text-[13px]">
               데이터 출처: <a href="https://developers.neople.co.kr" target="_blank" rel="noreferrer">Neople 오픈 API</a> (캐릭터 검색·타임라인).
               원본 응답을 저장하지 않고 집계 수치만 공개합니다. 파이프라인·집계 코드는{" "}
               <a href="https://github.com/Yegeon99/arad-census" target="_blank" rel="noreferrer">GitHub 저장소</a> 참조.
@@ -469,8 +483,8 @@ export default function App() {
         </main>
       </div>
 
-      <footer className="border-t" style={{ background: "var(--bg-surface)", borderColor: "var(--border)" }}>
-        <div className="mx-auto max-w-[1080px] px-5 py-4 text-xs" style={{ color: "var(--text-muted)" }}>
+      <footer className="hairline-t" style={{ borderColor: "var(--border)" }}>
+        <div className="caption mx-auto max-w-[1080px] px-5 py-5">
           <p className="m-0">본 서비스는 Neople 오픈 API에서 제공받은 데이터를 일부 가공하여 활용하고 있습니다.</p>
           <p className="m-0 mt-0.5">비공식 팬메이드 포트폴리오 — ㈜네오플·넥슨과 무관합니다. 게임 IP 아트워크를 사용하지 않습니다.</p>
         </div>
