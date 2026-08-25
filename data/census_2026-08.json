@@ -1,0 +1,4708 @@
+{
+  "meta": {
+    "surveyed_at": "2026-08-25T17:43:56+09:00",
+    "sample_size": 31523,
+    "fame_missing": 1441,
+    "uncapped_sample_size": 5352,
+    "uncapped_fame_missing": 1265,
+    "search_calls": 288,
+    "search_calls_capped": 132,
+    "timeline_subsample": 0,
+    "servers": [
+      "anton",
+      "bakal",
+      "cain",
+      "casillas",
+      "diregie",
+      "hilder",
+      "prey",
+      "siroco"
+    ],
+    "method_version": "1.0",
+    "min_cell": 10
+  },
+  "distributions": {
+    "job": [
+      {
+        "jobName": "眞 크루세이더",
+        "count": 2281,
+        "pct": 7.24
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "count": 1557,
+        "pct": 4.94
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "count": 1318,
+        "pct": 4.18
+      },
+      {
+        "jobName": "眞 브레이커",
+        "count": 1220,
+        "pct": 3.87
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "count": 1104,
+        "pct": 3.5
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "count": 923,
+        "pct": 2.93
+      },
+      {
+        "jobName": "眞 트래블러",
+        "count": 907,
+        "pct": 2.88
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "count": 905,
+        "pct": 2.87
+      },
+      {
+        "jobName": "眞 인파이터",
+        "count": 887,
+        "pct": 2.81
+      },
+      {
+        "jobName": "眞 키메라",
+        "count": 869,
+        "pct": 2.76
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "count": 866,
+        "pct": 2.75
+      },
+      {
+        "jobName": "眞 아수라",
+        "count": 865,
+        "pct": 2.74
+      },
+      {
+        "jobName": "眞 블레이드",
+        "count": 787,
+        "pct": 2.5
+      },
+      {
+        "jobName": "眞 레인저",
+        "count": 785,
+        "pct": 2.49
+      },
+      {
+        "jobName": "眞 버서커",
+        "count": 646,
+        "pct": 2.05
+      },
+      {
+        "jobName": "眞 베가본드",
+        "count": 629,
+        "pct": 2.0
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "count": 606,
+        "pct": 1.92
+      },
+      {
+        "jobName": "眞 런처",
+        "count": 575,
+        "pct": 1.82
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "count": 528,
+        "pct": 1.67
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "count": 518,
+        "pct": 1.64
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "count": 511,
+        "pct": 1.62
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "count": 483,
+        "pct": 1.53
+      },
+      {
+        "jobName": "眞 소환사",
+        "count": 475,
+        "pct": 1.51
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "count": 439,
+        "pct": 1.39
+      },
+      {
+        "jobName": "眞 비질란테",
+        "count": 437,
+        "pct": 1.39
+      },
+      {
+        "jobName": "眞 메카닉",
+        "count": 435,
+        "pct": 1.38
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "count": 431,
+        "pct": 1.37
+      },
+      {
+        "jobName": "眞 헌터",
+        "count": 424,
+        "pct": 1.35
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "count": 421,
+        "pct": 1.34
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "count": 417,
+        "pct": 1.32
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "count": 386,
+        "pct": 1.22
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "count": 379,
+        "pct": 1.2
+      },
+      {
+        "jobName": "眞 검귀",
+        "count": 345,
+        "pct": 1.09
+      },
+      {
+        "jobName": "眞 마도학자",
+        "count": 335,
+        "pct": 1.06
+      },
+      {
+        "jobName": "眞 그래플러",
+        "count": 333,
+        "pct": 1.06
+      },
+      {
+        "jobName": "眞 카오스",
+        "count": 281,
+        "pct": 0.89
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "count": 278,
+        "pct": 0.88
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "count": 272,
+        "pct": 0.86
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "count": 268,
+        "pct": 0.85
+      },
+      {
+        "jobName": "眞 무녀",
+        "count": 242,
+        "pct": 0.77
+      },
+      {
+        "jobName": "眞 어벤저",
+        "count": 222,
+        "pct": 0.7
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "count": 221,
+        "pct": 0.7
+      },
+      {
+        "jobName": "眞 사령술사",
+        "count": 221,
+        "pct": 0.7
+      },
+      {
+        "jobName": "眞 로그",
+        "count": 211,
+        "pct": 0.67
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "count": 206,
+        "pct": 0.65
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "count": 194,
+        "pct": 0.62
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "count": 186,
+        "pct": 0.59
+      },
+      {
+        "jobName": "眞 요원",
+        "count": 184,
+        "pct": 0.58
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "count": 158,
+        "pct": 0.5
+      },
+      {
+        "jobName": "眞 빙결사",
+        "count": 152,
+        "pct": 0.48
+      },
+      {
+        "jobName": "眞 어썰트",
+        "count": 145,
+        "pct": 0.46
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "count": 138,
+        "pct": 0.44
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "count": 128,
+        "pct": 0.41
+      },
+      {
+        "jobName": "眞 히트맨",
+        "count": 128,
+        "pct": 0.41
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "count": 127,
+        "pct": 0.4
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "count": 110,
+        "pct": 0.35
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "count": 109,
+        "pct": 0.35
+      },
+      {
+        "jobName": "데스브링어",
+        "count": 102,
+        "pct": 0.32
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "count": 101,
+        "pct": 0.32
+      },
+      {
+        "jobName": "마왕",
+        "count": 99,
+        "pct": 0.31
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "count": 83,
+        "pct": 0.26
+      },
+      {
+        "jobName": "새비지",
+        "count": 74,
+        "pct": 0.23
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "count": 71,
+        "pct": 0.23
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "count": 64,
+        "pct": 0.2
+      },
+      {
+        "jobName": "리디머",
+        "count": 49,
+        "pct": 0.16
+      },
+      {
+        "jobName": "프라임",
+        "count": 28,
+        "pct": 0.09
+      },
+      {
+        "jobName": "인다라천",
+        "count": 27,
+        "pct": 0.09
+      },
+      {
+        "jobName": "세라핌",
+        "count": 26,
+        "pct": 0.08
+      },
+      {
+        "jobName": "세이비어",
+        "count": 25,
+        "pct": 0.08
+      },
+      {
+        "jobName": "다크로드",
+        "count": 24,
+        "pct": 0.08
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "count": 22,
+        "pct": 0.07
+      },
+      {
+        "jobName": "이모탈",
+        "count": 22,
+        "pct": 0.07
+      },
+      {
+        "jobName": "마제스티",
+        "count": 21,
+        "pct": 0.07
+      },
+      {
+        "jobName": "에반젤리스트",
+        "count": 21,
+        "pct": 0.07
+      },
+      {
+        "jobName": "천선낭랑",
+        "count": 20,
+        "pct": 0.06
+      },
+      {
+        "jobName": "프레이야",
+        "count": 20,
+        "pct": 0.06
+      },
+      {
+        "jobName": "런처",
+        "count": 20,
+        "pct": 0.06
+      },
+      {
+        "jobName": "악귀나찰",
+        "count": 19,
+        "pct": 0.06
+      },
+      {
+        "jobName": "네메시스",
+        "count": 19,
+        "pct": 0.06
+      },
+      {
+        "jobName": "검신",
+        "count": 18,
+        "pct": 0.06
+      },
+      {
+        "jobName": "염제 폐월수화",
+        "count": 18,
+        "pct": 0.06
+      },
+      {
+        "jobName": "디어사이드",
+        "count": 18,
+        "pct": 0.06
+      },
+      {
+        "jobName": "블러드 이블",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "아수라",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "저스티스",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "크루세이더",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "지니위즈",
+        "count": 17,
+        "pct": 0.05
+      },
+      {
+        "jobName": "헬벤터",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "갓파더",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "세인트",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "스핏파이어",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "오버마인드",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "신세이어",
+        "count": 16,
+        "pct": 0.05
+      },
+      {
+        "jobName": "레인저",
+        "count": 15,
+        "pct": 0.05
+      },
+      {
+        "jobName": "디스트로이어",
+        "count": 14,
+        "pct": 0.04
+      },
+      {
+        "jobName": "검제",
+        "count": 14,
+        "pct": 0.04
+      },
+      {
+        "jobName": "자각2",
+        "count": 14,
+        "pct": 0.04
+      },
+      {
+        "jobName": "둠스가디언",
+        "count": 14,
+        "pct": 0.04
+      },
+      {
+        "jobName": "언터처블",
+        "count": 14,
+        "pct": 0.04
+      },
+      {
+        "jobName": "자각1",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "크림슨로제",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "미스트리스",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "아슈타르테",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "헤카테",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "이터널",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "베가본드",
+        "count": 13,
+        "pct": 0.04
+      },
+      {
+        "jobName": "에레보스",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "카이저",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "크리에이터",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "용독문주",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "홀리오더",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "메카닉",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "넨마스터",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "이클립스",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "태을선인",
+        "count": 12,
+        "pct": 0.04
+      },
+      {
+        "jobName": "레퀴엠",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "블래스터",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "옵티머스",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "알키오네",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "아이올로스",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "소울브링어",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "검성",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "드레드노트",
+        "count": 11,
+        "pct": 0.03
+      },
+      {
+        "jobName": "헌터",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "문 엠프레스",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "데스페라도",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "인페르노",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "메탈하트",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "헤비배럴",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "버서커",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "그랜드 마스터",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "커맨더",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "얼티밋 디바",
+        "count": 10,
+        "pct": 0.03
+      },
+      {
+        "jobName": "기타(표본<10 직업 133개)",
+        "count": 634,
+        "pct": 2.01
+      }
+    ],
+    "fame_bins": [
+      {
+        "range": "0~1만",
+        "count": 1787,
+        "pct": 5.94
+      },
+      {
+        "range": "1~5만",
+        "count": 6904,
+        "pct": 22.95
+      },
+      {
+        "range": "5~8만",
+        "count": 7272,
+        "pct": 24.17
+      },
+      {
+        "range": "8~10만",
+        "count": 5645,
+        "pct": 18.77
+      },
+      {
+        "range": "10~11만",
+        "count": 3240,
+        "pct": 10.77
+      },
+      {
+        "range": "11~12만",
+        "count": 2826,
+        "pct": 9.39
+      },
+      {
+        "range": "12만+",
+        "count": 2408,
+        "pct": 8.0
+      }
+    ],
+    "server": [
+      {
+        "server": "cain",
+        "count": 4995
+      },
+      {
+        "server": "prey",
+        "count": 4205
+      },
+      {
+        "server": "casillas",
+        "count": 3852
+      },
+      {
+        "server": "hilder",
+        "count": 3769
+      },
+      {
+        "server": "bakal",
+        "count": 3763
+      },
+      {
+        "server": "diregie",
+        "count": 3751
+      },
+      {
+        "server": "siroco",
+        "count": 3629
+      },
+      {
+        "server": "anton",
+        "count": 3559
+      }
+    ],
+    "job_x_fame": [
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "0~1만",
+        "count": 29
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "1~5만",
+        "count": 504
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "5~8만",
+        "count": 536
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "8~10만",
+        "count": 385
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "10~11만",
+        "count": 283
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "11~12만",
+        "count": 259
+      },
+      {
+        "jobName": "眞 크루세이더",
+        "bin": "12만+",
+        "count": 223
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "1~5만",
+        "count": 230
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "5~8만",
+        "count": 409
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "8~10만",
+        "count": 414
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "10~11만",
+        "count": 212
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "11~12만",
+        "count": 166
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "bin": "12만+",
+        "count": 99
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "0~1만",
+        "count": 19
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "1~5만",
+        "count": 326
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "5~8만",
+        "count": 304
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "8~10만",
+        "count": 217
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "10~11만",
+        "count": 168
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "11~12만",
+        "count": 134
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "bin": "12만+",
+        "count": 111
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "0~1만",
+        "count": 0
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "1~5만",
+        "count": 65
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "5~8만",
+        "count": 318
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "8~10만",
+        "count": 447
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "10~11만",
+        "count": 208
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "11~12만",
+        "count": 118
+      },
+      {
+        "jobName": "眞 브레이커",
+        "bin": "12만+",
+        "count": 64
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "1~5만",
+        "count": 117
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "5~8만",
+        "count": 264
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "8~10만",
+        "count": 237
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "10~11만",
+        "count": 171
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "11~12만",
+        "count": 158
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "bin": "12만+",
+        "count": 143
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "1~5만",
+        "count": 233
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "5~8만",
+        "count": 255
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "8~10만",
+        "count": 154
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "10~11만",
+        "count": 104
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "11~12만",
+        "count": 98
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "bin": "12만+",
+        "count": 76
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "1~5만",
+        "count": 176
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "5~8만",
+        "count": 219
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "8~10만",
+        "count": 181
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "10~11만",
+        "count": 100
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "11~12만",
+        "count": 101
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "bin": "12만+",
+        "count": 90
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "1~5만",
+        "count": 236
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "5~8만",
+        "count": 197
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "8~10만",
+        "count": 122
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "10~11만",
+        "count": 105
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "11~12만",
+        "count": 108
+      },
+      {
+        "jobName": "眞 트래블러",
+        "bin": "12만+",
+        "count": 105
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "1~5만",
+        "count": 129
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "5~8만",
+        "count": 237
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "8~10만",
+        "count": 242
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "10~11만",
+        "count": 113
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "11~12만",
+        "count": 92
+      },
+      {
+        "jobName": "眞 인파이터",
+        "bin": "12만+",
+        "count": 49
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "1~5만",
+        "count": 310
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "5~8만",
+        "count": 227
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "8~10만",
+        "count": 118
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "10~11만",
+        "count": 84
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "11~12만",
+        "count": 70
+      },
+      {
+        "jobName": "眞 키메라",
+        "bin": "12만+",
+        "count": 56
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "1~5만",
+        "count": 188
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "5~8만",
+        "count": 195
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "8~10만",
+        "count": 152
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "10~11만",
+        "count": 100
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "11~12만",
+        "count": 114
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "bin": "12만+",
+        "count": 89
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "1~5만",
+        "count": 198
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "5~8만",
+        "count": 217
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "8~10만",
+        "count": 170
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "10~11만",
+        "count": 119
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "11~12만",
+        "count": 82
+      },
+      {
+        "jobName": "眞 아수라",
+        "bin": "12만+",
+        "count": 43
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "1~5만",
+        "count": 204
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "5~8만",
+        "count": 177
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "8~10만",
+        "count": 134
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "10~11만",
+        "count": 80
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "11~12만",
+        "count": 87
+      },
+      {
+        "jobName": "眞 블레이드",
+        "bin": "12만+",
+        "count": 78
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "1~5만",
+        "count": 147
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "5~8만",
+        "count": 191
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "8~10만",
+        "count": 153
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "10~11만",
+        "count": 98
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "11~12만",
+        "count": 77
+      },
+      {
+        "jobName": "眞 레인저",
+        "bin": "12만+",
+        "count": 76
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "1~5만",
+        "count": 164
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "5~8만",
+        "count": 146
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "8~10만",
+        "count": 128
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "10~11만",
+        "count": 73
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "11~12만",
+        "count": 55
+      },
+      {
+        "jobName": "眞 버서커",
+        "bin": "12만+",
+        "count": 52
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "0~1만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "1~5만",
+        "count": 138
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "5~8만",
+        "count": 162
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "8~10만",
+        "count": 107
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "10~11만",
+        "count": 82
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "11~12만",
+        "count": 63
+      },
+      {
+        "jobName": "眞 베가본드",
+        "bin": "12만+",
+        "count": 53
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "0~1만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "1~5만",
+        "count": 112
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "5~8만",
+        "count": 122
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "8~10만",
+        "count": 112
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "10~11만",
+        "count": 63
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "11~12만",
+        "count": 75
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "bin": "12만+",
+        "count": 90
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "0~1만",
+        "count": 21
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "1~5만",
+        "count": 141
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "5~8만",
+        "count": 153
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "8~10만",
+        "count": 103
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "10~11만",
+        "count": 59
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "11~12만",
+        "count": 50
+      },
+      {
+        "jobName": "眞 런처",
+        "bin": "12만+",
+        "count": 31
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "1~5만",
+        "count": 141
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "5~8만",
+        "count": 132
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "8~10만",
+        "count": 97
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "10~11만",
+        "count": 57
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "11~12만",
+        "count": 45
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "bin": "12만+",
+        "count": 35
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "0~1만",
+        "count": 17
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "1~5만",
+        "count": 147
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "5~8만",
+        "count": 143
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "8~10만",
+        "count": 89
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "10~11만",
+        "count": 37
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "11~12만",
+        "count": 32
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "bin": "12만+",
+        "count": 42
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "0~1만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "1~5만",
+        "count": 143
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "5~8만",
+        "count": 127
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "8~10만",
+        "count": 99
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "10~11만",
+        "count": 39
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "11~12만",
+        "count": 48
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "bin": "12만+",
+        "count": 34
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "1~5만",
+        "count": 122
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "5~8만",
+        "count": 136
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "8~10만",
+        "count": 73
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "10~11만",
+        "count": 47
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "11~12만",
+        "count": 45
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "bin": "12만+",
+        "count": 43
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "1~5만",
+        "count": 114
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "5~8만",
+        "count": 114
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "8~10만",
+        "count": 89
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "10~11만",
+        "count": 42
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "11~12만",
+        "count": 45
+      },
+      {
+        "jobName": "眞 소환사",
+        "bin": "12만+",
+        "count": 48
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "1~5만",
+        "count": 103
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "5~8만",
+        "count": 125
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "8~10만",
+        "count": 68
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "10~11만",
+        "count": 45
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "11~12만",
+        "count": 43
+      },
+      {
+        "jobName": "眞 비질란테",
+        "bin": "12만+",
+        "count": 46
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "1~5만",
+        "count": 106
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "5~8만",
+        "count": 110
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "8~10만",
+        "count": 80
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "10~11만",
+        "count": 41
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "11~12만",
+        "count": 29
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "bin": "12만+",
+        "count": 46
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "0~1만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "1~5만",
+        "count": 119
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "5~8만",
+        "count": 97
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "8~10만",
+        "count": 91
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "10~11만",
+        "count": 32
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "11~12만",
+        "count": 22
+      },
+      {
+        "jobName": "眞 메카닉",
+        "bin": "12만+",
+        "count": 42
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "0~1만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "1~5만",
+        "count": 111
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "5~8만",
+        "count": 100
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "8~10만",
+        "count": 86
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "10~11만",
+        "count": 33
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "11~12만",
+        "count": 37
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "bin": "12만+",
+        "count": 35
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "1~5만",
+        "count": 130
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "5~8만",
+        "count": 97
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "8~10만",
+        "count": 62
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "10~11만",
+        "count": 32
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "11~12만",
+        "count": 44
+      },
+      {
+        "jobName": "眞 헌터",
+        "bin": "12만+",
+        "count": 39
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "1~5만",
+        "count": 108
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "5~8만",
+        "count": 86
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "8~10만",
+        "count": 88
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "10~11만",
+        "count": 36
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "11~12만",
+        "count": 43
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "bin": "12만+",
+        "count": 40
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "1~5만",
+        "count": 96
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "5~8만",
+        "count": 114
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "8~10만",
+        "count": 84
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "10~11만",
+        "count": 44
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "11~12만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "bin": "12만+",
+        "count": 21
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "1~5만",
+        "count": 103
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "5~8만",
+        "count": 85
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "8~10만",
+        "count": 76
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "10~11만",
+        "count": 40
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "11~12만",
+        "count": 28
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "bin": "12만+",
+        "count": 30
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "0~1만",
+        "count": 24
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "1~5만",
+        "count": 124
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "5~8만",
+        "count": 86
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "8~10만",
+        "count": 52
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "10~11만",
+        "count": 28
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "11~12만",
+        "count": 20
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "bin": "12만+",
+        "count": 20
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "1~5만",
+        "count": 90
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "5~8만",
+        "count": 68
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "8~10만",
+        "count": 64
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "10~11만",
+        "count": 49
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "11~12만",
+        "count": 31
+      },
+      {
+        "jobName": "眞 검귀",
+        "bin": "12만+",
+        "count": 16
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "1~5만",
+        "count": 87
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "5~8만",
+        "count": 93
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "8~10만",
+        "count": 61
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "10~11만",
+        "count": 25
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "11~12만",
+        "count": 24
+      },
+      {
+        "jobName": "眞 그래플러",
+        "bin": "12만+",
+        "count": 20
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "1~5만",
+        "count": 90
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "5~8만",
+        "count": 73
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "8~10만",
+        "count": 67
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "10~11만",
+        "count": 24
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "11~12만",
+        "count": 27
+      },
+      {
+        "jobName": "眞 마도학자",
+        "bin": "12만+",
+        "count": 33
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "1~5만",
+        "count": 73
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "5~8만",
+        "count": 61
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "8~10만",
+        "count": 54
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "10~11만",
+        "count": 32
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "11~12만",
+        "count": 23
+      },
+      {
+        "jobName": "眞 카오스",
+        "bin": "12만+",
+        "count": 16
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "1~5만",
+        "count": 84
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "5~8만",
+        "count": 67
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "8~10만",
+        "count": 49
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "10~11만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "11~12만",
+        "count": 30
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "bin": "12만+",
+        "count": 19
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "1~5만",
+        "count": 78
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "5~8만",
+        "count": 67
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "8~10만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "10~11만",
+        "count": 23
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "11~12만",
+        "count": 23
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "bin": "12만+",
+        "count": 25
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "1~5만",
+        "count": 78
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "5~8만",
+        "count": 73
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "8~10만",
+        "count": 41
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "10~11만",
+        "count": 21
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "11~12만",
+        "count": 17
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "bin": "12만+",
+        "count": 24
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "1~5만",
+        "count": 76
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "5~8만",
+        "count": 56
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "8~10만",
+        "count": 44
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "10~11만",
+        "count": 22
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "11~12만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 무녀",
+        "bin": "12만+",
+        "count": 10
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "1~5만",
+        "count": 65
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "5~8만",
+        "count": 55
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "8~10만",
+        "count": 39
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "10~11만",
+        "count": 17
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "11~12만",
+        "count": 20
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "bin": "12만+",
+        "count": 13
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "1~5만",
+        "count": 61
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "5~8만",
+        "count": 41
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "8~10만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "10~11만",
+        "count": 27
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "11~12만",
+        "count": 19
+      },
+      {
+        "jobName": "眞 사령술사",
+        "bin": "12만+",
+        "count": 17
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "1~5만",
+        "count": 53
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "5~8만",
+        "count": 64
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "8~10만",
+        "count": 43
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "10~11만",
+        "count": 18
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "11~12만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 로그",
+        "bin": "12만+",
+        "count": 11
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "0~1만",
+        "count": 16
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "1~5만",
+        "count": 60
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "5~8만",
+        "count": 51
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "8~10만",
+        "count": 42
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "10~11만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "11~12만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 어벤저",
+        "bin": "12만+",
+        "count": 15
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "1~5만",
+        "count": 50
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "5~8만",
+        "count": 60
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "8~10만",
+        "count": 34
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "10~11만",
+        "count": 22
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "11~12만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "bin": "12만+",
+        "count": 13
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "1~5만",
+        "count": 72
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "5~8만",
+        "count": 53
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "8~10만",
+        "count": 35
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "10~11만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "bin": "12만+",
+        "count": 12
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "1~5만",
+        "count": 59
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "5~8만",
+        "count": 47
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "8~10만",
+        "count": 34
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "10~11만",
+        "count": 15
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "11~12만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "1~5만",
+        "count": 52
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "5~8만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "8~10만",
+        "count": 29
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "10~11만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "11~12만",
+        "count": 23
+      },
+      {
+        "jobName": "眞 요원",
+        "bin": "12만+",
+        "count": 12
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "1~5만",
+        "count": 57
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "5~8만",
+        "count": 41
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "8~10만",
+        "count": 26
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "10~11만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "1~5만",
+        "count": 48
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "5~8만",
+        "count": 39
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "8~10만",
+        "count": 20
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "10~11만",
+        "count": 16
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 빙결사",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "1~5만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "5~8만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "8~10만",
+        "count": 23
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "10~11만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "bin": "12만+",
+        "count": 12
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "1~5만",
+        "count": 44
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "5~8만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "8~10만",
+        "count": 26
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "10~11만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 어썰트",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "1~5만",
+        "count": 34
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "5~8만",
+        "count": 38
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "8~10만",
+        "count": 21
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "10~11만",
+        "count": 10
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "11~12만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 히트맨",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "1~5만",
+        "count": 35
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "5~8만",
+        "count": 42
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "8~10만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "10~11만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "11~12만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "1~5만",
+        "count": 43
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "5~8만",
+        "count": 29
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "8~10만",
+        "count": 15
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "10~11만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "bin": "12만+",
+        "count": 12
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "1~5만",
+        "count": 30
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "5~8만",
+        "count": 30
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "8~10만",
+        "count": 17
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "10~11만",
+        "count": 12
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "1~5만",
+        "count": 30
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "5~8만",
+        "count": 32
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "8~10만",
+        "count": 17
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "10~11만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "0~1만",
+        "count": 100
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "데스브링어",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "1~5만",
+        "count": 31
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "5~8만",
+        "count": 30
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "8~10만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "10~11만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "마왕",
+        "bin": "0~1만",
+        "count": 98
+      },
+      {
+        "jobName": "마왕",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "마왕",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "마왕",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "마왕",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "마왕",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "마왕",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "1~5만",
+        "count": 22
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "5~8만",
+        "count": 26
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "8~10만",
+        "count": 11
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "10~11만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 듀얼리스트",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "새비지",
+        "bin": "0~1만",
+        "count": 71
+      },
+      {
+        "jobName": "새비지",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "새비지",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "새비지",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "새비지",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "새비지",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "새비지",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "1~5만",
+        "count": 18
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "5~8만",
+        "count": 25
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "8~10만",
+        "count": 13
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "10~11만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 스페셜리스트",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "1~5만",
+        "count": 22
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "5~8만",
+        "count": 14
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "8~10만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "10~11만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "11~12만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "bin": "12만+",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "리디머",
+        "bin": "0~1만",
+        "count": 24
+      },
+      {
+        "jobName": "리디머",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "리디머",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "리디머",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "리디머",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "리디머",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "리디머",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "0~1만",
+        "count": 16
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "세이비어",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "다크로드",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "인다라천",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "프라임",
+        "bin": "0~1만",
+        "count": 14
+      },
+      {
+        "jobName": "프라임",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "프라임",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "프라임",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "프라임",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "프라임",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "프라임",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "0~1만",
+        "count": 15
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "에반젤리스트",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "0~1만",
+        "count": 14
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "마제스티",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "세인트",
+        "bin": "0~1만",
+        "count": 13
+      },
+      {
+        "jobName": "세인트",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "세인트",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "세인트",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "세인트",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "세인트",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "세인트",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "디어사이드",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "0~1만",
+        "count": 14
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "지니위즈",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "천선낭랑",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "0~1만",
+        "count": 13
+      },
+      {
+        "jobName": "런처",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "런처",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "세라핌",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "크림슨로제",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "0~1만",
+        "count": 11
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "저스티스",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "0~1만",
+        "count": 12
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "오버마인드",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "프레이야",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "0~1만",
+        "count": 11
+      },
+      {
+        "jobName": "검신",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "검신",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "0~1만",
+        "count": 11
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "이모탈",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "갓파더",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "자각1",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "자각1",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "자각2",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "자각2",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "악귀나찰",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "0~1만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "1~5만",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "블러드 이블",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "아수라",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "아수라",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "신세이어",
+        "bin": "12만+",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "0~1만",
+        "count": 10
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "1~5만",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "5~8만",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "8~10만",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "10~11만",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "11~12만",
+        "count": 0
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "bin": "12만+",
+        "count": 0
+      }
+    ]
+  },
+  "distributions_uncapped_only": {
+    "note": "상한(200) 미도달 검색에서 발견된 표본만의 분포 — 상한 도달 표본의 고명성 쏠림 편향 비교용",
+    "job": [
+      {
+        "jobName": "眞 크루세이더",
+        "count": 294,
+        "pct": 5.49
+      },
+      {
+        "jobName": "眞 넨마스터",
+        "count": 223,
+        "pct": 4.17
+      },
+      {
+        "jobName": "眞 미스트리스",
+        "count": 134,
+        "pct": 2.5
+      },
+      {
+        "jobName": "眞 인챈트리스",
+        "count": 132,
+        "pct": 2.47
+      },
+      {
+        "jobName": "眞 패러메딕",
+        "count": 130,
+        "pct": 2.43
+      },
+      {
+        "jobName": "眞 키메라",
+        "count": 129,
+        "pct": 2.41
+      },
+      {
+        "jobName": "眞 아수라",
+        "count": 122,
+        "pct": 2.28
+      },
+      {
+        "jobName": "眞 블레이드",
+        "count": 116,
+        "pct": 2.17
+      },
+      {
+        "jobName": "眞 레인저",
+        "count": 105,
+        "pct": 1.96
+      },
+      {
+        "jobName": "眞 인파이터",
+        "count": 104,
+        "pct": 1.94
+      },
+      {
+        "jobName": "眞 다크템플러",
+        "count": 102,
+        "pct": 1.91
+      },
+      {
+        "jobName": "데스브링어",
+        "count": 102,
+        "pct": 1.91
+      },
+      {
+        "jobName": "眞 뮤즈",
+        "count": 100,
+        "pct": 1.87
+      },
+      {
+        "jobName": "마왕",
+        "count": 98,
+        "pct": 1.83
+      },
+      {
+        "jobName": "眞 런처",
+        "count": 94,
+        "pct": 1.76
+      },
+      {
+        "jobName": "眞 트래블러",
+        "count": 93,
+        "pct": 1.74
+      },
+      {
+        "jobName": "眞 헌터",
+        "count": 81,
+        "pct": 1.51
+      },
+      {
+        "jobName": "眞 버서커",
+        "count": 78,
+        "pct": 1.46
+      },
+      {
+        "jobName": "眞 웨펀마스터",
+        "count": 76,
+        "pct": 1.42
+      },
+      {
+        "jobName": "眞 스핏파이어",
+        "count": 76,
+        "pct": 1.42
+      },
+      {
+        "jobName": "眞 스트라이커",
+        "count": 76,
+        "pct": 1.42
+      },
+      {
+        "jobName": "眞 팔라딘",
+        "count": 71,
+        "pct": 1.33
+      },
+      {
+        "jobName": "眞 메카닉",
+        "count": 67,
+        "pct": 1.25
+      },
+      {
+        "jobName": "眞 소환사",
+        "count": 65,
+        "pct": 1.21
+      },
+      {
+        "jobName": "眞 베가본드",
+        "count": 60,
+        "pct": 1.12
+      },
+      {
+        "jobName": "眞 소드마스터",
+        "count": 59,
+        "pct": 1.1
+      },
+      {
+        "jobName": "眞 엘레멘탈마스터",
+        "count": 59,
+        "pct": 1.1
+      },
+      {
+        "jobName": "眞 비질란테",
+        "count": 58,
+        "pct": 1.08
+      },
+      {
+        "jobName": "眞 배틀메이지",
+        "count": 58,
+        "pct": 1.08
+      },
+      {
+        "jobName": "眞 어벤저",
+        "count": 57,
+        "pct": 1.07
+      },
+      {
+        "jobName": "眞 마도학자",
+        "count": 55,
+        "pct": 1.03
+      },
+      {
+        "jobName": "眞 데몬슬레이어",
+        "count": 54,
+        "pct": 1.01
+      },
+      {
+        "jobName": "眞 그래플러",
+        "count": 52,
+        "pct": 0.97
+      },
+      {
+        "jobName": "眞 소울브링어",
+        "count": 50,
+        "pct": 0.93
+      },
+      {
+        "jobName": "眞 카오스",
+        "count": 48,
+        "pct": 0.9
+      },
+      {
+        "jobName": "眞 검귀",
+        "count": 47,
+        "pct": 0.88
+      },
+      {
+        "jobName": "眞 스트리트파이터",
+        "count": 47,
+        "pct": 0.88
+      },
+      {
+        "jobName": "眞 이단심판관",
+        "count": 45,
+        "pct": 0.84
+      },
+      {
+        "jobName": "리디머",
+        "count": 43,
+        "pct": 0.8
+      },
+      {
+        "jobName": "眞 다크 랜서",
+        "count": 39,
+        "pct": 0.73
+      },
+      {
+        "jobName": "眞 브레이커",
+        "count": 35,
+        "pct": 0.65
+      },
+      {
+        "jobName": "眞 사령술사",
+        "count": 33,
+        "pct": 0.62
+      },
+      {
+        "jobName": "眞 어썰트",
+        "count": 32,
+        "pct": 0.6
+      },
+      {
+        "jobName": "眞 퇴마사",
+        "count": 32,
+        "pct": 0.6
+      },
+      {
+        "jobName": "眞 로그",
+        "count": 32,
+        "pct": 0.6
+      },
+      {
+        "jobName": "眞 무녀",
+        "count": 32,
+        "pct": 0.6
+      },
+      {
+        "jobName": "眞 쿠노이치",
+        "count": 32,
+        "pct": 0.6
+      },
+      {
+        "jobName": "眞 스위프트 마스터",
+        "count": 29,
+        "pct": 0.54
+      },
+      {
+        "jobName": "眞 드래고니안 랜서",
+        "count": 28,
+        "pct": 0.52
+      },
+      {
+        "jobName": "眞 드래곤나이트",
+        "count": 26,
+        "pct": 0.49
+      },
+      {
+        "jobName": "眞 다크나이트",
+        "count": 25,
+        "pct": 0.47
+      },
+      {
+        "jobName": "眞 요원",
+        "count": 25,
+        "pct": 0.47
+      },
+      {
+        "jobName": "眞 엘레멘탈 바머",
+        "count": 23,
+        "pct": 0.43
+      },
+      {
+        "jobName": "인다라천",
+        "count": 22,
+        "pct": 0.41
+      },
+      {
+        "jobName": "眞 엘븐나이트",
+        "count": 22,
+        "pct": 0.41
+      },
+      {
+        "jobName": "프라임",
+        "count": 21,
+        "pct": 0.39
+      },
+      {
+        "jobName": "眞 블러드 메이지",
+        "count": 20,
+        "pct": 0.37
+      },
+      {
+        "jobName": "이모탈",
+        "count": 19,
+        "pct": 0.36
+      },
+      {
+        "jobName": "眞 빙결사",
+        "count": 18,
+        "pct": 0.34
+      },
+      {
+        "jobName": "眞 크리에이터",
+        "count": 18,
+        "pct": 0.34
+      },
+      {
+        "jobName": "眞 디멘션워커",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "세이비어",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "스톰트루퍼",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "런처",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "眞 뱅가드",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "眞 히트맨",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "세라핌",
+        "count": 17,
+        "pct": 0.32
+      },
+      {
+        "jobName": "블러드 이블",
+        "count": 16,
+        "pct": 0.3
+      },
+      {
+        "jobName": "아수라",
+        "count": 16,
+        "pct": 0.3
+      },
+      {
+        "jobName": "신세이어",
+        "count": 16,
+        "pct": 0.3
+      },
+      {
+        "jobName": "검신",
+        "count": 15,
+        "pct": 0.28
+      },
+      {
+        "jobName": "眞 트러블 슈터",
+        "count": 15,
+        "pct": 0.28
+      },
+      {
+        "jobName": "마제스티",
+        "count": 15,
+        "pct": 0.28
+      },
+      {
+        "jobName": "천선낭랑",
+        "count": 15,
+        "pct": 0.28
+      },
+      {
+        "jobName": "스핏파이어",
+        "count": 15,
+        "pct": 0.28
+      },
+      {
+        "jobName": "헬벤터",
+        "count": 14,
+        "pct": 0.26
+      },
+      {
+        "jobName": "크루세이더",
+        "count": 14,
+        "pct": 0.26
+      },
+      {
+        "jobName": "다크로드",
+        "count": 14,
+        "pct": 0.26
+      },
+      {
+        "jobName": "염제 폐월수화",
+        "count": 13,
+        "pct": 0.24
+      },
+      {
+        "jobName": "저스티스",
+        "count": 13,
+        "pct": 0.24
+      },
+      {
+        "jobName": "세인트",
+        "count": 13,
+        "pct": 0.24
+      },
+      {
+        "jobName": "둠스가디언",
+        "count": 13,
+        "pct": 0.24
+      },
+      {
+        "jobName": "眞 섀도우댄서",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "자각2",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "프레이야",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "베가본드",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "오버마인드",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "네메시스",
+        "count": 12,
+        "pct": 0.22
+      },
+      {
+        "jobName": "악귀나찰",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "갓파더",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "카이저",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "자각1",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "미스트리스",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "용독문주",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "뱀파이어 로드",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "메카닉",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "넨마스터",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "지니위즈",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "레인저",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "태을선인",
+        "count": 11,
+        "pct": 0.21
+      },
+      {
+        "jobName": "크림슨로제",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "크리에이터",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "디스트로이어",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "검제",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "디어사이드",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "에반젤리스트",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "이터널",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "검성",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "커맨더",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "홀리오더",
+        "count": 10,
+        "pct": 0.19
+      },
+      {
+        "jobName": "기타(표본<10 직업 151개)",
+        "count": 689,
+        "pct": 12.87
+      }
+    ],
+    "fame_bins": [
+      {
+        "range": "0~1만",
+        "count": 1176,
+        "pct": 28.77
+      },
+      {
+        "range": "1~5만",
+        "count": 1567,
+        "pct": 38.34
+      },
+      {
+        "range": "5~8만",
+        "count": 700,
+        "pct": 17.13
+      },
+      {
+        "range": "8~10만",
+        "count": 300,
+        "pct": 7.34
+      },
+      {
+        "range": "10~11만",
+        "count": 152,
+        "pct": 3.72
+      },
+      {
+        "range": "11~12만",
+        "count": 99,
+        "pct": 2.42
+      },
+      {
+        "range": "12만+",
+        "count": 93,
+        "pct": 2.28
+      }
+    ],
+    "server": [
+      {
+        "server": "cain",
+        "count": 809
+      },
+      {
+        "server": "hilder",
+        "count": 793
+      },
+      {
+        "server": "casillas",
+        "count": 680
+      },
+      {
+        "server": "siroco",
+        "count": 659
+      },
+      {
+        "server": "prey",
+        "count": 632
+      },
+      {
+        "server": "bakal",
+        "count": 595
+      },
+      {
+        "server": "anton",
+        "count": 593
+      },
+      {
+        "server": "diregie",
+        "count": 591
+      }
+    ]
+  },
+  "activity": null,
+  "insights": []
+}

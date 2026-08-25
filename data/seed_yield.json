@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-08-25T17:43:52+09:00",
+  "seeds": [
+    {
+      "seed": "하늘",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "바람",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "검은",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "붉은",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "작은",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "라라",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "루나",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "블랙",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "천상",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "마루",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "구름",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "달빛",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "별빛",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "어둠",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "하얀",
+      "class": "common",
+      "calls": 8,
+      "rows": 1600,
+      "capped_calls": 8
+    },
+    {
+      "seed": "돈까",
+      "class": "common",
+      "calls": 8,
+      "rows": 1257,
+      "capped_calls": 3
+    },
+    {
+      "seed": "찹쌀",
+      "class": "common",
+      "calls": 8,
+      "rows": 1191,
+      "capped_calls": 3
+    },
+    {
+      "seed": "햄찌",
+      "class": "common",
+      "calls": 8,
+      "rows": 851,
+      "capped_calls": 1
+    },
+    {
+      "seed": "삐약",
+      "class": "rare",
+      "calls": 8,
+      "rows": 1199,
+      "capped_calls": 2
+    },
+    {
+      "seed": "두더",
+      "class": "rare",
+      "calls": 8,
+      "rows": 762,
+      "capped_calls": 2
+    },
+    {
+      "seed": "꼬막",
+      "class": "rare",
+      "calls": 8,
+      "rows": 450,
+      "capped_calls": 0
+    },
+    {
+      "seed": "먹물",
+      "class": "rare",
+      "calls": 8,
+      "rows": 432,
+      "capped_calls": 1
+    },
+    {
+      "seed": "겨자",
+      "class": "rare",
+      "calls": 8,
+      "rows": 260,
+      "capped_calls": 0
+    },
+    {
+      "seed": "궤도",
+      "class": "rare",
+      "calls": 8,
+      "rows": 243,
+      "capped_calls": 0
+    },
+    {
+      "seed": "낫질",
+      "class": "rare",
+      "calls": 8,
+      "rows": 230,
+      "capped_calls": 0
+    },
+    {
+      "seed": "몽당",
+      "class": "rare",
+      "calls": 8,
+      "rows": 171,
+      "capped_calls": 0
+    },
+    {
+      "seed": "쿼크",
+      "class": "rare",
+      "calls": 8,
+      "rows": 146,
+      "capped_calls": 0
+    },
+    {
+      "seed": "넝쿨",
+      "class": "rare",
+      "calls": 8,
+      "rows": 134,
+      "capped_calls": 0
+    },
+    {
+      "seed": "톱니",
+      "class": "rare",
+      "calls": 8,
+      "rows": 103,
+      "capped_calls": 0
+    },
+    {
+      "seed": "늑골",
+      "class": "rare",
+      "calls": 8,
+      "rows": 90,
+      "capped_calls": 0
+    },
+    {
+      "seed": "뻐꾹",
+      "class": "rare",
+      "calls": 8,
+      "rows": 69,
+      "capped_calls": 0
+    },
+    {
+      "seed": "짚신",
+      "class": "rare",
+      "calls": 8,
+      "rows": 62,
+      "capped_calls": 0
+    },
+    {
+      "seed": "튜바",
+      "class": "rare",
+      "calls": 8,
+      "rows": 44,
+      "capped_calls": 0
+    },
+    {
+      "seed": "헛간",
+      "class": "rare",
+      "calls": 8,
+      "rows": 36,
+      "capped_calls": 0
+    },
+    {
+      "seed": "얄개",
+      "class": "rare",
+      "calls": 8,
+      "rows": 21,
+      "capped_calls": 0
+    },
+    {
+      "seed": "곁눈",
+      "class": "rare",
+      "calls": 8,
+      "rows": 4,
+      "capped_calls": 0
+    }
+  ]
+}

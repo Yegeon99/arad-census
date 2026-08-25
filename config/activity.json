@@ -1,0 +1,12 @@
+{
+  "note": "게이트 0에서 확정. 최신 타임라인 이벤트 날짜 기준 분류. 타임라인 이벤트 없음(90일)을 휴면으로 판정하므로 '접속만 하는 유저'는 활성에서 과소집계될 수 있다 (bias_notes 참조).",
+  "criteria": [
+    { "label": "주간 활성", "within_days": 7 },
+    { "label": "월간 활성", "within_days": 30 },
+    { "label": "저활성",   "within_days": 90 },
+    { "label": "휴면",     "within_days": null }
+  ],
+  "lookback_days": 90,
+  "subsample_size": 600,
+  "stratify_by": "fame_bins"
+}
