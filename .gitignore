@@ -21,3 +21,6 @@ dist/
 report/src/data/
 docs/captures/*.png
 .vercel
+
+# 검사 원본 (요약은 docs/quality.md)
+docs/lighthouse-*.json

@@ -1,0 +1,131 @@
+import { useState } from "react";
+import { area, curveMonotoneY } from "d3-shape";
+import { ACT_ORDER, ACT_COLOR } from "../../lib/palette.js";
+import { fmtPct, fmtPeople } from "../../lib/format.js";
+import { useInView } from "../../lib/hooks.js";
+import { ActLegend } from "./Legend.jsx";
+
+/** 보정 전과 보정 후 사이를 오가며 모양이 바뀌는 4단 스택 바 */
+export function ActivityMorph({ before, after, subsample }) {
+  const [mode, setMode] = useState("before");
+  const values = mode === "before" ? before : after;
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-4">
+        {[["before", "보정 전"], ["after", "보정 후"]].map(([key, label]) => {
+          const on = mode === key;
+          return (
+            <button key={key} type="button" className="disclose" onClick={() => setMode(key)}
+              style={{ color: on ? "var(--text-primary)" : "var(--accent)", fontWeight: on ? 700 : 450, textDecoration: on ? "none" : "underline" }}>
+              {label}
+            </button>
+          );
+        })}
+        <p className="t-small m-0">
+          보정 후는 완전 검색 표본의 명성 분포를 기준으로 다시 계산한 값입니다.
+        </p>
+      </div>
+
+      <div className="flex h-[54px] w-full overflow-hidden" style={{ background: "var(--bg-sunken)" }}>
+        {ACT_ORDER.map((k) => (
+          <div
+            key={k}
+            style={{
+              width: `${values[k]}%`,
+              background: ACT_COLOR[k],
+              transition: "width 0.75s cubic-bezier(0.3,0.7,0.3,1)",
+            }}
+            title={`${k} ${fmtPct(values[k])}`}
+          />
+        ))}
+      </div>
+
+      <ul className="mt-3 m-0 grid list-none gap-x-6 gap-y-1 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        {ACT_ORDER.map((k) => (
+          <li key={k} className="flex items-baseline gap-2 text-[0.86rem]">
+            <span className="inline-block h-[9px] w-[9px] shrink-0" style={{ background: ACT_COLOR[k] }} />
+            <span style={{ color: "var(--text-secondary)" }}>{k}</span>
+            <b className="num ml-auto" style={{ color: "var(--text-primary)" }}>{fmtPct(values[k])}</b>
+          </li>
+        ))}
+      </ul>
+      <p className="t-small mt-2 m-0">
+        활성도 조사 대상 {fmtPeople(subsample)}, 명성 구간에 비례해 뽑았습니다.
+      </p>
+    </div>
+  );
+}
+
+const W = 900;
+const ROW = 62;
+const PAD_L = 128;
+const PAD_R = 66;
+
+/** 명성 구간을 아래에서 위로 쌓은 스트림. 위로 갈수록 최근 접속 비중이 짙어진다. */
+export function ActivityStream({ bins }) {
+  const [ref, seen] = useInView();
+  const [hover, setHover] = useState(null);
+  const rows = [...bins].reverse();
+  const H = rows.length * ROW + 34;
+  const innerW = W - PAD_L - PAD_R;
+  const yOf = (i) => 22 + i * ROW + ROW / 2;
+
+  const bands = ACT_ORDER.map((k) => {
+    const points = [];
+    const push = (y, j) => {
+      let left = 0;
+      for (const kk of ACT_ORDER) {
+        if (kk === k) break;
+        left += rows[j].pct[kk];
+      }
+      points.push({ y, x0: PAD_L + (left / 100) * innerW, x1: PAD_L + ((left + rows[j].pct[k]) / 100) * innerW });
+    };
+    push(18, 0);
+    rows.forEach((_, j) => push(yOf(j), j));
+    push(H - 12, rows.length - 1);
+    const gen = area().x0((d) => d.x0).x1((d) => d.x1).y((d) => d.y).curve(curveMonotoneY);
+    return { key: k, d: gen(points) };
+  });
+
+  return (
+    <div ref={ref}>
+      <div className="scroll-x">
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ maxWidth: W, minWidth: 660, display: "block" }} role="img"
+          aria-label="명성 구간별 접속 기록 구성">
+          <g opacity={seen ? 1 : 0} style={{ transition: "opacity 0.8s ease" }}>
+            {bands.map((b) => (
+              <path key={b.key} d={b.d} fill={ACT_COLOR[b.key]} stroke="var(--bg-base)" strokeWidth="0.8" />
+            ))}
+          </g>
+          {rows.map((b, i) => (
+            <g key={b.bin} onMouseEnter={() => setHover(b)} onMouseLeave={() => setHover(null)}>
+              <rect x={0} y={22 + i * ROW} width={W} height={ROW} fill="transparent" />
+              <text x={PAD_L - 12} y={yOf(i) + 4} textAnchor="end" fontSize="12.5" fontWeight={hover === b ? 700 : 500}
+                fill="var(--text-primary)">
+                {b.bin}
+              </text>
+              <text x={W - PAD_R + 10} y={yOf(i) + 4} fontSize="11.5" className="num" fill="var(--text-muted)">
+                {fmtPeople(b.n)}
+              </text>
+              {b.smallSample && (
+                <>
+                  <rect x={PAD_L - 4} y={22 + i * ROW + 6} width={innerW + 8} height={ROW - 12}
+                    fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeDasharray="5 4" />
+                  <text x={PAD_L - 12} y={yOf(i) + 20} textAnchor="end" fontSize="10.5" fill="var(--gold-text)" fontWeight="700">
+                    표본이 적어 참고용
+                  </text>
+                </>
+              )}
+            </g>
+          ))}
+        </svg>
+      </div>
+      <ActLegend />
+      <p className="t-small mt-1 min-h-[1.6rem]">
+        {hover
+          ? `${hover.bin} ${fmtPeople(hover.n)} 가운데 ${ACT_ORDER.map((k) => `${k} ${fmtPct(hover.pct[k])}`).join(", ")}`
+          : "구간에 마우스를 올리면 네 가지 접속 상태의 비중이 나옵니다."}
+      </p>
+    </div>
+  );
+}

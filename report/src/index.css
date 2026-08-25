@@ -1,23 +1,29 @@
 @import "tailwindcss";
 
-/* 디자인 토큰 — 라이트 "리포트/논문" 무드 (Market Analyst의 형제 프로젝트,
-   대시보드 vs 리포트로 형태 구분. 단일 액센트 + 데이터 잉크 중심) */
+/* ─ 디자인 토큰 ─
+   바탕 오프화이트, 잉크 네이비, 액센트 1색, 3D 강조용 보조 액센트(골드) 1색.
+   상자 테두리 대신 헤어라인과 여백으로만 구획한다. */
 :root {
-  --bg-base: #FAFAF8;      /* 종이 느낌의 웜 화이트 */
+  --bg-base: #FAFAF8;
   --bg-surface: #FFFFFF;
-  --border: #E6E4DE;
-  --text-primary: #1F2430;
-  --text-secondary: #5A6172;
-  --text-muted: #989DAB;
-  --accent: #2450A8;       /* 형제 프로젝트와 동일 포인트 블루 (단일 액센트) */
-  --accent-soft: #E8EEF9;
-  --ink-1: #DDE5F3;        /* 데이터 잉크 농도 스케일 (액센트 계열 단색) */
-  --ink-2: #B9C9E8;
-  --ink-3: #8AA5D9;
-  --ink-4: #5C7FC4;
+  --bg-sunken: #F3F2EE;
+  --hairline: #E2E0D9;
+  --hairline-strong: #CFCCC3;
+  --text-primary: #1B2130;
+  --text-secondary: #575E70;
+  --text-muted: #6B7183;
+  --accent: #2450A8;
+  --accent-soft: #E9EEF8;
+  --gold: #B0813C;        /* 도형용 */
+  --gold-text: #8A6224;   /* 글자용, 바탕과의 대비를 맞춘 값 */
+  --gold-soft: #F4EDE0;
+  --ink-1: #DEE5F2;
+  --ink-2: #BCCAE7;
+  --ink-3: #8DA6D8;
+  --ink-4: #5D80C3;
   --ink-5: #2450A8;
-  --ink-6: #17376F;
-  --masked: #EFEDE8;       /* 마스킹 셀 */
+  --ink-6: #16346B;
+  --masked: #EDEBE5;
 }
 
 html {
@@ -25,27 +31,112 @@ html {
   color: var(--text-primary);
   font-family: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI",
     "Malgun Gothic", sans-serif;
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.75;
-  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body { margin: 0; min-height: 100vh; }
 
-h1, h2, h3, .serif {
+/* ─ 타이포 5단계 ─ */
+.t-display {
   font-family: "Noto Serif KR", "Pretendard Variable", serif;
-  letter-spacing: -0.01em;
-}
-
-.num {
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum";
 }
-
-.prose-block {
+.t-title {
+  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.t-lead {
+  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+  line-height: 1.75;
   color: var(--text-secondary);
 }
+.t-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+.t-body { font-size: 1rem; line-height: 1.85; color: var(--text-secondary); }
+.t-small { font-size: 0.82rem; line-height: 1.7; color: var(--text-muted); }
 
-a { color: var(--accent); }
+h1, h2, h3, .t-display, .t-title, .t-lead, .t-body, p, li, td, th, figcaption {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
 
-section { scroll-margin-top: 24px; }
+.num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+
+/* ─ 헤어라인 ─ */
+.rule { height: 1px; background: var(--hairline); border: 0; }
+.rule-strong { height: 1px; background: var(--hairline-strong); border: 0; }
+
+/* ─ 접기 펼치기: 텍스트 링크 스타일 ─ */
+.disclose {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.disclose:hover { color: var(--ink-6); }
+
+/* ─ 모션 ─ */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: riseIn 0.52s cubic-bezier(0.22, 0.68, 0.31, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none !important; }
+  * { transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ─ 표 ─ */
+table.plain { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+table.plain th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0.45rem 0.6rem 0.45rem 0;
+  border-bottom: 1px solid var(--hairline-strong);
+  white-space: nowrap;
+}
+table.plain td {
+  padding: 0.45rem 0.6rem 0.45rem 0;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-secondary);
+}
+table.plain tbody tr:last-child td { border-bottom: 0; }
+
+/* 가로 스크롤 표 */
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.scroll-x::-webkit-scrollbar { height: 6px; }
+.scroll-x::-webkit-scrollbar-thumb { background: var(--hairline-strong); border-radius: 3px; }
+
+/* 슬라이더 */
+input[type="range"] { accent-color: var(--accent); width: 100%; }
+
+/* 모바일 하단 탭바 여백 */
+@media (max-width: 900px) {
+  body { padding-bottom: 62px; }
+}
+
+svg text { user-select: none; }
