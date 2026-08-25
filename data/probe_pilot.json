@@ -1,0 +1,171 @@
+{
+  "match_mode": {
+    "n": 200,
+    "startswith": 97,
+    "contains": 200
+  },
+  "limit_300": {
+    "count": 200
+  },
+  "pilot": {
+    "seeds": [
+      {
+        "seed": "하늘",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "바람",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "검은",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "붉은",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "작은",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "라라",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "루나",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "블랙",
+        "rows": 200,
+        "new": 199
+      },
+      {
+        "seed": "천상",
+        "rows": 200,
+        "new": 200
+      },
+      {
+        "seed": "마루",
+        "rows": 200,
+        "new": 195
+      }
+    ],
+    "unique_total": 1994,
+    "dup_rate": 0.003,
+    "level_min": 95,
+    "level_max": 115,
+    "level_under_100": 1,
+    "fame_none_count": 3,
+    "fame_p10": 66439,
+    "fame_p50": 101283,
+    "fame_p90": 121999,
+    "fame_min": 2844,
+    "fame_max": 132064,
+    "distinct_jobs": 61,
+    "top_jobs": [
+      [
+        "眞 크루세이더",
+        169
+      ],
+      [
+        "眞 브레이커",
+        157
+      ],
+      [
+        "眞 스위프트 마스터",
+        152
+      ],
+      [
+        "眞 다크템플러",
+        94
+      ],
+      [
+        "眞 넨마스터",
+        91
+      ]
+    ]
+  },
+  "timeline": [
+    {
+      "fame": 2844,
+      "level": 100,
+      "no_range": {
+        "count": 0,
+        "codes": [],
+        "newest": null,
+        "oldest": null
+      },
+      "range_space": {
+        "count": 0
+      }
+    },
+    {
+      "fame": 97069,
+      "level": 115,
+      "no_range": {
+        "count": 13,
+        "codes": [
+          {
+            "code": 504,
+            "name": "아이템 획득(항아리&상자)",
+            "n": 3
+          },
+          {
+            "code": 209,
+            "name": "레기온 클리어",
+            "n": 2
+          },
+          {
+            "code": 513,
+            "name": "아이템 획득(던전 카드 보상)",
+            "n": 2
+          },
+          {
+            "code": 201,
+            "name": "레이드",
+            "n": 2
+          },
+          {
+            "code": 551,
+            "name": "서약 획득(레이드 카드 보상)",
+            "n": 1
+          },
+          {
+            "code": 554,
+            "name": "서약 획득(제작서)",
+            "n": 1
+          },
+          {
+            "code": 505,
+            "name": "아이템 획득(던전 드랍)",
+            "n": 1
+          },
+          {
+            "code": 550,
+            "name": "서약 획득(던전 드랍)",
+            "n": 1
+          }
+        ],
+        "newest": "2026-08-10 17:01",
+        "oldest": "2026-07-26 23:31"
+      },
+      "range_space": {
+        "count": 50
+      }
+    }
+  ],
+  "calls": {
+    "total": 16,
+    "failed": 0
+  }
+}

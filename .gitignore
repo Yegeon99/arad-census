@@ -1,0 +1,19 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# raw/checkpoint data (식별 정보 포함 가능 — 커밋 금지)
+data/raw/
+data/checkpoints/
+data/*.tmp
+
+# node
+node_modules/
+dist/
+.vercel/
