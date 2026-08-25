@@ -36,7 +36,9 @@ for job in jobs.get("rows", []):
         while node:
             chain.append(node.get("jobGrowName"))
             node = node.get("next")
-        canonical = chain[0]
+        # 외전 캐릭터(다크나이트·크리에이터)는 체인 첫 노드가 전직명이 아닌
+        # 공유 성장 단계명("자각1")이라 직업군명을 canonical로 사용
+        canonical = job_name if chain[0] in ("자각1", "자각2") else chain[0]
         for i, name in enumerate(chain):
             stage = STAGE_LABELS[i] if i < len(STAGE_LABELS) else str(i)
             # 이름이 "眞 "으로 시작하면 단계 표기를 眞으로 강제

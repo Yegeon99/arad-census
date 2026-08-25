@@ -20,4 +20,6 @@ dist/
 
 report/src/data/
 docs/captures/*.png
+!docs/captures/desktop-full.png
+!docs/captures/desktop-s4.png
 .vercel
