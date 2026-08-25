@@ -169,30 +169,90 @@ def pii_scan(text: str) -> list:
 TL_PATH = ROOT / "data" / "checkpoints" / "timeline.jsonl"
 
 
-def load_activity(bins):
-    """타임라인 조사 결과(Phase 2) → activity 섹션. 없으면 None."""
+SMALL_N = 30  # 이 미만 구간은 "표본 소" 플래그 (게이트 2 응답 1항)
+
+
+def _uncapped_lookup():
+    """calls.jsonl → cid_hash별 found_uncapped (비상한 호출에서 1회라도 발견)."""
+    lut = {}
+    with CALLS_PATH.open(encoding="utf-8") as f:
+        for line in f:
+            rec = json.loads(line)
+            for row in rec["rows"]:
+                h = row.get("cid_hash")
+                if h is None:
+                    continue
+                lut[h] = lut.get(h, False) or (not rec["capped"])
+    return lut
+
+
+def _rates(rows, labels):
+    n = len(rows)
+    counter = Counter(r["activity"] for r in rows)
+    return {
+        "n": n,
+        "counts": {lab: counter.get(lab, 0) for lab in labels},
+        "pct": {lab: round(counter.get(lab, 0) / n * 100, 2) if n else None for lab in labels},
+        "small_sample": n < SMALL_N,
+    }
+
+
+def load_activity(bins, uncapped_fame_dist):
+    """타임라인 조사 결과(Phase 2) → activity 섹션. 없으면 None.
+
+    게이트 2 보완: 구간별 n·표본 소 플래그, capped/uncapped 비교,
+    비상한 명성 분포 가중 재추정치(reweighted_by_uncapped).
+    """
     if not TL_PATH.exists():
         return None
     acfg = json.loads((ROOT / "config" / "activity.json").read_text(encoding="utf-8"))
     labels = [c["label"] for c in acfg["criteria"]]
     rows = [json.loads(l) for l in TL_PATH.open(encoding="utf-8")]
-    counter = Counter(r["activity"] for r in rows)
-    by_bin = defaultdict(Counter)
+    lut = _uncapped_lookup()
     for r in rows:
-        by_bin[r["fame_bin"]][r["activity"]] += 1
+        r["found_uncapped"] = lut.get(r["cid_hash"], False)
+
     n = len(rows)
+    counter = Counter(r["activity"] for r in rows)
+    by_bin = {b["label"]: [r for r in rows if r["fame_bin"] == b["label"]] for b in bins}
+
+    # 비상한 명성 분포를 가중치로 쓴 재추정: 구간별 활성률 × 비상한 구간 비중 합
+    weights = {d["range"]: d["pct"] / 100 for d in uncapped_fame_dist}
+    reweighted = {}
+    for lab in labels:
+        est = 0.0
+        for b in bins:
+            sub = by_bin[b["label"]]
+            if not sub:
+                continue
+            rate = sum(1 for r in sub if r["activity"] == lab) / len(sub)
+            est += weights.get(b["label"], 0) * rate
+        reweighted[lab] = round(est * 100, 2)
+
     return {
         "subsample_size": n,
         "criteria": "최신 타임라인 이벤트 기준 7/30/90일 분류. 이벤트 없음(90일)=휴면 — 접속만 하는 유저는 과소집계 가능 (bias_notes)",
         "lookback_days": acfg["lookback_days"],
+        "small_n_threshold": SMALL_N,
         "overall": [{"label": lab, "count": counter.get(lab, 0),
                      "pct": round(counter.get(lab, 0) / n * 100, 2)} for lab in labels],
         "by_fame_bin": [
-            {"bin": b["label"],
-             "n": sum(by_bin[b["label"]].values()),
-             "counts": {lab: by_bin[b["label"]].get(lab, 0) for lab in labels}}
-            for b in bins if sum(by_bin[b["label"]].values()) > 0
+            dict({"bin": b["label"]}, **_rates(by_bin[b["label"]], labels))
+            for b in bins if by_bin[b["label"]]
         ],
+        "by_capped": {
+            "note": "서브샘플을 발견 경로로 분리 — uncapped=비상한(200 미만) 검색에서 1회 이상 발견",
+            "uncapped": _rates([r for r in rows if r["found_uncapped"]], labels),
+            "capped_only": _rates([r for r in rows if not r["found_uncapped"]], labels),
+            "by_fame_bin_uncapped": [
+                dict({"bin": b["label"]}, **_rates([r for r in by_bin[b["label"]] if r["found_uncapped"]], labels))
+                for b in bins if any(r["found_uncapped"] for r in by_bin[b["label"]])
+            ],
+        },
+        "reweighted_by_uncapped": {
+            "method": "명성 구간별 서브샘플 활성률에 비상한(uncapped) 표본의 6구간 비중을 가중치로 곱해 합산 — 상한 편향 보정 방향의 재추정치",
+            "pct": reweighted,
+        },
     }
 
 
@@ -204,7 +264,7 @@ def aggregate():
 
     fame_dist, fame_missing = dist_fame(frame, bins)
     u_fame_dist, u_fame_missing = dist_fame(uncapped, bins)
-    activity = load_activity(bins)
+    activity = load_activity(bins, u_fame_dist)
 
     census = {
         "meta": {

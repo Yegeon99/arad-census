@@ -17,3 +17,6 @@ data/*.tmp
 node_modules/
 dist/
 .vercel/
+
+report/src/data/
+docs/captures/*.png

@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* 디자인 토큰 — 라이트 "리포트/논문" 무드 (Market Analyst의 형제 프로젝트,
+   대시보드 vs 리포트로 형태 구분. 단일 액센트 + 데이터 잉크 중심) */
+:root {
+  --bg-base: #FAFAF8;      /* 종이 느낌의 웜 화이트 */
+  --bg-surface: #FFFFFF;
+  --border: #E6E4DE;
+  --text-primary: #1F2430;
+  --text-secondary: #5A6172;
+  --text-muted: #989DAB;
+  --accent: #2450A8;       /* 형제 프로젝트와 동일 포인트 블루 (단일 액센트) */
+  --accent-soft: #E8EEF9;
+  --ink-1: #DDE5F3;        /* 데이터 잉크 농도 스케일 (액센트 계열 단색) */
+  --ink-2: #B9C9E8;
+  --ink-3: #8AA5D9;
+  --ink-4: #5C7FC4;
+  --ink-5: #2450A8;
+  --ink-6: #17376F;
+  --masked: #EFEDE8;       /* 마스킹 셀 */
+}
+
+html {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, "Segoe UI",
+    "Malgun Gothic", sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  scroll-behavior: smooth;
+}
+
+body { margin: 0; min-height: 100vh; }
+
+h1, h2, h3, .serif {
+  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  letter-spacing: -0.01em;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.prose-block {
+  color: var(--text-secondary);
+}
+
+a { color: var(--accent); }
+
+section { scroll-margin-top: 24px; }

@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd report && npm install",
+  "buildCommand": "cd report && npm run build",
+  "outputDirectory": "report/dist"
+}
