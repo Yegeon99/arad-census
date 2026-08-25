@@ -34,6 +34,11 @@ def load_bins():
     return cfg["bins"]
 
 
+def load_job_map():
+    cfg = json.loads((ROOT / "config" / "job_map.json").read_text(encoding="utf-8"))
+    return cfg["map"]
+
+
 def bin_label(fame, bins):
     for b in bins:
         if fame >= b["min"] and (b["max"] is None or fame < b["max"]):
@@ -42,32 +47,47 @@ def bin_label(fame, bins):
 
 
 def load_frame():
-    """호출 체크포인트 → 고유 캐릭터 프레임 (메모리 내에서만 ID 사용)."""
-    chars = {}  # (server, characterId) -> dict
+    """호출 체크포인트 → 고유 캐릭터 프레임 (메모리 내에서만 ID 사용).
+
+    직업 축은 job_map.json으로 정규화: job(최종 전직명)·stage(각성 단계)·
+    job_group(기본 직업군). 매핑 실패 이름은 예외로 중단 (게이트 1 응답 1항).
+    """
+    job_map = load_job_map()
+    chars = {}  # (server, cid) -> dict
     call_stats = {"calls": 0, "capped_calls": 0}
+    unmapped = set()
     with CALLS_PATH.open(encoding="utf-8") as f:
         for line in f:
             rec = json.loads(line)
             call_stats["calls"] += 1
             call_stats["capped_calls"] += 1 if rec["capped"] else 0
             for row in rec["rows"]:
-                key = (rec["server"], row["characterId"])
+                cid = row.get("cid_hash") or row.get("characterId")
+                key = (rec["server"], cid)
                 if key not in chars:
+                    grow = row["jobGrowName"]
+                    m = job_map.get(grow)
+                    if m is None:
+                        unmapped.add(grow)
+                        continue
                     chars[key] = {
                         "server": rec["server"],
-                        "jobName": row["jobName"],
-                        "jobGrowName": row["jobGrowName"],
+                        "job": m["canonical"],
+                        "stage": m["stage"],
+                        "job_group": row["jobName"],
                         "level": row["level"],
                         "fame": row["fame"],
                         "found_uncapped": not rec["capped"],
                     }
                 elif not rec["capped"]:
                     chars[key]["found_uncapped"] = True
+    if unmapped:
+        raise RuntimeError(f"job_map 매핑 실패 {len(unmapped)}건: {sorted(unmapped)}")
     return list(chars.values()), call_stats
 
 
-def dist_job(frame, total):
-    counter = Counter(c["jobGrowName"] for c in frame)
+def dist_job(frame, total, key="job"):
+    counter = Counter(c[key] for c in frame)
     out, etc_count, etc_jobs = [], 0, 0
     for name, n in counter.most_common():
         if n >= MIN_CELL:
@@ -95,15 +115,31 @@ def dist_server(frame):
     return [{"server": s, "count": n} for s, n in counter.most_common()]
 
 
+def dist_stage(frame, total):
+    order = ["미전직", "0", "1", "2", "眞"]
+    counter = Counter(c["stage"] for c in frame)
+    return [{"stage": s, "count": counter.get(s, 0),
+             "pct": round(counter.get(s, 0) / total * 100, 2)}
+            for s in order if counter.get(s, 0) > 0]
+
+
+def fame_missing_levels(frame):
+    """fame 결측 캐릭터의 level 분포 (bias_notes용, 게이트 1 응답 3항)."""
+    lv_bins = [("1~49", 1, 50), ("50~99", 50, 100), ("100~109", 100, 110), ("110~115", 110, 116)]
+    missing = [c["level"] for c in frame if c["fame"] is None and c["level"] is not None]
+    return [{"range": lab, "count": sum(1 for l in missing if lo <= l < hi)}
+            for lab, lo, hi in lv_bins]
+
+
 def dist_job_x_fame(frame, bins):
-    """job×fame 교차. 10명 미만 셀은 masked (수치 미공개)."""
+    """job×fame 교차 (정규화 전직명 기준). 10명 미만 셀은 masked (수치 미공개)."""
     cells = defaultdict(int)
     job_totals = Counter()
     for c in frame:
         if c["fame"] is None:
             continue
-        cells[(c["jobGrowName"], bin_label(c["fame"], bins))] += 1
-        job_totals[c["jobGrowName"]] += 1
+        cells[(c["job"], bin_label(c["fame"], bins))] += 1
+        job_totals[c["job"]] += 1
     # 교차표는 fame 있는 표본 수 MIN_CELL 이상 직업만 (그 외는 전 셀이 마스킹 대상)
     jobs = [j for j, n in job_totals.most_common() if n >= MIN_CELL]
     out = []
@@ -130,6 +166,36 @@ def pii_scan(text: str) -> list:
     return hits
 
 
+TL_PATH = ROOT / "data" / "checkpoints" / "timeline.jsonl"
+
+
+def load_activity(bins):
+    """타임라인 조사 결과(Phase 2) → activity 섹션. 없으면 None."""
+    if not TL_PATH.exists():
+        return None
+    acfg = json.loads((ROOT / "config" / "activity.json").read_text(encoding="utf-8"))
+    labels = [c["label"] for c in acfg["criteria"]]
+    rows = [json.loads(l) for l in TL_PATH.open(encoding="utf-8")]
+    counter = Counter(r["activity"] for r in rows)
+    by_bin = defaultdict(Counter)
+    for r in rows:
+        by_bin[r["fame_bin"]][r["activity"]] += 1
+    n = len(rows)
+    return {
+        "subsample_size": n,
+        "criteria": "최신 타임라인 이벤트 기준 7/30/90일 분류. 이벤트 없음(90일)=휴면 — 접속만 하는 유저는 과소집계 가능 (bias_notes)",
+        "lookback_days": acfg["lookback_days"],
+        "overall": [{"label": lab, "count": counter.get(lab, 0),
+                     "pct": round(counter.get(lab, 0) / n * 100, 2)} for lab in labels],
+        "by_fame_bin": [
+            {"bin": b["label"],
+             "n": sum(by_bin[b["label"]].values()),
+             "counts": {lab: by_bin[b["label"]].get(lab, 0) for lab in labels}}
+            for b in bins if sum(by_bin[b["label"]].values()) > 0
+        ],
+    }
+
+
 def aggregate():
     bins = load_bins()
     frame, call_stats = load_frame()
@@ -138,6 +204,7 @@ def aggregate():
 
     fame_dist, fame_missing = dist_fame(frame, bins)
     u_fame_dist, u_fame_missing = dist_fame(uncapped, bins)
+    activity = load_activity(bins)
 
     census = {
         "meta": {
@@ -148,13 +215,16 @@ def aggregate():
             "uncapped_fame_missing": u_fame_missing,
             "search_calls": call_stats["calls"],
             "search_calls_capped": call_stats["capped_calls"],
-            "timeline_subsample": 0,  # Phase 2에서 채움
+            "timeline_subsample": activity["subsample_size"] if activity else 0,
             "servers": sorted({c["server"] for c in frame}),
-            "method_version": "1.0",
+            "method_version": "1.1",
             "min_cell": MIN_CELL,
+            "fame_missing_level_dist": fame_missing_levels(frame),
         },
         "distributions": {
             "job": dist_job(frame, total),
+            "job_group": dist_job(frame, total, key="job_group"),
+            "stage": dist_stage(frame, total),
             "fame_bins": fame_dist,
             "server": dist_server(frame),
             "job_x_fame": dist_job_x_fame(frame, bins),
@@ -165,9 +235,17 @@ def aggregate():
             "fame_bins": u_fame_dist,
             "server": dist_server(uncapped),
         },
-        "activity": None,  # Phase 2
-        "insights": [],    # Phase 2
+        "activity": activity,
+        "insights": [],  # Phase 2 insights.py가 채움
     }
+
+    # 기존 인사이트 보존 (재집계 시 유실 방지)
+    if OUT_PATH.exists():
+        try:
+            prev = json.loads(OUT_PATH.read_text(encoding="utf-8"))
+            census["insights"] = prev.get("insights", [])
+        except (ValueError, OSError):
+            pass
 
     # 정합성 검증
     assert sum(d["count"] for d in census["distributions"]["job"]) == total, "job 합계 불일치"

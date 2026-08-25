@@ -1,0 +1,1382 @@
+{
+  "generated_at": "2026-08-25T17:49:00+09:00",
+  "source": "/df/jobs",
+  "note": "미전직 캐릭터의 jobGrowName(기본 직업명)은 자기 자신으로 매핑, stage='미전직'",
+  "map": {
+    "웨펀마스터": {
+      "canonical": "웨펀마스터",
+      "stage": "0",
+      "jobName": "귀검사(남)"
+    },
+    "검성": {
+      "canonical": "웨펀마스터",
+      "stage": "1",
+      "jobName": "귀검사(남)"
+    },
+    "검신": {
+      "canonical": "웨펀마스터",
+      "stage": "2",
+      "jobName": "귀검사(남)"
+    },
+    "眞 웨펀마스터": {
+      "canonical": "웨펀마스터",
+      "stage": "眞",
+      "jobName": "귀검사(남)"
+    },
+    "소울브링어": {
+      "canonical": "소울브링어",
+      "stage": "0",
+      "jobName": "귀검사(남)"
+    },
+    "소울테이커": {
+      "canonical": "소울브링어",
+      "stage": "1",
+      "jobName": "귀검사(남)"
+    },
+    "다크로드": {
+      "canonical": "소울브링어",
+      "stage": "2",
+      "jobName": "귀검사(남)"
+    },
+    "眞 소울브링어": {
+      "canonical": "소울브링어",
+      "stage": "眞",
+      "jobName": "귀검사(남)"
+    },
+    "버서커": {
+      "canonical": "버서커",
+      "stage": "0",
+      "jobName": "귀검사(남)"
+    },
+    "헬벤터": {
+      "canonical": "버서커",
+      "stage": "1",
+      "jobName": "귀검사(남)"
+    },
+    "블러드 이블": {
+      "canonical": "버서커",
+      "stage": "2",
+      "jobName": "귀검사(남)"
+    },
+    "眞 버서커": {
+      "canonical": "버서커",
+      "stage": "眞",
+      "jobName": "귀검사(남)"
+    },
+    "아수라": {
+      "canonical": "아수라",
+      "stage": "0",
+      "jobName": "귀검사(남)"
+    },
+    "대암흑천": {
+      "canonical": "아수라",
+      "stage": "1",
+      "jobName": "귀검사(남)"
+    },
+    "인다라천": {
+      "canonical": "아수라",
+      "stage": "2",
+      "jobName": "귀검사(남)"
+    },
+    "眞 아수라": {
+      "canonical": "아수라",
+      "stage": "眞",
+      "jobName": "귀검사(남)"
+    },
+    "검귀": {
+      "canonical": "검귀",
+      "stage": "0",
+      "jobName": "귀검사(남)"
+    },
+    "야차": {
+      "canonical": "검귀",
+      "stage": "1",
+      "jobName": "귀검사(남)"
+    },
+    "악귀나찰": {
+      "canonical": "검귀",
+      "stage": "2",
+      "jobName": "귀검사(남)"
+    },
+    "眞 검귀": {
+      "canonical": "검귀",
+      "stage": "眞",
+      "jobName": "귀검사(남)"
+    },
+    "넨마스터": {
+      "canonical": "넨마스터",
+      "stage": "0",
+      "jobName": "격투가(여)"
+    },
+    "백화요란": {
+      "canonical": "넨마스터",
+      "stage": "1",
+      "jobName": "격투가(여)"
+    },
+    "염제 폐월수화": {
+      "canonical": "넨마스터",
+      "stage": "2",
+      "jobName": "격투가(여)"
+    },
+    "眞 넨마스터": {
+      "canonical": "넨마스터",
+      "stage": "眞",
+      "jobName": "격투가(여)"
+    },
+    "스트라이커": {
+      "canonical": "스트라이커",
+      "stage": "0",
+      "jobName": "격투가(여)"
+    },
+    "챔피언": {
+      "canonical": "스트라이커",
+      "stage": "1",
+      "jobName": "격투가(여)"
+    },
+    "카이저": {
+      "canonical": "스트라이커",
+      "stage": "2",
+      "jobName": "격투가(여)"
+    },
+    "眞 스트라이커": {
+      "canonical": "스트라이커",
+      "stage": "眞",
+      "jobName": "격투가(여)"
+    },
+    "스트리트파이터": {
+      "canonical": "스트리트파이터",
+      "stage": "0",
+      "jobName": "격투가(여)"
+    },
+    "독왕": {
+      "canonical": "스트리트파이터",
+      "stage": "1",
+      "jobName": "격투가(여)"
+    },
+    "용독문주": {
+      "canonical": "스트리트파이터",
+      "stage": "2",
+      "jobName": "격투가(여)"
+    },
+    "眞 스트리트파이터": {
+      "canonical": "스트리트파이터",
+      "stage": "眞",
+      "jobName": "격투가(여)"
+    },
+    "그래플러": {
+      "canonical": "그래플러",
+      "stage": "0",
+      "jobName": "격투가(여)"
+    },
+    "토네이도": {
+      "canonical": "그래플러",
+      "stage": "1",
+      "jobName": "격투가(여)"
+    },
+    "얼티밋 디바": {
+      "canonical": "그래플러",
+      "stage": "2",
+      "jobName": "격투가(여)"
+    },
+    "眞 그래플러": {
+      "canonical": "그래플러",
+      "stage": "眞",
+      "jobName": "격투가(여)"
+    },
+    "레인저": {
+      "canonical": "레인저",
+      "stage": "0",
+      "jobName": "거너(남)"
+    },
+    "데스페라도": {
+      "canonical": "레인저",
+      "stage": "1",
+      "jobName": "거너(남)"
+    },
+    "레이븐": {
+      "canonical": "레인저",
+      "stage": "2",
+      "jobName": "거너(남)"
+    },
+    "眞 레인저": {
+      "canonical": "레인저",
+      "stage": "眞",
+      "jobName": "거너(남)"
+    },
+    "런처": {
+      "canonical": "런처",
+      "stage": "0",
+      "jobName": "거너(남)"
+    },
+    "블래스터": {
+      "canonical": "런처",
+      "stage": "1",
+      "jobName": "거너(남)"
+    },
+    "디스트로이어": {
+      "canonical": "런처",
+      "stage": "2",
+      "jobName": "거너(남)"
+    },
+    "眞 런처": {
+      "canonical": "런처",
+      "stage": "眞",
+      "jobName": "거너(남)"
+    },
+    "메카닉": {
+      "canonical": "메카닉",
+      "stage": "0",
+      "jobName": "거너(남)"
+    },
+    "마이스터": {
+      "canonical": "메카닉",
+      "stage": "1",
+      "jobName": "거너(남)"
+    },
+    "프라임": {
+      "canonical": "메카닉",
+      "stage": "2",
+      "jobName": "거너(남)"
+    },
+    "眞 메카닉": {
+      "canonical": "메카닉",
+      "stage": "眞",
+      "jobName": "거너(남)"
+    },
+    "스핏파이어": {
+      "canonical": "스핏파이어",
+      "stage": "0",
+      "jobName": "거너(남)"
+    },
+    "제네럴": {
+      "canonical": "스핏파이어",
+      "stage": "1",
+      "jobName": "거너(남)"
+    },
+    "커맨더": {
+      "canonical": "스핏파이어",
+      "stage": "2",
+      "jobName": "거너(남)"
+    },
+    "眞 스핏파이어": {
+      "canonical": "스핏파이어",
+      "stage": "眞",
+      "jobName": "거너(남)"
+    },
+    "어썰트": {
+      "canonical": "어썰트",
+      "stage": "0",
+      "jobName": "거너(남)"
+    },
+    "인트루더": {
+      "canonical": "어썰트",
+      "stage": "1",
+      "jobName": "거너(남)"
+    },
+    "엑스마키나": {
+      "canonical": "어썰트",
+      "stage": "2",
+      "jobName": "거너(남)"
+    },
+    "眞 어썰트": {
+      "canonical": "어썰트",
+      "stage": "眞",
+      "jobName": "거너(남)"
+    },
+    "엘레멘탈마스터": {
+      "canonical": "엘레멘탈마스터",
+      "stage": "0",
+      "jobName": "마법사(여)"
+    },
+    "아크메이지": {
+      "canonical": "엘레멘탈마스터",
+      "stage": "1",
+      "jobName": "마법사(여)"
+    },
+    "오버마인드": {
+      "canonical": "엘레멘탈마스터",
+      "stage": "2",
+      "jobName": "마법사(여)"
+    },
+    "眞 엘레멘탈마스터": {
+      "canonical": "엘레멘탈마스터",
+      "stage": "眞",
+      "jobName": "마법사(여)"
+    },
+    "소환사": {
+      "canonical": "소환사",
+      "stage": "0",
+      "jobName": "마법사(여)"
+    },
+    "문 엠프레스": {
+      "canonical": "소환사",
+      "stage": "1",
+      "jobName": "마법사(여)"
+    },
+    "이클립스": {
+      "canonical": "소환사",
+      "stage": "2",
+      "jobName": "마법사(여)"
+    },
+    "眞 소환사": {
+      "canonical": "소환사",
+      "stage": "眞",
+      "jobName": "마법사(여)"
+    },
+    "배틀메이지": {
+      "canonical": "배틀메이지",
+      "stage": "0",
+      "jobName": "마법사(여)"
+    },
+    "벨라트릭스": {
+      "canonical": "배틀메이지",
+      "stage": "1",
+      "jobName": "마법사(여)"
+    },
+    "아슈타르테": {
+      "canonical": "배틀메이지",
+      "stage": "2",
+      "jobName": "마법사(여)"
+    },
+    "眞 배틀메이지": {
+      "canonical": "배틀메이지",
+      "stage": "眞",
+      "jobName": "마법사(여)"
+    },
+    "마도학자": {
+      "canonical": "마도학자",
+      "stage": "0",
+      "jobName": "마법사(여)"
+    },
+    "트릭스터": {
+      "canonical": "마도학자",
+      "stage": "1",
+      "jobName": "마법사(여)"
+    },
+    "지니위즈": {
+      "canonical": "마도학자",
+      "stage": "2",
+      "jobName": "마법사(여)"
+    },
+    "眞 마도학자": {
+      "canonical": "마도학자",
+      "stage": "眞",
+      "jobName": "마법사(여)"
+    },
+    "인챈트리스": {
+      "canonical": "인챈트리스",
+      "stage": "0",
+      "jobName": "마법사(여)"
+    },
+    "블랙 메이든": {
+      "canonical": "인챈트리스",
+      "stage": "1",
+      "jobName": "마법사(여)"
+    },
+    "헤카테": {
+      "canonical": "인챈트리스",
+      "stage": "2",
+      "jobName": "마법사(여)"
+    },
+    "眞 인챈트리스": {
+      "canonical": "인챈트리스",
+      "stage": "眞",
+      "jobName": "마법사(여)"
+    },
+    "크루세이더": {
+      "canonical": "크루세이더",
+      "stage": "0",
+      "jobName": "프리스트(남)"
+    },
+    "홀리오더": {
+      "canonical": "크루세이더",
+      "stage": "1",
+      "jobName": "프리스트(남)"
+    },
+    "세인트": {
+      "canonical": "크루세이더",
+      "stage": "2",
+      "jobName": "프리스트(남)"
+    },
+    "眞 크루세이더": {
+      "canonical": "크루세이더",
+      "stage": "眞",
+      "jobName": "프리스트(남)"
+    },
+    "인파이터": {
+      "canonical": "인파이터",
+      "stage": "0",
+      "jobName": "프리스트(남)"
+    },
+    "갓핸드": {
+      "canonical": "인파이터",
+      "stage": "1",
+      "jobName": "프리스트(남)"
+    },
+    "저스티스": {
+      "canonical": "인파이터",
+      "stage": "2",
+      "jobName": "프리스트(남)"
+    },
+    "眞 인파이터": {
+      "canonical": "인파이터",
+      "stage": "眞",
+      "jobName": "프리스트(남)"
+    },
+    "퇴마사": {
+      "canonical": "퇴마사",
+      "stage": "0",
+      "jobName": "프리스트(남)"
+    },
+    "용투사": {
+      "canonical": "퇴마사",
+      "stage": "1",
+      "jobName": "프리스트(남)"
+    },
+    "태을선인": {
+      "canonical": "퇴마사",
+      "stage": "2",
+      "jobName": "프리스트(남)"
+    },
+    "眞 퇴마사": {
+      "canonical": "퇴마사",
+      "stage": "眞",
+      "jobName": "프리스트(남)"
+    },
+    "어벤저": {
+      "canonical": "어벤저",
+      "stage": "0",
+      "jobName": "프리스트(남)"
+    },
+    "둠스가디언": {
+      "canonical": "어벤저",
+      "stage": "1",
+      "jobName": "프리스트(남)"
+    },
+    "이모탈": {
+      "canonical": "어벤저",
+      "stage": "2",
+      "jobName": "프리스트(남)"
+    },
+    "眞 어벤저": {
+      "canonical": "어벤저",
+      "stage": "眞",
+      "jobName": "프리스트(남)"
+    },
+    "블러디아": {
+      "canonical": "레인저",
+      "stage": "1",
+      "jobName": "거너(여)"
+    },
+    "크림슨로제": {
+      "canonical": "레인저",
+      "stage": "2",
+      "jobName": "거너(여)"
+    },
+    "헤비배럴": {
+      "canonical": "런처",
+      "stage": "1",
+      "jobName": "거너(여)"
+    },
+    "스톰트루퍼": {
+      "canonical": "런처",
+      "stage": "2",
+      "jobName": "거너(여)"
+    },
+    "메탈하트": {
+      "canonical": "메카닉",
+      "stage": "1",
+      "jobName": "거너(여)"
+    },
+    "옵티머스": {
+      "canonical": "메카닉",
+      "stage": "2",
+      "jobName": "거너(여)"
+    },
+    "발키리": {
+      "canonical": "스핏파이어",
+      "stage": "1",
+      "jobName": "거너(여)"
+    },
+    "프레이야": {
+      "canonical": "스핏파이어",
+      "stage": "2",
+      "jobName": "거너(여)"
+    },
+    "패러메딕": {
+      "canonical": "패러메딕",
+      "stage": "0",
+      "jobName": "거너(여)"
+    },
+    "스키퍼": {
+      "canonical": "패러메딕",
+      "stage": "1",
+      "jobName": "거너(여)"
+    },
+    "코로니스": {
+      "canonical": "패러메딕",
+      "stage": "2",
+      "jobName": "거너(여)"
+    },
+    "眞 패러메딕": {
+      "canonical": "패러메딕",
+      "stage": "眞",
+      "jobName": "거너(여)"
+    },
+    "로그": {
+      "canonical": "로그",
+      "stage": "0",
+      "jobName": "도적"
+    },
+    "실버문": {
+      "canonical": "로그",
+      "stage": "1",
+      "jobName": "도적"
+    },
+    "알키오네": {
+      "canonical": "로그",
+      "stage": "2",
+      "jobName": "도적"
+    },
+    "眞 로그": {
+      "canonical": "로그",
+      "stage": "眞",
+      "jobName": "도적"
+    },
+    "사령술사": {
+      "canonical": "사령술사",
+      "stage": "0",
+      "jobName": "도적"
+    },
+    "데스브링어": {
+      "canonical": "사령술사",
+      "stage": "1",
+      "jobName": "도적"
+    },
+    "타나토스": {
+      "canonical": "사령술사",
+      "stage": "2",
+      "jobName": "도적"
+    },
+    "眞 사령술사": {
+      "canonical": "사령술사",
+      "stage": "眞",
+      "jobName": "도적"
+    },
+    "쿠노이치": {
+      "canonical": "쿠노이치",
+      "stage": "0",
+      "jobName": "도적"
+    },
+    "이즈나비": {
+      "canonical": "쿠노이치",
+      "stage": "1",
+      "jobName": "도적"
+    },
+    "시라누이": {
+      "canonical": "쿠노이치",
+      "stage": "2",
+      "jobName": "도적"
+    },
+    "眞 쿠노이치": {
+      "canonical": "쿠노이치",
+      "stage": "眞",
+      "jobName": "도적"
+    },
+    "섀도우댄서": {
+      "canonical": "섀도우댄서",
+      "stage": "0",
+      "jobName": "도적"
+    },
+    "나이트메어": {
+      "canonical": "섀도우댄서",
+      "stage": "1",
+      "jobName": "도적"
+    },
+    "그림리퍼": {
+      "canonical": "섀도우댄서",
+      "stage": "2",
+      "jobName": "도적"
+    },
+    "眞 섀도우댄서": {
+      "canonical": "섀도우댄서",
+      "stage": "眞",
+      "jobName": "도적"
+    },
+    "광호제": {
+      "canonical": "넨마스터",
+      "stage": "1",
+      "jobName": "격투가(남)"
+    },
+    "염황 광풍제월": {
+      "canonical": "넨마스터",
+      "stage": "2",
+      "jobName": "격투가(남)"
+    },
+    "무극": {
+      "canonical": "스트라이커",
+      "stage": "1",
+      "jobName": "격투가(남)"
+    },
+    "패황": {
+      "canonical": "스트라이커",
+      "stage": "2",
+      "jobName": "격투가(남)"
+    },
+    "천수나한": {
+      "canonical": "스트리트파이터",
+      "stage": "1",
+      "jobName": "격투가(남)"
+    },
+    "명왕": {
+      "canonical": "스트리트파이터",
+      "stage": "2",
+      "jobName": "격투가(남)"
+    },
+    "자이언트": {
+      "canonical": "그래플러",
+      "stage": "1",
+      "jobName": "격투가(남)"
+    },
+    "그랜드 마스터": {
+      "canonical": "그래플러",
+      "stage": "2",
+      "jobName": "격투가(남)"
+    },
+    "엘레멘탈 바머": {
+      "canonical": "엘레멘탈 바머",
+      "stage": "0",
+      "jobName": "마법사(남)"
+    },
+    "워록": {
+      "canonical": "엘레멘탈 바머",
+      "stage": "1",
+      "jobName": "마법사(남)"
+    },
+    "오블리비언": {
+      "canonical": "엘레멘탈 바머",
+      "stage": "2",
+      "jobName": "마법사(남)"
+    },
+    "眞 엘레멘탈 바머": {
+      "canonical": "엘레멘탈 바머",
+      "stage": "眞",
+      "jobName": "마법사(남)"
+    },
+    "빙결사": {
+      "canonical": "빙결사",
+      "stage": "0",
+      "jobName": "마법사(남)"
+    },
+    "프로즌하트": {
+      "canonical": "빙결사",
+      "stage": "1",
+      "jobName": "마법사(남)"
+    },
+    "이터널": {
+      "canonical": "빙결사",
+      "stage": "2",
+      "jobName": "마법사(남)"
+    },
+    "眞 빙결사": {
+      "canonical": "빙결사",
+      "stage": "眞",
+      "jobName": "마법사(남)"
+    },
+    "블러드 메이지": {
+      "canonical": "블러드 메이지",
+      "stage": "0",
+      "jobName": "마법사(남)"
+    },
+    "뱀파이어": {
+      "canonical": "블러드 메이지",
+      "stage": "1",
+      "jobName": "마법사(남)"
+    },
+    "뱀파이어 로드": {
+      "canonical": "블러드 메이지",
+      "stage": "2",
+      "jobName": "마법사(남)"
+    },
+    "眞 블러드 메이지": {
+      "canonical": "블러드 메이지",
+      "stage": "眞",
+      "jobName": "마법사(남)"
+    },
+    "스위프트 마스터": {
+      "canonical": "스위프트 마스터",
+      "stage": "0",
+      "jobName": "마법사(남)"
+    },
+    "스톰브링어": {
+      "canonical": "스위프트 마스터",
+      "stage": "1",
+      "jobName": "마법사(남)"
+    },
+    "아이올로스": {
+      "canonical": "스위프트 마스터",
+      "stage": "2",
+      "jobName": "마법사(남)"
+    },
+    "眞 스위프트 마스터": {
+      "canonical": "스위프트 마스터",
+      "stage": "眞",
+      "jobName": "마법사(남)"
+    },
+    "디멘션워커": {
+      "canonical": "디멘션워커",
+      "stage": "0",
+      "jobName": "마법사(남)"
+    },
+    "이레귤러": {
+      "canonical": "디멘션워커",
+      "stage": "1",
+      "jobName": "마법사(남)"
+    },
+    "어센션": {
+      "canonical": "디멘션워커",
+      "stage": "2",
+      "jobName": "마법사(남)"
+    },
+    "眞 디멘션워커": {
+      "canonical": "디멘션워커",
+      "stage": "眞",
+      "jobName": "마법사(남)"
+    },
+    "자각1": {
+      "canonical": "자각1",
+      "stage": "0",
+      "jobName": "다크나이트"
+    },
+    "자각2": {
+      "canonical": "자각1",
+      "stage": "1",
+      "jobName": "다크나이트"
+    },
+    "眞 다크나이트": {
+      "canonical": "자각1",
+      "stage": "眞",
+      "jobName": "다크나이트"
+    },
+    "眞 크리에이터": {
+      "canonical": "자각1",
+      "stage": "眞",
+      "jobName": "크리에이터"
+    },
+    "소드마스터": {
+      "canonical": "소드마스터",
+      "stage": "0",
+      "jobName": "귀검사(여)"
+    },
+    "노블레스": {
+      "canonical": "소드마스터",
+      "stage": "1",
+      "jobName": "귀검사(여)"
+    },
+    "마제스티": {
+      "canonical": "소드마스터",
+      "stage": "2",
+      "jobName": "귀검사(여)"
+    },
+    "眞 소드마스터": {
+      "canonical": "소드마스터",
+      "stage": "眞",
+      "jobName": "귀검사(여)"
+    },
+    "다크템플러": {
+      "canonical": "다크템플러",
+      "stage": "0",
+      "jobName": "귀검사(여)"
+    },
+    "암제": {
+      "canonical": "다크템플러",
+      "stage": "1",
+      "jobName": "귀검사(여)"
+    },
+    "네메시스": {
+      "canonical": "다크템플러",
+      "stage": "2",
+      "jobName": "귀검사(여)"
+    },
+    "眞 다크템플러": {
+      "canonical": "다크템플러",
+      "stage": "眞",
+      "jobName": "귀검사(여)"
+    },
+    "데몬슬레이어": {
+      "canonical": "데몬슬레이어",
+      "stage": "0",
+      "jobName": "귀검사(여)"
+    },
+    "검마": {
+      "canonical": "데몬슬레이어",
+      "stage": "1",
+      "jobName": "귀검사(여)"
+    },
+    "디어사이드": {
+      "canonical": "데몬슬레이어",
+      "stage": "2",
+      "jobName": "귀검사(여)"
+    },
+    "眞 데몬슬레이어": {
+      "canonical": "데몬슬레이어",
+      "stage": "眞",
+      "jobName": "귀검사(여)"
+    },
+    "베가본드": {
+      "canonical": "베가본드",
+      "stage": "0",
+      "jobName": "귀검사(여)"
+    },
+    "검호": {
+      "canonical": "베가본드",
+      "stage": "1",
+      "jobName": "귀검사(여)"
+    },
+    "검제": {
+      "canonical": "베가본드",
+      "stage": "2",
+      "jobName": "귀검사(여)"
+    },
+    "眞 베가본드": {
+      "canonical": "베가본드",
+      "stage": "眞",
+      "jobName": "귀검사(여)"
+    },
+    "블레이드": {
+      "canonical": "블레이드",
+      "stage": "0",
+      "jobName": "귀검사(여)"
+    },
+    "리벨리온": {
+      "canonical": "블레이드",
+      "stage": "1",
+      "jobName": "귀검사(여)"
+    },
+    "벤데타": {
+      "canonical": "블레이드",
+      "stage": "2",
+      "jobName": "귀검사(여)"
+    },
+    "眞 블레이드": {
+      "canonical": "블레이드",
+      "stage": "眞",
+      "jobName": "귀검사(여)"
+    },
+    "엘븐나이트": {
+      "canonical": "엘븐나이트",
+      "stage": "0",
+      "jobName": "나이트"
+    },
+    "피스메이커": {
+      "canonical": "엘븐나이트",
+      "stage": "1",
+      "jobName": "나이트"
+    },
+    "가이아": {
+      "canonical": "엘븐나이트",
+      "stage": "2",
+      "jobName": "나이트"
+    },
+    "眞 엘븐나이트": {
+      "canonical": "엘븐나이트",
+      "stage": "眞",
+      "jobName": "나이트"
+    },
+    "카오스": {
+      "canonical": "카오스",
+      "stage": "0",
+      "jobName": "나이트"
+    },
+    "마왕": {
+      "canonical": "카오스",
+      "stage": "1",
+      "jobName": "나이트"
+    },
+    "마신": {
+      "canonical": "카오스",
+      "stage": "2",
+      "jobName": "나이트"
+    },
+    "眞 카오스": {
+      "canonical": "카오스",
+      "stage": "眞",
+      "jobName": "나이트"
+    },
+    "팔라딘": {
+      "canonical": "팔라딘",
+      "stage": "0",
+      "jobName": "나이트"
+    },
+    "센티넬": {
+      "canonical": "팔라딘",
+      "stage": "1",
+      "jobName": "나이트"
+    },
+    "세이비어": {
+      "canonical": "팔라딘",
+      "stage": "2",
+      "jobName": "나이트"
+    },
+    "眞 팔라딘": {
+      "canonical": "팔라딘",
+      "stage": "眞",
+      "jobName": "나이트"
+    },
+    "드래곤나이트": {
+      "canonical": "드래곤나이트",
+      "stage": "0",
+      "jobName": "나이트"
+    },
+    "타이런트": {
+      "canonical": "드래곤나이트",
+      "stage": "1",
+      "jobName": "나이트"
+    },
+    "드레드노트": {
+      "canonical": "드래곤나이트",
+      "stage": "2",
+      "jobName": "나이트"
+    },
+    "眞 드래곤나이트": {
+      "canonical": "드래곤나이트",
+      "stage": "眞",
+      "jobName": "나이트"
+    },
+    "뱅가드": {
+      "canonical": "뱅가드",
+      "stage": "0",
+      "jobName": "마창사"
+    },
+    "레버넌트": {
+      "canonical": "뱅가드",
+      "stage": "1",
+      "jobName": "마창사"
+    },
+    "워로드": {
+      "canonical": "뱅가드",
+      "stage": "2",
+      "jobName": "마창사"
+    },
+    "眞 뱅가드": {
+      "canonical": "뱅가드",
+      "stage": "眞",
+      "jobName": "마창사"
+    },
+    "듀얼리스트": {
+      "canonical": "듀얼리스트",
+      "stage": "0",
+      "jobName": "마창사"
+    },
+    "하이랜더": {
+      "canonical": "듀얼리스트",
+      "stage": "1",
+      "jobName": "마창사"
+    },
+    "듀란달": {
+      "canonical": "듀얼리스트",
+      "stage": "2",
+      "jobName": "마창사"
+    },
+    "眞 듀얼리스트": {
+      "canonical": "듀얼리스트",
+      "stage": "眞",
+      "jobName": "마창사"
+    },
+    "드래고니안 랜서": {
+      "canonical": "드래고니안 랜서",
+      "stage": "0",
+      "jobName": "마창사"
+    },
+    "레비아탄": {
+      "canonical": "드래고니안 랜서",
+      "stage": "1",
+      "jobName": "마창사"
+    },
+    "제노사이더": {
+      "canonical": "드래고니안 랜서",
+      "stage": "2",
+      "jobName": "마창사"
+    },
+    "眞 드래고니안 랜서": {
+      "canonical": "드래고니안 랜서",
+      "stage": "眞",
+      "jobName": "마창사"
+    },
+    "다크 랜서": {
+      "canonical": "다크 랜서",
+      "stage": "0",
+      "jobName": "마창사"
+    },
+    "램페이저": {
+      "canonical": "다크 랜서",
+      "stage": "1",
+      "jobName": "마창사"
+    },
+    "에레보스": {
+      "canonical": "다크 랜서",
+      "stage": "2",
+      "jobName": "마창사"
+    },
+    "眞 다크 랜서": {
+      "canonical": "다크 랜서",
+      "stage": "眞",
+      "jobName": "마창사"
+    },
+    "에반젤리스트": {
+      "canonical": "크루세이더",
+      "stage": "1",
+      "jobName": "프리스트(여)"
+    },
+    "세라핌": {
+      "canonical": "크루세이더",
+      "stage": "2",
+      "jobName": "프리스트(여)"
+    },
+    "이단심판관": {
+      "canonical": "이단심판관",
+      "stage": "0",
+      "jobName": "프리스트(여)"
+    },
+    "헬카이트": {
+      "canonical": "이단심판관",
+      "stage": "1",
+      "jobName": "프리스트(여)"
+    },
+    "인페르노": {
+      "canonical": "이단심판관",
+      "stage": "2",
+      "jobName": "프리스트(여)"
+    },
+    "眞 이단심판관": {
+      "canonical": "이단심판관",
+      "stage": "眞",
+      "jobName": "프리스트(여)"
+    },
+    "무녀": {
+      "canonical": "무녀",
+      "stage": "0",
+      "jobName": "프리스트(여)"
+    },
+    "신녀": {
+      "canonical": "무녀",
+      "stage": "1",
+      "jobName": "프리스트(여)"
+    },
+    "천선낭랑": {
+      "canonical": "무녀",
+      "stage": "2",
+      "jobName": "프리스트(여)"
+    },
+    "眞 무녀": {
+      "canonical": "무녀",
+      "stage": "眞",
+      "jobName": "프리스트(여)"
+    },
+    "미스트리스": {
+      "canonical": "미스트리스",
+      "stage": "0",
+      "jobName": "프리스트(여)"
+    },
+    "신세이어": {
+      "canonical": "미스트리스",
+      "stage": "1",
+      "jobName": "프리스트(여)"
+    },
+    "리디머": {
+      "canonical": "미스트리스",
+      "stage": "2",
+      "jobName": "프리스트(여)"
+    },
+    "眞 미스트리스": {
+      "canonical": "미스트리스",
+      "stage": "眞",
+      "jobName": "프리스트(여)"
+    },
+    "페르소나": {
+      "canonical": "인파이터",
+      "stage": "1",
+      "jobName": "프리스트(여)"
+    },
+    "비헤멘스": {
+      "canonical": "인파이터",
+      "stage": "2",
+      "jobName": "프리스트(여)"
+    },
+    "히트맨": {
+      "canonical": "히트맨",
+      "stage": "0",
+      "jobName": "총검사"
+    },
+    "빅보스": {
+      "canonical": "히트맨",
+      "stage": "1",
+      "jobName": "총검사"
+    },
+    "갓파더": {
+      "canonical": "히트맨",
+      "stage": "2",
+      "jobName": "총검사"
+    },
+    "眞 히트맨": {
+      "canonical": "히트맨",
+      "stage": "眞",
+      "jobName": "총검사"
+    },
+    "요원": {
+      "canonical": "요원",
+      "stage": "0",
+      "jobName": "총검사"
+    },
+    "인포서": {
+      "canonical": "요원",
+      "stage": "1",
+      "jobName": "총검사"
+    },
+    "레퀴엠": {
+      "canonical": "요원",
+      "stage": "2",
+      "jobName": "총검사"
+    },
+    "眞 요원": {
+      "canonical": "요원",
+      "stage": "眞",
+      "jobName": "총검사"
+    },
+    "트러블 슈터": {
+      "canonical": "트러블 슈터",
+      "stage": "0",
+      "jobName": "총검사"
+    },
+    "와일드 카드": {
+      "canonical": "트러블 슈터",
+      "stage": "1",
+      "jobName": "총검사"
+    },
+    "언터처블": {
+      "canonical": "트러블 슈터",
+      "stage": "2",
+      "jobName": "총검사"
+    },
+    "眞 트러블 슈터": {
+      "canonical": "트러블 슈터",
+      "stage": "眞",
+      "jobName": "총검사"
+    },
+    "스페셜리스트": {
+      "canonical": "스페셜리스트",
+      "stage": "0",
+      "jobName": "총검사"
+    },
+    "코어 마스터": {
+      "canonical": "스페셜리스트",
+      "stage": "1",
+      "jobName": "총검사"
+    },
+    "패스파인더": {
+      "canonical": "스페셜리스트",
+      "stage": "2",
+      "jobName": "총검사"
+    },
+    "眞 스페셜리스트": {
+      "canonical": "스페셜리스트",
+      "stage": "眞",
+      "jobName": "총검사"
+    },
+    "뮤즈": {
+      "canonical": "뮤즈",
+      "stage": "0",
+      "jobName": "아처"
+    },
+    "헤드라이너": {
+      "canonical": "뮤즈",
+      "stage": "1",
+      "jobName": "아처"
+    },
+    "트렌드세터": {
+      "canonical": "뮤즈",
+      "stage": "2",
+      "jobName": "아처"
+    },
+    "眞 뮤즈": {
+      "canonical": "뮤즈",
+      "stage": "眞",
+      "jobName": "아처"
+    },
+    "트래블러": {
+      "canonical": "트래블러",
+      "stage": "0",
+      "jobName": "아처"
+    },
+    "드리머": {
+      "canonical": "트래블러",
+      "stage": "1",
+      "jobName": "아처"
+    },
+    "셀레스티얼": {
+      "canonical": "트래블러",
+      "stage": "2",
+      "jobName": "아처"
+    },
+    "眞 트래블러": {
+      "canonical": "트래블러",
+      "stage": "眞",
+      "jobName": "아처"
+    },
+    "헌터": {
+      "canonical": "헌터",
+      "stage": "0",
+      "jobName": "아처"
+    },
+    "호크 아이": {
+      "canonical": "헌터",
+      "stage": "1",
+      "jobName": "아처"
+    },
+    "메이븐": {
+      "canonical": "헌터",
+      "stage": "2",
+      "jobName": "아처"
+    },
+    "眞 헌터": {
+      "canonical": "헌터",
+      "stage": "眞",
+      "jobName": "아처"
+    },
+    "비질란테": {
+      "canonical": "비질란테",
+      "stage": "0",
+      "jobName": "아처"
+    },
+    "새비지": {
+      "canonical": "비질란테",
+      "stage": "1",
+      "jobName": "아처"
+    },
+    "프레데터": {
+      "canonical": "비질란테",
+      "stage": "2",
+      "jobName": "아처"
+    },
+    "眞 비질란테": {
+      "canonical": "비질란테",
+      "stage": "眞",
+      "jobName": "아처"
+    },
+    "키메라": {
+      "canonical": "키메라",
+      "stage": "0",
+      "jobName": "아처"
+    },
+    "키클롭스": {
+      "canonical": "키메라",
+      "stage": "1",
+      "jobName": "아처"
+    },
+    "하이드라": {
+      "canonical": "키메라",
+      "stage": "2",
+      "jobName": "아처"
+    },
+    "眞 키메라": {
+      "canonical": "키메라",
+      "stage": "眞",
+      "jobName": "아처"
+    },
+    "브레이커": {
+      "canonical": "브레이커",
+      "stage": "0",
+      "jobName": "제국기사"
+    },
+    "블랙 쉽": {
+      "canonical": "브레이커",
+      "stage": "1",
+      "jobName": "제국기사"
+    },
+    "세이렌": {
+      "canonical": "브레이커",
+      "stage": "2",
+      "jobName": "제국기사"
+    },
+    "眞 브레이커": {
+      "canonical": "브레이커",
+      "stage": "眞",
+      "jobName": "제국기사"
+    },
+    "프리스트(여)": {
+      "canonical": "프리스트(여)",
+      "stage": "미전직",
+      "jobName": "프리스트(여)"
+    },
+    "마법사(여)": {
+      "canonical": "마법사(여)",
+      "stage": "미전직",
+      "jobName": "마법사(여)"
+    },
+    "나이트": {
+      "canonical": "나이트",
+      "stage": "미전직",
+      "jobName": "나이트"
+    },
+    "거너(남)": {
+      "canonical": "거너(남)",
+      "stage": "미전직",
+      "jobName": "거너(남)"
+    },
+    "총검사": {
+      "canonical": "총검사",
+      "stage": "미전직",
+      "jobName": "총검사"
+    },
+    "크리에이터": {
+      "canonical": "크리에이터",
+      "stage": "미전직",
+      "jobName": "크리에이터"
+    },
+    "격투가(남)": {
+      "canonical": "격투가(남)",
+      "stage": "미전직",
+      "jobName": "격투가(남)"
+    },
+    "도적": {
+      "canonical": "도적",
+      "stage": "미전직",
+      "jobName": "도적"
+    },
+    "마창사": {
+      "canonical": "마창사",
+      "stage": "미전직",
+      "jobName": "마창사"
+    },
+    "프리스트(남)": {
+      "canonical": "프리스트(남)",
+      "stage": "미전직",
+      "jobName": "프리스트(남)"
+    },
+    "귀검사(여)": {
+      "canonical": "귀검사(여)",
+      "stage": "미전직",
+      "jobName": "귀검사(여)"
+    },
+    "귀검사(남)": {
+      "canonical": "귀검사(남)",
+      "stage": "미전직",
+      "jobName": "귀검사(남)"
+    },
+    "다크나이트": {
+      "canonical": "다크나이트",
+      "stage": "미전직",
+      "jobName": "다크나이트"
+    },
+    "격투가(여)": {
+      "canonical": "격투가(여)",
+      "stage": "미전직",
+      "jobName": "격투가(여)"
+    },
+    "거너(여)": {
+      "canonical": "거너(여)",
+      "stage": "미전직",
+      "jobName": "거너(여)"
+    }
+  }
+}
