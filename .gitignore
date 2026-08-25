@@ -20,3 +20,4 @@ dist/
 
 report/src/data/
 docs/captures/*.png
+.vercel
