@@ -40,7 +40,7 @@ body { margin: 0; min-height: 100vh; }
 
 /* ─ 타이포 5단계 ─ */
 .t-display {
-  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", "Malgun Gothic", serif;
   font-weight: 700;
   font-size: clamp(2.6rem, 7vw, 4.4rem);
   line-height: 1.02;
@@ -48,14 +48,14 @@ body { margin: 0; min-height: 100vh; }
   font-variant-numeric: tabular-nums;
 }
 .t-title {
-  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", "Malgun Gothic", serif;
   font-weight: 700;
   font-size: clamp(1.5rem, 3.4vw, 2.1rem);
   line-height: 1.4;
   letter-spacing: -0.02em;
 }
 .t-lead {
-  font-family: "Noto Serif KR", "Pretendard Variable", serif;
+  font-family: "Noto Serif KR", "Apple SD Gothic Neo", "Malgun Gothic", serif;
   font-weight: 400;
   font-size: clamp(1.05rem, 2.1vw, 1.3rem);
   line-height: 1.75;
