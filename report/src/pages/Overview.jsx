@@ -58,7 +58,7 @@ export default function Overview() {
   return (
     <PageShell
       id="overview"
-      question="이 페이지가 답하는 질문은 하나입니다. 이 조사는 무엇을 어떻게 보았습니까?"
+      question="이 조사는 무엇을 어떻게 보았습니까?"
       statValue={fmtInt(meta.sampleSize)}
       statUnit="명"
       statLabel="조사한 캐릭터 수"
@@ -73,14 +73,32 @@ export default function Overview() {
       }
       visualCaption={`왼쪽은 전체 표본, 오른쪽은 완전 검색 표본입니다. 두 피라미드의 밑동을 견주어 보십시오. 레기온 입장 전 구간이 전체 표본에서는 ${fmtPct(fameCompare[0].full)}, 완전 검색 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다.`}
       explain={[
-        `던전앤파이터 캐릭터 ${fmtPeople(meta.sampleSize)}을 서버 ${meta.servers.length}곳에서 뽑아 직업과 성장 단계, 접속 기록을 살펴본 표본조사입니다. 캐릭터 이름을 두 글자씩 넣어 검색하는 방식으로 표본을 모았습니다.`,
-        "검색 결과는 한 번에 200명까지만 돌아옵니다. 200명 한도에 걸린 검색을 한도 검색이라고 부르고, 한도에 걸리지 않아 해당 글자가 들어간 캐릭터를 빠짐없이 가져온 검색을 완전 검색이라고 부릅니다. 완전 검색으로만 모은 표본은 성장 단계가 훨씬 아래쪽에 몰려 있습니다.",
-        "이 조사는 게임 전체 인구를 추정하지 않습니다. 표본을 어떻게 뽑았고 그 표본이 어디로 기울어 있는지를 끝까지 드러내는 방법론 시연입니다. 기울어진 방향과 크기는 조사 방법과 한계 화면에 그대로 적어 두었습니다.",
+        {
+          label: "무엇을 보았는가",
+          body: [
+            `던전앤파이터 캐릭터 표본을 서버 ${meta.servers.length}곳에서 뽑아 직업과 성장 단계, 접속 기록을 살펴본 조사입니다.`,
+            "표본은 캐릭터 이름에 한국어 두 글자를 넣어 검색하는 방식으로 모았습니다.",
+          ],
+        },
+        {
+          label: "왜 표본을 둘로 나눠 보는가",
+          body: [
+            "검색 결과는 한 번에 200명까지만 돌아옵니다. 200명 한도에 걸린 검색을 한도 검색, 한도에 걸리지 않아 해당 글자가 들어간 캐릭터를 빠짐없이 가져온 검색을 완전 검색이라고 부릅니다.",
+            `완전 검색으로만 모은 표본은 성장 단계가 훨씬 아래쪽에 몰려 있습니다. 위 피라미드에서 맨 아래층이 ${fmtPct(fameCompare[0].full)}에서 ${fmtPct(fameCompare[0].complete)}로 두꺼워지는 것이 그 차이입니다.`,
+          ],
+        },
+        {
+          label: "이 리포트가 하지 않는 것",
+          body: [
+            "이 조사는 게임 전체 인구를 추정하지 않습니다. 표본을 어떻게 뽑았고 그 표본이 어디로 기울어 있는지를 끝까지 드러내는 방법론 시연입니다.",
+            "기울어진 방향과 크기는 조사 방법과 한계 화면에 그대로 적어 두었습니다.",
+          ],
+        },
       ]}
     >
       <Stagger index={5}>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <BigNumber index={0} value={meta.sampleSize} suffix="명" label="조사한 캐릭터" note="서버와 캐릭터 기준 중복 제거 후" />
+          <BigNumber index={0} value={fameSample} suffix="명" label="명성값이 있는 표본" note="성장 단계를 셀 수 있는 캐릭터" />
           <BigNumber index={1} value={meta.servers.length} suffix="곳" label="조사한 서버" note="공개된 서버 전부" />
           <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="완전 검색 표본" note="한도에 걸리지 않은 검색에서 발견" />
           <BigNumber index={3} value={MEASURED.apiCalls} suffix="회" label="주고받은 요청" note="실패 없이 마쳤습니다" />

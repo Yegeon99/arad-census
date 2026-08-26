@@ -30,16 +30,21 @@ export const ACT_COLOR = {
   "90일 넘게 기록 없음": "#DCD9D1",
 };
 
-/** 직업군 계열색 18종 (채도 낮은 잉크 톤) */
-const GROUP_HUES = [
-  218, 205, 240, 196, 255, 228, 188, 264, 212, 246,
-  182, 272, 222, 200, 252, 192, 234, 208,
-];
-export const groupColor = (index, light = 0) => {
-  const h = GROUP_HUES[index % GROUP_HUES.length];
-  const s = 20 + (index % 3) * 5;
-  const l = 38 + light * 34;
-  return `hsl(${h} ${s}% ${l}%)`;
+/** 직업군 색: 잉크 네이비 한 색을 명도로만 나눈 램프 */
+const GROUP_HUE = 219;
+const GROUP_SAT = 34;
+export const groupColor = (index, total = 18, light = 0) => {
+  const step = total > 1 ? index / (total - 1) : 0;
+  const base = 22 + step * 46;          // 어두운 잉크에서 밝은 잉크까지
+  const l = base + light * (86 - base) * 0.72;
+  return `hsl(${GROUP_HUE} ${GROUP_SAT}% ${l}%)`;
+};
+/** 그 색 위에 글자를 얹을 때 쓸 색 */
+export const onGroupColor = (index, total = 18, light = 0) => {
+  const step = total > 1 ? index / (total - 1) : 0;
+  const base = 22 + step * 46;
+  const l = base + light * (86 - base) * 0.72;
+  return l > 62 ? "#1B2130" : "#FFFFFF";
 };
 
 /** 0~1 값을 잉크 6단계로 */

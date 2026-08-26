@@ -23,7 +23,7 @@ export default function Growth() {
   return (
     <PageShell
       id="growth"
-      question="이 페이지가 답하는 질문은 하나입니다. 캐릭터들은 성장 단계 어디쯤에 몰려 있습니까?"
+      question="캐릭터들은 성장 단계 어디쯤에 몰려 있습니까?"
       statValue={pct1(pyramidGap)}
       statUnit="%포인트"
       statLabel="레기온 입장 전 구간 비중의 차이"
@@ -33,10 +33,34 @@ export default function Growth() {
       }
       visualCaption={`슬라이더를 오른쪽으로 끌면 전체 표본 ${fmtPeople(fameSample)}에서 완전 검색 표본 ${fmtPeople(completeFameSample)}으로 바뀝니다. 명성값이 있는 캐릭터만 넣었습니다.`}
       explain={[
-        "성장 단계는 명성값을 컨텐츠 입장 기준으로 여섯 구간에 나눈 것입니다. 구간 경계는 게임 안에서 실제로 입장선이 갈리는 지점을 그대로 썼습니다.",
-        `전체 표본에서는 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].full)}이고 레이드 진입 구간이 ${fmtPct(raidPct)}입니다. 그런데 완전 검색 표본만 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
-        `이 차이는 검색 방식에서 옵니다. 검색이 200명 한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않은데, 실제로 받아 보면 성장이 앞선 쪽으로 크게 쏠립니다. 한도에 걸리지 않은 검색만 모으면 훨씬 아래쪽이 두껍습니다.`,
-        `명성값이 없어 분포에서 뺀 캐릭터는 ${fmtPeople(meta.fameMissing)}입니다. 이 가운데 ${fmtPct(missingLowLevel.pct)}가 레벨 100 미만이라, 이들을 뺀 것만으로도 피라미드가 조금 더 위로 기울었을 가능성이 있습니다.`,
+        {
+          label: "어떻게 나눴는가",
+          body: [
+            "성장 단계는 명성값을 컨텐츠 입장 기준으로 여섯 구간에 나눈 것입니다.",
+            "구간 경계는 게임 안에서 실제로 입장선이 갈리는 지점을 그대로 썼습니다.",
+          ],
+        },
+        {
+          label: "무엇이 나왔는가",
+          body: [
+            `전체 표본에서는 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].full)}이고 레이드 진입 구간이 ${fmtPct(raidPct)}입니다.`,
+            `완전 검색 표본만 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
+          ],
+        },
+        {
+          label: "왜 이런 차이가 나는가",
+          body: [
+            "검색이 200명 한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않은데, 실제로 받아 보면 성장이 앞선 쪽으로 크게 쏠립니다.",
+            "한도에 걸리지 않은 검색만 모으면 훨씬 아래쪽이 두껍습니다.",
+          ],
+        },
+        {
+          label: "어디까지 믿을 수 있는가",
+          body: [
+            `명성값이 없어 분포에서 뺀 캐릭터는 ${fmtPeople(meta.fameMissing)}입니다.`,
+            `이 가운데 ${fmtPct(missingLowLevel.pct)}가 레벨 100 미만이라, 이들을 뺀 것만으로도 피라미드가 조금 더 위로 기울었을 가능성이 있습니다.`,
+          ],
+        },
       ]}
       details={
         <div className="grid gap-10 lg:grid-cols-2">

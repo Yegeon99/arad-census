@@ -24,6 +24,28 @@ export function Disclose({ label, openLabel, children }) {
   );
 }
 
+/** 소제목 라벨을 단 본문 묶음. 한 문단은 두세 문장까지만 담는다. */
+export function Prose({ sections }) {
+  return (
+    <div className="space-y-9">
+      {sections.map((section, i) => {
+        const label = typeof section === "string" ? null : section.label;
+        const body = typeof section === "string" ? [section] : section.body;
+        return (
+          <div key={label ?? i}>
+            {label && <p className="t-kicker m-0 mb-2">{label}</p>}
+            <div className="prose">
+              {body.map((para, j) => (
+                <p key={j} className="t-body m-0">{para}</p>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /** 화면 공통 뼈대: 리드, 메인 시각화, 해설, 세부 데이터, 이전 다음 */
 export default function PageShell({
   id,
@@ -53,9 +75,10 @@ export default function PageShell({
         <h1 className="t-title mt-1 mb-0">{current.label}</h1>
       </Stagger>
 
-      <div className="mt-5 grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10">
         <Stagger index={1}>
-          <p className="t-lead m-0 max-w-[46rem]">{question}</p>
+          <p className="t-kicker m-0">이 페이지가 답하는 질문은 하나입니다.</p>
+          <p className="t-lead m-0 mt-2 max-w-[680px]">{question}</p>
         </Stagger>
         {statValue && (
           <Stagger index={2}>
@@ -71,23 +94,21 @@ export default function PageShell({
         )}
       </div>
 
-      <hr className="rule mt-7 mb-7" />
+      <hr className="rule mt-8 mb-8" />
 
       {visual && (
-        <Stagger index={3}>
+        <Stagger index={4}>
           <figure className="m-0">
             {visual}
-            {visualCaption && <figcaption className="t-small mt-3">{visualCaption}</figcaption>}
+            {visualCaption && <figcaption className="t-small prose mt-3">{visualCaption}</figcaption>}
           </figure>
         </Stagger>
       )}
 
       {explain && (
-        <Stagger index={4}>
-          <div className="mt-9 max-w-[46rem] space-y-3">
-            {explain.map((para, i) => (
-              <p key={i} className="t-body m-0">{para}</p>
-            ))}
+        <Stagger index={5}>
+          <div className="mt-10">
+            <Prose sections={explain} />
           </div>
         </Stagger>
       )}
@@ -95,7 +116,7 @@ export default function PageShell({
       {children}
 
       {details && (
-        <Stagger index={5}>
+        <Stagger index={6}>
           <Disclose label={detailsLabel}>{details}</Disclose>
         </Stagger>
       )}

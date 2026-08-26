@@ -14,7 +14,7 @@ export default function Activity() {
   return (
     <PageShell
       id="activity"
-      question="이 페이지가 답하는 질문은 하나입니다. 캐릭터들은 최근에 얼마나 접속했습니까?"
+      question="캐릭터들은 최근에 얼마나 접속했습니까?"
       statValue={pct1(after[dormantLabel])}
       statUnit="%"
       statLabel="90일 넘게 기록이 없는 비중, 편향 보정값"
@@ -22,10 +22,34 @@ export default function Activity() {
       visual={<ActivityMorph before={before} after={after} subsample={activity.subsampleSize} />}
       visualCaption="보정 전과 보정 후를 눌러 보면 네 칸의 폭이 바뀝니다. 칸 하나하나가 접속 상태 한 가지입니다."
       explain={[
-        `활성도는 최근 ${activity.lookbackDays}일 사이의 행동 기록으로 판정했습니다. 마지막 기록이 7일 안이면 최근 7일 접속, 30일 안이면 최근 30일 접속, 90일 안이면 최근 90일 접속, 기록이 하나도 없으면 90일 넘게 기록 없음입니다.`,
-        `보정 전 수치로는 90일 넘게 기록이 없는 캐릭터가 ${fmtPct(before[dormantLabel])}이고 최근 7일 접속이 ${fmtPct(before[weeklyLabel])}입니다. 편향 보정값으로 바꾸면 각각 ${fmtPct(after[dormantLabel])}와 ${fmtPct(after[weeklyLabel])}가 됩니다. 조용한 쪽이 ${fmtPp(after[dormantLabel] - before[dormantLabel])} 늘어납니다.`,
-        `보정의 근거는 발견 경로 차이입니다. 완전 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}인데, 한도 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다.`,
-        "두 수치 모두 두 가지 흔들림을 걷어내지 못합니다. 첫째 행동 기록이 남는 빈도가 성장 단계마다 다를 수 있고, 둘째 검색 결과에 최근 접속 여부가 걸려 있는지 확인할 수 없습니다. 접속만 하고 기록을 남기지 않은 캐릭터는 조용한 쪽으로 분류됩니다.",
+        {
+          label: "어떻게 판정했는가",
+          body: [
+            `활성도는 최근 ${activity.lookbackDays}일 사이의 행동 기록으로 판정했습니다.`,
+            "마지막 기록이 7일 안이면 최근 7일 접속, 30일 안이면 최근 30일 접속, 90일 안이면 최근 90일 접속, 기록이 하나도 없으면 90일 넘게 기록 없음입니다.",
+          ],
+        },
+        {
+          label: "무엇이 나왔는가",
+          body: [
+            `보정 전 수치로는 90일 넘게 기록이 없는 캐릭터가 ${fmtPct(before[dormantLabel])}이고 최근 7일 접속이 ${fmtPct(before[weeklyLabel])}입니다.`,
+            `편향 보정값으로 바꾸면 각각 ${fmtPct(after[dormantLabel])}와 ${fmtPct(after[weeklyLabel])}가 됩니다. 조용한 쪽이 ${fmtPp(after[dormantLabel] - before[dormantLabel])} 늘어납니다.`,
+          ],
+        },
+        {
+          label: "보정의 근거는 무엇인가",
+          body: [
+            `보정의 근거는 발견 경로 차이입니다. 완전 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
+            `같은 기준으로 한도 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다. 발견 경로만 달라도 두 배 넘게 벌어집니다.`,
+          ],
+        },
+        {
+          label: "어디까지 믿을 수 있는가",
+          body: [
+            "두 수치 모두 두 가지 흔들림을 걷어내지 못합니다. 첫째 행동 기록이 남는 빈도가 성장 단계마다 다를 수 있고, 둘째 검색 결과에 최근 접속 여부가 걸려 있는지 확인할 수 없습니다.",
+            "접속만 하고 기록을 남기지 않은 캐릭터는 조용한 쪽으로 분류됩니다.",
+          ],
+        },
       ]}
       details={
         <div className="grid gap-10 lg:grid-cols-2">

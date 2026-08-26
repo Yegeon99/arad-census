@@ -57,9 +57,17 @@ body { margin: 0; min-height: 100vh; }
 .t-lead {
   font-family: "Noto Serif KR", "Apple SD Gothic Neo", "Malgun Gothic", serif;
   font-weight: 400;
-  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
-  line-height: 1.75;
-  color: var(--text-secondary);
+  font-size: clamp(1.19rem, 2.1vw, 1.375rem);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+/* 리드 위에 붙는 한 줄 (대문자풍 소제목) */
+.t-kicker {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  color: var(--text-muted);
 }
 .t-eyebrow {
   font-size: 0.72rem;
@@ -67,7 +75,9 @@ body { margin: 0; min-height: 100vh; }
   letter-spacing: 0.18em;
   color: var(--text-muted);
 }
-.t-body { font-size: 1rem; line-height: 1.85; color: var(--text-secondary); }
+.t-body { font-size: 1rem; line-height: 1.75; color: var(--text-secondary); }
+.prose { max-width: 680px; }
+.prose > p + p { margin-top: 20px; }
 .t-small { font-size: 0.82rem; line-height: 1.7; color: var(--text-muted); }
 
 h1, h2, h3, .t-display, .t-title, .t-lead, .t-body, p, li, td, th, figcaption {
