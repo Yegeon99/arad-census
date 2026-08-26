@@ -29,11 +29,11 @@ class Fallback extends Component {
 }
 
 function wrap(Node, height) {
-  return function Wrapped({ fallback, ...props }) {
+  return function Wrapped({ fallback, placeholder, ...props }) {
     return (
       <Fallback fallback={fallback}>
-        <Suspense fallback={<Loading height={height} />}>
-          <Node {...props} />
+        <Suspense fallback={placeholder ?? <Loading height={height} />}>
+          <Node {...props} placeholder={placeholder} />
         </Suspense>
       </Fallback>
     );

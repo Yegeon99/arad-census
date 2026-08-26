@@ -28,16 +28,16 @@ export default function Growth() {
       statValue={pct1(pyramidGap)}
       statUnit="%포인트"
       statLabel="레기온 입장 전 구간 비중의 차이"
-      statNote="전체 표본과 빠짐없이 모은 표본 사이"
+      statNote="전체 표본과 쏠림 없는 표본 사이"
       visual={
         <Chart
           how="막대 하나가 성장 단계 하나입니다. 채운 막대가 지금 고른 표본, 점선 윤곽이 반대쪽 표본입니다. 막대가 길수록 그 단계의 캐릭터가 많습니다."
-          so="레이드 구간까지 온 캐릭터는 전체 표본에서 넷 중 한 명꼴, 빠짐없이 모은 표본에서는 열여섯 중 한 명꼴입니다."
+          so="레이드 구간까지 온 캐릭터는 전체 표본에서 넷 중 한 명꼴, 쏠림 없는 표본에서는 열여섯 중 한 명꼴입니다."
         >
           <MirrorPyramid bins={fameCompare} gapLabelBin={fameCompare[0].label} gapValue={pyramidGap} />
         </Chart>
       }
-      visualCaption={`슬라이더를 오른쪽으로 끌면 전체 표본 ${fmtPeople(fameSample)}에서 빠짐없이 모은 표본 ${fmtPeople(completeFameSample)}으로 바뀝니다. 명성 점수가 있는 캐릭터만 넣었습니다.`}
+      visualCaption={`슬라이더를 오른쪽으로 끌면 전체 표본 ${fmtPeople(fameSample)}에서 쏠림 없는 표본 ${fmtPeople(completeFameSample)}으로 바뀝니다. 명성 점수가 있는 캐릭터만 넣었습니다.`}
       explain={[
         {
           label: "나눈 기준",
@@ -50,7 +50,7 @@ export default function Growth() {
           label: "결과",
           body: [
             `전체 표본에서는 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].full)}이고 레이드 진입 구간이 ${fmtPct(raidPct)}입니다.`,
-            `빠짐없이 모은 표본만 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
+            `쏠림 없는 표본 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
           ],
         },
         {
@@ -74,7 +74,7 @@ export default function Growth() {
             <p className="t-eyebrow m-0 mb-2">구간 경계와 인원</p>
             <table className="plain">
               <thead>
-                <tr><th>구간</th><th>기준</th><th className="text-right">전체 표본</th><th className="text-right">빠짐없이 모은 검색</th></tr>
+                <tr><th>구간</th><th>기준</th><th className="text-right">전체 표본</th><th className="text-right">쏠림 없는 검색</th></tr>
               </thead>
               <tbody>
                 {fameCompare.map((b, i) => (

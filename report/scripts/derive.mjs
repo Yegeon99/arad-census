@@ -28,7 +28,7 @@ for await (const line of rl) {
     if (!m) continue;
     const prev = chars.get(key);
     if (!prev) {
-      chars.set(key, { group: row.jobName, job: m.canonical, fame: row.fame, complete: !rec.capped });
+      chars.set(key, { group: row.jobName, job: m.canonical, stage: m.stage, fame: row.fame, complete: !rec.capped });
     } else if (!rec.capped) {
       prev.complete = true;
     }
@@ -61,9 +61,11 @@ const histogram = {
   ],
 };
 
-// 2) 직업군 2단계 트리
+// 2) 직업군 2단계 트리 (직업 화면과 같은 기준: 마지막 전직을 마친 캐릭터만)
+const FINAL_STAGE = "眞";
+const grown = all.filter((c) => c.stage === FINAL_STAGE);
 const tree = new Map();
-for (const c of all) {
+for (const c of grown) {
   if (!tree.has(c.group)) tree.set(c.group, new Map());
   const leaves = tree.get(c.group);
   leaves.set(c.job, (leaves.get(c.job) ?? 0) + 1);
@@ -74,7 +76,7 @@ const MIN_LEAF = 10;
 const MERGED_NAME = "자각1";
 const ETC = "따로 세지 않은 직업";
 
-const total = all.length;
+const total = grown.length;
 const jobTree = {
   total,
   groups: [...tree.entries()]
@@ -98,5 +100,5 @@ const jobTree = {
 
 writeFileSync(join(out, "fame_histogram.json"), JSON.stringify(histogram), "utf-8");
 writeFileSync(join(out, "job_tree.json"), JSON.stringify(jobTree), "utf-8");
-console.log(`derive: 고유 캐릭터 ${total.toLocaleString()} / 명성 보유 ${histogram.full.n.toLocaleString()} / 완전 검색 ${histogram.complete.n.toLocaleString()}`);
-console.log(`직업군 ${jobTree.groups.length}개, 최상위 ${jobTree.groups[0].group} ${jobTree.groups[0].count}`);
+console.log(`derive: 명성 보유 ${histogram.full.n.toLocaleString()} / 쏠림 없는 ${histogram.complete.n.toLocaleString()}`);
+console.log(`성장 완료 ${grown.length.toLocaleString()} / 직업군 ${jobTree.groups.length}개, 최상위 ${jobTree.groups[0].group} ${jobTree.groups[0].count}`);

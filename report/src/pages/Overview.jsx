@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
+import SearchExplainer from "../components/SearchExplainer.jsx";
 import ViewToggle from "../components/ViewToggle.jsx";
 import Pyramid2D from "../components/charts/Pyramid2D.jsx";
 import { LazySamplePyramid } from "../components/three/Lazy.jsx";
@@ -8,7 +9,7 @@ import { useCanRender3D, useCountUp, useIdleMount, useReducedMotion } from "../l
 import { fmtInt, fmtPct, fmtPeople } from "../lib/format.js";
 import {
   meta, dist, complete, MEASURED, fameCompare, fameSample, completeFameSample,
-  actOverall, actAdjusted, dormantLabel, topJobs,
+  actOverall, actAdjusted, dormantLabel, topJobs, finalSample,
 } from "../lib/data.js";
 
 const ICON = {
@@ -64,14 +65,9 @@ const BASICS = [
     body: "명성 점수를 게임 콘텐츠 입장 조건에 맞춰 여섯 단계로 나눈 것입니다. 가장 낮은 단계가 레기온 입장 전, 가장 높은 단계가 하드 권장 구간입니다.",
   },
   {
-    icon: <CutIcon />,
-    title: "잘린 검색과 빠짐없이 모은 표본",
-    body: "검색은 한 번에 200명까지만 돌려줍니다. 200명에 걸려 일부만 받은 검색을 잘린 검색, 걸리지 않아 전부 받은 검색만 모은 것을 빠짐없이 모은 표본이라 부릅니다. 잘린 검색은 강한 캐릭터를 먼저 보여주는 쏠림이 있습니다.",
-  },
-  {
     icon: <AdjustIcon />,
     title: "보정값",
-    body: "잘린 검색의 쏠림을 빠짐없이 모은 표본의 비율로 되돌려 다시 계산한 값입니다.",
+    body: "잘린 검색의 쏠림을 쏠림 없는 표본의 비율로 되돌려 다시 계산한 값입니다.",
   },
 ];
 
@@ -112,8 +108,8 @@ export default function Overview() {
   const [mode, setMode] = useState("solid");
   const effective = can3D && idle && mode === "solid" ? "solid" : "flat";
 
-  const fullNote = `${fmtPeople(fameSample)} 기준`;
-  const completeNote = `${fmtPeople(completeFameSample)} 기준`;
+  const fullNote = `강한 캐릭터 쪽으로 쏠림 있음, ${fmtPeople(fameSample)}`;
+  const completeNote = `검색 한도에 안 걸려 전부 받은 ${fmtPeople(completeFameSample)}`;
   const pyramidProps = { full: dist.fameBins, complete: complete.fameBins, fullNote, completeNote };
   const flatPyramid = <Pyramid2D {...pyramidProps} />;
 
@@ -128,7 +124,7 @@ export default function Overview() {
       intro={
         <section className="mb-12">
           <h2 className="t-kicker m-0 mb-4">먼저 알아둘 것 네 가지</h2>
-          <ul className="m-0 grid list-none gap-x-10 gap-y-6 p-0 sm:grid-cols-2">
+          <ul className="m-0 grid list-none gap-x-10 gap-y-6 p-0 lg:grid-cols-3">
             {BASICS.map((b) => (
               <li key={b.title} className="flex gap-4">
                 <span className="mt-0.5 shrink-0">{b.icon}</span>
@@ -139,12 +135,23 @@ export default function Overview() {
               </li>
             ))}
           </ul>
+          <div className="mt-8 flex gap-4">
+            <span className="mt-0.5 shrink-0"><CutIcon /></span>
+            <div className="min-w-0 flex-1">
+              <p className="m-0 text-[0.98rem] font-bold" style={{ color: "var(--text-primary)" }}>
+                잘린 검색과 쏠림 없는 표본
+              </p>
+              <div className="mt-3">
+                <SearchExplainer />
+              </div>
+            </div>
+          </div>
         </section>
       }
       visual={
         <Chart
           how="한 층이 성장 단계 하나입니다. 층이 두꺼울수록 그 단계에 있는 캐릭터가 많습니다. 두 피라미드는 밑변과 전체 높이가 같고, 자른 위치만 다릅니다."
-          so="빠짐없이 모은 표본은 열 명 중 여덟 명이 레이드 이전 단계입니다. 전체 표본에서는 열 명 중 네다섯 명입니다."
+          so="쏠림 없는 표본은 열 명 중 여덟 명이 레이드 이전 단계입니다. 전체 표본에서는 열 명 중 네다섯 명입니다."
         >
           <ViewToggle mode={effective} setMode={setMode} available={can3D} />
           {effective === "solid"
@@ -163,7 +170,7 @@ export default function Overview() {
         {
           label: "표본을 둘로 나눈 이유",
           body: [
-            "잘린 검색은 강한 캐릭터 쪽으로 쏠립니다. 그 쏠림이 얼마나 큰지 재려고 빠짐없이 모은 표본을 따로 집계했습니다.",
+            "잘린 검색은 강한 캐릭터 쪽으로 쏠립니다. 그 쏠림이 얼마나 큰지 재려고 쏠림 없는 표본을 따로 집계했습니다.",
           ],
         },
         {
@@ -184,14 +191,14 @@ export default function Overview() {
             href="#jobs"
             kicker="직업"
             title={`가장 많은 직업은 ${topJobs[0].jobName}입니다`}
-            body={`표본 안에서 ${fmtPct(topJobs[0].pct)}를 차지합니다. 상위 5개 직업을 합치면 넷 중 하나에 가깝습니다.`}
+            body={`성장을 마친 캐릭터 안에서 ${fmtPct(topJobs[0].pct)}를 차지합니다. 상위 5개 직업을 합치면 넷 중 하나에 가깝습니다.`}
           />
           <FindingCard
             index={1}
             href="#growth"
             kicker="성장 단계"
             title="잘린 검색을 빼면 레이드 이전 단계가 두 배로 뜁니다"
-            body={`전체 표본에서는 ${fmtPct(fameCompare[0].full)}인데, 빠짐없이 모은 표본만 보면 ${fmtPct(fameCompare[0].complete)}입니다.`}
+            body={`전체 표본에서는 ${fmtPct(fameCompare[0].full)}인데, 쏠림 없는 표본 보면 ${fmtPct(fameCompare[0].complete)}입니다.`}
           />
           <FindingCard
             index={2}
@@ -205,9 +212,9 @@ export default function Overview() {
 
       <Stagger index={7}>
         <div className="mt-14 grid gap-6 sm:grid-cols-3">
-          <BigNumber index={0} value={fameSample} suffix="명" label="명성 점수가 있는 캐릭터" note="성장 단계를 셀 수 있는 캐릭터" />
+          <BigNumber index={0} value={finalSample} suffix="명" label="성장을 마친 캐릭터" note="직업 순위는 이 기준으로 셉니다" />
           <BigNumber index={1} value={meta.servers.length} suffix="곳" label="조사한 서버" note="공개된 서버 전부" />
-          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="빠짐없이 모은 표본" note="200명에 걸리지 않은 검색에서 발견" />
+          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="쏠림 없는 표본" note="200명에 걸리지 않은 검색에서 발견" />
         </div>
       </Stagger>
     </PageShell>

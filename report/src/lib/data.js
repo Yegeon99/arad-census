@@ -9,6 +9,8 @@ import { BIN_ORDER } from "./palette.js";
 
 export const meta = census.meta;
 export const dist = census.distributions;
+/** 직업 순위와 직업별 성장 구성은 마지막 전직을 마친 캐릭터만 센다 */
+export const finalStage = census.finalStage;
 export const complete = census.completeSearch;
 export const activity = census.activity;
 export { insights, histogram, jobTree };
@@ -16,8 +18,8 @@ export { insights, histogram, jobTree };
 /** 파이프라인 실행 기록 (게이트 보고와 같은 실측치) */
 export const MEASURED = {
   apiCalls: 933,
-  llmCostUsd: 0.0890,
-  llmBatches: 3,
+  llmCostUsd: 0.0966,
+  llmBatches: 4,
   collectSec: 87,
   timelineSec: 181,
   surveyedAt: "2026년 8월 25일",
@@ -28,12 +30,15 @@ export const RAID_BINS = ["레이드 입장 구간", "레이드 권장 구간", 
 export const fameSample = meta.sampleSize - meta.fameMissing;
 export const completeFameSample = meta.completeSampleSize - meta.completeFameMissing;
 
-const ETC_PREFIX = "따로 세지 않은 직업";
-export const namedJobs = dist.job.filter((j) => !j.jobName.startsWith(ETC_PREFIX));
-export const etcJobs = dist.job.find((j) => j.jobName.startsWith(ETC_PREFIX));
+const ETC_PREFIX = "따로 세지 않은 캐릭터";
+export const finalSample = finalStage.sampleSize;
+export const finalFameSample = finalStage.sampleSize - finalStage.fameMissing;
+export const namedJobs = finalStage.job.filter((j) => !j.jobName.startsWith(ETC_PREFIX));
+export const etcJobs = finalStage.job.find((j) => j.jobName.startsWith(ETC_PREFIX));
 export const topJobs = namedJobs.slice(0, 15);
+export const allJobs = dist.job;
 
-/** 전체 표본과 빠짐없이 모은 표본의 6구간 비교 */
+/** 전체 표본과 쏠림 없는 표본의 6구간 비교 */
 const completeByRange = Object.fromEntries(complete.fameBins.map((b) => [b.range, b]));
 export const fameCompare = dist.fameBins.map((b) => ({
   label: b.range,
@@ -45,14 +50,14 @@ export const fameCompare = dist.fameBins.map((b) => ({
 
 export const pyramidGap = fameCompare[0].complete - fameCompare[0].full;
 
-/** 직업별 명성 구간 교차표 */
+/** 직업별 명성 구간 교차표 (마지막 전직을 마친 캐릭터 기준) */
 const byJob = new Map();
-for (const cell of dist.jobByFame) {
+for (const cell of finalStage.jobByFame) {
   if (!byJob.has(cell.jobName)) byJob.set(cell.jobName, {});
   byJob.get(cell.jobName)[cell.bin] = cell.masked ? null : cell.count;
 }
 export const jobFame = byJob;
-export const jobFameRows = dist.job
+export const jobFameRows = finalStage.job
   .filter((j) => byJob.has(j.jobName))
   .slice(0, 20)
   .map((j) => j.jobName);
@@ -67,10 +72,10 @@ export const cellShare = (job, bin) => {
   return total && v !== null ? v / total : 0;
 };
 
-/** 레이드 진입 구간 비중 지수 (전체 평균을 1.00으로 둔다) */
-const totalFameCount = dist.fameBins.reduce((s, b) => s + b.count, 0);
+/** 레이드 진입 구간 비중 지수 (마지막 전직을 마친 캐릭터의 평균을 1.00으로 둔다) */
+const totalFameCount = finalStage.fameBins.reduce((s, b) => s + b.count, 0);
 export const overallRaidShare =
-  dist.fameBins.filter((b) => RAID_BINS.includes(b.range)).reduce((s, b) => s + b.count, 0) /
+  finalStage.fameBins.filter((b) => RAID_BINS.includes(b.range)).reduce((s, b) => s + b.count, 0) /
   totalFameCount;
 
 const indexRows = [];

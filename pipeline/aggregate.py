@@ -27,6 +27,10 @@ CALLS_PATH = ROOT / "data" / "checkpoints" / "calls.jsonl"
 OUT_PATH = ROOT / "data" / "census_2026-08.json"
 
 MIN_CELL = 10  # 마스킹 기준
+FINAL_STAGE = "眞"  # 마지막 전직(진 각성)
+ROUND = "2026-08"
+# 외전 캐릭터: 각성 이후 직업명이 하나로 겹쳐 어느 쪽인지 가릴 수 없다 (bias_notes 1.6)
+SIDE_JOBS = {"자각1", "크리에이터"}
 
 
 def load_bins():
@@ -99,6 +103,32 @@ def dist_job(frame, total, key="job"):
         out.append({"jobName": f"기타(표본<{MIN_CELL} 직업 {etc_jobs}개)",
                     "count": etc_count, "pct": round(etc_count / total * 100, 2)})
     return out
+
+
+def merge_side_jobs(job_list, total):
+    """외전 캐릭터와 표본 10명 미만 직업을 한 줄로 합친다."""
+    removed = [j for j in job_list if j["jobName"] in SIDE_JOBS]
+    etc = next((j for j in job_list if j["jobName"].startswith("기타")), None)
+    small = 0
+    if etc is not None:
+        m = re.search(r"직업 (\d+)개", etc["jobName"])
+        small = int(m.group(1)) if m else 0
+    add = sum(j["count"] for j in removed)
+    if etc is None:
+        if not removed:
+            return job_list
+        etc = {"jobName": "", "count": 0, "pct": 0.0}
+        job_list.append(etc)
+    etc["count"] += add
+    etc["pct"] = round(etc["count"] / total * 100, 2) if total else 0.0
+    etc["jobName"] = f"기타(외전 캐릭터·표본<{MIN_CELL} 직업 {small}개 합산)"
+    job_list[:] = [j for j in job_list if j["jobName"] not in SIDE_JOBS]
+    return job_list
+
+
+def drop_side_rows(cross):
+    """교차표에서도 외전 합산 행을 뺀다."""
+    return [x for x in cross if x["jobName"] not in SIDE_JOBS]
 
 
 def dist_fame(frame, bins):
@@ -266,6 +296,12 @@ def aggregate():
     u_fame_dist, u_fame_missing = dist_fame(uncapped, bins)
     activity = load_activity(bins, u_fame_dist)
 
+    # 마지막 전직을 마친 캐릭터만 (직업 순위는 이 기준으로 본다)
+    final = [c for c in frame if c["stage"] == FINAL_STAGE]
+    f_total = len(final)
+    f_fame_dist, f_fame_missing = dist_fame(final, bins)
+    final_uncapped = [c for c in final if c["found_uncapped"]]
+
     census = {
         "meta": {
             "surveyed_at": datetime.now(KST).isoformat(timespec="seconds"),
@@ -277,21 +313,34 @@ def aggregate():
             "search_calls_capped": call_stats["capped_calls"],
             "timeline_subsample": activity["subsample_size"] if activity else 0,
             "servers": sorted({c["server"] for c in frame}),
-            "method_version": "1.1",
+            "method_version": "1.2",
+            "round": ROUND,
             "min_cell": MIN_CELL,
             "fame_missing_level_dist": fame_missing_levels(frame),
         },
         "distributions": {
-            "job": dist_job(frame, total),
+            "job": merge_side_jobs(dist_job(frame, total), total),
             "job_group": dist_job(frame, total, key="job_group"),
             "stage": dist_stage(frame, total),
             "fame_bins": fame_dist,
             "server": dist_server(frame),
-            "job_x_fame": dist_job_x_fame(frame, bins),
+            "job_x_fame": drop_side_rows(dist_job_x_fame(frame, bins)),
+        },
+        "distributions_final_stage": {
+            "note": "마지막 전직(진 각성)을 마친 캐릭터만의 분포 — 직업 순위와 직업×명성 교차의 기준",
+            "sample_size": f_total,
+            "fame_missing": f_fame_missing,
+            "job": merge_side_jobs(dist_job(final, f_total), f_total),
+            "job_group": dist_job(final, f_total, key="job_group"),
+            "fame_bins": f_fame_dist,
+            "job_x_fame": drop_side_rows(dist_job_x_fame(final, bins)),
+            "uncapped_sample_size": len(final_uncapped),
+            "uncapped_job": merge_side_jobs(dist_job(final_uncapped, len(final_uncapped)), len(final_uncapped))
+            if final_uncapped else [],
         },
         "distributions_uncapped_only": {
             "note": "상한(200) 미도달 검색에서 발견된 표본만의 분포 — 상한 도달 표본의 고명성 쏠림 편향 비교용",
-            "job": dist_job(uncapped, len(uncapped)) if uncapped else [],
+            "job": merge_side_jobs(dist_job(uncapped, len(uncapped)), len(uncapped)) if uncapped else [],
             "fame_bins": u_fame_dist,
             "server": dist_server(uncapped),
         },
@@ -325,4 +374,6 @@ if __name__ == "__main__":
     m = c["meta"]
     print(f"표본 {m['sample_size']}명 (비상한 {m['uncapped_sample_size']}명, fame 결측 {m['fame_missing']}명)")
     print(f"검색 호출 {m['search_calls']}건 중 상한 도달 {m['search_calls_capped']}건")
+    f = c["distributions_final_stage"]
+    print(f"마지막 전직 완료 {f['sample_size']}명 (fame 결측 {f['fame_missing']}명), 직업 {len(f['job'])}종")
     print(f"저장: {OUT_PATH} / 식별 정보 스캔 0건")

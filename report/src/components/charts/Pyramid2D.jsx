@@ -15,7 +15,7 @@ function Panel({ title, note, bins, hovered, onHover }) {
   const rows = bands(bins);
   const top = [...rows].reverse(); // 위에서 아래 차례
   const desired = top.map((b) => BASE_Y - b.mid * TOTAL_H + 4);
-  const ys = spreadLabels(desired, 23, 58, BASE_Y - 2);
+  const ys = spreadLabels(desired, 38, 50, BASE_Y - 10);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }} role="img"
@@ -56,7 +56,7 @@ function Panel({ title, note, bins, hovered, onHover }) {
             <text x={LABEL_X} y={y} fontSize="13" fontWeight={on || base ? 700 : 500} fill="var(--text-primary)">
               {b.bin}
             </text>
-            <text x={LABEL_X} y={y + 16} fontSize={base ? "15" : "12.5"} fontWeight={base ? 700 : 400}
+            <text x={LABEL_X} y={y + (base ? 21 : 18)} fontSize={base ? "15" : "12.5"} fontWeight={base ? 700 : 400}
               className="num" fill={base ? "var(--ink-6)" : "var(--text-secondary)"}>
               {fmtPct(b.pct)}
               <tspan fill="var(--text-muted)" fontSize="11.5" fontWeight="400" dx="6">{fmtPeople(b.count)}</tspan>
@@ -86,8 +86,8 @@ export default function Pyramid2D({ full, complete, fullNote, completeNote }) {
   const [hovered, setHovered] = useState(null);
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-      <Panel title="전체 표본" note={fullNote} bins={full} hovered={hovered} onHover={setHovered} />
-      <Panel title="빠짐없이 모은 표본만" note={completeNote} bins={complete} hovered={hovered} onHover={setHovered} />
+      <Panel title="전체 표본 (쏠림 있음)" note={fullNote} bins={full} hovered={hovered} onHover={setHovered} />
+      <Panel title="쏠림 없는 표본" note={completeNote} bins={complete} hovered={hovered} onHover={setHovered} />
     </div>
   );
 }

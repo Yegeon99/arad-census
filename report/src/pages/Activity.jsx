@@ -47,7 +47,7 @@ export default function Activity() {
         {
           label: "보정한 이유",
           body: [
-            `보정의 근거는 검색 방식 차이입니다. 빠짐없이 모은 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
+            `보정의 근거는 검색 방식 차이입니다. 쏠림 없는 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
             `같은 기준으로 잘린 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다. 검색 방식만 달라도 두 배 넘게 벌어집니다.`,
           ],
         },
@@ -80,7 +80,7 @@ export default function Activity() {
               </tbody>
             </table>
             <p className="t-small mt-3">
-              보정값은 명성 구간별 접속 비율에 빠짐없이 모은 표본의 구간 비중을 곱해 더한 값입니다.
+              보정값은 명성 구간별 접속 비율에 쏠림 없는 표본의 구간 비중을 곱해 더한 값입니다.
               검색 한도 편향을 아래쪽으로 되돌린 방향의 추정입니다.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function Activity() {
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ color: "var(--text-primary)" }}>빠짐없이 모은 검색에서도 발견</td>
+                  <td style={{ color: "var(--text-primary)" }}>쏠림 없는 검색에서도 발견</td>
                   <td className="num text-right">{fmtPeople(discovery.complete.n)}</td>
                   <td className="num text-right">{fmtPct(discovery.complete.pct[dormantLabel])}</td>
                 </tr>

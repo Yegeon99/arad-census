@@ -1,6 +1,6 @@
 {
   "meta": {
-    "surveyed_at": "2026-08-25T18:04:02+09:00",
+    "surveyed_at": "2026-08-26T15:22:04+09:00",
     "sample_size": 31523,
     "fame_missing": 1441,
     "uncapped_sample_size": 5352,
@@ -18,7 +18,8 @@
       "prey",
       "siroco"
     ],
-    "method_version": "1.1",
+    "method_version": "1.2",
+    "round": "2026-08",
     "min_cell": 10,
     "fame_missing_level_dist": [
       {
@@ -37,8 +38,7 @@
         "range": "110~115",
         "count": 564
       }
-    ],
-    "round": "2026-08"
+    ]
   },
   "distributions": {
     "job": [
@@ -338,7 +338,7 @@
         "pct": 0.26
       },
       {
-        "jobName": "기타(외전 2종·표본<10 직업 14개 합산)",
+        "jobName": "기타(외전 캐릭터·표본<10 직업 14개 합산)",
         "count": 416,
         "pct": 1.32
       }
@@ -2354,6 +2354,2555 @@
       }
     ]
   },
+  "distributions_final_stage": {
+    "note": "마지막 전직(진 각성)을 마친 캐릭터만의 분포 — 직업 순위와 직업×명성 교차의 기준",
+    "sample_size": 29527,
+    "fame_missing": 736,
+    "job": [
+      {
+        "jobName": "크루세이더",
+        "count": 2281,
+        "pct": 7.73
+      },
+      {
+        "jobName": "다크템플러",
+        "count": 1557,
+        "pct": 5.27
+      },
+      {
+        "jobName": "넨마스터",
+        "count": 1318,
+        "pct": 4.46
+      },
+      {
+        "jobName": "브레이커",
+        "count": 1220,
+        "pct": 4.13
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "count": 1104,
+        "pct": 3.74
+      },
+      {
+        "jobName": "패러메딕",
+        "count": 923,
+        "pct": 3.13
+      },
+      {
+        "jobName": "트래블러",
+        "count": 907,
+        "pct": 3.07
+      },
+      {
+        "jobName": "인챈트리스",
+        "count": 905,
+        "pct": 3.06
+      },
+      {
+        "jobName": "인파이터",
+        "count": 887,
+        "pct": 3.0
+      },
+      {
+        "jobName": "키메라",
+        "count": 869,
+        "pct": 2.94
+      },
+      {
+        "jobName": "뮤즈",
+        "count": 866,
+        "pct": 2.93
+      },
+      {
+        "jobName": "아수라",
+        "count": 865,
+        "pct": 2.93
+      },
+      {
+        "jobName": "블레이드",
+        "count": 787,
+        "pct": 2.67
+      },
+      {
+        "jobName": "레인저",
+        "count": 785,
+        "pct": 2.66
+      },
+      {
+        "jobName": "버서커",
+        "count": 646,
+        "pct": 2.19
+      },
+      {
+        "jobName": "베가본드",
+        "count": 629,
+        "pct": 2.13
+      },
+      {
+        "jobName": "웨펀마스터",
+        "count": 606,
+        "pct": 2.05
+      },
+      {
+        "jobName": "런처",
+        "count": 575,
+        "pct": 1.95
+      },
+      {
+        "jobName": "스트라이커",
+        "count": 528,
+        "pct": 1.79
+      },
+      {
+        "jobName": "스핏파이어",
+        "count": 518,
+        "pct": 1.75
+      },
+      {
+        "jobName": "팔라딘",
+        "count": 511,
+        "pct": 1.73
+      },
+      {
+        "jobName": "배틀메이지",
+        "count": 483,
+        "pct": 1.64
+      },
+      {
+        "jobName": "소환사",
+        "count": 475,
+        "pct": 1.61
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "count": 439,
+        "pct": 1.49
+      },
+      {
+        "jobName": "비질란테",
+        "count": 437,
+        "pct": 1.48
+      },
+      {
+        "jobName": "메카닉",
+        "count": 435,
+        "pct": 1.47
+      },
+      {
+        "jobName": "소드마스터",
+        "count": 431,
+        "pct": 1.46
+      },
+      {
+        "jobName": "헌터",
+        "count": 424,
+        "pct": 1.44
+      },
+      {
+        "jobName": "소울브링어",
+        "count": 421,
+        "pct": 1.43
+      },
+      {
+        "jobName": "다크 랜서",
+        "count": 417,
+        "pct": 1.41
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "count": 386,
+        "pct": 1.31
+      },
+      {
+        "jobName": "미스트리스",
+        "count": 379,
+        "pct": 1.28
+      },
+      {
+        "jobName": "검귀",
+        "count": 345,
+        "pct": 1.17
+      },
+      {
+        "jobName": "마도학자",
+        "count": 335,
+        "pct": 1.13
+      },
+      {
+        "jobName": "그래플러",
+        "count": 333,
+        "pct": 1.13
+      },
+      {
+        "jobName": "카오스",
+        "count": 281,
+        "pct": 0.95
+      },
+      {
+        "jobName": "이단심판관",
+        "count": 278,
+        "pct": 0.94
+      },
+      {
+        "jobName": "스트리트파이터",
+        "count": 272,
+        "pct": 0.92
+      },
+      {
+        "jobName": "무녀",
+        "count": 242,
+        "pct": 0.82
+      },
+      {
+        "jobName": "어벤저",
+        "count": 222,
+        "pct": 0.75
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "count": 221,
+        "pct": 0.75
+      },
+      {
+        "jobName": "사령술사",
+        "count": 221,
+        "pct": 0.75
+      },
+      {
+        "jobName": "로그",
+        "count": 211,
+        "pct": 0.71
+      },
+      {
+        "jobName": "블러드 메이지",
+        "count": 206,
+        "pct": 0.7
+      },
+      {
+        "jobName": "드래곤나이트",
+        "count": 194,
+        "pct": 0.66
+      },
+      {
+        "jobName": "퇴마사",
+        "count": 186,
+        "pct": 0.63
+      },
+      {
+        "jobName": "요원",
+        "count": 184,
+        "pct": 0.62
+      },
+      {
+        "jobName": "쿠노이치",
+        "count": 158,
+        "pct": 0.54
+      },
+      {
+        "jobName": "빙결사",
+        "count": 152,
+        "pct": 0.51
+      },
+      {
+        "jobName": "어썰트",
+        "count": 145,
+        "pct": 0.49
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "count": 138,
+        "pct": 0.47
+      },
+      {
+        "jobName": "뱅가드",
+        "count": 128,
+        "pct": 0.43
+      },
+      {
+        "jobName": "히트맨",
+        "count": 128,
+        "pct": 0.43
+      },
+      {
+        "jobName": "엘븐나이트",
+        "count": 127,
+        "pct": 0.43
+      },
+      {
+        "jobName": "트러블 슈터",
+        "count": 110,
+        "pct": 0.37
+      },
+      {
+        "jobName": "디멘션워커",
+        "count": 109,
+        "pct": 0.37
+      },
+      {
+        "jobName": "섀도우댄서",
+        "count": 101,
+        "pct": 0.34
+      },
+      {
+        "jobName": "듀얼리스트",
+        "count": 83,
+        "pct": 0.28
+      },
+      {
+        "jobName": "스페셜리스트",
+        "count": 71,
+        "pct": 0.24
+      },
+      {
+        "jobName": "기타(외전 캐릭터·표본<10 직업 0개 합산)",
+        "count": 332,
+        "pct": 1.12
+      }
+    ],
+    "job_group": [
+      {
+        "jobName": "귀검사(여)",
+        "count": 3790,
+        "pct": 12.84
+      },
+      {
+        "jobName": "아처",
+        "count": 3503,
+        "pct": 11.86
+      },
+      {
+        "jobName": "프리스트(여)",
+        "count": 3198,
+        "pct": 10.83
+      },
+      {
+        "jobName": "귀검사(남)",
+        "count": 2883,
+        "pct": 9.76
+      },
+      {
+        "jobName": "마법사(여)",
+        "count": 2637,
+        "pct": 8.93
+      },
+      {
+        "jobName": "거너(여)",
+        "count": 2116,
+        "pct": 7.17
+      },
+      {
+        "jobName": "격투가(여)",
+        "count": 1880,
+        "pct": 6.37
+      },
+      {
+        "jobName": "마법사(남)",
+        "count": 1709,
+        "pct": 5.79
+      },
+      {
+        "jobName": "프리스트(남)",
+        "count": 1277,
+        "pct": 4.32
+      },
+      {
+        "jobName": "거너(남)",
+        "count": 1265,
+        "pct": 4.28
+      },
+      {
+        "jobName": "제국기사",
+        "count": 1220,
+        "pct": 4.13
+      },
+      {
+        "jobName": "나이트",
+        "count": 1113,
+        "pct": 3.77
+      },
+      {
+        "jobName": "마창사",
+        "count": 849,
+        "pct": 2.88
+      },
+      {
+        "jobName": "도적",
+        "count": 691,
+        "pct": 2.34
+      },
+      {
+        "jobName": "격투가(남)",
+        "count": 571,
+        "pct": 1.93
+      },
+      {
+        "jobName": "총검사",
+        "count": 493,
+        "pct": 1.67
+      },
+      {
+        "jobName": "다크나이트",
+        "count": 268,
+        "pct": 0.91
+      },
+      {
+        "jobName": "크리에이터",
+        "count": 64,
+        "pct": 0.22
+      }
+    ],
+    "fame_bins": [
+      {
+        "range": "레기온 미만",
+        "count": 12196,
+        "pct": 42.36
+      },
+      {
+        "range": "아포칼립스 입장",
+        "count": 5613,
+        "pct": 19.5
+      },
+      {
+        "range": "상급 던전권",
+        "count": 3895,
+        "pct": 13.53
+      },
+      {
+        "range": "미카엘라 입장",
+        "count": 3913,
+        "pct": 13.59
+      },
+      {
+        "range": "미카엘라 권장",
+        "count": 2627,
+        "pct": 9.12
+      },
+      {
+        "range": "하드 권장 이상",
+        "count": 547,
+        "pct": 1.9
+      }
+    ],
+    "job_x_fame": [
+      {
+        "jobName": "크루세이더",
+        "bin": "레기온 미만",
+        "count": 883
+      },
+      {
+        "jobName": "크루세이더",
+        "bin": "아포칼립스 입장",
+        "count": 411
+      },
+      {
+        "jobName": "크루세이더",
+        "bin": "상급 던전권",
+        "count": 265
+      },
+      {
+        "jobName": "크루세이더",
+        "bin": "미카엘라 입장",
+        "count": 357
+      },
+      {
+        "jobName": "크루세이더",
+        "bin": "미카엘라 권장",
+        "count": 263
+      },
+      {
+        "jobName": "크루세이더",
+        "bin": "하드 권장 이상",
+        "count": 40
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "레기온 미만",
+        "count": 505
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "아포칼립스 입장",
+        "count": 361
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "상급 던전권",
+        "count": 297
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "미카엘라 입장",
+        "count": 241
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "미카엘라 권장",
+        "count": 116
+      },
+      {
+        "jobName": "다크템플러",
+        "bin": "하드 권장 이상",
+        "count": 22
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "레기온 미만",
+        "count": 535
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "아포칼립스 입장",
+        "count": 230
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "상급 던전권",
+        "count": 173
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "미카엘라 입장",
+        "count": 192
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "미카엘라 권장",
+        "count": 124
+      },
+      {
+        "jobName": "넨마스터",
+        "bin": "하드 권장 이상",
+        "count": 25
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "레기온 미만",
+        "count": 273
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "아포칼립스 입장",
+        "count": 338
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "상급 던전권",
+        "count": 332
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "미카엘라 입장",
+        "count": 191
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "미카엘라 권장",
+        "count": 74
+      },
+      {
+        "jobName": "브레이커",
+        "bin": "하드 권장 이상",
+        "count": 12
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "레기온 미만",
+        "count": 272
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "아포칼립스 입장",
+        "count": 244
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "상급 던전권",
+        "count": 181
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "미카엘라 입장",
+        "count": 214
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "미카엘라 권장",
+        "count": 167
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "bin": "하드 권장 이상",
+        "count": 19
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "레기온 미만",
+        "count": 410
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "아포칼립스 입장",
+        "count": 160
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "상급 던전권",
+        "count": 123
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "미카엘라 입장",
+        "count": 124
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "미카엘라 권장",
+        "count": 98
+      },
+      {
+        "jobName": "패러메딕",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "레기온 미만",
+        "count": 327
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "아포칼립스 입장",
+        "count": 197
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "상급 던전권",
+        "count": 99
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "미카엘라 입장",
+        "count": 134
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "미카엘라 권장",
+        "count": 112
+      },
+      {
+        "jobName": "인챈트리스",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "레기온 미만",
+        "count": 377
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "아포칼립스 입장",
+        "count": 129
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "상급 던전권",
+        "count": 99
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "미카엘라 입장",
+        "count": 134
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "미카엘라 권장",
+        "count": 118
+      },
+      {
+        "jobName": "트래블러",
+        "bin": "하드 권장 이상",
+        "count": 20
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "레기온 미만",
+        "count": 292
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "아포칼립스 입장",
+        "count": 214
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "상급 던전권",
+        "count": 161
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "미카엘라 입장",
+        "count": 131
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "미카엘라 권장",
+        "count": 68
+      },
+      {
+        "jobName": "인파이터",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "키메라",
+        "bin": "레기온 미만",
+        "count": 476
+      },
+      {
+        "jobName": "키메라",
+        "bin": "아포칼립스 입장",
+        "count": 131
+      },
+      {
+        "jobName": "키메라",
+        "bin": "상급 던전권",
+        "count": 86
+      },
+      {
+        "jobName": "키메라",
+        "bin": "미카엘라 입장",
+        "count": 93
+      },
+      {
+        "jobName": "키메라",
+        "bin": "미카엘라 권장",
+        "count": 73
+      },
+      {
+        "jobName": "키메라",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "레기온 미만",
+        "count": 328
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "아포칼립스 입장",
+        "count": 153
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "상급 던전권",
+        "count": 97
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "미카엘라 입장",
+        "count": 141
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "미카엘라 권장",
+        "count": 118
+      },
+      {
+        "jobName": "뮤즈",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "아수라",
+        "bin": "레기온 미만",
+        "count": 363
+      },
+      {
+        "jobName": "아수라",
+        "bin": "아포칼립스 입장",
+        "count": 157
+      },
+      {
+        "jobName": "아수라",
+        "bin": "상급 던전권",
+        "count": 139
+      },
+      {
+        "jobName": "아수라",
+        "bin": "미카엘라 입장",
+        "count": 120
+      },
+      {
+        "jobName": "아수라",
+        "bin": "미카엘라 권장",
+        "count": 53
+      },
+      {
+        "jobName": "아수라",
+        "bin": "하드 권장 이상",
+        "count": 12
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "레기온 미만",
+        "count": 333
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "아포칼립스 입장",
+        "count": 125
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "상급 던전권",
+        "count": 95
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "미카엘라 입장",
+        "count": 107
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "미카엘라 권장",
+        "count": 90
+      },
+      {
+        "jobName": "블레이드",
+        "bin": "하드 권장 이상",
+        "count": 15
+      },
+      {
+        "jobName": "레인저",
+        "bin": "레기온 미만",
+        "count": 287
+      },
+      {
+        "jobName": "레인저",
+        "bin": "아포칼립스 입장",
+        "count": 146
+      },
+      {
+        "jobName": "레인저",
+        "bin": "상급 던전권",
+        "count": 120
+      },
+      {
+        "jobName": "레인저",
+        "bin": "미카엘라 입장",
+        "count": 108
+      },
+      {
+        "jobName": "레인저",
+        "bin": "미카엘라 권장",
+        "count": 70
+      },
+      {
+        "jobName": "레인저",
+        "bin": "하드 권장 이상",
+        "count": 26
+      },
+      {
+        "jobName": "버서커",
+        "bin": "레기온 미만",
+        "count": 275
+      },
+      {
+        "jobName": "버서커",
+        "bin": "아포칼립스 입장",
+        "count": 120
+      },
+      {
+        "jobName": "버서커",
+        "bin": "상급 던전권",
+        "count": 82
+      },
+      {
+        "jobName": "버서커",
+        "bin": "미카엘라 입장",
+        "count": 90
+      },
+      {
+        "jobName": "버서커",
+        "bin": "미카엘라 권장",
+        "count": 48
+      },
+      {
+        "jobName": "버서커",
+        "bin": "하드 권장 이상",
+        "count": 18
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "레기온 미만",
+        "count": 248
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "아포칼립스 입장",
+        "count": 131
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "상급 던전권",
+        "count": 78
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "미카엘라 입장",
+        "count": 90
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "미카엘라 권장",
+        "count": 55
+      },
+      {
+        "jobName": "베가본드",
+        "bin": "하드 권장 이상",
+        "count": 14
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "레기온 미만",
+        "count": 207
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "아포칼립스 입장",
+        "count": 97
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "상급 던전권",
+        "count": 82
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "미카엘라 입장",
+        "count": 95
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "미카엘라 권장",
+        "count": 82
+      },
+      {
+        "jobName": "웨펀마스터",
+        "bin": "하드 권장 이상",
+        "count": 24
+      },
+      {
+        "jobName": "런처",
+        "bin": "레기온 미만",
+        "count": 253
+      },
+      {
+        "jobName": "런처",
+        "bin": "아포칼립스 입장",
+        "count": 109
+      },
+      {
+        "jobName": "런처",
+        "bin": "상급 던전권",
+        "count": 79
+      },
+      {
+        "jobName": "런처",
+        "bin": "미카엘라 입장",
+        "count": 73
+      },
+      {
+        "jobName": "런처",
+        "bin": "미카엘라 권장",
+        "count": 34
+      },
+      {
+        "jobName": "런처",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "레기온 미만",
+        "count": 232
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "아포칼립스 입장",
+        "count": 102
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "상급 던전권",
+        "count": 71
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "미카엘라 입장",
+        "count": 66
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "미카엘라 권장",
+        "count": 35
+      },
+      {
+        "jobName": "스트라이커",
+        "bin": "하드 권장 이상",
+        "count": 11
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "레기온 미만",
+        "count": 251
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "아포칼립스 입장",
+        "count": 95
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "상급 던전권",
+        "count": 61
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "미카엘라 입장",
+        "count": 51
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "미카엘라 권장",
+        "count": 37
+      },
+      {
+        "jobName": "스핏파이어",
+        "bin": "하드 권장 이상",
+        "count": 12
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "레기온 미만",
+        "count": 245
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "아포칼립스 입장",
+        "count": 98
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "상급 던전권",
+        "count": 51
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "미카엘라 입장",
+        "count": 68
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "미카엘라 권장",
+        "count": 34
+      },
+      {
+        "jobName": "팔라딘",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "레기온 미만",
+        "count": 211
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "아포칼립스 입장",
+        "count": 104
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "상급 던전권",
+        "count": 42
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "미카엘라 입장",
+        "count": 65
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "미카엘라 권장",
+        "count": 41
+      },
+      {
+        "jobName": "배틀메이지",
+        "bin": "하드 권장 이상",
+        "count": 13
+      },
+      {
+        "jobName": "소환사",
+        "bin": "레기온 미만",
+        "count": 197
+      },
+      {
+        "jobName": "소환사",
+        "bin": "아포칼립스 입장",
+        "count": 88
+      },
+      {
+        "jobName": "소환사",
+        "bin": "상급 던전권",
+        "count": 56
+      },
+      {
+        "jobName": "소환사",
+        "bin": "미카엘라 입장",
+        "count": 56
+      },
+      {
+        "jobName": "소환사",
+        "bin": "미카엘라 권장",
+        "count": 41
+      },
+      {
+        "jobName": "소환사",
+        "bin": "하드 권장 이상",
+        "count": 19
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "레기온 미만",
+        "count": 181
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "아포칼립스 입장",
+        "count": 84
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "상급 던전권",
+        "count": 48
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "미카엘라 입장",
+        "count": 62
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "미카엘라 권장",
+        "count": 49
+      },
+      {
+        "jobName": "비질란테",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "레기온 미만",
+        "count": 181
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "아포칼립스 입장",
+        "count": 89
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "상급 던전권",
+        "count": 45
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "미카엘라 입장",
+        "count": 47
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "미카엘라 권장",
+        "count": 40
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "bin": "하드 권장 이상",
+        "count": 15
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "레기온 미만",
+        "count": 200
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "아포칼립스 입장",
+        "count": 79
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "상급 던전권",
+        "count": 56
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "미카엘라 입장",
+        "count": 35
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "미카엘라 권장",
+        "count": 25
+      },
+      {
+        "jobName": "메카닉",
+        "bin": "하드 권장 이상",
+        "count": 21
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "레기온 미만",
+        "count": 190
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "아포칼립스 입장",
+        "count": 85
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "상급 던전권",
+        "count": 53
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "미카엘라 입장",
+        "count": 44
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "미카엘라 권장",
+        "count": 35
+      },
+      {
+        "jobName": "소드마스터",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "헌터",
+        "bin": "레기온 미만",
+        "count": 197
+      },
+      {
+        "jobName": "헌터",
+        "bin": "아포칼립스 입장",
+        "count": 65
+      },
+      {
+        "jobName": "헌터",
+        "bin": "상급 던전권",
+        "count": 41
+      },
+      {
+        "jobName": "헌터",
+        "bin": "미카엘라 입장",
+        "count": 53
+      },
+      {
+        "jobName": "헌터",
+        "bin": "미카엘라 권장",
+        "count": 41
+      },
+      {
+        "jobName": "헌터",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "레기온 미만",
+        "count": 170
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "아포칼립스 입장",
+        "count": 84
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "상급 던전권",
+        "count": 50
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "미카엘라 입장",
+        "count": 55
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "미카엘라 권장",
+        "count": 37
+      },
+      {
+        "jobName": "소울브링어",
+        "bin": "하드 권장 이상",
+        "count": 10
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "레기온 미만",
+        "count": 180
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "아포칼립스 입장",
+        "count": 87
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "상급 던전권",
+        "count": 53
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "미카엘라 입장",
+        "count": 50
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "미카엘라 권장",
+        "count": 29
+      },
+      {
+        "jobName": "다크 랜서",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "레기온 미만",
+        "count": 173
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "아포칼립스 입장",
+        "count": 63
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "상급 던전권",
+        "count": 54
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "미카엘라 입장",
+        "count": 41
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "미카엘라 권장",
+        "count": 32
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "레기온 미만",
+        "count": 202
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "아포칼립스 입장",
+        "count": 55
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "상급 던전권",
+        "count": 40
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "미카엘라 입장",
+        "count": 31
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "미카엘라 권장",
+        "count": 20
+      },
+      {
+        "jobName": "미스트리스",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "검귀",
+        "bin": "레기온 미만",
+        "count": 150
+      },
+      {
+        "jobName": "검귀",
+        "bin": "아포칼립스 입장",
+        "count": 53
+      },
+      {
+        "jobName": "검귀",
+        "bin": "상급 던전권",
+        "count": 49
+      },
+      {
+        "jobName": "검귀",
+        "bin": "미카엘라 입장",
+        "count": 52
+      },
+      {
+        "jobName": "검귀",
+        "bin": "미카엘라 권장",
+        "count": 19
+      },
+      {
+        "jobName": "검귀",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "레기온 미만",
+        "count": 166
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "아포칼립스 입장",
+        "count": 62
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "상급 던전권",
+        "count": 36
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "미카엘라 입장",
+        "count": 32
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "미카엘라 권장",
+        "count": 22
+      },
+      {
+        "jobName": "그래플러",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "레기온 미만",
+        "count": 145
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "아포칼립스 입장",
+        "count": 67
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "상급 던전권",
+        "count": 33
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "미카엘라 입장",
+        "count": 36
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "미카엘라 권장",
+        "count": 33
+      },
+      {
+        "jobName": "마도학자",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "카오스",
+        "bin": "레기온 미만",
+        "count": 128
+      },
+      {
+        "jobName": "카오스",
+        "bin": "아포칼립스 입장",
+        "count": 55
+      },
+      {
+        "jobName": "카오스",
+        "bin": "상급 던전권",
+        "count": 30
+      },
+      {
+        "jobName": "카오스",
+        "bin": "미카엘라 입장",
+        "count": 34
+      },
+      {
+        "jobName": "카오스",
+        "bin": "미카엘라 권장",
+        "count": 20
+      },
+      {
+        "jobName": "카오스",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "레기온 미만",
+        "count": 141
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "아포칼립스 입장",
+        "count": 40
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "상급 던전권",
+        "count": 31
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "미카엘라 입장",
+        "count": 30
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "미카엘라 권장",
+        "count": 25
+      },
+      {
+        "jobName": "이단심판관",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "레기온 미만",
+        "count": 139
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "아포칼립스 입장",
+        "count": 37
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "상급 던전권",
+        "count": 31
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "미카엘라 입장",
+        "count": 28
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "미카엘라 권장",
+        "count": 22
+      },
+      {
+        "jobName": "스트리트파이터",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "무녀",
+        "bin": "레기온 미만",
+        "count": 124
+      },
+      {
+        "jobName": "무녀",
+        "bin": "아포칼립스 입장",
+        "count": 45
+      },
+      {
+        "jobName": "무녀",
+        "bin": "상급 던전권",
+        "count": 27
+      },
+      {
+        "jobName": "무녀",
+        "bin": "미카엘라 입장",
+        "count": 24
+      },
+      {
+        "jobName": "무녀",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "무녀",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "레기온 미만",
+        "count": 115
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "아포칼립스 입장",
+        "count": 35
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "상급 던전권",
+        "count": 25
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "미카엘라 입장",
+        "count": 21
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "미카엘라 권장",
+        "count": 18
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "레기온 미만",
+        "count": 99
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "아포칼립스 입장",
+        "count": 34
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "상급 던전권",
+        "count": 31
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "미카엘라 입장",
+        "count": 31
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "미카엘라 권장",
+        "count": 16
+      },
+      {
+        "jobName": "사령술사",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "로그",
+        "bin": "레기온 미만",
+        "count": 95
+      },
+      {
+        "jobName": "로그",
+        "bin": "아포칼립스 입장",
+        "count": 57
+      },
+      {
+        "jobName": "로그",
+        "bin": "상급 던전권",
+        "count": 23
+      },
+      {
+        "jobName": "로그",
+        "bin": "미카엘라 입장",
+        "count": 20
+      },
+      {
+        "jobName": "로그",
+        "bin": "미카엘라 권장",
+        "count": 10
+      },
+      {
+        "jobName": "로그",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "레기온 미만",
+        "count": 109
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "아포칼립스 입장",
+        "count": 43
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "상급 던전권",
+        "count": 24
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "미카엘라 입장",
+        "count": 13
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "미카엘라 권장",
+        "count": 16
+      },
+      {
+        "jobName": "어벤저",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "레기온 미만",
+        "count": 98
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "아포칼립스 입장",
+        "count": 43
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "상급 던전권",
+        "count": 22
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "미카엘라 입장",
+        "count": 23
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "미카엘라 권장",
+        "count": 15
+      },
+      {
+        "jobName": "블러드 메이지",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "레기온 미만",
+        "count": 111
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "아포칼립스 입장",
+        "count": 36
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "상급 던전권",
+        "count": 21
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "미카엘라 입장",
+        "count": 12
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "미카엘라 권장",
+        "count": 10
+      },
+      {
+        "jobName": "드래곤나이트",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "레기온 미만",
+        "count": 96
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "아포칼립스 입장",
+        "count": 36
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "상급 던전권",
+        "count": 17
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "미카엘라 입장",
+        "count": 23
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "퇴마사",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "요원",
+        "bin": "레기온 미만",
+        "count": 85
+      },
+      {
+        "jobName": "요원",
+        "bin": "아포칼립스 입장",
+        "count": 31
+      },
+      {
+        "jobName": "요원",
+        "bin": "상급 던전권",
+        "count": 19
+      },
+      {
+        "jobName": "요원",
+        "bin": "미카엘라 입장",
+        "count": 21
+      },
+      {
+        "jobName": "요원",
+        "bin": "미카엘라 권장",
+        "count": 17
+      },
+      {
+        "jobName": "요원",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "레기온 미만",
+        "count": 85
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "아포칼립스 입장",
+        "count": 32
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "상급 던전권",
+        "count": 15
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "미카엘라 입장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "쿠노이치",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "레기온 미만",
+        "count": 87
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "아포칼립스 입장",
+        "count": 19
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "상급 던전권",
+        "count": 15
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "미카엘라 입장",
+        "count": 15
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "빙결사",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "레기온 미만",
+        "count": 71
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "아포칼립스 입장",
+        "count": 26
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "상급 던전권",
+        "count": 11
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "미카엘라 입장",
+        "count": 14
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "레기온 미만",
+        "count": 81
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "아포칼립스 입장",
+        "count": 27
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "상급 던전권",
+        "count": 14
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "미카엘라 입장",
+        "count": 12
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "미카엘라 권장",
+        "count": 0
+      },
+      {
+        "jobName": "어썰트",
+        "bin": "하드 권장 이상",
+        "count": 0
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "레기온 미만",
+        "count": 62
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "아포칼립스 입장",
+        "count": 23
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "상급 던전권",
+        "count": 15
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "미카엘라 입장",
+        "count": 14
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "미카엘라 권장",
+        "count": 11
+      },
+      {
+        "jobName": "히트맨",
+        "bin": "하드 권장 이상",
+        "count": 0
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "레기온 미만",
+        "count": 63
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "아포칼립스 입장",
+        "count": 24
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "상급 던전권",
+        "count": 10
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "미카엘라 입장",
+        "count": 15
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "뱅가드",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "레기온 미만",
+        "count": 70
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "아포칼립스 입장",
+        "count": 16
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "상급 던전권",
+        "count": 11
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "미카엘라 입장",
+        "count": 11
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "엘븐나이트",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "레기온 미만",
+        "count": 52
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "아포칼립스 입장",
+        "count": 16
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "상급 던전권",
+        "count": 17
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "미카엘라 입장",
+        "count": 12
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "트러블 슈터",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "레기온 미만",
+        "count": 53
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "아포칼립스 입장",
+        "count": 24
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "상급 던전권",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "미카엘라 입장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "디멘션워커",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "레기온 미만",
+        "count": 62
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "아포칼립스 입장",
+        "count": 14
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "상급 던전권",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "미카엘라 입장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "섀도우댄서",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "레기온 미만",
+        "count": 45
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "아포칼립스 입장",
+        "count": 15
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "상급 던전권",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "미카엘라 입장",
+        "count": 10
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "듀얼리스트",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "레기온 미만",
+        "count": 37
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "아포칼립스 입장",
+        "count": 17
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "상급 던전권",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "미카엘라 입장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "미카엘라 권장",
+        "count": null,
+        "masked": true
+      },
+      {
+        "jobName": "스페셜리스트",
+        "bin": "하드 권장 이상",
+        "count": null,
+        "masked": true
+      }
+    ],
+    "uncapped_sample_size": 3812,
+    "uncapped_job": [
+      {
+        "jobName": "크루세이더",
+        "count": 294,
+        "pct": 7.71
+      },
+      {
+        "jobName": "넨마스터",
+        "count": 223,
+        "pct": 5.85
+      },
+      {
+        "jobName": "미스트리스",
+        "count": 134,
+        "pct": 3.52
+      },
+      {
+        "jobName": "인챈트리스",
+        "count": 132,
+        "pct": 3.46
+      },
+      {
+        "jobName": "패러메딕",
+        "count": 130,
+        "pct": 3.41
+      },
+      {
+        "jobName": "키메라",
+        "count": 129,
+        "pct": 3.38
+      },
+      {
+        "jobName": "아수라",
+        "count": 122,
+        "pct": 3.2
+      },
+      {
+        "jobName": "블레이드",
+        "count": 116,
+        "pct": 3.04
+      },
+      {
+        "jobName": "레인저",
+        "count": 105,
+        "pct": 2.75
+      },
+      {
+        "jobName": "인파이터",
+        "count": 104,
+        "pct": 2.73
+      },
+      {
+        "jobName": "다크템플러",
+        "count": 102,
+        "pct": 2.68
+      },
+      {
+        "jobName": "뮤즈",
+        "count": 100,
+        "pct": 2.62
+      },
+      {
+        "jobName": "런처",
+        "count": 94,
+        "pct": 2.47
+      },
+      {
+        "jobName": "트래블러",
+        "count": 93,
+        "pct": 2.44
+      },
+      {
+        "jobName": "헌터",
+        "count": 81,
+        "pct": 2.12
+      },
+      {
+        "jobName": "버서커",
+        "count": 78,
+        "pct": 2.05
+      },
+      {
+        "jobName": "웨펀마스터",
+        "count": 76,
+        "pct": 1.99
+      },
+      {
+        "jobName": "스핏파이어",
+        "count": 76,
+        "pct": 1.99
+      },
+      {
+        "jobName": "스트라이커",
+        "count": 76,
+        "pct": 1.99
+      },
+      {
+        "jobName": "팔라딘",
+        "count": 71,
+        "pct": 1.86
+      },
+      {
+        "jobName": "메카닉",
+        "count": 67,
+        "pct": 1.76
+      },
+      {
+        "jobName": "소환사",
+        "count": 65,
+        "pct": 1.71
+      },
+      {
+        "jobName": "베가본드",
+        "count": 60,
+        "pct": 1.57
+      },
+      {
+        "jobName": "소드마스터",
+        "count": 59,
+        "pct": 1.55
+      },
+      {
+        "jobName": "엘레멘탈마스터",
+        "count": 59,
+        "pct": 1.55
+      },
+      {
+        "jobName": "비질란테",
+        "count": 58,
+        "pct": 1.52
+      },
+      {
+        "jobName": "배틀메이지",
+        "count": 58,
+        "pct": 1.52
+      },
+      {
+        "jobName": "어벤저",
+        "count": 57,
+        "pct": 1.5
+      },
+      {
+        "jobName": "마도학자",
+        "count": 55,
+        "pct": 1.44
+      },
+      {
+        "jobName": "데몬슬레이어",
+        "count": 54,
+        "pct": 1.42
+      },
+      {
+        "jobName": "그래플러",
+        "count": 52,
+        "pct": 1.36
+      },
+      {
+        "jobName": "소울브링어",
+        "count": 50,
+        "pct": 1.31
+      },
+      {
+        "jobName": "카오스",
+        "count": 48,
+        "pct": 1.26
+      },
+      {
+        "jobName": "검귀",
+        "count": 47,
+        "pct": 1.23
+      },
+      {
+        "jobName": "스트리트파이터",
+        "count": 47,
+        "pct": 1.23
+      },
+      {
+        "jobName": "이단심판관",
+        "count": 45,
+        "pct": 1.18
+      },
+      {
+        "jobName": "다크 랜서",
+        "count": 39,
+        "pct": 1.02
+      },
+      {
+        "jobName": "브레이커",
+        "count": 35,
+        "pct": 0.92
+      },
+      {
+        "jobName": "사령술사",
+        "count": 33,
+        "pct": 0.87
+      },
+      {
+        "jobName": "어썰트",
+        "count": 32,
+        "pct": 0.84
+      },
+      {
+        "jobName": "퇴마사",
+        "count": 32,
+        "pct": 0.84
+      },
+      {
+        "jobName": "로그",
+        "count": 32,
+        "pct": 0.84
+      },
+      {
+        "jobName": "무녀",
+        "count": 32,
+        "pct": 0.84
+      },
+      {
+        "jobName": "쿠노이치",
+        "count": 32,
+        "pct": 0.84
+      },
+      {
+        "jobName": "스위프트 마스터",
+        "count": 29,
+        "pct": 0.76
+      },
+      {
+        "jobName": "드래고니안 랜서",
+        "count": 28,
+        "pct": 0.73
+      },
+      {
+        "jobName": "드래곤나이트",
+        "count": 26,
+        "pct": 0.68
+      },
+      {
+        "jobName": "요원",
+        "count": 25,
+        "pct": 0.66
+      },
+      {
+        "jobName": "엘레멘탈 바머",
+        "count": 23,
+        "pct": 0.6
+      },
+      {
+        "jobName": "엘븐나이트",
+        "count": 22,
+        "pct": 0.58
+      },
+      {
+        "jobName": "블러드 메이지",
+        "count": 20,
+        "pct": 0.52
+      },
+      {
+        "jobName": "빙결사",
+        "count": 18,
+        "pct": 0.47
+      },
+      {
+        "jobName": "디멘션워커",
+        "count": 17,
+        "pct": 0.45
+      },
+      {
+        "jobName": "뱅가드",
+        "count": 17,
+        "pct": 0.45
+      },
+      {
+        "jobName": "히트맨",
+        "count": 17,
+        "pct": 0.45
+      },
+      {
+        "jobName": "트러블 슈터",
+        "count": 15,
+        "pct": 0.39
+      },
+      {
+        "jobName": "섀도우댄서",
+        "count": 12,
+        "pct": 0.31
+      },
+      {
+        "jobName": "기타(외전 캐릭터·표본<10 직업 2개 합산)",
+        "count": 59,
+        "pct": 1.55
+      }
+    ]
+  },
   "distributions_uncapped_only": {
     "note": "상한(200) 미도달 검색에서 발견된 표본만의 분포 — 상한 도달 표본의 고명성 쏠림 편향 비교용",
     "job": [
@@ -2653,7 +5202,7 @@
         "pct": 0.28
       },
       {
-        "jobName": "기타(외전 2종·표본<10 직업 12개 합산)",
+        "jobName": "기타(외전 캐릭터·표본<10 직업 12개 합산)",
         "count": 109,
         "pct": 2.04
       }

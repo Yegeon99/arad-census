@@ -3,8 +3,8 @@ import { scaleLinear } from "d3-scale";
 import { fmtFame, fmtPct, fmtPeople } from "../../lib/format.js";
 import { useInView, useMediaQuery, ENTER_MS, STAGGER_MS } from "../../lib/hooks.js";
 
-const WIDE = { w: 960, h: 356, left: 46, right: 18, bottom: 104, tickEvery: 1 };
-const NARROW = { w: 380, h: 260, left: 30, right: 8, bottom: 40, tickEvery: 2 };
+const WIDE = { w: 960, h: 372, left: 46, right: 18, bottom: 120, tickEvery: 1 };
+const NARROW = { w: 380, h: 264, left: 30, right: 8, bottom: 44, tickEvery: 2 };
 
 /** 명성 히스토그램. 세로 기준선은 구간 경계로 쓴 컨텐츠 입장값이다. */
 export default function FameHistogram({ data, cuts, binWidth }) {
@@ -21,6 +21,21 @@ export default function FameHistogram({ data, cuts, binWidth }) {
   const y = scaleLinear().domain([0, Math.max(...bins.map((b) => b.pct))]).range([S.h - S.bottom, 18]);
   const bw = x(binWidth) - x(0);
   const baseY = y(0);
+  // 기준선 라벨은 서로 겹치지 않는 줄에 얹는다
+  const cutRows = (() => {
+    const rows = [];
+    const placed = [];
+    for (const cut of cuts) {
+      const width = (cut.label.length + 4) * (narrow ? 6 : 7) + 18;
+      const cx = x(cut.fame);
+      let row = 0;
+      while (placed.some((p) => p.row === row && Math.abs(p.cx - cx) < (p.width + width) / 2)) row += 1;
+      placed.push({ row, cx, width });
+      rows.push({ cut, row });
+    }
+    return rows;
+  })();
+
   const ticks = [];
   for (let v = 0; v <= maxFame; v += binWidth * 2 * S.tickEvery) ticks.push(v);
 
@@ -55,7 +70,7 @@ export default function FameHistogram({ data, cuts, binWidth }) {
           );
         })}
 
-        {cuts.map((c, i) => {
+        {cutRows.map(({ cut: c, row }, i) => {
           const cx = x(c.fame);
           if (narrow) {
             return (
@@ -66,7 +81,7 @@ export default function FameHistogram({ data, cuts, binWidth }) {
               </g>
             );
           }
-          const labelY = baseY + 40 + (i % 3) * 21;
+          const labelY = baseY + 40 + row * 21;
           return (
             <g key={c.fame}>
               <line x1={cx} x2={cx} y1={10} y2={labelY - 12} stroke="var(--gold)" strokeWidth="1.2" strokeDasharray="4 4" />

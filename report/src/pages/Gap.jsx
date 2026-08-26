@@ -42,7 +42,7 @@ export default function Gap() {
       statValue={(best.index / worst.index).toFixed(2)}
       statUnit="배"
       statLabel="레이드 진입 비중이 가장 높은 직업과 가장 낮은 직업의 배수"
-      statNote={`${best.job}는 3명 중 1명이 레이드 구간, ${worst.job}는 8명 중 1명입니다.`}
+      statNote={`${best.job}는 3명 중 1명이 레이드 구간, ${worst.job}는 7명 중 1명입니다. 성장을 마친 캐릭터 기준입니다.`}
       visual={
         <Chart
           how="가로가 직업, 세로가 성장 단계입니다. 앞줄이 낮은 단계, 뒷줄이 높은 단계이고, 막대가 높을수록 그 직업에서 그 단계의 비중이 큽니다."
@@ -59,6 +59,7 @@ export default function Gap() {
               hovered={hovered}
               onHover={setHovered}
               fallback={flatHeatmap}
+              placeholder={flatHeatmap}
             />
           ) : flatHeatmap}
         </Chart>
@@ -68,7 +69,7 @@ export default function Gap() {
         {
           label: "견준 것",
           body: [
-            "같은 표본 안에서도 직업마다 성장 단계 구성이 크게 다릅니다.",
+            "성장을 마친 캐릭터만 놓고 봐도 직업마다 성장 단계 구성이 크게 다릅니다.",
             "어떤 직업은 레이드 진입 구간에 몰려 있고, 어떤 직업은 레기온 입장 전 구간에 몰려 있습니다.",
           ],
         },
@@ -90,7 +91,7 @@ export default function Gap() {
           label: "한계",
           body: [
             "표본이 10명이 되지 않는 칸은 공개하지 않으므로, 그 칸이 있는 직업의 합계는 실제보다 작게 잡힌 하한값입니다.",
-            "표본 안의 비교이며, 게임 전체 인구의 직업별 성장 수준이 아닙니다.",
+            "성장을 마친 캐릭터만 센 표본 안의 비교이며, 게임 전체 인구의 직업별 성장 수준이 아닙니다.",
           ],
         },
       ]}

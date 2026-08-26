@@ -11,6 +11,20 @@ const BAR_D = 0.46;
 const MAX_H = 2.3;
 const LABEL_SHARE = 0.45; // 이 비중을 넘는 막대에만 숫자를 붙인다
 
+/** 붙자마자 첫 장면을 바로 그린다. */
+function FirstFrame({ onReady }) {
+  const invalidate = useThree((state) => state.invalidate);
+  useEffect(() => {
+    invalidate();
+    const raf = requestAnimationFrame(() => {
+      invalidate();
+      onReady();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [invalidate, onReady]);
+  return null;
+}
+
 /** 크기가 바뀌거나 탭이 돌아오면 다시 한 장 그린다. 필요할 때만 그리는 설정에서 화면이 비지 않게. */
 function KeepDrawn() {
   const invalidate = useThree((state) => state.invalidate);
@@ -46,7 +60,8 @@ const labelStyle = {
 };
 
 /** 직업 20종과 명성 6구간을 높이로 세운 지형. 막대 높이는 직업 안에서의 구간 비중이다. */
-export default function JobTerrain3D({ rows, cellCount, cellShare, selected, setSelected, onHover, hovered }) {
+export default function JobTerrain3D({ rows, cellCount, cellShare, selected, setSelected, onHover, hovered, placeholder }) {
+  const [ready, setReady] = useState(false);
   const originX = -((rows.length - 1) * CELL) / 2;
   const frontZ = ((BIN_ORDER.length - 1) * DEPTH) / 2;
 
@@ -73,10 +88,14 @@ export default function JobTerrain3D({ rows, cellCount, cellShare, selected, set
 
   return (
     <div>
-      <div style={{ height: 476, maxWidth: 1160, margin: "0 auto", background: "var(--bg-base)" }}>
+      <div className="relative" style={{ height: 476, maxWidth: 1160, margin: "0 auto", background: "var(--bg-base)" }}>
+        {!ready && placeholder && (
+          <div className="absolute inset-0 overflow-hidden" style={{ opacity: 0.45 }} aria-hidden="true">{placeholder}</div>
+        )}
         <Canvas frameloop="demand" camera={{ position: [0, 5.3, 6.2], fov: 42 }} dpr={[1, 1.8]} gl={{ antialias: true, preserveDrawingBuffer: true }}>
           <color attach="background" args={["#FAFAF8"]} />
           <KeepDrawn />
+          <FirstFrame onReady={() => setReady(true)} />
           <ambientLight intensity={0.78} />
           <directionalLight position={[5, 9, 7]} intensity={1.05} />
           <directionalLight position={[-6, 4, -5]} intensity={0.28} />

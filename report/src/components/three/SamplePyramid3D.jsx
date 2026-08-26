@@ -198,8 +198,8 @@ export default function SamplePyramid3D({ full, complete, fullNote, completeNote
           <IntroFrames active={spinning} />
           <Stack rows={rowsFull} x={-GAP} onHover={setHovered} hovered={hovered} spinning={spinning} />
           <Stack rows={rowsComplete} x={GAP} onHover={setHovered} hovered={hovered} spinning={spinning} />
-          <Title x={-GAP} text="전체 표본" note={fullNote} />
-          <Title x={GAP} text="빠짐없이 모은 표본만" note={completeNote} />
+          <Title x={-GAP} text="전체 표본 (쏠림 있음)" note={fullNote} />
+          <Title x={GAP} text="쏠림 없는 표본" note={completeNote} />
           <SideLabels rows={rowsFull} x={-GAP} side={-1} hovered={hovered} onHover={setHovered} />
           <SideLabels rows={rowsComplete} x={GAP} side={1} hovered={hovered} onHover={setHovered} />
           <BaseCallout x={-GAP} row={rowsFull[0]} />
@@ -212,7 +212,7 @@ export default function SamplePyramid3D({ full, complete, fullNote, completeNote
             <b style={{ color: "var(--text-primary)" }}>{hovered}</b>
             <span className="num"> 전체 표본 {fmtPct(info.full.pct)} {fmtPeople(info.full.count)}</span>
             <span style={{ opacity: 0.5 }}> · </span>
-            <span className="num">빠짐없이 모은 표본 {fmtPct(info.complete.pct)} {fmtPeople(info.complete.count)}</span>
+            <span className="num">쏠림 없는 표본 {fmtPct(info.complete.pct)} {fmtPeople(info.complete.count)}</span>
           </>
         ) : (
           <span className="t-small">처음 몇 초만 천천히 돌고 멈춥니다. 층에 마우스를 올리면 인원이 나옵니다.</span>

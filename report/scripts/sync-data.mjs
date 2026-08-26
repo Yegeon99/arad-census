@@ -23,6 +23,9 @@ const KEY_MAP = {
   method_version: "methodVersion",
   min_cell: "minCell",
   distributions_uncapped_only: "completeSearch",
+  distributions_final_stage: "finalStage",
+  uncapped_job: "completeJob",
+  uncapped_sample_size: "completeSampleSize",
   fame_bins: "fameBins",
   job_group: "jobGroup",
   job_x_fame: "jobByFame",
@@ -57,15 +60,9 @@ const VALUE_MAP = {
 };
 
 // 따로 세지 않고 한 줄로 합친 직업 항목. 안에 든 숫자를 더해 종수로 적는다.
-const ETC_LABEL = "따로 세지 않은 직업";
-function etcLabel(raw) {
-  // "기타(외전 2종·표본<10 직업 14개 합산)" 처럼 종수를 두 군데 나눠 적어 둔 라벨.
-  // 마스킹 기준값 10은 종수가 아니므로 세지 않는다.
-  const side = Number(raw.match(/외전\s*(\d+)\s*종/)?.[1] ?? 0);
-  const small = Number(raw.match(/직업\s*(\d+)\s*개/)?.[1] ?? 0);
-  const kinds = side + small;
-  if (!kinds) throw new Error(`sync-data: 합산 항목의 종수를 읽지 못했습니다 ${raw}`);
-  return `${ETC_LABEL} ${kinds}종`;
+const ETC_LABEL = "따로 세지 않은 캐릭터";
+function etcLabel() {
+  return ETC_LABEL;
 }
 
 function convert(node) {
@@ -79,13 +76,13 @@ function convert(node) {
     return out;
   }
   if (typeof node === "string") {
-    if (node.startsWith("기타(")) return etcLabel(node);
+    if (node.startsWith("기타(")) return etcLabel();
     return VALUE_MAP[node] ?? node;
   }
   return node;
 }
 
-const FORBIDDEN = ["외전", "완전 검색", "한도 검색", "편향 보정값", "명성값",
+const FORBIDDEN = ["외전", "빠짐없이 모은", "완전 검색", "한도 검색", "편향 보정값", "명성값",
   "\u2014", "\u2013", "\u3161", "\u00a7", "n=", "capped", "uncapped",
   "reweighted", "job_x_fame", "small_sample", "비상한", "레기온 미만", "가중 재추정"];
 

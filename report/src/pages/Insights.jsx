@@ -57,7 +57,7 @@ function Card({ item, open, onToggle, index }) {
 
 export default function Insights() {
   const [filter, setFilter] = useState("all");
-  const [openIds, setOpenIds] = useState([insights[0]?.id]);
+  const [openIds, setOpenIds] = useState([]);
   const shown = filter === "all" ? insights : insights.filter((i) => i.confidence === filter);
   const confirmedCount = insights.filter((i) => i.confidence === "데이터에서 확인됨").length;
   const toggle = (id) =>

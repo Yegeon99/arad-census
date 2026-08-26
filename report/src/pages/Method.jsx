@@ -54,9 +54,9 @@ export default function Method() {
       measured: `표본 ${fmtPeople(meta.sampleSize)}`,
     },
     {
-      title: "빠짐없이 모은 표본 분리",
+      title: "쏠림 없는 표본 분리",
       body: "한도에 걸리지 않은 검색에서 한 번이라도 나온 캐릭터를 따로 모아 별도 분포를 냈습니다. 검색 한도가 만드는 기울기를 재는 잣대입니다.",
-      measured: `빠짐없이 모은 표본 ${fmtPeople(meta.completeSampleSize)}`,
+      measured: `쏠림 없는 표본 ${fmtPeople(meta.completeSampleSize)}`,
     },
     {
       title: "활성도 조사",
@@ -112,6 +112,19 @@ export default function Method() {
                   <p className="m-0">생성 뒤에는 모든 숫자를 집계 원본과 하나씩 맞추어 보았습니다.</p>
                 </div>
               </Section>
+              <Section title="직업 순위를 성장 완료 캐릭터로 좁힌 이유">
+                <div className="prose t-body text-[0.94rem]">
+                  <p className="m-0">
+                    직업 순위와 직업별 성장 구성은 마지막 전직을 마친 캐릭터만 세었습니다.
+                    막 만들어 아직 전직 중인 캐릭터가 섞이면 지금 실제로 플레이되는 직업이 가려지기 때문입니다.
+                  </p>
+                  <p className="m-0">
+                    이 기준으로 좁히면 검색 방식에 따른 직업 구성 차이도 거의 사라집니다.
+                    앞서 커 보이던 차이의 상당 부분이 성장 단계가 섞여 있던 탓일 수 있습니다.
+                  </p>
+                  <p className="m-0">모든 캐릭터를 포함한 수치는 직업 화면의 세부 데이터에 함께 두었습니다.</p>
+                </div>
+              </Section>
             </Stagger>
           )}
 
@@ -121,7 +134,7 @@ export default function Method() {
                 <Bullets
                   items={[
                     ["검색 한도가 성장이 앞선 쪽으로 기울입니다",
-                      `한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않습니다. 레기온 입장 전 구간 비중이 전체 표본 ${fmtPct(fameCompare[0].full)}인 반면 빠짐없이 모은 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다. 이 조사에서 가장 큰 편향입니다.`],
+                      `한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않습니다. 레기온 입장 전 구간 비중이 전체 표본 ${fmtPct(fameCompare[0].full)}인 반면 쏠림 없는 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다. 이 조사에서 가장 큰 편향입니다.`],
                     ["명성 점수가 없는 캐릭터를 뺀 것도 위로 기울입니다",
                       `분포에서 뺀 ${fmtPeople(meta.fameMissing)} 가운데 ${fmtPct(missingLowLevel.pct)}가 레벨 100 미만입니다. 아래쪽이 더 많이 빠졌습니다.`],
                     ["한글 이름만 표본에 들어옵니다",
@@ -174,7 +187,7 @@ export default function Method() {
                 <table className="plain" style={{ maxWidth: 720 }}>
                   <tbody>
                     {[
-                      ["표본 크기", `${fmtPeople(meta.sampleSize)}, 빠짐없이 모은 표본 ${fmtPeople(meta.completeSampleSize)}, 명성 점수 없음 ${fmtPeople(meta.fameMissing)}`],
+                      ["표본 크기", `${fmtPeople(meta.sampleSize)}, 쏠림 없는 표본 ${fmtPeople(meta.completeSampleSize)}, 명성 점수 없음 ${fmtPeople(meta.fameMissing)}`],
                       ["활성도 조사", `${fmtPeople(activity.subsampleSize)}, 구간 비례로 뽑았고 가장 작은 구간이 ${fmtPeople(11)}`],
                       ["주고받은 요청", `약 ${fmtInt(MEASURED.apiCalls)}회, 사전 검증 43회와 직업 목록 1회, 검색 ${fmtInt(seedStats.calls + 1)}회, 활성도 조사 ${fmtInt(activity.subsampleSize)}회, 실패 0회`],
                       ["모델 비용", `${MEASURED.llmCostUsd.toFixed(4)}달러, 배치 ${MEASURED.llmBatches}회 누적`],

@@ -35,7 +35,7 @@ FACTS = ROOT / "report" / "content" / "insight_facts.json"
 DIST = ROOT / "report" / "dist"
 RENDERED = ROOT / "docs" / "rendered_text.txt"
 
-FORBIDDEN = ["완전 검색", "한도 검색", "편향 보정값", "명성값",
+FORBIDDEN = ["완전 검색", "한도 검색", "편향 보정값", "명성값", "빠짐없이 모은",
              "답하는 질문은", "발견 경로",
              "—", "–", "ㅡ", "§", "n=", "capped", "uncapped",
              "reweighted", "job_x_fame", "small_sample", "비상한", "레기온 미만",
@@ -101,6 +101,16 @@ def check_census(c):
     etc = [j for j in d["job"] if j["jobName"].startswith("기타")]
     ok(len(etc) == 1 and etc[0]["count"] == 416, "합산 항목이 416명이 아닙니다")
 
+    # 마지막 전직을 마친 캐릭터만의 집계
+    f = c["distributions_final_stage"]
+    ok(f["sample_size"] == 29527, "성장 완료 캐릭터가 29,527명이 아닙니다")
+    ok(sum(j["count"] for j in f["job"]) == f["sample_size"], "성장 완료 직업 인원 합이 다릅니다")
+    ok(sum(b["count"] for b in f["fame_bins"]) == f["sample_size"] - f["fame_missing"],
+       "성장 완료 명성 구간 인원 합이 다릅니다")
+    ok(not any(x["jobName"] == "자각1" for x in f["job_x_fame"]),
+       "성장 완료 교차표에 합산 대상 이름이 남아 있습니다")
+    ok(f["uncapped_sample_size"] > 0, "성장 완료 기준 쏠림 없는 표본이 비어 있습니다")
+
     ok(sum(j["count"] for j in d["job"]) == m["sample_size"], "직업 인원 합이 표본 크기와 다릅니다")
     ok(sum(j["count"] for j in u["job"]) == m["uncapped_sample_size"],
        "완전 검색 직업 인원 합이 완전 검색 표본과 다릅니다")
@@ -130,6 +140,11 @@ def check_bundle(c):
     ok(len(b["distributions"]["jobByFame"]) == len(c["distributions"]["job_x_fame"]),
        "번들의 교차표 칸 수가 다릅니다")
     ok("insights" not in b, "번들에 옛 인사이트가 남아 있습니다")
+    ok(b["finalStage"]["sampleSize"] == c["distributions_final_stage"]["sample_size"],
+       "번들의 성장 완료 표본이 다릅니다")
+    ok([x["count"] for x in b["finalStage"]["job"]]
+       == [x["count"] for x in c["distributions_final_stage"]["job"]],
+       "번들의 성장 완료 직업 인원이 다릅니다")
 
 
 # ── 3. 화면 숫자 대조 ──
@@ -153,12 +168,15 @@ def check_numbers(c, text):
     expect["명성값 결측"] = people(meta["fame_missing"])
     expect["합산 항목 인원"] = people([j for j in d["job"] if j["jobName"].startswith("기타")][0]["count"])
 
+    fin = c["distributions_final_stage"]
+    fjob = {j["jobName"]: j for j in fin["job"]}
     top5 = ["크루세이더", "다크템플러", "넨마스터", "브레이커", "스위프트 마스터"]
-    top5_n = sum(job[j]["count"] for j in top5)
-    expect["최다 직업 비중"] = pct(job["크루세이더"]["pct"])
-    expect["최다 직업 인원"] = people(job["크루세이더"]["count"])
+    top5_n = sum(fjob[j]["count"] for j in top5)
+    expect["성장 완료 캐릭터"] = people(fin["sample_size"])
+    expect["최다 직업 비중"] = pct(fjob["크루세이더"]["pct"])
+    expect["최다 직업 인원"] = people(fjob["크루세이더"]["count"])
     expect["상위 다섯 인원"] = people(top5_n)
-    expect["상위 다섯 비중"] = pct(top5_n / meta["sample_size"] * 100)
+    expect["상위 다섯 비중"] = pct(top5_n / fin["sample_size"] * 100)
     expect["진 각성 비중"] = pct(next(s["pct"] for s in d["stage"] if s["stage"] == "眞"))
 
     gap = ufame["레기온 미만"]["pct"] - fame["레기온 미만"]["pct"]
@@ -188,10 +206,11 @@ def check_numbers(c, text):
     expect["가장 낮은 구간 인원"] = people(lowest["n"])
 
     cells = {}
-    for x in d["job_x_fame"]:
+    for x in fin["job_x_fame"]:
         cells.setdefault(x["jobName"], {})[x["bin"]] = None if x.get("masked") else x["count"]
-    total_fame = sum(b["count"] for b in d["fame_bins"])
-    overall_raid = sum(fame[b]["count"] for b in RAID_BINS) / total_fame
+    ffame = {b["range"]: b for b in fin["fame_bins"]}
+    total_fame = sum(b["count"] for b in fin["fame_bins"])
+    overall_raid = sum(ffame[b]["count"] for b in RAID_BINS) / total_fame
     rows = []
     for name, cs in cells.items():
         total = sum(v for v in cs.values() if v)
@@ -322,11 +341,11 @@ def check_stability():
         return None
     data = json.loads(STABILITY.read_text(encoding="utf-8"))
     rows = data["results"]
-    ok(len(rows) == 14, f"표시 안정성 검사 대상이 14개가 아닙니다 ({len(rows)}개)")
+    ok(len(rows) == 18, f"표시 안정성 검사 대상이 18개가 아닙니다 ({len(rows)}개)")
     for r in rows:
         ok(r["ok"], f"표시 안정성 실패 {r['view']} {r['page']}: 글자 {r['textLength']}, "
                     f"안 보이는 요소 {r['fadedCount']}, 빈 캔버스 {r['emptyCanvas']}, "
-                    f"도는 애니메이션 {r['runningAnimations']}")
+                    f"도는 애니메이션 {r['runningAnimations']}, 글자 겹침 {r['overlapCount']}")
     return data
 
 
@@ -355,6 +374,7 @@ def main():
     if stability:
         good = sum(1 for r in stability["results"] if r["ok"])
         print(f"  주소로 곧장 진입 후 {stability['waitMs']}밀리초 시점: {good}/{len(stability['results'])} 통과")
+        print(f"  차트 글자 겹침: {sum(r['overlapCount'] for r in stability['results'])}건")
     print("[금지 표현 스캔]")
     for name, hits in layers.items():
         print(f"  {name}: {'0건' if not hits else hits}  ({counts[name]})")

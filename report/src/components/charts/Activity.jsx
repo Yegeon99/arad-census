@@ -22,7 +22,7 @@ export function ActivityMorph({ before, after, subsample }) {
           );
         })}
         <p className="t-small m-0">
-          보정 후는 빠짐없이 모은 표본의 명성 분포를 기준으로 다시 계산한 값입니다.
+          보정 후는 쏠림 없는 표본의 명성 분포를 기준으로 다시 계산한 값입니다.
         </p>
       </div>
 
