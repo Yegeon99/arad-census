@@ -47,7 +47,7 @@ export default function JobTerrain3D({ rows, cellCount, cellShare, selected, set
   return (
     <div>
       <div style={{ height: 476, maxWidth: 1160, margin: "0 auto", background: "var(--bg-base)" }}>
-        <Canvas camera={{ position: [0, 5.3, 6.2], fov: 42 }} dpr={[1, 1.8]} gl={{ antialias: true }}>
+        <Canvas frameloop="demand" camera={{ position: [0, 5.3, 6.2], fov: 42 }} dpr={[1, 1.8]} gl={{ antialias: true, preserveDrawingBuffer: true }}>
           <color attach="background" args={["#FAFAF8"]} />
           <ambientLight intensity={0.78} />
           <directionalLight position={[5, 9, 7]} intensity={1.05} />
@@ -61,7 +61,7 @@ export default function JobTerrain3D({ rows, cellCount, cellShare, selected, set
             maxPolarAngle={1.12}
             minAzimuthAngle={-0.42}
             maxAzimuthAngle={0.42}
-            enableDamping
+            enableDamping={false}
           />
           <group position={[1.15, -0.6, 0]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>

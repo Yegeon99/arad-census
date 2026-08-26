@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import { BIN_COLOR, GOLD } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
@@ -9,11 +9,28 @@ import { BinLegend } from "../charts/Legend.jsx";
 const BASE_R = 1.78;
 const TOTAL_H = 3.1;
 const GAP = 2.0; // 두 피라미드 사이 간격
+const INTRO_MS = 6000; // 이만큼만 돌리고 멈춘다 (계속 돌면 화면이 쉬지 않는다)
 
-function Stack({ rows, x, onHover, hovered, paused }) {
+/** 도는 동안에만 프레임을 요청한다. 멈추면 그리기도 멈춘다. */
+function IntroFrames({ active }) {
+  const invalidate = useThree((state) => state.invalidate);
+  useEffect(() => {
+    if (!active) return undefined;
+    let raf = 0;
+    const tick = () => {
+      invalidate();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [active, invalidate]);
+  return null;
+}
+
+function Stack({ rows, x, onHover, hovered, spinning }) {
   const spin = useRef(null);
   useFrame((_, delta) => {
-    if (spin.current && !paused) spin.current.rotation.y += delta * 0.11;
+    if (spin.current && spinning) spin.current.rotation.y += Math.min(delta, 0.05) * 0.11;
   });
   return (
     <group ref={spin} position={[x, -TOTAL_H / 2, 0]} rotation={[0, Math.PI / 4, 0]}>
@@ -60,6 +77,12 @@ function BaseLabel({ x, row }) {
 /** 표본 피라미드 입체 화면. 층 높이가 그 구간의 비중이다. */
 export default function SamplePyramid3D({ full, complete, fullNote, completeNote }) {
   const [hovered, setHovered] = useState(null);
+  const [intro, setIntro] = useState(true);
+  useEffect(() => {
+    const id = setTimeout(() => setIntro(false), INTRO_MS);
+    return () => clearTimeout(id);
+  }, []);
+  const spinning = intro && !hovered;
   const rowsFull = bands(full);
   const rowsComplete = bands(complete);
   const info = hovered
@@ -69,13 +92,14 @@ export default function SamplePyramid3D({ full, complete, fullNote, completeNote
   return (
     <div>
       <div style={{ height: 420, maxWidth: 880, margin: "0 auto", background: "var(--bg-base)" }}>
-        <Canvas camera={{ position: [0, 0.9, 6.1], fov: 38 }} dpr={[1, 1.8]} gl={{ antialias: true }}>
+        <Canvas frameloop="demand" camera={{ position: [0, 0.9, 6.1], fov: 38 }} dpr={[1, 1.8]} gl={{ antialias: true, preserveDrawingBuffer: true }}>
           <color attach="background" args={["#FAFAF8"]} />
           <ambientLight intensity={0.76} />
           <directionalLight position={[4, 7, 5]} intensity={1.1} />
           <directionalLight position={[-5, 3, -4]} intensity={0.32} />
-          <Stack rows={rowsFull} x={-GAP} onHover={setHovered} hovered={hovered} paused={Boolean(hovered)} />
-          <Stack rows={rowsComplete} x={GAP} onHover={setHovered} hovered={hovered} paused={Boolean(hovered)} />
+          <IntroFrames active={spinning} />
+          <Stack rows={rowsFull} x={-GAP} onHover={setHovered} hovered={hovered} spinning={spinning} />
+          <Stack rows={rowsComplete} x={GAP} onHover={setHovered} hovered={hovered} spinning={spinning} />
           <BaseLabel x={-GAP} row={rowsFull[0]} />
           <BaseLabel x={GAP} row={rowsComplete[0]} />
         </Canvas>
@@ -94,7 +118,7 @@ export default function SamplePyramid3D({ full, complete, fullNote, completeNote
             <span className="num">완전 검색 표본 {fmtPct(info.complete.pct)} {fmtPeople(info.complete.count)}</span>
           </>
         ) : (
-          <span className="t-small">맨 아래층 비중만 늘 보입니다. 다른 층은 마우스를 올리면 회전이 멈추고 수치가 나옵니다.</span>
+          <span className="t-small">처음 몇 초만 천천히 돌고 멈춥니다. 맨 아래층 비중은 늘 보이고, 다른 층은 마우스를 올리면 수치가 나옵니다.</span>
         )}
       </p>
     </div>
