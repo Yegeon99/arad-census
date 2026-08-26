@@ -54,9 +54,19 @@ const VALUE_MAP = {
   "월간 활성": "최근 30일 접속",
   "저활성": "최근 90일 접속",
   "휴면": "90일 넘게 기록 없음",
-  "자각1": "다크나이트, 크리에이터 합산",
-  "기타(표본<10 직업 14개)": "표본이 적어 합산한 직업 14종",
 };
+
+// 따로 세지 않고 한 줄로 합친 직업 항목. 안에 든 숫자를 더해 종수로 적는다.
+const ETC_LABEL = "따로 세지 않은 직업";
+function etcLabel(raw) {
+  // "기타(외전 2종·표본<10 직업 14개 합산)" 처럼 종수를 두 군데 나눠 적어 둔 라벨.
+  // 마스킹 기준값 10은 종수가 아니므로 세지 않는다.
+  const side = Number(raw.match(/외전\s*(\d+)\s*종/)?.[1] ?? 0);
+  const small = Number(raw.match(/직업\s*(\d+)\s*개/)?.[1] ?? 0);
+  const kinds = side + small;
+  if (!kinds) throw new Error(`sync-data: 합산 항목의 종수를 읽지 못했습니다 ${raw}`);
+  return `${ETC_LABEL} ${kinds}종`;
+}
 
 function convert(node) {
   if (Array.isArray(node)) return node.map(convert);
@@ -68,7 +78,10 @@ function convert(node) {
     }
     return out;
   }
-  if (typeof node === "string") return VALUE_MAP[node] ?? node;
+  if (typeof node === "string") {
+    if (node.startsWith("기타(")) return etcLabel(node);
+    return VALUE_MAP[node] ?? node;
+  }
   return node;
 }
 

@@ -28,7 +28,7 @@ export const RAID_BINS = ["레이드 입장 구간", "레이드 권장 구간", 
 export const fameSample = meta.sampleSize - meta.fameMissing;
 export const completeFameSample = meta.completeSampleSize - meta.completeFameMissing;
 
-const ETC_PREFIX = "표본이 적어";
+const ETC_PREFIX = "따로 세지 않은 직업";
 export const namedJobs = dist.job.filter((j) => !j.jobName.startsWith(ETC_PREFIX));
 export const etcJobs = dist.job.find((j) => j.jobName.startsWith(ETC_PREFIX));
 export const topJobs = namedJobs.slice(0, 15);

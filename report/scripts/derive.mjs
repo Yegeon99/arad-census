@@ -66,20 +66,33 @@ const tree = new Map();
 for (const c of all) {
   if (!tree.has(c.group)) tree.set(c.group, new Map());
   const leaves = tree.get(c.group);
-  // 다크나이트·크리에이터는 각성 직업명이 하나로 공유되어 집계상 한 이름으로 합쳐진다.
-  // 본문에서는 소속 직업군을 붙여 읽히게 표기한다 (조사 방법 화면에 설명).
-  const label = c.job === "자각1" ? `${c.group} 각성 이후` : c.job;
-  leaves.set(label, (leaves.get(label) ?? 0) + 1);
+  leaves.set(c.job, (leaves.get(c.job) ?? 0) + 1);
 }
+// 집계 파일과 같은 규칙으로 묶는다. 표본 10명 미만과, 각성 이후 이름이
+// 하나로 겹쳐 직업을 가릴 수 없는 캐릭터는 한 줄로 합친다 (조사 방법 화면에 설명).
+const MIN_LEAF = 10;
+const MERGED_NAME = "자각1";
+const ETC = "따로 세지 않은 직업";
+
 const total = all.length;
 const jobTree = {
   total,
   groups: [...tree.entries()]
-    .map(([group, leaves]) => ({
-      group,
-      count: [...leaves.values()].reduce((a, b) => a + b, 0),
-      children: [...leaves.entries()].map(([job, count]) => ({ job, count })).sort((a, b) => b.count - a.count),
-    }))
+    .map(([group, leaves]) => {
+      const kept = [];
+      let etc = 0;
+      for (const [job, count] of leaves) {
+        if (job === MERGED_NAME || count < MIN_LEAF) etc += count;
+        else kept.push({ job, count });
+      }
+      kept.sort((a, b) => b.count - a.count);
+      if (etc) kept.push({ job: ETC, count: etc });
+      return {
+        group,
+        count: [...leaves.values()].reduce((a, b) => a + b, 0),
+        children: kept,
+      };
+    })
     .sort((a, b) => b.count - a.count),
 };
 

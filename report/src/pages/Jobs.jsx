@@ -46,7 +46,7 @@ export default function Jobs() {
       }
       visualCaption="왼쪽 고리와 오른쪽 목록은 함께 움직입니다. 한쪽에 마우스를 올리면 다른 쪽에서도 같은 직업이 밝아집니다."
       explain={[
-        `직업 이름은 전직 단계를 하나로 합쳐 최종 전직명으로 맞추었습니다. 표본 ${fmtPeople(meta.sampleSize)} 안에서 이름을 공개할 수 있는 직업은 ${namedJobs.length}종이고, 표본이 10명이 되지 않는 직업 ${etcKinds}종은 ${fmtPeople(etcJobs.count)}으로 한 줄에 합쳤습니다.`,
+        `직업 이름은 전직 단계를 하나로 합쳐 최종 전직명으로 맞추었습니다. 표본 ${fmtPeople(meta.sampleSize)} 안에서 이름을 따로 셀 수 있는 직업은 ${namedJobs.length}종입니다. 표본이 10명이 되지 않거나 각성 이후 이름이 다른 직업과 겹쳐 가릴 수 없는 ${etcKinds}종은 ${fmtPeople(etcJobs.count)}으로 한 줄에 합쳤습니다.`,
         `가장 많은 직업은 ${asParticle(topJobs[0].jobName)} ${fmtPct(topJobs[0].pct)}입니다. 상위 5개 직업을 합치면 ${fmtPeople(top5Sum)}으로 ${fmtPct((top5Sum / meta.sampleSize) * 100)}이며, 넷 중 하나에 가깝습니다.`,
         `각성 단계로 보면 진 각성이 ${fmtPct(finalStage.pct)}로 표본 대부분을 차지합니다. 검색에 잘 잡히는 캐릭터가 이미 성장을 마친 쪽에 몰려 있을 가능성이 있습니다.`,
         "이 순위는 표본 안에서의 순위입니다. 검색 한도 편향이 남아 있으므로 게임 전체 인구의 직업 순위라고 읽을 수 없습니다.",
