@@ -2,7 +2,7 @@ import { useState } from "react";
 import { interpolateNumber } from "d3-interpolate";
 import { BIN_COLOR, BIN_ORDER } from "../../lib/palette.js";
 import { fmtPct, fmtPeople, fmtPp } from "../../lib/format.js";
-import { useInView, useMediaQuery, useReducedMotion } from "../../lib/hooks.js";
+import { useInView, useMediaQuery, useReducedMotion, ENTER_MS } from "../../lib/hooks.js";
 
 const WIDE = { w: 960, gutter: 168, row: 50, pad: 96, bar: 34, font: 13 };
 const NARROW = { w: 380, gutter: 0, row: 70, pad: 10, bar: 20, font: 12 };
@@ -22,7 +22,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
 
   const rows = [...bins].reverse(); // 위가 높은 구간
   const height = rows.length * S.row + (narrow ? 22 : 54);
-  const ease = reduced ? "none" : "all 0.5s cubic-bezier(0.3,0.7,0.3,1)";
+  const ease = reduced ? "none" : `all ${ENTER_MS}ms cubic-bezier(0.3,0.7,0.3,1)`;
 
   const solidAt = (b) => interpolateNumber(b.full, b.complete)(t);
   const ghostAt = (b) => interpolateNumber(b.complete, b.full)(t);
@@ -31,7 +31,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
   return (
     <div ref={ref}>
       <svg viewBox={`0 0 ${S.w} ${height}`} width="100%" style={{ display: "block" }} role="img"
-        aria-label="명성 구간 피라미드, 전체 표본과 완전 검색 표본 비교">
+        aria-label="명성 구간 피라미드, 전체 표본과 빠짐없이 모은 표본 비교">
         {rows.map((b, i) => {
           const top = (narrow ? 4 : 16) + i * S.row;
           const barY = narrow ? top + 20 : top;
@@ -85,7 +85,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
               )}
 
               {isGap && (
-                <g opacity={seen ? 1 : 0} style={{ transition: "opacity 0.9s ease 0.5s" }}>
+                <g opacity={seen ? 1 : 0} style={{ transition: "opacity 0.3s ease 0.2s" }}>
                   <line x1={cx - half} x2={cx - ghostHalf} y1={barY + S.bar + 7} y2={barY + S.bar + 7}
                     stroke="var(--gold)" strokeWidth="2" style={{ transition: ease }} />
                   <text x={Math.max(4, cx - Math.max(half, ghostHalf))} y={barY + S.bar + 22}
@@ -104,7 +104,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
       <div className="mt-4 max-w-[680px]">
         <label htmlFor="pyramid-slider" className="t-small m-0 flex justify-between">
           <span style={{ fontWeight: t < 0.5 ? 700 : 400, color: t < 0.5 ? "var(--text-primary)" : undefined }}>전체 표본</span>
-          <span style={{ fontWeight: t >= 0.5 ? 700 : 400, color: t >= 0.5 ? "var(--text-primary)" : undefined }}>완전 검색 표본</span>
+          <span style={{ fontWeight: t >= 0.5 ? 700 : 400, color: t >= 0.5 ? "var(--text-primary)" : undefined }}>빠짐없이 모은 표본</span>
         </label>
         <input
           id="pyramid-slider"
@@ -114,11 +114,11 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
           step="0.01"
           value={t}
           onChange={(e) => setT(Number(e.target.value))}
-          aria-label="전체 표본과 완전 검색 표본 사이 전환"
+          aria-label="전체 표본과 빠짐없이 모은 표본 사이 전환"
         />
         <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
           <button type="button" className="disclose" onClick={() => setT(0)}>전체 표본으로</button>
-          <button type="button" className="disclose" onClick={() => setT(1)}>완전 검색 표본으로</button>
+          <button type="button" className="disclose" onClick={() => setT(1)}>빠짐없이 모은 표본으로</button>
           <span className="t-small">채운 막대가 지금 고른 표본, 점선 윤곽이 반대쪽 표본입니다.</span>
         </div>
       </div>

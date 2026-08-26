@@ -26,9 +26,12 @@ function Card({ item, open, onToggle, index }) {
     <Stagger index={index}>
       <div className="flex h-full min-w-0 flex-col py-6" style={{ borderTop: "1px solid var(--hairline-strong)" }}>
         <p className="t-eyebrow m-0" style={{ color: confirmed ? "var(--accent)" : "var(--gold-text)" }}>
-          {item.confidence}
+          <span className="term" title={confirmed ? "집계 수치 그대로" : "해석이라 더 확인이 필요함"}>
+            {item.confidence}
+          </span>
         </p>
         <h3 className="t-title m-0 mt-2 text-[1.12rem]">{item.title}</h3>
+        <p className="num m-0 mt-1 text-[1.05rem] font-bold" style={{ color: "var(--accent)" }}>{item.keyNumber}</p>
 
         <Block label="발견">{item.finding}</Block>
         <Block label="해석">{item.interpretation}</Block>
@@ -63,7 +66,7 @@ export default function Insights() {
   return (
     <PageShell
       id="insights"
-      question="집계에서 무엇을 읽어냈고, 무엇을 아직 못 믿습니까?"
+      question="숫자에서 무엇을 읽어냈고, 무엇은 아직 못 믿을까"
       statValue={String(insights.length)}
       statUnit="개"
       statLabel="생성한 인사이트 수"
@@ -97,21 +100,21 @@ export default function Insights() {
       }
       explain={[
         {
-          label: "어떻게 만들었는가",
+          label: "만든 방법",
           body: [
             "집계 결과 전체와 편향 노트를 한 번에 넣어 언어 모델이 생성했습니다. 모델 호출은 배치로만 했습니다.",
             "문장을 다시 쓸 때에는 항목마다 쓸 수 있는 수치를 미리 못 박아 두었습니다. 그 밖의 숫자가 들어오면 저장이 멈춥니다.",
           ],
         },
         {
-          label: "어떻게 읽어야 하는가",
+          label: "읽는 법",
           body: [
             "데이터에서 확인됨은 집계 수치 자체를 그대로 옮긴 것입니다. 추가 검증 필요는 그 수치에 대한 해석입니다.",
             "해석은 단정하지 않습니다. 대신 무엇을 더 보면 확인할 수 있는지를 카드마다 적어 두었습니다.",
           ],
         },
         {
-          label: "얼마나 들었는가",
+          label: "비용",
           body: [
             `지금까지 쓴 모델 비용은 모두 합쳐 ${MEASURED.llmCostUsd.toFixed(4)}달러입니다. 호출 기록은 조사 방법과 한계 화면의 실측치 표에 있습니다.`,
           ],

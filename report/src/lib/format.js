@@ -12,7 +12,7 @@ export const fmtPct = (v) => `${pct1(v)}%`;
 export const fmtPp = (v) => `${pct1(v)}%포인트`;
 export const fmtX = (v) => `${Number(v).toFixed(2)}배`;
 
-/** 명성값 축 라벨: 74,000 대신 7.4만으로 짧게 */
+/** 명성 점수 축 라벨: 74,000 대신 7.4만으로 짧게 */
 export const fmtFame = (v) => {
   if (v === 0) return "0";
   const man = v / 10000;

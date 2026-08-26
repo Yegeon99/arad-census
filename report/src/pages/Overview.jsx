@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
+import Chart from "../components/Chart.jsx";
 import ViewToggle from "../components/ViewToggle.jsx";
 import Pyramid2D from "../components/charts/Pyramid2D.jsx";
 import { LazySamplePyramid } from "../components/three/Lazy.jsx";
@@ -10,9 +11,73 @@ import {
   actOverall, actAdjusted, dormantLabel, topJobs,
 } from "../lib/data.js";
 
+const ICON = {
+  common: { width: 30, height: 30, viewBox: "0 0 30 30", fill: "none", stroke: "var(--accent)", strokeWidth: 1.6, strokeLinecap: "round", strokeLinejoin: "round" },
+};
+
+function FameIcon() {
+  return (
+    <svg {...ICON.common} aria-hidden="true">
+      <path d="M4 22h22" />
+      <path d="M7 22v-5M13 22v-9M19 22v-13" />
+      <circle cx="19" cy="6" r="2.2" />
+    </svg>
+  );
+}
+function StageIcon() {
+  return (
+    <svg {...ICON.common} aria-hidden="true">
+      <path d="M11 7h8M8 13h14M5 19h20M3 25h24" />
+    </svg>
+  );
+}
+function CutIcon() {
+  return (
+    <svg {...ICON.common} aria-hidden="true">
+      <path d="M5 7h20M5 12h20M5 17h20" />
+      <path d="M3 21.5h24" strokeDasharray="3 3" />
+      <path d="M9 26l12-4" opacity="0.55" />
+    </svg>
+  );
+}
+function AdjustIcon() {
+  return (
+    <svg {...ICON.common} aria-hidden="true">
+      <path d="M15 4v22" />
+      <path d="M6 11h18" />
+      <path d="M9 18l-3-3 3-3" />
+      <path d="M21 24l3-3-3-3" />
+      <path d="M24 21H6" />
+    </svg>
+  );
+}
+
+const BASICS = [
+  {
+    icon: <FameIcon />,
+    title: "명성",
+    body: "캐릭터가 얼마나 강한지 게임이 매기는 점수입니다. 장비가 좋을수록 높습니다.",
+  },
+  {
+    icon: <StageIcon />,
+    title: "성장 단계",
+    body: "명성 점수를 게임 콘텐츠 입장 조건에 맞춰 여섯 단계로 나눈 것입니다. 가장 낮은 단계가 레기온 입장 전, 가장 높은 단계가 하드 권장 구간입니다.",
+  },
+  {
+    icon: <CutIcon />,
+    title: "잘린 검색과 빠짐없이 모은 표본",
+    body: "검색은 한 번에 200명까지만 돌려줍니다. 200명에 걸려 일부만 받은 검색을 잘린 검색, 걸리지 않아 전부 받은 검색만 모은 것을 빠짐없이 모은 표본이라 부릅니다. 잘린 검색은 강한 캐릭터를 먼저 보여주는 쏠림이 있습니다.",
+  },
+  {
+    icon: <AdjustIcon />,
+    title: "보정값",
+    body: "잘린 검색의 쏠림을 빠짐없이 모은 표본의 비율로 되돌려 다시 계산한 값입니다.",
+  },
+];
+
 function BigNumber({ value, suffix, label, note, index }) {
   const reduced = useReducedMotion();
-  const shown = useCountUp(value, { enabled: !reduced, duration: 1200 });
+  const shown = useCountUp(value, { enabled: !reduced, duration: 900 });
   return (
     <Stagger index={index}>
       <div>
@@ -47,64 +112,69 @@ export default function Overview() {
   const [mode, setMode] = useState("solid");
   const effective = can3D && idle && mode === "solid" ? "solid" : "flat";
 
-  const fullBins = dist.fameBins;
-  const completeBins = complete.fameBins;
-  const fullNote = `명성값이 있는 ${fmtPeople(fameSample)} 기준`;
-  const completeNote = `명성값이 있는 ${fmtPeople(completeFameSample)} 기준`;
-
-  const pyramidProps = { full: fullBins, complete: completeBins, fullNote, completeNote };
+  const fullNote = `${fmtPeople(fameSample)} 기준`;
+  const completeNote = `${fmtPeople(completeFameSample)} 기준`;
+  const pyramidProps = { full: dist.fameBins, complete: complete.fameBins, fullNote, completeNote };
   const flatPyramid = <Pyramid2D {...pyramidProps} />;
 
   return (
     <PageShell
       id="overview"
-      question="이 조사는 무엇을 어떻게 보았습니까?"
+      question="던파 캐릭터 3만 명은 지금 어디까지 성장해 있을까"
       statValue={fmtInt(meta.sampleSize)}
       statUnit="명"
       statLabel="조사한 캐릭터 수"
       statNote={`서버 ${meta.servers.length}곳, ${MEASURED.surveyedAt} 수집`}
+      intro={
+        <section className="mb-12">
+          <h2 className="t-kicker m-0 mb-4">먼저 알아둘 것 네 가지</h2>
+          <ul className="m-0 grid list-none gap-x-10 gap-y-6 p-0 sm:grid-cols-2">
+            {BASICS.map((b) => (
+              <li key={b.title} className="flex gap-4">
+                <span className="mt-0.5 shrink-0">{b.icon}</span>
+                <span>
+                  <span className="block text-[0.98rem] font-bold" style={{ color: "var(--text-primary)" }}>{b.title}</span>
+                  <span className="t-body mt-1 block text-[0.9rem]">{b.body}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      }
       visual={
-        <div>
-          <ViewToggle mode={effective === "solid" ? "solid" : "flat"} setMode={setMode} available={can3D} />
+        <Chart
+          how="한 층이 성장 단계 하나입니다. 층이 두꺼울수록 그 단계에 있는 캐릭터가 많습니다. 두 피라미드는 밑변과 전체 높이가 같고, 자른 위치만 다릅니다."
+          so="빠짐없이 모은 표본은 열 명 중 여덟 명이 레이드 이전 단계입니다. 전체 표본에서는 열 명 중 네다섯 명입니다."
+        >
+          <ViewToggle mode={effective} setMode={setMode} available={can3D} />
           {effective === "solid"
             ? <LazySamplePyramid {...pyramidProps} fallback={flatPyramid} />
             : flatPyramid}
-        </div>
+        </Chart>
       }
-      visualCaption={`왼쪽은 전체 표본, 오른쪽은 완전 검색 표본입니다. 두 피라미드의 밑동을 견주어 보십시오. 레기온 입장 전 구간이 전체 표본에서는 ${fmtPct(fameCompare[0].full)}, 완전 검색 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다.`}
       explain={[
         {
-          label: "무엇을 보았는가",
+          label: "조사한 것",
           body: [
-            `던전앤파이터 캐릭터 표본을 서버 ${meta.servers.length}곳에서 뽑아 직업과 성장 단계, 접속 기록을 살펴본 조사입니다.`,
+            `던전앤파이터 캐릭터 표본을 서버 ${meta.servers.length}곳에서 뽑아 직업과 성장 단계, 접속 기록을 살펴봤습니다.`,
             "표본은 캐릭터 이름에 한국어 두 글자를 넣어 검색하는 방식으로 모았습니다.",
           ],
         },
         {
-          label: "왜 표본을 둘로 나눠 보는가",
+          label: "표본을 둘로 나눈 이유",
           body: [
-            "검색 결과는 한 번에 200명까지만 돌아옵니다. 200명 한도에 걸린 검색을 한도 검색, 한도에 걸리지 않아 해당 글자가 들어간 캐릭터를 빠짐없이 가져온 검색을 완전 검색이라고 부릅니다.",
-            `완전 검색으로만 모은 표본은 성장 단계가 훨씬 아래쪽에 몰려 있습니다. 위 피라미드에서 맨 아래층이 ${fmtPct(fameCompare[0].full)}에서 ${fmtPct(fameCompare[0].complete)}로 두꺼워지는 것이 그 차이입니다.`,
+            "잘린 검색은 강한 캐릭터 쪽으로 쏠립니다. 그 쏠림이 얼마나 큰지 재려고 빠짐없이 모은 표본을 따로 집계했습니다.",
           ],
         },
         {
-          label: "이 리포트가 하지 않는 것",
+          label: "주의할 점",
           body: [
-            "이 조사는 게임 전체 인구를 추정하지 않습니다. 표본을 어떻게 뽑았고 그 표본이 어디로 기울어 있는지를 끝까지 드러내는 방법론 시연입니다.",
+            "이 조사는 게임 전체 인구를 추정하지 않습니다. 표본을 어떻게 뽑았고 그 표본이 어디로 기울었는지를 끝까지 드러내는 방법론 시연입니다.",
             "기울어진 방향과 크기는 조사 방법과 한계 화면에 그대로 적어 두었습니다.",
           ],
         },
       ]}
     >
-      <Stagger index={5}>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <BigNumber index={0} value={fameSample} suffix="명" label="명성값이 있는 표본" note="성장 단계를 셀 수 있는 캐릭터" />
-          <BigNumber index={1} value={meta.servers.length} suffix="곳" label="조사한 서버" note="공개된 서버 전부" />
-          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="완전 검색 표본" note="한도에 걸리지 않은 검색에서 발견" />
-          <BigNumber index={3} value={MEASURED.apiCalls} suffix="회" label="주고받은 요청" note="실패 없이 마쳤습니다" />
-        </div>
-      </Stagger>
-
       <Stagger index={6}>
         <h2 className="t-title mt-14 mb-1 text-[1.3rem]">핵심 발견 세 가지</h2>
         <p className="t-small m-0 mb-2">각 항목을 누르면 해당 화면으로 갑니다.</p>
@@ -120,16 +190,24 @@ export default function Overview() {
             index={1}
             href="#growth"
             kicker="성장 단계"
-            title="발견 경로를 바꾸면 피라미드 밑동이 두 배 가까이 두꺼워집니다"
-            body={`레기온 입장 전 구간 비중이 전체 표본 ${fmtPct(fameCompare[0].full)}에서 완전 검색 표본 ${fmtPct(fameCompare[0].complete)}로 커집니다.`}
+            title="잘린 검색을 빼면 레이드 이전 단계가 두 배로 뜁니다"
+            body={`전체 표본에서는 ${fmtPct(fameCompare[0].full)}인데, 빠짐없이 모은 표본만 보면 ${fmtPct(fameCompare[0].complete)}입니다.`}
           />
           <FindingCard
             index={2}
             href="#activity"
             kicker="활성도"
-            title="편향을 보정하면 조용한 캐릭터가 훨씬 많아집니다"
-            body={`90일 넘게 기록이 없는 비중이 보정 전 ${fmtPct(actOverall[dormantLabel].pct)}에서 보정 후 ${fmtPct(actAdjusted[dormantLabel])}로 올라갑니다.`}
+            title="보정하면 조용한 캐릭터가 훨씬 많아집니다"
+            body={`90일 넘게 기록이 없는 비중이 ${fmtPct(actOverall[dormantLabel].pct)}에서 ${fmtPct(actAdjusted[dormantLabel])}로 올라갑니다.`}
           />
+        </div>
+      </Stagger>
+
+      <Stagger index={7}>
+        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+          <BigNumber index={0} value={fameSample} suffix="명" label="명성 점수가 있는 캐릭터" note="성장 단계를 셀 수 있는 캐릭터" />
+          <BigNumber index={1} value={meta.servers.length} suffix="곳" label="조사한 서버" note="공개된 서버 전부" />
+          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="빠짐없이 모은 표본" note="200명에 걸리지 않은 검색에서 발견" />
         </div>
       </Stagger>
     </PageShell>

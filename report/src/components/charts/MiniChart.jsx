@@ -62,7 +62,7 @@ export default function MiniChart({ focus }) {
             <Row label={b.label} value={b.full} max={max} color={i === 0 ? "var(--ink-6)" : "var(--ink-3)"}
               note={`전체 ${fmtPct(b.full)}`} strong={i === 0} />
             <Row label="" value={b.complete} max={max} color={i === 0 ? "var(--gold)" : "var(--ink-1)"}
-              note={`완전 검색 ${fmtPct(b.complete)}`} />
+              note={`빠짐없이 모은 검색 ${fmtPct(b.complete)}`} />
           </li>
         ))}
       </ul>
@@ -94,7 +94,7 @@ export default function MiniChart({ focus }) {
             <Row label={p} value={byName[p].pct} max={max} color="var(--ink-4)" strong
               note={`전체 ${fmtPct(byName[p].pct)}`} />
             <Row label="" value={inComplete[p]?.pct ?? 0} max={max} color="var(--gold)"
-              note={`완전 검색 ${fmtPct(inComplete[p]?.pct ?? 0)}`} />
+              note={`빠짐없이 모은 검색 ${fmtPct(inComplete[p]?.pct ?? 0)}`} />
           </li>
         ))}
       </ul>
@@ -131,9 +131,9 @@ export default function MiniChart({ focus }) {
       <ul className="m-0 list-none p-0">
         <Row label="한도에 걸린 검색" value={limitedRatio} max={100} color="var(--gold)"
           note={`${meta.searchCallsLimited}회 ${fmtPct(limitedRatio)}`} strong />
-        <Row label="한도 검색에서만" value={(d.limited.n / activity.subsampleSize) * 100} max={100}
+        <Row label="잘린 검색에서만" value={(d.limited.n / activity.subsampleSize) * 100} max={100}
           color="var(--ink-5)" note={`${fmtPeople(d.limited.n)}`} />
-        <Row label="완전 검색에서도" value={(d.complete.n / activity.subsampleSize) * 100} max={100}
+        <Row label="빠짐없이 모은 검색에서도" value={(d.complete.n / activity.subsampleSize) * 100} max={100}
           color="var(--ink-3)" note={`${fmtPeople(d.complete.n)}`} />
       </ul>
     );

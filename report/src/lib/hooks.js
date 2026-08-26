@@ -100,13 +100,23 @@ export function useCountUp(target, { duration = 1100, enabled = true } = {}) {
   return value;
 }
 
-/** 화면에 들어왔는지 (차트 그려지는 애니메이션 시작점) */
+/** 등장 애니메이션 길이. 순차 간격을 더해도 800밀리초를 넘지 않게 잡는다. */
+export const ENTER_MS = 320;
+export const STAGGER_MS = 10;
+export const SAFETY_MS = 800;      // 요소 등장의 마지노선
+export const VIEW_SAFETY_MS = 400; // 차트가 화면 밖이어도 이때는 그리기 시작한다
+
+/**
+ * 화면에 들어왔는지 (차트 그려지는 애니메이션 시작점).
+ * 관찰이 늦거나 아예 걸리지 않아도 800밀리초 뒤에는 무조건 보이게 한다.
+ */
 export function useInView(options) {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
+    const timer = setTimeout(() => setSeen(true), VIEW_SAFETY_MS);
     const el = ref.current;
-    if (!el) return undefined;
+    if (!el) return () => clearTimeout(timer);
     const obs = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
@@ -117,7 +127,10 @@ export function useInView(options) {
       { rootMargin: "0px 0px -12% 0px", ...options }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => {
+      clearTimeout(timer);
+      obs.disconnect();
+    };
   }, [options]);
   return [ref, seen];
 }

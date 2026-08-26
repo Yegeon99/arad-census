@@ -14,7 +14,10 @@ export const BIN_ORDER = [
   "레이드 권장 구간",
   "하드 권장 구간",
 ];
-export const BIN_COLOR = Object.fromEntries(BIN_ORDER.map((b, i) => [b, INK[i]]));
+const BIN_RAMP = ["#C4D3EC", "#A2B8E1", "#7E9BD4", "#5379BE", "#3159A4", "#1B3B78"];
+export const BIN_COLOR = Object.fromEntries(BIN_ORDER.map((b, i) => [b, BIN_RAMP[i]]));
+/** 그 색 위에 글자를 얹을 때 */
+export const onBinColor = (bin) => (BIN_ORDER.indexOf(bin) >= 3 ? "#FFFFFF" : "#1B2130");
 
 /** 활성도 4단계 색 */
 export const ACT_ORDER = [

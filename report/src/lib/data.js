@@ -33,7 +33,7 @@ export const namedJobs = dist.job.filter((j) => !j.jobName.startsWith(ETC_PREFIX
 export const etcJobs = dist.job.find((j) => j.jobName.startsWith(ETC_PREFIX));
 export const topJobs = namedJobs.slice(0, 15);
 
-/** 전체 표본과 완전 검색 표본의 6구간 비교 */
+/** 전체 표본과 빠짐없이 모은 표본의 6구간 비교 */
 const completeByRange = Object.fromEntries(complete.fameBins.map((b) => [b.range, b]));
 export const fameCompare = dist.fameBins.map((b) => ({
   label: b.range,
@@ -106,7 +106,7 @@ export const seedStats = (() => {
 })();
 export const limitedRatio = (meta.searchCallsLimited / meta.searchCalls) * 100;
 
-/** 명성값 결측 캐릭터 중 레벨 100 미만 비중 */
+/** 명성 점수 결측 캐릭터 중 레벨 100 미만 비중 */
 export const missingLowLevel = (() => {
   const rows = meta.fameMissingLevels;
   const low = rows.filter((r) => r.range === "1~49" || r.range === "50~99")

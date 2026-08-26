@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
+import Chart from "../components/Chart.jsx";
 import ViewToggle from "../components/ViewToggle.jsx";
 import Heatmap from "../components/charts/Heatmap.jsx";
 import IndexBars from "../components/charts/IndexBars.jsx";
@@ -37,13 +38,16 @@ export default function Gap() {
   return (
     <PageShell
       id="gap"
-      question="직업에 따라 성장 단계 구성이 얼마나 다릅니까?"
+      question="직업에 따라 레이드 진입률이 얼마나 다를까"
       statValue={(best.index / worst.index).toFixed(2)}
       statUnit="배"
       statLabel="레이드 진입 비중이 가장 높은 직업과 가장 낮은 직업의 배수"
-      statNote={`${withParticle(best.job)} ${worst.job} 사이`}
+      statNote={`${best.job}는 3명 중 1명이 레이드 구간, ${worst.job}는 8명 중 1명입니다.`}
       visual={
-        <div>
+        <Chart
+          how="가로가 직업, 세로가 성장 단계입니다. 앞줄이 낮은 단계, 뒷줄이 높은 단계이고, 막대가 높을수록 그 직업에서 그 단계의 비중이 큽니다."
+          so={`같은 표본 안에서도 레이드 구간 비중은 직업에 따라 ${fmtX(best.index / worst.index)} 차이가 납니다.`}
+        >
           <ViewToggle mode={effective} setMode={setMode} available={can3D} />
           {effective === "solid" ? (
             <LazyJobTerrain
@@ -57,33 +61,33 @@ export default function Gap() {
               fallback={flatHeatmap}
             />
           ) : flatHeatmap}
-        </div>
+        </Chart>
       }
       visualCaption={`인원이 많은 직업 20종을 가로로, 성장 단계 여섯 구간을 세로로 놓았습니다. 막대 높이와 칸 색은 그 직업 안에서 해당 구간이 차지하는 비중입니다. ${selected ? `${selected}만 골라 놓았습니다. 다시 누르면 전체로 돌아갑니다.` : "직업을 누르면 그 줄만 남습니다."}`}
       explain={[
         {
-          label: "무엇을 견주었는가",
+          label: "견준 것",
           body: [
             "같은 표본 안에서도 직업마다 성장 단계 구성이 크게 다릅니다.",
             "어떤 직업은 레이드 진입 구간에 몰려 있고, 어떤 직업은 레기온 입장 전 구간에 몰려 있습니다.",
           ],
         },
         {
-          label: "지수는 어떻게 읽는가",
+          label: "지수 읽는 법",
           body: [
             "레이드 진입 구간은 레이드 입장 구간, 레이드 권장 구간, 하드 권장 구간을 합친 것입니다.",
             `표본 전체 평균은 ${fmtPct(overallRaidShare * 100)}이고, 이 값을 1.00으로 두고 직업별 비중을 나눈 값이 아래 지수입니다.`,
           ],
         },
         {
-          label: "무엇이 나왔는가",
+          label: "결과",
           body: [
             `가장 높은 ${topicParticle(best.job)} ${fmtX(best.index)}로 평균보다 높고, 가장 낮은 ${topicParticle(worst.job)} ${fmtX(worst.index)}로 평균보다 낮습니다.`,
-            "명성값이 있는 표본이 300명 이상인 직업만 지수를 냈습니다.",
+            "명성 점수가 있는 캐릭터이 300명 이상인 직업만 지수를 냈습니다.",
           ],
         },
         {
-          label: "어디까지 믿을 수 있는가",
+          label: "한계",
           body: [
             "표본이 10명이 되지 않는 칸은 공개하지 않으므로, 그 칸이 있는 직업의 합계는 실제보다 작게 잡힌 하한값입니다.",
             "표본 안의 비교이며, 게임 전체 인구의 직업별 성장 수준이 아닙니다.",
@@ -128,12 +132,12 @@ export default function Gap() {
     >
       <Stagger index={6}>
         <div className="mt-14 grid gap-10 lg:grid-cols-2">
-          <IndexBars title={`레이드 진입 비중이 평균보다 높은 직업 다섯`} rows={raidIndex.top} />
-          <IndexBars title={`레이드 진입 비중이 평균보다 낮은 직업 다섯`} rows={raidIndex.bottom} />
+          <IndexBars title="레이드 구간 비중, 평균 대비 배수 (높은 직업 다섯)" rows={raidIndex.top} />
+          <IndexBars title="레이드 구간 비중, 평균 대비 배수 (낮은 직업 다섯)" rows={raidIndex.bottom} />
         </div>
         <p className="t-small mt-3 max-w-[46rem]">
           가운데 선이 표본 평균 {fmtPct(overallRaidShare * 100)}입니다. 오른쪽으로 뻗으면 평균보다 높고 왼쪽으로 뻗으면 평균보다 낮습니다.
-          오른쪽 끝 숫자는 그 직업의 레이드 진입 비중과 명성값이 있는 표본 인원입니다.
+          오른쪽 끝 숫자는 그 직업의 레이드 진입 비중과 명성 점수가 있는 캐릭터 인원입니다.
         </p>
       </Stagger>
     </PageShell>

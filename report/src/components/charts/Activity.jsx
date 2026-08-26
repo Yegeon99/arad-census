@@ -2,7 +2,7 @@ import { useState } from "react";
 import { area, curveMonotoneY } from "d3-shape";
 import { ACT_ORDER, ACT_COLOR } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
-import { useInView, useMediaQuery } from "../../lib/hooks.js";
+import { useInView, useMediaQuery, ENTER_MS } from "../../lib/hooks.js";
 import { ActLegend } from "./Legend.jsx";
 
 /** 보정 전과 보정 후 사이를 오가며 모양이 바뀌는 4단 스택 바 */
@@ -22,7 +22,7 @@ export function ActivityMorph({ before, after, subsample }) {
           );
         })}
         <p className="t-small m-0">
-          보정 후는 완전 검색 표본의 명성 분포를 기준으로 다시 계산한 값입니다.
+          보정 후는 빠짐없이 모은 표본의 명성 분포를 기준으로 다시 계산한 값입니다.
         </p>
       </div>
 
@@ -33,11 +33,16 @@ export function ActivityMorph({ before, after, subsample }) {
             style={{
               width: `${values[k]}%`,
               background: ACT_COLOR[k],
-              transition: "width 0.75s cubic-bezier(0.3,0.7,0.3,1)",
+              transition: `width ${ENTER_MS}ms cubic-bezier(0.3,0.7,0.3,1)`,
             }}
             title={`${k} ${fmtPct(values[k])}`}
           />
         ))}
+      </div>
+
+      <div className="mt-1 flex justify-between text-[0.72rem]" style={{ color: "var(--text-muted)" }}>
+        <span>왼쪽일수록 최근 접속</span>
+        <span>오른쪽일수록 오래 미접속</span>
       </div>
 
       <ul className="mt-3 m-0 grid list-none gap-x-6 gap-y-1 p-0 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,9 +71,9 @@ export function ActivityStream({ bins }) {
   const narrow = useMediaQuery("(max-width: 760px)");
   const S = narrow ? NARROW : WIDE;
   const rows = [...bins].reverse();
-  const H = rows.length * S.row + 34;
+  const H = rows.length * S.row + 40;
   const innerW = S.w - S.left - S.right;
-  const yOf = (i) => 22 + i * S.row + S.row / 2;
+  const yOf = (i) => 28 + i * S.row + S.row / 2;
 
   const bands = ACT_ORDER.map((k) => {
     const points = [];
@@ -80,7 +85,7 @@ export function ActivityStream({ bins }) {
       }
       points.push({ y, x0: S.left + (left / 100) * innerW, x1: S.left + ((left + rows[j].pct[k]) / 100) * innerW });
     };
-    push(18, 0);
+    push(24, 0);
     rows.forEach((_, j) => push(yOf(j), j));
     push(H - 12, rows.length - 1);
     const gen = area().x0((d) => d.x0).x1((d) => d.x1).y((d) => d.y).curve(curveMonotoneY);
@@ -91,14 +96,18 @@ export function ActivityStream({ bins }) {
     <div ref={ref}>
       <svg viewBox={`0 0 ${S.w} ${H}`} width="100%" style={{ display: "block" }} role="img"
         aria-label="명성 구간별 접속 기록 구성">
-        <g opacity={seen ? 1 : 0} style={{ transition: "opacity 0.8s ease" }}>
+        <text x={S.left} y={12} fontSize={narrow ? 9 : 10.5} fill="var(--text-muted)">왼쪽일수록 최근 접속</text>
+        <text x={S.w - S.right} y={12} textAnchor="end" fontSize={narrow ? 9 : 10.5} fill="var(--text-muted)">
+          오른쪽일수록 오래 미접속
+        </text>
+        <g opacity={seen ? 1 : 0} style={{ transition: `opacity ${ENTER_MS}ms ease` }}>
           {bands.map((b) => (
             <path key={b.key} d={b.d} fill={ACT_COLOR[b.key]} stroke="var(--bg-base)" strokeWidth="0.8" />
           ))}
         </g>
         {rows.map((b, i) => (
           <g key={b.bin} onMouseEnter={() => setHover(b)} onMouseLeave={() => setHover(null)}>
-            <rect x={0} y={22 + i * S.row} width={S.w} height={S.row} fill="transparent" />
+            <rect x={0} y={28 + i * S.row} width={S.w} height={S.row} fill="transparent" />
             <text x={S.left - 10} y={yOf(i) + 4} textAnchor="end" fontSize={S.font} fontWeight={hover === b ? 700 : 500}
               fill="var(--text-primary)">
               {b.bin}
@@ -108,7 +117,7 @@ export function ActivityStream({ bins }) {
             </text>
             {b.smallSample && (
               <>
-                <rect x={S.left - 4} y={22 + i * S.row + 5} width={innerW + 8} height={S.row - 10}
+                <rect x={S.left - 4} y={28 + i * S.row + 5} width={innerW + 8} height={S.row - 10}
                   fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeDasharray="5 4" />
                 <text x={S.left - 10} y={yOf(i) + 18} textAnchor="end" fontSize={narrow ? 8.5 : 10.5}
                   fill="var(--gold-text)" fontWeight="700">

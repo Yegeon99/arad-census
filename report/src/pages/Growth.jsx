@@ -1,4 +1,5 @@
 import PageShell, { Stagger } from "../components/PageShell.jsx";
+import Chart from "../components/Chart.jsx";
 import MirrorPyramid from "../components/charts/MirrorPyramid.jsx";
 import FameHistogram from "../components/charts/FameHistogram.jsx";
 import { fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
@@ -23,41 +24,46 @@ export default function Growth() {
   return (
     <PageShell
       id="growth"
-      question="캐릭터들은 성장 단계 어디쯤에 몰려 있습니까?"
+      question="레이드까지 온 캐릭터는 몇 명 중 한 명일까"
       statValue={pct1(pyramidGap)}
       statUnit="%포인트"
       statLabel="레기온 입장 전 구간 비중의 차이"
-      statNote="전체 표본과 완전 검색 표본 사이"
+      statNote="전체 표본과 빠짐없이 모은 표본 사이"
       visual={
-        <MirrorPyramid bins={fameCompare} gapLabelBin={fameCompare[0].label} gapValue={pyramidGap} />
+        <Chart
+          how="막대 하나가 성장 단계 하나입니다. 채운 막대가 지금 고른 표본, 점선 윤곽이 반대쪽 표본입니다. 막대가 길수록 그 단계의 캐릭터가 많습니다."
+          so="레이드 구간까지 온 캐릭터는 전체 표본에서 넷 중 한 명꼴, 빠짐없이 모은 표본에서는 열여섯 중 한 명꼴입니다."
+        >
+          <MirrorPyramid bins={fameCompare} gapLabelBin={fameCompare[0].label} gapValue={pyramidGap} />
+        </Chart>
       }
-      visualCaption={`슬라이더를 오른쪽으로 끌면 전체 표본 ${fmtPeople(fameSample)}에서 완전 검색 표본 ${fmtPeople(completeFameSample)}으로 바뀝니다. 명성값이 있는 캐릭터만 넣었습니다.`}
+      visualCaption={`슬라이더를 오른쪽으로 끌면 전체 표본 ${fmtPeople(fameSample)}에서 빠짐없이 모은 표본 ${fmtPeople(completeFameSample)}으로 바뀝니다. 명성 점수가 있는 캐릭터만 넣었습니다.`}
       explain={[
         {
-          label: "어떻게 나눴는가",
+          label: "나눈 기준",
           body: [
-            "성장 단계는 명성값을 컨텐츠 입장 기준으로 여섯 구간에 나눈 것입니다.",
+            "성장 단계는 명성 점수를 컨텐츠 입장 기준으로 여섯 구간에 나눈 것입니다.",
             "구간 경계는 게임 안에서 실제로 입장선이 갈리는 지점을 그대로 썼습니다.",
           ],
         },
         {
-          label: "무엇이 나왔는가",
+          label: "결과",
           body: [
             `전체 표본에서는 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].full)}이고 레이드 진입 구간이 ${fmtPct(raidPct)}입니다.`,
-            `완전 검색 표본만 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
+            `빠짐없이 모은 표본만 보면 레기온 입장 전 구간이 ${fmtPct(fameCompare[0].complete)}로 뛰어오릅니다. 차이는 ${fmtPp(pyramidGap)}입니다.`,
           ],
         },
         {
-          label: "왜 이런 차이가 나는가",
+          label: "차이가 나는 이유",
           body: [
             "검색이 200명 한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않은데, 실제로 받아 보면 성장이 앞선 쪽으로 크게 쏠립니다.",
             "한도에 걸리지 않은 검색만 모으면 훨씬 아래쪽이 두껍습니다.",
           ],
         },
         {
-          label: "어디까지 믿을 수 있는가",
+          label: "한계",
           body: [
-            `명성값이 없어 분포에서 뺀 캐릭터는 ${fmtPeople(meta.fameMissing)}입니다.`,
+            `명성 점수가 없어 분포에서 뺀 캐릭터는 ${fmtPeople(meta.fameMissing)}입니다.`,
             `이 가운데 ${fmtPct(missingLowLevel.pct)}가 레벨 100 미만이라, 이들을 뺀 것만으로도 피라미드가 조금 더 위로 기울었을 가능성이 있습니다.`,
           ],
         },
@@ -68,7 +74,7 @@ export default function Growth() {
             <p className="t-eyebrow m-0 mb-2">구간 경계와 인원</p>
             <table className="plain">
               <thead>
-                <tr><th>구간</th><th>기준</th><th className="text-right">전체 표본</th><th className="text-right">완전 검색</th></tr>
+                <tr><th>구간</th><th>기준</th><th className="text-right">전체 표본</th><th className="text-right">빠짐없이 모은 검색</th></tr>
               </thead>
               <tbody>
                 {fameCompare.map((b, i) => (
@@ -83,7 +89,7 @@ export default function Growth() {
             </table>
           </div>
           <div>
-            <p className="t-eyebrow m-0 mb-2">명성값이 없는 캐릭터의 레벨 분포</p>
+            <p className="t-eyebrow m-0 mb-2">명성 점수가 없는 캐릭터의 레벨 분포</p>
             <table className="plain">
               <thead>
                 <tr><th>레벨</th><th className="text-right">인원</th></tr>
@@ -111,12 +117,16 @@ export default function Growth() {
     >
       <Stagger index={6}>
         <div className="mt-14">
-          <h2 className="t-title mb-1 text-[1.3rem]">구간 경계는 어디에서 왔습니까</h2>
+          <h2 className="t-title mb-1 text-[1.3rem]">구간 경계의 근거</h2>
           <p className="t-body m-0 mb-4 max-w-[46rem] text-[0.95rem]">
-            아래는 명성값을 1만 단위로 끊어 센 히스토그램입니다. 세로 기준선은 여섯 구간을 나눌 때 쓴 컨텐츠 입장값입니다.
-            가장 높은 막대는 명성 7만에서 8만 사이 구간이고, 아포칼립스 입장 기준선이 그 안을 지납니다.
+            명성 점수를 1만 단위로 끊어 세면 여섯 단계를 나눈 기준이 어디에 놓였는지 보입니다.
           </p>
-          <FameHistogram data={histogram.full} cuts={histogram.cuts} binWidth={histogram.binWidth} />
+          <Chart
+            how="가로축은 명성 점수, 세로축은 그 점수대에 있는 캐릭터의 비중입니다. 점선은 여섯 단계를 나눌 때 쓴 콘텐츠 입장 기준입니다."
+            so="캐릭터가 가장 많이 몰린 명성은 7만대이고, 레기온 입장선 바로 위입니다."
+          >
+            <FameHistogram data={histogram.full} cuts={histogram.cuts} binWidth={histogram.binWidth} />
+          </Chart>
         </div>
       </Stagger>
     </PageShell>

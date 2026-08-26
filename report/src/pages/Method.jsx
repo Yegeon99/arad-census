@@ -46,7 +46,7 @@ export default function Method() {
     {
       title: "한도 판정",
       body: "검색 결과가 200명 한도에 걸렸는지 매 호출마다 기록했습니다. 한도에 걸린 검색은 일부만 받은 것입니다.",
-      measured: `한도 검색 ${fmtInt(meta.searchCallsLimited)}회, ${fmtPct(limitedRatio)}`,
+      measured: `잘린 검색 ${fmtInt(meta.searchCallsLimited)}회, ${fmtPct(limitedRatio)}`,
     },
     {
       title: "중복 제거",
@@ -54,9 +54,9 @@ export default function Method() {
       measured: `표본 ${fmtPeople(meta.sampleSize)}`,
     },
     {
-      title: "완전 검색 표본 분리",
+      title: "빠짐없이 모은 표본 분리",
       body: "한도에 걸리지 않은 검색에서 한 번이라도 나온 캐릭터를 따로 모아 별도 분포를 냈습니다. 검색 한도가 만드는 기울기를 재는 잣대입니다.",
-      measured: `완전 검색 표본 ${fmtPeople(meta.completeSampleSize)}`,
+      measured: `빠짐없이 모은 표본 ${fmtPeople(meta.completeSampleSize)}`,
     },
     {
       title: "활성도 조사",
@@ -68,7 +68,7 @@ export default function Method() {
   return (
     <PageShell
       id="method"
-      question="이 숫자들은 어떻게 만들었고 어디까지 믿을 수 있습니까?"
+      question="이 숫자를 어디까지 믿어도 될까"
       statValue={pct1(limitedRatio)}
       statUnit="%"
       statLabel="200명 한도에 걸린 검색의 비중"
@@ -121,8 +121,8 @@ export default function Method() {
                 <Bullets
                   items={[
                     ["검색 한도가 성장이 앞선 쪽으로 기울입니다",
-                      `한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않습니다. 레기온 입장 전 구간 비중이 전체 표본 ${fmtPct(fameCompare[0].full)}인 반면 완전 검색 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다. 이 조사에서 가장 큰 편향입니다.`],
-                    ["명성값이 없는 캐릭터를 뺀 것도 위로 기울입니다",
+                      `한도에 걸리면 어떤 200명이 돌아오는지 공개되어 있지 않습니다. 레기온 입장 전 구간 비중이 전체 표본 ${fmtPct(fameCompare[0].full)}인 반면 빠짐없이 모은 표본에서는 ${fmtPct(fameCompare[0].complete)}입니다. 이 조사에서 가장 큰 편향입니다.`],
+                    ["명성 점수가 없는 캐릭터를 뺀 것도 위로 기울입니다",
                       `분포에서 뺀 ${fmtPeople(meta.fameMissing)} 가운데 ${fmtPct(missingLowLevel.pct)}가 레벨 100 미만입니다. 아래쪽이 더 많이 빠졌습니다.`],
                     ["한글 이름만 표본에 들어옵니다",
                       "한국어 두 글자를 넣어 찾는 방식이라 영문과 숫자, 특수문자로 지은 이름은 구조적으로 빠집니다. 어떤 낱말을 골랐는지도 표본 구성에 영향을 줍니다."],
@@ -144,7 +144,7 @@ export default function Method() {
                   ]}
                 />
               </Section>
-              <Section title="어디까지 말할 수 있습니까">
+              <Section title="말할 수 있는 범위">
                 <div className="prose t-body text-[0.94rem]">
                   <p className="m-0">
                     이 결과는 한글 이름을 쓰고 검색에 노출되는 캐릭터 집단에 대한 기술 통계입니다.
@@ -174,7 +174,7 @@ export default function Method() {
                 <table className="plain" style={{ maxWidth: 720 }}>
                   <tbody>
                     {[
-                      ["표본 크기", `${fmtPeople(meta.sampleSize)}, 완전 검색 표본 ${fmtPeople(meta.completeSampleSize)}, 명성값 없음 ${fmtPeople(meta.fameMissing)}`],
+                      ["표본 크기", `${fmtPeople(meta.sampleSize)}, 빠짐없이 모은 표본 ${fmtPeople(meta.completeSampleSize)}, 명성 점수 없음 ${fmtPeople(meta.fameMissing)}`],
                       ["활성도 조사", `${fmtPeople(activity.subsampleSize)}, 구간 비례로 뽑았고 가장 작은 구간이 ${fmtPeople(11)}`],
                       ["주고받은 요청", `약 ${fmtInt(MEASURED.apiCalls)}회, 사전 검증 43회와 직업 목록 1회, 검색 ${fmtInt(seedStats.calls + 1)}회, 활성도 조사 ${fmtInt(activity.subsampleSize)}회, 실패 0회`],
                       ["모델 비용", `${MEASURED.llmCostUsd.toFixed(4)}달러, 배치 ${MEASURED.llmBatches}회 누적`],
@@ -196,13 +196,13 @@ export default function Method() {
       }
       explain={[
         {
-          label: "이 화면의 구성",
+          label: "화면 구성",
           body: [
             "세 갈래로 나누어 두었습니다. 표본을 어떻게 뽑았는지, 어디로 얼마나 기울어 있는지, 개인정보를 어떻게 다루었고 실제로 얼마나 썼는지입니다.",
           ],
         },
         {
-          label: "왜 이렇게 적었는가",
+          label: "적은 방식",
           body: [
             "숫자를 예쁘게 만들기보다 어디가 흔들리는지 그대로 적는 쪽을 택했습니다.",
             "같은 방법을 다시 돌리면 같은 결과가 나오도록 코드와 설정을 모두 공개해 두었습니다.",

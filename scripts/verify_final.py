@@ -29,12 +29,15 @@ CENSUS = ROOT / "data" / "census_2026-08.json"
 SEEDS = ROOT / "data" / "seed_yield.json"
 COSTS = ROOT / "data" / "llm_costs.json"
 BUNDLE = ROOT / "report" / "src" / "data" / "census.json"
+STABILITY = ROOT / "docs" / "stability.json"
 INSIGHTS = ROOT / "report" / "src" / "derived" / "insights.json"
 FACTS = ROOT / "report" / "content" / "insight_facts.json"
 DIST = ROOT / "report" / "dist"
 RENDERED = ROOT / "docs" / "rendered_text.txt"
 
-FORBIDDEN = ["—", "–", "ㅡ", "§", "n=", "capped", "uncapped",
+FORBIDDEN = ["완전 검색", "한도 검색", "편향 보정값", "명성값",
+             "답하는 질문은", "발견 경로",
+             "—", "–", "ㅡ", "§", "n=", "capped", "uncapped",
              "reweighted", "job_x_fame", "small_sample", "비상한", "레기온 미만",
              "가중 재추정", "자각1", "외전"]
 FORBIDDEN_NAME = {"—": "줄표", "–": "짧은 줄표", "ㅡ": "낱자 으", "§": "절 기호"}
@@ -221,7 +224,7 @@ def check_numbers(c, text):
 
 # ── 4. 인사이트 수치 전수 대조 ──
 GLOBAL_NUMBERS = {"1", "2", "3", "4", "5", "6", "7", "8", "30", "90", "200"}
-FIELDS = ["title", "finding", "interpretation", "validation", "nextQuestion"]
+FIELDS = ["title", "keyNumber", "finding", "interpretation", "validation", "nextQuestion"]
 
 
 def check_insights():
@@ -298,6 +301,35 @@ def check_layers(rendered):
     return layers, counts
 
 
+ASK_ENDINGS = ("는가", "은가", "인가")
+
+
+def check_headings(rendered):
+    """소제목을 의문형으로 달지 않았는지 본다. 짧은 줄만 소제목으로 친다."""
+    bad = []
+    for line in rendered.splitlines():
+        t = line.strip()
+        if 2 < len(t) <= 30 and t.endswith(ASK_ENDINGS):
+            bad.append(t)
+    ok(not bad, f"의문형 소제목이 남아 있습니다 {sorted(set(bad))[:5]}")
+    return len(bad)
+
+
+def check_stability():
+    """화면 일곱 개에 주소로 곧장 들어갔을 때 1초 뒤 빈 곳이 없는지."""
+    if not STABILITY.exists():
+        ok(False, "표시 안정성 결과가 없습니다. report 폴더에서 node scripts/stability.mjs 를 돌리십시오")
+        return None
+    data = json.loads(STABILITY.read_text(encoding="utf-8"))
+    rows = data["results"]
+    ok(len(rows) == 14, f"표시 안정성 검사 대상이 14개가 아닙니다 ({len(rows)}개)")
+    for r in rows:
+        ok(r["ok"], f"표시 안정성 실패 {r['view']} {r['page']}: 글자 {r['textLength']}, "
+                    f"안 보이는 요소 {r['fadedCount']}, 빈 캔버스 {r['emptyCanvas']}, "
+                    f"도는 애니메이션 {r['runningAnimations']}")
+    return data
+
+
 def main():
     if not RENDERED.exists():
         print("화면 글 모음이 없습니다. report 폴더에서 node scripts/capture.mjs 를 먼저 돌리십시오.")
@@ -309,6 +341,8 @@ def main():
     check_bundle(census)
     n_expect = check_numbers(census, rendered)
     n_numbers = check_insights()
+    check_headings(rendered)
+    stability = check_stability()
     layers, counts = check_layers(rendered)
 
     print("[집계 정합성]")
@@ -317,6 +351,10 @@ def main():
     print("[숫자 정합성]")
     print(f"  집계 원본에서 다시 계산한 표기 {n_expect}건을 화면 글과 대조")
     print(f"  인사이트 문장의 숫자 {n_numbers}개를 허용 목록과 대조")
+    print("[표시 안정성]")
+    if stability:
+        good = sum(1 for r in stability["results"] if r["ok"])
+        print(f"  주소로 곧장 진입 후 {stability['waitMs']}밀리초 시점: {good}/{len(stability['results'])} 통과")
     print("[금지 표현 스캔]")
     for name, hits in layers.items():
         print(f"  {name}: {'0건' if not hits else hits}  ({counts[name]})")

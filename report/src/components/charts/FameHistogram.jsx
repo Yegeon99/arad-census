@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { scaleLinear } from "d3-scale";
 import { fmtFame, fmtPct, fmtPeople } from "../../lib/format.js";
-import { useInView, useMediaQuery } from "../../lib/hooks.js";
+import { useInView, useMediaQuery, ENTER_MS, STAGGER_MS } from "../../lib/hooks.js";
 
 const WIDE = { w: 960, h: 356, left: 46, right: 18, bottom: 104, tickEvery: 1 };
 const NARROW = { w: 380, h: 260, left: 30, right: 8, bottom: 40, tickEvery: 2 };
@@ -50,7 +50,7 @@ export default function FameHistogram({ data, cuts, binWidth }) {
               fill={on ? "var(--gold)" : "var(--ink-4)"}
               onMouseEnter={() => setHover(i)}
               onMouseLeave={() => setHover(null)}
-              style={{ transition: `height 0.7s cubic-bezier(0.22,0.68,0.31,1) ${i * 30}ms, y 0.7s cubic-bezier(0.22,0.68,0.31,1) ${i * 30}ms, fill 0.15s` }}
+              style={{ transition: `height ${ENTER_MS}ms cubic-bezier(0.22,0.68,0.31,1) ${i * STAGGER_MS}ms, y ${ENTER_MS}ms cubic-bezier(0.22,0.68,0.31,1) ${i * STAGGER_MS}ms, fill 0.15s` }}
             />
           );
         })}
@@ -109,7 +109,7 @@ export default function FameHistogram({ data, cuts, binWidth }) {
             ? `${fmtFame(bins[hover].from)} 이상 ${bins[hover].to === null ? "위쪽 전부" : `${fmtFame(bins[hover].to)} 미만`}, ${fmtPeople(bins[hover].count)} ${fmtPct(bins[hover].pct)}`
             : "막대에 마우스를 올리면 구간별 인원이 나옵니다."}
         </p>
-        <p className="t-small m-0">가로축은 명성값, 세로축은 표본 안 비중입니다.</p>
+        <p className="t-small m-0">가로축은 명성 점수, 세로축은 표본 안 비중입니다.</p>
       </div>
     </div>
   );

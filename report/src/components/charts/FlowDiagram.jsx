@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useInView } from "../../lib/hooks.js";
+import { useInView, ENTER_MS, STAGGER_MS } from "../../lib/hooks.js";
 
 /** 표본 설계 흐름. 각 단계에 마우스를 올리면 실측치가 나온다. */
 export default function FlowDiagram({ steps }) {
@@ -17,7 +17,7 @@ export default function FlowDiagram({ steps }) {
               style={{
                 opacity: seen ? 1 : 0,
                 transform: seen ? "none" : "translateY(10px)",
-                transition: `opacity 0.5s ease ${i * 120}ms, transform 0.5s ease ${i * 120}ms`,
+                transition: `opacity ${ENTER_MS}ms ease ${i * STAGGER_MS * 4}ms, transform ${ENTER_MS}ms ease ${i * STAGGER_MS * 4}ms`,
               }}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}

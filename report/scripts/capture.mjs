@@ -42,6 +42,21 @@ async function collectText(page, tag) {
   texts.push(`===== ${tag} =====\n${t}`);
 }
 
+/**
+ * 화면 전체를 한 장으로 담는다.
+ * fullPage 옵션은 그리기를 미루는 입체 화면을 빈 칸으로 남기므로,
+ * 창 높이를 문서 높이만큼 늘려서 실제로 한 번 더 그리게 한 뒤 찍는다.
+ */
+async function shootWhole(page, path, width) {
+  const height = await page.evaluate(() => document.body.scrollHeight);
+  const tall = Math.min(height + 20, 9000);
+  await page.setViewportSize({ width, height: tall });
+  await page.waitForTimeout(1200);
+  await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+  await page.waitForTimeout(400);
+  await page.screenshot({ path });
+}
+
 /** 아래까지 한 번 훑어 화면에 들어와야 그려지는 요소를 모두 깨운다. */
 async function scrollThrough(page) {
   const height = await page.evaluate(() => document.body.scrollHeight);
@@ -80,7 +95,9 @@ async function shoot(label, viewport, { withText }) {
     await page.goto(`http://localhost:4179/#${id}`, { waitUntil: "networkidle" });
     await page.waitForTimeout(700);
     await scrollThrough(page);
-    await page.screenshot({ path: join(outDir, `${label}-${id}.png`), fullPage: true });
+    await shootWhole(page, join(outDir, `${label}-${id}.png`), viewport.width);
+    await page.setViewportSize(viewport);
+    await page.waitForTimeout(300);
     if (withText) {
       await collectText(page, `${label} ${id} ${name}`);
       await exerciseControls(page, `${label} ${id}`);
@@ -92,7 +109,8 @@ async function shoot(label, viewport, { withText }) {
         await flat.first().click().catch(() => {});
         await page.waitForTimeout(400);
         await scrollThrough(page);
-        await page.screenshot({ path: join(outDir, `${label}-${id}-flat.png`), fullPage: true });
+        await shootWhole(page, join(outDir, `${label}-${id}-flat.png`), viewport.width);
+        await page.setViewportSize(viewport);
       }
     }
   }

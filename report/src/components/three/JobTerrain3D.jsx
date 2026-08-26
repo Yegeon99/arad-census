@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useEffect, useMemo, useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { BIN_ORDER, BIN_COLOR, GOLD } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
@@ -10,6 +10,33 @@ const BAR_W = 0.34;
 const BAR_D = 0.46;
 const MAX_H = 2.3;
 const LABEL_SHARE = 0.45; // 이 비중을 넘는 막대에만 숫자를 붙인다
+
+/** 크기가 바뀌거나 탭이 돌아오면 다시 한 장 그린다. 필요할 때만 그리는 설정에서 화면이 비지 않게. */
+function KeepDrawn() {
+  const invalidate = useThree((state) => state.invalidate);
+  const width = useThree((state) => state.size.width);
+  const height = useThree((state) => state.size.height);
+  useEffect(() => {
+    invalidate();
+    const raf = requestAnimationFrame(() => invalidate());
+    return () => cancelAnimationFrame(raf);
+  }, [invalidate, width, height]);
+  useEffect(() => {
+    const again = () => invalidate();
+    window.addEventListener("resize", again);
+    document.addEventListener("visibilitychange", again);
+    // 화면을 캡처하거나 브라우저가 그림을 버렸을 때를 대비해 1초에 한 장씩만 다시 그린다.
+    const beat = setInterval(() => {
+      if (document.visibilityState === "visible") invalidate();
+    }, 1000);
+    return () => {
+      clearInterval(beat);
+      window.removeEventListener("resize", again);
+      document.removeEventListener("visibilitychange", again);
+    };
+  }, [invalidate]);
+  return null;
+}
 
 const labelStyle = {
   pointerEvents: "none",
@@ -49,6 +76,7 @@ export default function JobTerrain3D({ rows, cellCount, cellShare, selected, set
       <div style={{ height: 476, maxWidth: 1160, margin: "0 auto", background: "var(--bg-base)" }}>
         <Canvas frameloop="demand" camera={{ position: [0, 5.3, 6.2], fov: 42 }} dpr={[1, 1.8]} gl={{ antialias: true, preserveDrawingBuffer: true }}>
           <color attach="background" args={["#FAFAF8"]} />
+          <KeepDrawn />
           <ambientLight intensity={0.78} />
           <directionalLight position={[5, 9, 7]} intensity={1.05} />
           <directionalLight position={[-6, 4, -5]} intensity={0.28} />

@@ -85,7 +85,8 @@ function convert(node) {
   return node;
 }
 
-const FORBIDDEN = ["\u2014", "\u2013", "\u3161", "\u00a7", "n=", "capped", "uncapped",
+const FORBIDDEN = ["외전", "완전 검색", "한도 검색", "편향 보정값", "명성값",
+  "\u2014", "\u2013", "\u3161", "\u00a7", "n=", "capped", "uncapped",
   "reweighted", "job_x_fame", "small_sample", "비상한", "레기온 미만", "가중 재추정"];
 
 function guard(name, text) {

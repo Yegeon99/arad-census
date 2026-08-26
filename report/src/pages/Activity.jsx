@@ -1,4 +1,5 @@
 import PageShell, { Stagger } from "../components/PageShell.jsx";
+import Chart from "../components/Chart.jsx";
 import { ActivityMorph, ActivityStream } from "../components/charts/Activity.jsx";
 import { ACT_ORDER } from "../lib/palette.js";
 import { fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
@@ -14,37 +15,44 @@ export default function Activity() {
   return (
     <PageShell
       id="activity"
-      question="캐릭터들은 최근에 얼마나 접속했습니까?"
+      question="최근 일주일 안에 접속한 캐릭터는 얼마나 될까"
       statValue={pct1(after[dormantLabel])}
       statUnit="%"
-      statLabel="90일 넘게 기록이 없는 비중, 편향 보정값"
-      statNote={`보정 전에는 ${fmtPct(before[dormantLabel])}입니다`}
-      visual={<ActivityMorph before={before} after={after} subsample={activity.subsampleSize} />}
-      visualCaption="보정 전과 보정 후를 눌러 보면 네 칸의 폭이 바뀝니다. 칸 하나하나가 접속 상태 한 가지입니다."
+      statLabel="90일 넘게 기록이 없는 비중, 보정값"
+      statNote={`10명 중 6~7명은 90일 넘게 기록이 없습니다(보정값). 보정 전에는 ${fmtPct(before[dormantLabel])}입니다.`}
+      visual={
+        <Chart
+          how="막대 하나를 네 칸으로 나눈 것입니다. 왼쪽 칸일수록 최근에 접속한 캐릭터, 오른쪽 칸일수록 오래 접속하지 않은 캐릭터입니다."
+          so={`보정하면 최근 7일 안에 접속한 캐릭터가 ${fmtPct(before[weeklyLabel])}에서 ${fmtPct(after[weeklyLabel])}로 줄어듭니다.`}
+        >
+          <ActivityMorph before={before} after={after} subsample={activity.subsampleSize} />
+        </Chart>
+      }
+      visualCaption="보정 전과 보정 후를 눌러 보면 네 칸의 폭이 바뀝니다."
       explain={[
         {
-          label: "어떻게 판정했는가",
+          label: "판정 기준",
           body: [
             `활성도는 최근 ${activity.lookbackDays}일 사이의 행동 기록으로 판정했습니다.`,
             "마지막 기록이 7일 안이면 최근 7일 접속, 30일 안이면 최근 30일 접속, 90일 안이면 최근 90일 접속, 기록이 하나도 없으면 90일 넘게 기록 없음입니다.",
           ],
         },
         {
-          label: "무엇이 나왔는가",
+          label: "결과",
           body: [
             `보정 전 수치로는 90일 넘게 기록이 없는 캐릭터가 ${fmtPct(before[dormantLabel])}이고 최근 7일 접속이 ${fmtPct(before[weeklyLabel])}입니다.`,
-            `편향 보정값으로 바꾸면 각각 ${fmtPct(after[dormantLabel])}와 ${fmtPct(after[weeklyLabel])}가 됩니다. 조용한 쪽이 ${fmtPp(after[dormantLabel] - before[dormantLabel])} 늘어납니다.`,
+            `보정값으로 바꾸면 각각 ${fmtPct(after[dormantLabel])}와 ${fmtPct(after[weeklyLabel])}가 됩니다. 조용한 쪽이 ${fmtPp(after[dormantLabel] - before[dormantLabel])} 늘어납니다.`,
           ],
         },
         {
-          label: "보정의 근거는 무엇인가",
+          label: "보정한 이유",
           body: [
-            `보정의 근거는 발견 경로 차이입니다. 완전 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
-            `같은 기준으로 한도 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다. 발견 경로만 달라도 두 배 넘게 벌어집니다.`,
+            `보정의 근거는 검색 방식 차이입니다. 빠짐없이 모은 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
+            `같은 기준으로 잘린 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다. 검색 방식만 달라도 두 배 넘게 벌어집니다.`,
           ],
         },
         {
-          label: "어디까지 믿을 수 있는가",
+          label: "한계",
           body: [
             "두 수치 모두 두 가지 흔들림을 걷어내지 못합니다. 첫째 행동 기록이 남는 빈도가 성장 단계마다 다를 수 있고, 둘째 검색 결과에 최근 접속 여부가 걸려 있는지 확인할 수 없습니다.",
             "접속만 하고 기록을 남기지 않은 캐릭터는 조용한 쪽으로 분류됩니다.",
@@ -72,24 +80,24 @@ export default function Activity() {
               </tbody>
             </table>
             <p className="t-small mt-3">
-              보정값은 명성 구간별 접속 비율에 완전 검색 표본의 구간 비중을 곱해 더한 값입니다.
+              보정값은 명성 구간별 접속 비율에 빠짐없이 모은 표본의 구간 비중을 곱해 더한 값입니다.
               검색 한도 편향을 아래쪽으로 되돌린 방향의 추정입니다.
             </p>
           </div>
           <div>
-            <p className="t-eyebrow m-0 mb-2">발견 경로별 비교</p>
+            <p className="t-eyebrow m-0 mb-2">검색 방식별 비교</p>
             <table className="plain">
               <thead>
-                <tr><th>발견 경로</th><th className="text-right">인원</th><th className="text-right">90일 넘게 기록 없음</th></tr>
+                <tr><th>검색 방식</th><th className="text-right">인원</th><th className="text-right">90일 넘게 기록 없음</th></tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ color: "var(--text-primary)" }}>완전 검색에서도 발견</td>
+                  <td style={{ color: "var(--text-primary)" }}>빠짐없이 모은 검색에서도 발견</td>
                   <td className="num text-right">{fmtPeople(discovery.complete.n)}</td>
                   <td className="num text-right">{fmtPct(discovery.complete.pct[dormantLabel])}</td>
                 </tr>
                 <tr>
-                  <td style={{ color: "var(--text-primary)" }}>한도 검색에서만 발견</td>
+                  <td style={{ color: "var(--text-primary)" }}>잘린 검색에서만 발견</td>
                   <td className="num text-right">{fmtPeople(discovery.limited.n)}</td>
                   <td className="num text-right">{fmtPct(discovery.limited.pct[dormantLabel])}</td>
                 </tr>
@@ -132,7 +140,12 @@ export default function Activity() {
             맨 위 {highest.bin}은 {fmtPeople(highest.n)} 전원이 최근 7일 안에 기록을 남겼습니다.
             다만 맨 위 구간은 표본이 적어 참고용으로 봐야 합니다.
           </p>
-          <ActivityStream bins={activity.byFameBin} />
+          <Chart
+            how="아래에서 위로 갈수록 높은 성장 단계입니다. 띠가 왼쪽으로 두꺼울수록 최근에 접속한 캐릭터가 많습니다."
+            so="성장 단계가 한 칸 오를 때마다 최근 접속 비중이 눈에 띄게 늘어납니다."
+          >
+            <ActivityStream bins={activity.byFameBin} />
+          </Chart>
         </div>
       </Stagger>
     </PageShell>

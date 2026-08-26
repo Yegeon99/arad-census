@@ -1,10 +1,21 @@
-import { useState } from "react";
-import { PAGES } from "../lib/hooks.js";
+import { useEffect, useState } from "react";
+import { PAGES, ENTER_MS, SAFETY_MS } from "../lib/hooks.js";
 
-/** 화면 진입 시 요소 순차 등장 (120밀리초 간격) */
+const STEP_MS = 60; // 요소 사이 등장 간격
+
+/**
+ * 화면 진입 시 요소를 차례로 띄운다.
+ * 800밀리초가 지나면 애니메이션과 무관하게 무조건 보이게 한다.
+ */
 export function Stagger({ index = 0, children, className = "", style }) {
+  const [safe, setSafe] = useState(false);
+  useEffect(() => {
+    const id = setTimeout(() => setSafe(true), SAFETY_MS);
+    return () => clearTimeout(id);
+  }, []);
+  if (safe) return <div className={className} style={style}>{children}</div>;
   return (
-    <div className={`rise ${className}`} style={{ animationDelay: `${index * 120}ms`, ...style }}>
+    <div className={`rise ${className}`} style={{ animationDelay: `${index * STEP_MS}ms`, ...style }}>
       {children}
     </div>
   );
@@ -54,6 +65,7 @@ export default function PageShell({
   statUnit,
   statLabel,
   statNote,
+  intro,
   visual,
   visualCaption,
   explain,
@@ -77,8 +89,7 @@ export default function PageShell({
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10">
         <Stagger index={1}>
-          <p className="t-kicker m-0">이 페이지가 답하는 질문은 하나입니다.</p>
-          <p className="t-lead m-0 mt-2 max-w-[680px]">{question}</p>
+          <p className="t-lead m-0 max-w-[680px]">{question}</p>
         </Stagger>
         {statValue && (
           <Stagger index={2}>
@@ -88,13 +99,15 @@ export default function PageShell({
                 {statUnit && <span style={{ fontSize: "0.42em", marginLeft: "0.12em", letterSpacing: "-0.01em" }}>{statUnit}</span>}
               </div>
               <div className="t-body m-0 text-[0.92rem]">{statLabel}</div>
-              {statNote && <div className="t-small m-0">{statNote}</div>}
+              {statNote && <div className="t-small m-0 max-w-[22rem] lg:ml-auto">{statNote}</div>}
             </div>
           </Stagger>
         )}
       </div>
 
       <hr className="rule mt-8 mb-8" />
+
+      {intro && <Stagger index={3}>{intro}</Stagger>}
 
       {visual && (
         <Stagger index={4}>

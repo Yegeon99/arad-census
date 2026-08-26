@@ -1,4 +1,4 @@
-import { useInView } from "../../lib/hooks.js";
+import { useInView, ENTER_MS, STAGGER_MS } from "../../lib/hooks.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
 
 /** 상위 직업 가로 바. 선버스트와 마우스 상태를 함께 쓴다. */
@@ -28,7 +28,7 @@ export default function TopBars({ items, hover, setHover, groupOf }) {
                 style={{
                   width: seen ? `${(d.pct / max) * 100}%` : 0,
                   background: on ? "var(--gold)" : "var(--ink-5)",
-                  transition: `width 0.8s cubic-bezier(0.22,0.68,0.31,1) ${i * 32}ms, background-color 0.18s`,
+                  transition: `width ${ENTER_MS}ms cubic-bezier(0.22,0.68,0.31,1) ${i * STAGGER_MS}ms, background-color 0.18s`,
                 }}
               />
             </span>
