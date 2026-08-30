@@ -25,7 +25,8 @@ export default function Growth() {
     <PageShell
       id="growth"
       question="레이드까지 온 캐릭터는 몇 명 중 한 명일까"
-      statValue={pct1(pyramidGap)}
+      statNumber={pyramidGap}
+      statFormat={pct1}
       statUnit="%포인트"
       statLabel="레기온 입장 전 구간 비중의 차이"
       statNote="전체 표본과 쏠림 없는 표본 사이"

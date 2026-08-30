@@ -1,11 +1,11 @@
 import { useState } from "react";
-import PageShell, { Stagger } from "../components/PageShell.jsx";
+import PageShell, { CountUp, Stagger } from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
 import SearchExplainer from "../components/SearchExplainer.jsx";
 import ViewToggle from "../components/ViewToggle.jsx";
 import Pyramid2D from "../components/charts/Pyramid2D.jsx";
 import { LazySamplePyramid } from "../components/three/Lazy.jsx";
-import { useCanRender3D, useCountUp, useIdleMount, useReducedMotion } from "../lib/hooks.js";
+import { useCanRender3D, useIdleMount } from "../lib/hooks.js";
 import { fmtInt, fmtPct, fmtPeople } from "../lib/format.js";
 import {
   meta, dist, complete, MEASURED, fameCompare, fameSample, completeFameSample,
@@ -72,13 +72,12 @@ const BASICS = [
 ];
 
 function BigNumber({ value, suffix, label, note, index }) {
-  const reduced = useReducedMotion();
-  const shown = useCountUp(value, { enabled: !reduced, duration: 900 });
   return (
     <Stagger index={index}>
       <div>
         <p className="num m-0 text-[2.1rem] font-bold leading-tight" style={{ color: "var(--text-primary)" }}>
-          {fmtInt(Math.round(shown))}<span className="text-[1.1rem] font-semibold" style={{ color: "var(--text-secondary)" }}>{suffix}</span>
+          <CountUp value={value} format={(v) => fmtInt(Math.round(v))} />
+          <span className="text-[1.1rem] font-semibold" style={{ color: "var(--text-secondary)" }}>{suffix}</span>
         </p>
         <p className="m-0 text-[0.9rem] font-semibold" style={{ color: "var(--text-secondary)" }}>{label}</p>
         <p className="t-small m-0">{note}</p>
@@ -117,7 +116,9 @@ export default function Overview() {
     <PageShell
       id="overview"
       question="던파 캐릭터 3만 명은 지금 어디까지 성장해 있을까"
-      statValue={fmtInt(meta.sampleSize)}
+      visualFocus={effective === "solid"}
+      statNumber={meta.sampleSize}
+      statFormat={(v) => fmtInt(Math.round(v))}
       statUnit="명"
       statLabel="조사한 캐릭터 수"
       statNote={`서버 ${meta.servers.length}곳, ${MEASURED.surveyedAt} 수집`}

@@ -78,45 +78,23 @@ export function useCanRender3D() {
   return !(narrow || coarse || reduced || weak) && hasWebGL();
 }
 
-/** 숫자 카운트업 */
-export function useCountUp(target, { duration = 1100, enabled = true } = {}) {
-  const [value, setValue] = useState(enabled ? 0 : target);
-  useEffect(() => {
-    if (!enabled) {
-      setValue(target);
-      return undefined;
-    }
-    let raf = 0;
-    const started = performance.now();
-    const tick = (now) => {
-      const t = Math.min(1, (now - started) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(target * eased);
-      if (t < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, enabled]);
-  return value;
-}
-
-/** 등장 애니메이션 길이. 순차 간격을 더해도 800밀리초를 넘지 않게 잡는다. */
+/** 차트가 0에서 실제 값까지 차오르는 시간. 항목이 많아도 0.8초 안에 끝나게 잡는다. */
 export const ENTER_MS = 320;
 export const STAGGER_MS = 10;
-export const SAFETY_MS = 800;      // 요소 등장의 마지노선
-export const VIEW_SAFETY_MS = 400; // 차트가 화면 밖이어도 이때는 그리기 시작한다
 
 /**
  * 화면에 들어왔는지 (차트 그려지는 애니메이션 시작점).
- * 관찰이 늦거나 아예 걸리지 않아도 800밀리초 뒤에는 무조건 보이게 한다.
+ * 관찰 기능이 없는 환경에서는 기다리지 않고 바로 그린다.
  */
 export function useInView(options) {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
-    const timer = setTimeout(() => setSeen(true), VIEW_SAFETY_MS);
     const el = ref.current;
-    if (!el) return () => clearTimeout(timer);
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setSeen(true);
+      return undefined;
+    }
     const obs = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
@@ -124,13 +102,10 @@ export function useInView(options) {
           obs.disconnect();
         }
       },
-      { rootMargin: "0px 0px -12% 0px", ...options }
+      { rootMargin: "0px 0px -8% 0px", ...options }
     );
     obs.observe(el);
-    return () => {
-      clearTimeout(timer);
-      obs.disconnect();
-    };
+    return () => obs.disconnect();
   }, [options]);
   return [ref, seen];
 }

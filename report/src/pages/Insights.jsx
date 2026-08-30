@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
 import MiniChart from "../components/charts/MiniChart.jsx";
 import { insights, MEASURED } from "../lib/data.js";
@@ -36,16 +37,23 @@ function Card({ item, open, onToggle, index }) {
         <Block label="발견">{item.finding}</Block>
         <Block label="해석">{item.interpretation}</Block>
 
-        {open && (
-          <>
-            <Block label="이렇게 확인할 수 있습니다">{item.validation}</Block>
-            <Block label="다음 질문" accent>{item.nextQuestion}</Block>
-            <div className="mt-5">
-              <p className="t-kicker m-0 mb-2" style={{ fontSize: "0.72rem", letterSpacing: "0.14em" }}>관련 수치</p>
-              <MiniChart focus={item.focus} />
-            </div>
-          </>
-        )}
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.28, ease: [0.22, 0.68, 0.31, 1] }}
+            >
+              <Block label="이렇게 확인할 수 있습니다">{item.validation}</Block>
+              <Block label="다음 질문" accent>{item.nextQuestion}</Block>
+              <div className="mt-5">
+                <p className="t-kicker m-0 mb-2" style={{ fontSize: "0.72rem", letterSpacing: "0.14em" }}>관련 수치</p>
+                <MiniChart focus={item.focus} />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <button type="button" className="disclose mt-5 self-start" aria-expanded={open} onClick={onToggle}>
           {open ? "접기" : "확인 방법과 관련 차트 펼치기"}
@@ -67,7 +75,8 @@ export default function Insights() {
     <PageShell
       id="insights"
       question="숫자에서 무엇을 읽어냈고, 무엇은 아직 못 믿을까"
-      statValue={String(insights.length)}
+      statNumber={insights.length}
+      statFormat={(v) => String(Math.round(v))}
       statUnit="개"
       statLabel="생성한 인사이트 수"
       statNote={`데이터에서 확인됨 ${confirmedCount}개, 추가 검증 필요 ${insights.length - confirmedCount}개`}

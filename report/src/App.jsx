@@ -1,3 +1,4 @@
+import { MotionConfig } from "motion/react";
 import { TopNav, BottomNav } from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import Overview from "./pages/Overview.jsx";
@@ -23,13 +24,15 @@ export default function App() {
   const page = useHashRoute();
   const View = VIEWS[page] ?? Overview;
   return (
-    <div className="flex min-h-screen flex-col">
-      <TopNav page={page} />
-      <main key={page} className="flex-1">
-        <View />
-      </main>
-      <Footer />
-      <BottomNav page={page} />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="flex min-h-screen flex-col">
+        <TopNav page={page} />
+        <main key={page} className="flex-1">
+          <View />
+        </main>
+        <Footer />
+        <BottomNav page={page} />
+      </div>
+    </MotionConfig>
   );
 }

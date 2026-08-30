@@ -32,7 +32,8 @@ export default function Jobs() {
     <PageShell
       id="jobs"
       question="어떤 직업이 가장 많을까"
-      statValue={pct1(topJobs[0].pct)}
+      statNumber={topJobs[0].pct}
+      statFormat={pct1}
       statUnit="%"
       statLabel={`${topJobs[0].jobName}, 표본에서 가장 많은 직업`}
       statNote={`${fmtPeople(topJobs[0].count)}, 성장을 마친 캐릭터 기준`}

@@ -39,7 +39,9 @@ export default function Gap() {
     <PageShell
       id="gap"
       question="직업에 따라 레이드 진입률이 얼마나 다를까"
-      statValue={(best.index / worst.index).toFixed(2)}
+      visualFocus={effective === "solid"}
+      statNumber={best.index / worst.index}
+      statFormat={(v) => v.toFixed(2)}
       statUnit="배"
       statLabel="레이드 진입 비중이 가장 높은 직업과 가장 낮은 직업의 배수"
       statNote={`${best.job}는 3명 중 1명이 레이드 구간, ${worst.job}는 7명 중 1명입니다. 성장을 마친 캐릭터 기준입니다.`}
@@ -84,7 +86,7 @@ export default function Gap() {
           label: "결과",
           body: [
             `가장 높은 ${topicParticle(best.job)} ${fmtX(best.index)}로 평균보다 높고, 가장 낮은 ${topicParticle(worst.job)} ${fmtX(worst.index)}로 평균보다 낮습니다.`,
-            "명성 점수가 있는 캐릭터이 300명 이상인 직업만 지수를 냈습니다.",
+            "명성 점수가 있는 캐릭터가 300명 이상인 직업만 지수를 냈습니다.",
           ],
         },
         {

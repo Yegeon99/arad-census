@@ -1,23 +1,33 @@
-import { useEffect, useState } from "react";
-import { PAGES, ENTER_MS, SAFETY_MS } from "../lib/hooks.js";
-
-const STEP_MS = 60; // 요소 사이 등장 간격
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { PAGES } from "../lib/hooks.js";
+import {
+  countUpOnScroll, dimAroundOnScroll, drawRuleOnScroll, revealOnScroll, MAX_STEPS, STEP_MS,
+} from "../lib/reveal.js";
 
 /**
- * 화면 진입 시 요소를 차례로 띄운다.
- * 800밀리초가 지나면 애니메이션과 무관하게 무조건 보이게 한다.
+ * 화면에 들어오면 차례로 뜬다.
+ * 제목이 먼저, 그다음 핵심 수치, 그다음 본문 순서가 되도록 index를 준다.
  */
 export function Stagger({ index = 0, children, className = "", style }) {
-  const [safe, setSafe] = useState(false);
-  useEffect(() => {
-    const id = setTimeout(() => setSafe(true), SAFETY_MS);
-    return () => clearTimeout(id);
-  }, []);
-  if (safe) return <div className={className} style={style}>{children}</div>;
+  const ref = useRef(null);
+  useEffect(() => revealOnScroll(ref.current, { delay: Math.min(index, MAX_STEPS) * STEP_MS }), [index]);
   return (
-    <div className={`rise ${className}`} style={{ animationDelay: `${index * STEP_MS}ms`, ...style }}>
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
+  );
+}
+
+/** 화면에 들어올 때 0에서 실제 값까지 세어 올라가는 숫자. 최초 1회만 돈다. */
+export function CountUp({ value, format, className, style }) {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(0);
+  useEffect(() => countUpOnScroll(ref.current, value, setShown), [value]);
+  return (
+    <span ref={ref} className={className} style={style}>
+      {format(shown)}
+    </span>
   );
 }
 
@@ -30,7 +40,19 @@ export function Disclose({ label, openLabel, children }) {
       <button type="button" className="disclose" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
         {open ? (openLabel ?? "세부 데이터 접기") : label}
       </button>
-      {open && <div className="mt-4">{children}</div>}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            className="mt-4"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 6 }}
+            transition={{ duration: 0.28, ease: [0.22, 0.68, 0.31, 1] }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -62,12 +84,15 @@ export default function PageShell({
   id,
   question,
   statValue,
+  statNumber,
+  statFormat,
   statUnit,
   statLabel,
   statNote,
   intro,
   visual,
   visualCaption,
+  visualFocus = false,
   explain,
   details,
   detailsLabel = "세부 데이터 펼치기",
@@ -78,8 +103,21 @@ export default function PageShell({
   const prev = PAGES[index - 1];
   const next = PAGES[index + 1];
 
+  const ruleRef = useRef(null);
+  const figureRef = useRef(null);
+  const articleRef = useRef(null);
+
+  useEffect(() => drawRuleOnScroll(ruleRef.current), []);
+
+  // 입체 시각화가 있는 화면에서만: 시각화가 화면 가운데 오면 주변 글을 살짝 죽인다
+  useEffect(() => {
+    if (!visualFocus) return undefined;
+    const around = articleRef.current?.querySelectorAll("[data-around-visual]");
+    return dimAroundOnScroll(figureRef.current, around);
+  }, [visualFocus]);
+
   return (
-    <article className="mx-auto w-full max-w-[1200px] px-5 pt-8 pb-16 lg:px-8 lg:pt-12">
+    <article ref={articleRef} className="mx-auto w-full max-w-[1200px] px-5 pt-8 pb-16 lg:px-8 lg:pt-12">
       <Stagger index={0}>
         <p className="t-eyebrow m-0">
           화면 {index + 1} <span style={{ opacity: 0.5 }}>/</span> {PAGES.length}
@@ -91,11 +129,13 @@ export default function PageShell({
         <Stagger index={1}>
           <p className="t-lead m-0 max-w-[680px]">{question}</p>
         </Stagger>
-        {statValue && (
+        {(statValue || statNumber !== undefined) && (
           <Stagger index={2}>
             <div className="lg:text-right">
               <div className="t-display" style={{ color: "var(--accent)" }}>
-                {statValue}
+                {statNumber !== undefined
+                  ? <CountUp value={statNumber} format={statFormat} />
+                  : statValue}
                 {statUnit && <span style={{ fontSize: "0.42em", marginLeft: "0.12em", letterSpacing: "-0.01em" }}>{statUnit}</span>}
               </div>
               <div className="t-body m-0 text-[0.92rem]">{statLabel}</div>
@@ -105,13 +145,17 @@ export default function PageShell({
         )}
       </div>
 
-      <hr className="rule mt-8 mb-8" />
+      <hr ref={ruleRef} className="rule mt-8 mb-8" />
 
-      {intro && <Stagger index={3}>{intro}</Stagger>}
+      {intro && (
+        <Stagger index={3}>
+          <div data-around-visual>{intro}</div>
+        </Stagger>
+      )}
 
       {visual && (
         <Stagger index={4}>
-          <figure className="m-0">
+          <figure ref={figureRef} className="m-0">
             {visual}
             {visualCaption && <figcaption className="t-small prose mt-3">{visualCaption}</figcaption>}
           </figure>
@@ -120,7 +164,7 @@ export default function PageShell({
 
       {explain && (
         <Stagger index={5}>
-          <div className="mt-10">
+          <div className="mt-10" data-around-visual>
             <Prose sections={explain} />
           </div>
         </Stagger>

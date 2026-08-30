@@ -36,6 +36,7 @@ function Bullets({ items }) {
 
 export default function Method() {
   const [tab, setTab] = useState("design");
+  const smallestBin = Math.min(...activity.byFameBin.map((b) => b.n));
 
   const steps = [
     {
@@ -69,7 +70,8 @@ export default function Method() {
     <PageShell
       id="method"
       question="이 숫자를 어디까지 믿어도 될까"
-      statValue={pct1(limitedRatio)}
+      statNumber={limitedRatio}
+      statFormat={pct1}
       statUnit="%"
       statLabel="200명 한도에 걸린 검색의 비중"
       statNote="이 조사에서 가장 큰 편향의 출처입니다"
@@ -188,7 +190,7 @@ export default function Method() {
                   <tbody>
                     {[
                       ["표본 크기", `${fmtPeople(meta.sampleSize)}, 쏠림 없는 표본 ${fmtPeople(meta.completeSampleSize)}, 명성 점수 없음 ${fmtPeople(meta.fameMissing)}`],
-                      ["활성도 조사", `${fmtPeople(activity.subsampleSize)}, 구간 비례로 뽑았고 가장 작은 구간이 ${fmtPeople(11)}`],
+                      ["활성도 조사", `${fmtPeople(activity.subsampleSize)}, 구간 비례로 뽑았고 가장 작은 구간이 ${fmtPeople(smallestBin)}`],
                       ["주고받은 요청", `약 ${fmtInt(MEASURED.apiCalls)}회, 사전 검증 43회와 직업 목록 1회, 검색 ${fmtInt(seedStats.calls + 1)}회, 활성도 조사 ${fmtInt(activity.subsampleSize)}회, 실패 0회`],
                       ["모델 비용", `${MEASURED.llmCostUsd.toFixed(4)}달러, 배치 ${MEASURED.llmBatches}회 누적`],
                       ["수집에 걸린 시간", `검색 ${MEASURED.collectSec}초, 활성도 조사 ${MEASURED.timelineSec}초`],

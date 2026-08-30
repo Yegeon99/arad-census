@@ -50,9 +50,19 @@ const parts = [
   "",
 ];
 
+// 등장 연출과 숫자 카운트업은 화면에 들어와야 돌기 시작한다.
+// 맨 아래까지 한 번 내렸다 올려 전부 끝난 상태의 글을 뽑는다.
+const settle = async () => {
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(1400);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(1400);
+};
+
 for (const [i, [id, label]] of PAGES.entries()) {
   await page.goto(`http://localhost:4182/#${id}`, { waitUntil: "networkidle" });
   await page.waitForTimeout(800);
+  await settle();
   const seen = new Set();
   const ordered = [];
   const take = async () => {

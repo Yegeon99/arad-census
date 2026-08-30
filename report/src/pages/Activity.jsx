@@ -16,7 +16,8 @@ export default function Activity() {
     <PageShell
       id="activity"
       question="최근 일주일 안에 접속한 캐릭터는 얼마나 될까"
-      statValue={pct1(after[dormantLabel])}
+      statNumber={after[dormantLabel]}
+      statFormat={pct1}
       statUnit="%"
       statLabel="90일 넘게 기록이 없는 비중, 보정값"
       statNote={`10명 중 6~7명은 90일 넘게 기록이 없습니다(보정값). 보정 전에는 ${fmtPct(before[dormantLabel])}입니다.`}
