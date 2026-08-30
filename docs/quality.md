@@ -2,7 +2,7 @@
 
 ## 배포본 실측 (v2.2, 2026년 8월 26일)
 
-배포된 주소 https://arad-census.vercel.app 에 Lighthouse 12를 붙여 쟀습니다.
+배포된 주소 https://dnf-census.vercel.app 에 Lighthouse 12를 붙여 쟀습니다.
 
 | 항목 | 데스크톱 | 모바일 |
 | --- | --- | --- |

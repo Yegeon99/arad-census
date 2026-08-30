@@ -1,5 +1,5 @@
 ===== desktop overview 한눈에 보기 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -164,7 +164,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop overview 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -325,7 +325,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop overview 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -490,7 +490,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop jobs 직업 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -652,7 +652,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop jobs 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -976,7 +976,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop growth 성장 단계 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1097,7 +1097,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop growth 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1218,7 +1218,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop growth 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1339,7 +1339,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop growth 조작 3 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1494,7 +1494,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop activity 활성도 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1605,7 +1605,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop activity 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1716,7 +1716,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop activity 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1827,7 +1827,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop activity 조작 3 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1964,7 +1964,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop gap 직업과 성장 격차 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2104,7 +2104,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop gap 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2474,7 +2474,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop gap 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2847,7 +2847,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop gap 조작 3 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3014,7 +3014,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights AI 인사이트 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3195,7 +3195,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3376,7 +3376,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3493,7 +3493,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 3 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3610,7 +3610,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 4 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3755,7 +3755,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 5 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3922,7 +3922,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 6 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4105,7 +4105,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop insights 조작 7 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4304,7 +4304,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop method 조사 방법과 한계 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4411,7 +4411,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop method 조작 1 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4518,7 +4518,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop method 조작 2 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4606,7 +4606,7 @@ AI 인사이트
 GitHub 저장소 · Neople 오픈 API
 
 ===== desktop method 조작 3 =====
-ARAD CENSUS
+DNF CENSUS
 한눈에 보기
 직업
 성장 단계

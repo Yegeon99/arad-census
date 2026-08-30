@@ -1,4 +1,4 @@
-# Arad Census, 던파 캐릭터 표본조사
+# DNF Census, 던파 캐릭터 표본조사
 
 던전앤파이터 캐릭터 **31,523명 표본**을 Neople 오픈 API로 추출해, 유저들이 지금
 어떻게 플레이하고 있는지(직업 분포, 성장 단계, 활성도, 직업 간 격차)를 통계조사
@@ -10,7 +10,7 @@
 > 표본 추출 방식의 편향과 한계를 리포트의 "조사 방법과 한계" 화면과
 > [data/bias_notes.md](data/bias_notes.md)에 그대로 공개합니다.
 
-**리포트**: https://arad-census.vercel.app (2026-08 조사 회차)
+**리포트**: https://dnf-census.vercel.app (2026-08 조사 회차)
 
 ![한눈에 보기 화면](docs/captures/desktop-overview.png)
 

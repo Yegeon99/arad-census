@@ -41,7 +41,7 @@ const lines = async () =>
 
 const NL = String.fromCharCode(10);
 const parts = [
-  "# 아라드 센서스 리포트 화면 문구 전문",
+  "# DNF 센서스 리포트 화면 문구 전문",
   "",
   "화면 일곱 개에 실제로 나오는 문구를 그대로 옮긴 것입니다.",
   "접기와 탭을 모두 펼친 상태까지 담았습니다.",

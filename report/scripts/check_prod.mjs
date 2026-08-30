@@ -1,7 +1,7 @@
 // 배포된 리포트 확인 (한 번만 본다)
 import { chromium } from "playwright";
 
-const URL = process.argv[2] ?? "https://arad-census.vercel.app";
+const URL = process.argv[2] ?? "https://dnf-census.vercel.app";
 const PAGES = [
   ["overview", "한눈에 보기"],
   ["jobs", "직업"],
