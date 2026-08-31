@@ -42,6 +42,9 @@ await page.waitForTimeout(1200);
 // 위로 되돌아온 뒤에는 화면 밖 요소가 아직 안 켜져 있어 빈 칸처럼 찍힌다.
 await page.evaluate(() => {
   for (const el of document.querySelectorAll("main *")) {
+    // 그림 안쪽은 건드리지 않는다. 차트는 transform 으로 자리를 잡기 때문에
+    // 여기서 지우면 축 글자와 막대가 겹쳐 보인다.
+    if (el.closest("svg")) continue;
     const cs = getComputedStyle(el);
     if (Number(cs.opacity) < 1) el.style.opacity = "1";
     if (cs.transform !== "none") el.style.transform = "none";

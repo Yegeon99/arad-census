@@ -204,6 +204,59 @@ export default function Overview() {
           <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="쏠림 없는 표본" note="200명에 걸리지 않은 검색에서 발견" />
         </div>
       </Stagger>
+
+      <Stagger index={8}>
+        <section
+          className="mt-14 px-6 py-7 lg:px-8 lg:py-8"
+          style={{ background: "var(--gold-soft)", borderLeft: "3px solid var(--gold)" }}
+        >
+          <p className="t-eyebrow m-0" style={{ color: "var(--gold-text)" }}>스스로 검증</p>
+          <h2 className="t-title m-0 mt-2 text-[1.3rem]">다른 방법으로 다시 재봤습니다</h2>
+          <p className="t-body m-0 mt-3 max-w-[52rem] text-[0.95rem]">
+            이름으로 찾는 방식은 결과가 200명에서 잘리고, 잘린 자리에 어떤 캐릭터가 있었는지 알 수 없습니다.
+            명성 점수로 직접 훑는 다른 방법으로 캐릭터 {fmtPeople(verify.meta.sampleSize)}을 다시 재서 두 결과를 맞춰 봤습니다.
+          </p>
+
+          <div className="mt-7 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+            {[
+              {
+                label: "성장 단계 분포",
+                value: verify.fameTvd,
+                verdict: "거의 같았습니다",
+                body: "검색이 잘리는 문제가 이 축을 크게 왜곡하지는 않았습니다.",
+                tone: "var(--accent)",
+              },
+              {
+                label: "직업 구성",
+                value: verify.jobTvd,
+                verdict: "뚜렷이 갈렸습니다",
+                body: "이름으로 뽑는 방식이 직업 쪽으로 치우칠 수 있다는 뜻입니다.",
+                tone: "var(--gold-text)",
+              },
+            ].map((c) => (
+              <div key={c.label} style={{ borderTop: "1px solid var(--hairline-strong)" }} className="pt-4">
+                <p className="t-small m-0">{c.label}</p>
+                <p className="num m-0 mt-1 text-[1.9rem] font-bold leading-none" style={{ color: c.tone }}>
+                  {fmtPp(c.value)}
+                </p>
+                <p className="m-0 mt-2 text-[0.95rem] font-bold" style={{ color: "var(--text-primary)" }}>
+                  {c.verdict}
+                </p>
+                <p className="t-body m-0 mt-1 text-[0.9rem]">{c.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="t-body m-0 mt-6 max-w-[52rem] text-[0.95rem]">
+            대신 활성도 판정에서 더 큰 문제를 찾았습니다.
+            최근 기록이 없으면 조용한 캐릭터로 봤는데, 명성이 낮은 캐릭터는 접속해도 기록에 남는 행동을 잘 하지 않습니다.
+            낮은 구간의 조용한 비중이 부풀었을 수 있습니다.
+          </p>
+          <p className="m-0 mt-4 text-[0.95rem]">
+            <a href="#method">조사 방법과 한계 화면에서 자세히 보기</a>
+          </p>
+        </section>
+      </Stagger>
     </PageShell>
   );
 }
