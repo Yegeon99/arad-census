@@ -23,10 +23,10 @@ const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8" />
   <div class="wordmark">DNF CENSUS</div>
   <div>
     <h1>DNF 센서스,<br />던파 캐릭터 표본조사</h1>
-    <p class="lede">캐릭터 31,523명 표본으로 읽는 직업과 성장 단계, 접속 기록. 표본이 어디로 기울어 있는지도 그대로 공개합니다.</p>
+    <p class="lede">캐릭터 130만 1,990명 표본으로 읽는 직업과 성장 단계, 접속 기록. 검색이 무엇을 가리는지 직접 재서 보정값을 함께 놓았습니다.</p>
   </div>
   <div class="foot">
-    <span>2026년 8월 조사 회차 · Neople 오픈 API</span>
+    <span>2026년 8월 두 번째 조사 회차 · Neople 오픈 API</span>
     <span class="bars"><i style="height:26px"></i><i style="height:44px"></i><i style="height:60px;opacity:.7"></i></span>
   </div>
 </div></body></html>`;

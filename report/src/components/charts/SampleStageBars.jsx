@@ -6,11 +6,10 @@ import { BIN_ORDER } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
 import { useReducedMotion } from "../../lib/hooks.js";
 
-const FULL = "전체 표본";
-const CLEAN = "쏠림 없는 표본";
-// 두 표본을 가르는 색. 한 계열 안의 명도 차가 아니라 색상 자체를 달리해
+// 두 계열을 가르는 색. 한 계열 안의 명도 차가 아니라 색상 자체를 달리해
 // 색약에서도 갈린다 (ΔE 27.5 protan / 31.2 정상 시야).
-const COLOR = { [FULL]: "var(--accent)", [CLEAN]: "var(--gold)" };
+const LEFT_COLOR = "var(--accent)";
+const RIGHT_COLOR = "var(--gold)";
 
 const ROW_H = 46;
 const M = { top: 6, right: 150, bottom: 26, left: 112 };
@@ -21,7 +20,12 @@ const pick = (bins, label) => bins.find((b) => (b.range ?? b.label) === label);
  * 성장 단계 여섯 칸을 두 표본으로 나란히 견준다.
  * 같은 자(가로축)를 함께 쓰기 때문에 두 막대의 길이를 그대로 비교할 수 있다.
  */
-export default function SampleStageBars({ full, complete, fullNote, completeNote }) {
+export default function SampleStageBars({
+  full, complete, fullNote, completeNote,
+  fullLabel = "전체 표본", completeLabel = "쏠림 없는 표본",
+}) {
+  const FULL = fullLabel;
+  const CLEAN = completeLabel;
   const [hovered, setHovered] = useState(null);
   // Bklit 차트는 움직임 최소화 설정을 스스로 보지 않는다. 여기서 꺼 준다.
   const reduced = useReducedMotion();
@@ -40,7 +44,7 @@ export default function SampleStageBars({ full, complete, fullNote, completeNote
           cleanCount: b?.count ?? 0,
         };
       }),
-    [full, complete]
+    [full, complete, FULL, CLEAN]
   );
 
   const height = data.length * ROW_H + M.top + M.bottom;
@@ -53,7 +57,7 @@ export default function SampleStageBars({ full, complete, fullNote, completeNote
           <li key={name} className="flex items-baseline gap-2">
             <span
               className="inline-block h-2.5 w-2.5 shrink-0 translate-y-[1px] rounded-[2px]"
-              style={{ background: COLOR[name] }}
+              style={{ background: name === FULL ? LEFT_COLOR : RIGHT_COLOR }}
               aria-hidden="true"
             />
             <span className="m-0 text-[0.92rem] font-bold" style={{ color: "var(--text-primary)" }}>{name}</span>

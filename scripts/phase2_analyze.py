@@ -140,6 +140,12 @@ res = {
     "old_n": len(old_rows), "new_n": len(new_rows),
     "fame_tvd_new_vs_old": round(fame_tvd, 2),
     "job_tvd_new_vs_old": round(job_tvd, 2),
+    # 화면이 이 표를 그대로 쓴다. 글 출력에만 두면 다시 읽을 수 없어 함께 저장한다.
+    "bin_old_vs_new": [
+        {"bin": l, "old": round(bo[l], 2), "new": round(bn[l], 2),
+         "diff": round(bn[l] - bo[l], 2)}
+        for l in LABELS
+    ],
     "random_seed": 20260831,
 }
 (ROOT / "data" / "phase2_sample.json").write_text(json.dumps(res, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -3,12 +3,11 @@ import Chart from "../components/Chart.jsx";
 import { ActivityMorph, ActivityStream } from "../components/charts/Activity.jsx";
 import { ACT_ORDER } from "../lib/palette.js";
 import { fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
-import { activity, actOverall, actAdjusted, dormantLabel, weeklyLabel, verify, dormGap } from "../lib/data.js";
+import { activity, actOverall, actAdjusted, dormantLabel, weeklyLabel, verify, capBins, capLowest } from "../lib/data.js";
 
 export default function Activity() {
   const before = Object.fromEntries(ACT_ORDER.map((k) => [k, actOverall[k].pct]));
   const after = actAdjusted;
-  const discovery = activity.byDiscovery;
   const lowest = activity.byFameBin[0];
   const highest = activity.byFameBin[activity.byFameBin.length - 1];
 
@@ -32,7 +31,7 @@ export default function Activity() {
           <p className="t-body m-0 mt-2 text-[0.92rem]">
             이 화면의 90일 넘게 기록 없음 비중은 실제보다 부풀었을 수 있습니다.
             명성 점수로 훑는 다른 방법으로 캐릭터 {fmtPeople(verify.meta.sampleSize)}을 다시 재본 결과,
-            특히 명성이 낮은 구간에서 그렇습니다. 아래 수치는 고치지 않고 그대로 두었습니다.{" "}
+            특히 명성이 낮은 구간에서 그렇습니다. 관측값은 고치지 않고 그대로 두었습니다.{" "}
             <a href="#method">조사 방법과 한계 화면</a>에 자세히 적었습니다.
           </p>
         </aside>
@@ -64,8 +63,8 @@ export default function Activity() {
         {
           label: "보정한 이유",
           body: [
-            `보정의 근거는 검색 방식 차이입니다. 쏠림 없는 검색에서도 발견된 ${fmtPeople(discovery.complete.n)} 가운데 90일 넘게 기록이 없는 비중은 ${fmtPct(discovery.complete.pct[dormantLabel])}입니다.`,
-            `같은 기준으로 잘린 검색에서만 발견된 ${fmtPeople(discovery.limited.n)}에서는 ${fmtPct(discovery.limited.pct[dormantLabel])}입니다. 검색 방식만 달라도 두 배 넘게 벌어집니다.`,
+            "접속 비율은 성장 단계마다 크게 다릅니다. 그래서 어느 단계가 얼마나 많은지가 전체 수치를 좌우합니다.",
+            `이 조사가 관측한 구간 비중은 검색 상한 때문에 위쪽으로 기울어 있습니다. 성장 단계 화면의 상한 보정값으로 구간 비중만 바꿔 다시 더한 것이 보정값입니다. 가장 낮은 구간이 ${fmtPct(capLowest.observed)}에서 ${fmtPct(capLowest.corrected)}로 커지면서, 조용한 쪽이 함께 늘어납니다.`,
           ],
         },
         {
@@ -101,30 +100,29 @@ export default function Activity() {
               </tbody>
             </table>
             <p className="t-small mt-3">
-              보정값은 명성 구간별 접속 비율에 쏠림 없는 표본의 구간 비중을 곱해 더한 값입니다.
+              보정값은 구간별 접속 비율에 상한 보정 구간 비중을 곱해 더한 값입니다.
               검색 한도 편향을 아래쪽으로 되돌린 방향의 추정입니다.
             </p>
           </div>
           <div>
-            <p className="t-eyebrow m-0 mb-2">검색 방식별 비교</p>
+            <p className="t-eyebrow m-0 mb-2">보정에 쓴 구간 비중</p>
             <table className="plain">
               <thead>
-                <tr><th>검색 방식</th><th className="text-right">인원</th><th className="text-right">90일 넘게 기록 없음</th></tr>
+                <tr><th>성장 단계</th><th className="text-right">관측 비중</th><th className="text-right">상한 보정 비중</th></tr>
               </thead>
               <tbody>
-                <tr>
-                  <td style={{ color: "var(--text-primary)" }}>쏠림 없는 검색에서도 발견</td>
-                  <td className="num text-right">{fmtPeople(discovery.complete.n)}</td>
-                  <td className="num text-right">{fmtPct(discovery.complete.pct[dormantLabel])}</td>
-                </tr>
-                <tr>
-                  <td style={{ color: "var(--text-primary)" }}>잘린 검색에서만 발견</td>
-                  <td className="num text-right">{fmtPeople(discovery.limited.n)}</td>
-                  <td className="num text-right">{fmtPct(discovery.limited.pct[dormantLabel])}</td>
-                </tr>
+                {capBins.map((b) => (
+                  <tr key={b.label}>
+                    <td style={{ color: "var(--text-primary)" }}>{b.label}</td>
+                    <td className="num text-right">{fmtPct(b.observed)}</td>
+                    <td className="num text-right" style={{ color: "var(--accent)", fontWeight: 600 }}>{fmtPct(b.corrected)}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-
+            <p className="t-small mt-3">
+              구간별 접속 비율은 그대로 두고 이 비중만 바꿔 다시 더했습니다.
+            </p>
           </div>
         </div>
 

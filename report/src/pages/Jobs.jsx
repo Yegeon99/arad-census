@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import PageShell from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
 import Term from "../components/Term.jsx";
 import JobGroupBars from "../components/charts/JobGroupBars.jsx";
 import TopBars from "../components/charts/TopBars.jsx";
 import { fmtPct, fmtPeople, pct1, asParticle } from "../lib/format.js";
-import { dist, finalStage, jobTree, topJobs, namedJobs, etcJobs, finalSample, allJobs } from "../lib/data.js";
+import { dist, finalStage, topJobs, namedJobs, etcJobs, finalSample, allJobs, meta } from "../lib/data.js";
 
 const STAGE_LABEL = {
   "미전직": "전직 전",
@@ -17,12 +17,6 @@ const STAGE_LABEL = {
 
 export default function Jobs() {
   const [hover, setHover] = useState(null);
-
-  const groupOf = useMemo(() => {
-    const m = new Map();
-    for (const g of jobTree.groups) for (const c of g.children) m.set(c.job, g.group);
-    return (job) => m.get(job) ?? null;
-  }, []);
 
   const top5Sum = topJobs.slice(0, 5).reduce((s, j) => s + j.count, 0);
   const finalJobs = finalStage.job;
@@ -36,7 +30,7 @@ export default function Jobs() {
       statFormat={pct1}
       statUnit="%"
       statLabel={`${topJobs[0].jobName}, 표본에서 가장 많은 직업`}
-      statNote={`${fmtPeople(topJobs[0].count)}, 성장을 마친 캐릭터 기준`}
+      statNote={`${fmtPeople(topJobs[0].count)}, 성장을 마친 캐릭터 ${fmtPeople(finalSample)} 기준`}
       intro={
         <p className="t-body m-0 max-w-[680px] text-[0.95rem]">
           성장을 마친(<Term k="진각성">진 각성</Term>) 캐릭터 {fmtPeople(finalSample)} 기준입니다.
@@ -45,17 +39,17 @@ export default function Jobs() {
       }
       visual={
         <Chart
-          how="왼쪽은 직업군 18종을 큰 것부터 늘어놓은 것입니다. 줄이 길수록 그 직업군이 많고, 줄 안의 칸 하나가 전직 하나입니다. 오른쪽은 전직만 따로 세어 많은 순으로 15종을 뽑은 것입니다."
+          how="왼쪽은 직업군 18종을 큰 것부터 늘어놓은 것입니다. 줄이 길수록 그 직업군이 많습니다. 오른쪽은 전직만 따로 세어 많은 순으로 15종을 뽑은 것입니다."
           so={`가장 많은 직업은 ${asParticle(topJobs[0].jobName)} ${fmtPct(topJobs[0].pct)}이고, 상위 5개 직업을 합치면 넷 중 하나에 가깝습니다.`}
         >
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
             <div>
               <p className="t-eyebrow m-0 mb-2">직업군 18종</p>
-              <JobGroupBars tree={jobTree} hover={hover} setHover={setHover} />
+              <JobGroupBars groups={finalStage.jobGroup} total={finalSample} />
             </div>
             <div>
               <p className="t-eyebrow m-0 mb-2">인원이 많은 직업 15종</p>
-              <TopBars items={topJobs} hover={hover} setHover={setHover} groupOf={groupOf} />
+              <TopBars items={topJobs} hover={hover} setHover={setHover} />
             </div>
           </div>
         </Chart>

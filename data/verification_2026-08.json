@@ -82,6 +82,362 @@
       "diff": -0.75
     }
   ],
+  "jobs_all": [
+    {
+      "jobName": "스위프트 마스터",
+      "first": 3.74,
+      "verified": 1.09,
+      "diff": -2.65
+    },
+    {
+      "jobName": "다크템플러",
+      "first": 5.27,
+      "verified": 2.96,
+      "diff": -2.31
+    },
+    {
+      "jobName": "인파이터",
+      "first": 3.0,
+      "verified": 4.48,
+      "diff": 1.48
+    },
+    {
+      "jobName": "런처",
+      "first": 1.95,
+      "verified": 2.7,
+      "diff": 0.75
+    },
+    {
+      "jobName": "인챈트리스",
+      "first": 3.06,
+      "verified": 2.31,
+      "diff": -0.75
+    },
+    {
+      "jobName": "스트라이커",
+      "first": 1.79,
+      "verified": 2.52,
+      "diff": 0.73
+    },
+    {
+      "jobName": "스트리트파이터",
+      "first": 0.92,
+      "verified": 1.52,
+      "diff": 0.6
+    },
+    {
+      "jobName": "다크 랜서",
+      "first": 1.41,
+      "verified": 0.82,
+      "diff": -0.59
+    },
+    {
+      "jobName": "어썰트",
+      "first": 0.49,
+      "verified": 0.96,
+      "diff": 0.47
+    },
+    {
+      "jobName": "트래블러",
+      "first": 3.07,
+      "verified": 2.65,
+      "diff": -0.42
+    },
+    {
+      "jobName": "뮤즈",
+      "first": 2.93,
+      "verified": 3.33,
+      "diff": 0.4
+    },
+    {
+      "jobName": "그래플러",
+      "first": 1.13,
+      "verified": 1.52,
+      "diff": 0.39
+    },
+    {
+      "jobName": "어벤저",
+      "first": 0.75,
+      "verified": 0.37,
+      "diff": -0.38
+    },
+    {
+      "jobName": "뱅가드",
+      "first": 0.43,
+      "verified": 0.74,
+      "diff": 0.31
+    },
+    {
+      "jobName": "베가본드",
+      "first": 2.13,
+      "verified": 1.84,
+      "diff": -0.29
+    },
+    {
+      "jobName": "메카닉",
+      "first": 1.47,
+      "verified": 1.76,
+      "diff": 0.29
+    },
+    {
+      "jobName": "미스트리스",
+      "first": 1.28,
+      "verified": 0.99,
+      "diff": -0.29
+    },
+    {
+      "jobName": "버서커",
+      "first": 2.19,
+      "verified": 1.92,
+      "diff": -0.27
+    },
+    {
+      "jobName": "듀얼리스트",
+      "first": 0.28,
+      "verified": 0.55,
+      "diff": 0.27
+    },
+    {
+      "jobName": "패러메딕",
+      "first": 3.13,
+      "verified": 3.39,
+      "diff": 0.26
+    },
+    {
+      "jobName": "레인저",
+      "first": 2.66,
+      "verified": 2.92,
+      "diff": 0.26
+    },
+    {
+      "jobName": "엘레멘탈마스터",
+      "first": 1.49,
+      "verified": 1.23,
+      "diff": -0.26
+    },
+    {
+      "jobName": "요원",
+      "first": 0.62,
+      "verified": 0.88,
+      "diff": 0.26
+    },
+    {
+      "jobName": "웨펀마스터",
+      "first": 2.05,
+      "verified": 2.29,
+      "diff": 0.24
+    },
+    {
+      "jobName": "트러블 슈터",
+      "first": 0.37,
+      "verified": 0.61,
+      "diff": 0.24
+    },
+    {
+      "jobName": "퇴마사",
+      "first": 0.63,
+      "verified": 0.86,
+      "diff": 0.23
+    },
+    {
+      "jobName": "헌터",
+      "first": 1.44,
+      "verified": 1.66,
+      "diff": 0.22
+    },
+    {
+      "jobName": "크루세이더",
+      "first": 7.73,
+      "verified": 7.94,
+      "diff": 0.21
+    },
+    {
+      "jobName": "드래고니안 랜서",
+      "first": 0.75,
+      "verified": 0.96,
+      "diff": 0.21
+    },
+    {
+      "jobName": "로그",
+      "first": 0.71,
+      "verified": 0.92,
+      "diff": 0.21
+    },
+    {
+      "jobName": "소울브링어",
+      "first": 1.43,
+      "verified": 1.63,
+      "diff": 0.2
+    },
+    {
+      "jobName": "이단심판관",
+      "first": 0.94,
+      "verified": 1.14,
+      "diff": 0.2
+    },
+    {
+      "jobName": "검귀",
+      "first": 1.17,
+      "verified": 1.35,
+      "diff": 0.18
+    },
+    {
+      "jobName": "블레이드",
+      "first": 2.67,
+      "verified": 2.5,
+      "diff": -0.17
+    },
+    {
+      "jobName": "블러드 메이지",
+      "first": 0.7,
+      "verified": 0.53,
+      "diff": -0.17
+    },
+    {
+      "jobName": "키메라",
+      "first": 2.94,
+      "verified": 2.78,
+      "diff": -0.16
+    },
+    {
+      "jobName": "쿠노이치",
+      "first": 0.54,
+      "verified": 0.69,
+      "diff": 0.15
+    },
+    {
+      "jobName": "마도학자",
+      "first": 1.13,
+      "verified": 1.0,
+      "diff": -0.13
+    },
+    {
+      "jobName": "소드마스터",
+      "first": 1.46,
+      "verified": 1.35,
+      "diff": -0.11
+    },
+    {
+      "jobName": "빙결사",
+      "first": 0.51,
+      "verified": 0.62,
+      "diff": 0.11
+    },
+    {
+      "jobName": "엘레멘탈 바머",
+      "first": 0.47,
+      "verified": 0.58,
+      "diff": 0.11
+    },
+    {
+      "jobName": "아수라",
+      "first": 2.93,
+      "verified": 3.03,
+      "diff": 0.1
+    },
+    {
+      "jobName": "비질란테",
+      "first": 1.48,
+      "verified": 1.38,
+      "diff": -0.1
+    },
+    {
+      "jobName": "엘븐나이트",
+      "first": 0.43,
+      "verified": 0.53,
+      "diff": 0.1
+    },
+    {
+      "jobName": "배틀메이지",
+      "first": 1.64,
+      "verified": 1.55,
+      "diff": -0.09
+    },
+    {
+      "jobName": "카오스",
+      "first": 0.95,
+      "verified": 1.04,
+      "diff": 0.09
+    },
+    {
+      "jobName": "드래곤나이트",
+      "first": 0.66,
+      "verified": 0.75,
+      "diff": 0.09
+    },
+    {
+      "jobName": "넨마스터",
+      "first": 4.46,
+      "verified": 4.54,
+      "diff": 0.08
+    },
+    {
+      "jobName": "소환사",
+      "first": 1.61,
+      "verified": 1.53,
+      "diff": -0.08
+    },
+    {
+      "jobName": "스핏파이어",
+      "first": 1.75,
+      "verified": 1.82,
+      "diff": 0.07
+    },
+    {
+      "jobName": "데몬슬레이어",
+      "first": 1.31,
+      "verified": 1.24,
+      "diff": -0.07
+    },
+    {
+      "jobName": "히트맨",
+      "first": 0.43,
+      "verified": 0.5,
+      "diff": 0.07
+    },
+    {
+      "jobName": "섀도우댄서",
+      "first": 0.34,
+      "verified": 0.41,
+      "diff": 0.07
+    },
+    {
+      "jobName": "브레이커",
+      "first": 4.13,
+      "verified": 4.08,
+      "diff": -0.05
+    },
+    {
+      "jobName": "디멘션워커",
+      "first": 0.37,
+      "verified": 0.34,
+      "diff": -0.03
+    },
+    {
+      "jobName": "스페셜리스트",
+      "first": 0.24,
+      "verified": 0.27,
+      "diff": 0.03
+    },
+    {
+      "jobName": "무녀",
+      "first": 0.82,
+      "verified": 0.8,
+      "diff": -0.02
+    },
+    {
+      "jobName": "사령술사",
+      "first": 0.75,
+      "verified": 0.73,
+      "diff": -0.02
+    },
+    {
+      "jobName": "팔라딘",
+      "first": 1.73,
+      "verified": 1.73,
+      "diff": 0.0
+    }
+  ],
   "job_tvd": 9.54,
   "job_group_tvd": 7.34,
   "job_compared": 59,

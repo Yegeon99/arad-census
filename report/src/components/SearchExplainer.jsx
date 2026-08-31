@@ -1,4 +1,6 @@
 import { BIN_COLOR, BIN_ORDER } from "../lib/palette.js";
+import { fmtInt, fmtPct } from "../lib/format.js";
+import { capEvidence } from "../lib/data.js";
 
 /**
  * 검색이 어떻게 잘리는지, 쏠림 없는 표본이 무엇인지 네 칸 그림으로 보여 준다.
@@ -95,7 +97,10 @@ function Panel4() {
 
 const PANELS = [
   { node: <Panel1 />, caption: "검색은 한 번에 200명까지만 보여줍니다." },
-  { node: <Panel2 />, caption: "200명이 넘는 글자는 잘립니다. 잘릴 때 강한 캐릭터가 먼저 남습니다." },
+  {
+    node: <Panel2 />,
+    caption: `200명이 넘는 글자는 잘립니다. 잘릴 때 낮은 명성 캐릭터가 먼저 잘립니다. 잘린 검색 ${fmtInt(capEvidence.sampledCombos)}개를 쪼개 다시 받아 보니 새로 드러난 캐릭터의 ${fmtPct(capEvidence.stageSplit[0].revealed)}가 가장 낮은 단계였습니다.`,
+  },
   { node: <Panel3 />, caption: "200명이 안 되는 글자는 전부 보입니다." },
   { node: <Panel4 />, caption: "이렇게 전부 보인 검색만 모은 것이 쏠림 없는 표본입니다. 실제 분포에 더 가깝습니다." },
 ];

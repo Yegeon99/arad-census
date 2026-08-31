@@ -1,5 +1,5 @@
 {
- "total_cost_usd": 0.107662,
+ "total_cost_usd": 0.129754,
  "calls": [
   {
    "at": "2026-08-25T17:58:16+09:00",
@@ -40,6 +40,14 @@
    "inputTokens": 3122,
    "outputTokens": 1587,
    "costUsd": 0.011057
+  },
+  {
+   "at": "2026-08-31T22:10:19+09:00",
+   "model": "claude-haiku-4-5",
+   "caller": "regen_insights_r2",
+   "inputTokens": 4332,
+   "outputTokens": 3552,
+   "costUsd": 0.022092
   }
  ]
 }

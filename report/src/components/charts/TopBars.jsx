@@ -1,19 +1,19 @@
 import { useInView, ENTER_MS, STAGGER_MS } from "../../lib/hooks.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
 
-/** 상위 직업 가로 바. 선버스트와 마우스 상태를 함께 쓴다. */
-export default function TopBars({ items, hover, setHover, groupOf }) {
+/** 상위 직업 가로 바. 마우스를 올린 줄만 도드라진다. */
+export default function TopBars({ items, hover, setHover }) {
   const [ref, seen] = useInView();
   const max = Math.max(...items.map((d) => d.pct));
   return (
     <ol ref={ref} className="m-0 list-none p-0">
       {items.map((d, i) => {
-        const on = hover && (hover.job === d.jobName || (hover.job === null && hover.group === groupOf(d.jobName)));
+        const on = hover && hover.job === d.jobName;
         return (
           <li
             key={d.jobName}
             className="flex items-center gap-3 py-[3px]"
-            onMouseEnter={() => setHover({ group: groupOf(d.jobName), job: d.jobName, count: d.count })}
+            onMouseEnter={() => setHover({ job: d.jobName, count: d.count })}
             onMouseLeave={() => setHover(null)}
             style={{ cursor: "default" }}
           >

@@ -1,0 +1,488 @@
+{
+  "meta": {
+    "surveyed_at": "2026-08-31T10:38:54+09:00",
+    "api_calls": 947,
+    "sample_size": 18552,
+    "population": 3091600,
+    "coarse_step": 250,
+    "dense_step": 50,
+    "grid_check_pct": -3.487,
+    "window_cap": 2000,
+    "subsample_min": 13,
+    "subsample_max": 293
+  },
+  "fame_bins": [
+    {
+      "bin": "레기온 미만",
+      "first": 48.78,
+      "verified": 38.52,
+      "diff": -10.26
+    },
+    {
+      "bin": "아포칼립스 입장",
+      "first": 16.99,
+      "verified": 20.45,
+      "diff": 3.46
+    },
+    {
+      "bin": "상급 던전권",
+      "first": 11.19,
+      "verified": 13.58,
+      "diff": 2.39
+    },
+    {
+      "bin": "미카엘라 입장",
+      "first": 12.06,
+      "verified": 14.94,
+      "diff": 2.88
+    },
+    {
+      "bin": "미카엘라 권장",
+      "first": 8.82,
+      "verified": 10.04,
+      "diff": 1.22
+    },
+    {
+      "bin": "하드 권장 이상",
+      "first": 2.16,
+      "verified": 2.47,
+      "diff": 0.31
+    }
+  ],
+  "fame_tvd": 10.26,
+  "jobs": [
+    {
+      "jobName": "브레이커",
+      "first": 2.91,
+      "verified": 4.08,
+      "diff": 1.17
+    },
+    {
+      "jobName": "인파이터",
+      "first": 3.33,
+      "verified": 4.48,
+      "diff": 1.15
+    },
+    {
+      "jobName": "인챈트리스",
+      "first": 3.02,
+      "verified": 2.31,
+      "diff": -0.71
+    },
+    {
+      "jobName": "스트라이커",
+      "first": 1.98,
+      "verified": 2.52,
+      "diff": 0.54
+    },
+    {
+      "jobName": "크루세이더",
+      "first": 8.42,
+      "verified": 7.94,
+      "diff": -0.48
+    }
+  ],
+  "jobs_all": [
+    {
+      "jobName": "브레이커",
+      "first": 2.91,
+      "verified": 4.08,
+      "diff": 1.17
+    },
+    {
+      "jobName": "인파이터",
+      "first": 3.33,
+      "verified": 4.48,
+      "diff": 1.15
+    },
+    {
+      "jobName": "인챈트리스",
+      "first": 3.02,
+      "verified": 2.31,
+      "diff": -0.71
+    },
+    {
+      "jobName": "스트라이커",
+      "first": 1.98,
+      "verified": 2.52,
+      "diff": 0.54
+    },
+    {
+      "jobName": "크루세이더",
+      "first": 8.42,
+      "verified": 7.94,
+      "diff": -0.48
+    },
+    {
+      "jobName": "패러메딕",
+      "first": 3.85,
+      "verified": 3.39,
+      "diff": -0.46
+    },
+    {
+      "jobName": "웨펀마스터",
+      "first": 1.91,
+      "verified": 2.29,
+      "diff": 0.38
+    },
+    {
+      "jobName": "트래블러",
+      "first": 2.97,
+      "verified": 2.65,
+      "diff": -0.32
+    },
+    {
+      "jobName": "런처",
+      "first": 2.4,
+      "verified": 2.7,
+      "diff": 0.3
+    },
+    {
+      "jobName": "마도학자",
+      "first": 1.28,
+      "verified": 1.0,
+      "diff": -0.28
+    },
+    {
+      "jobName": "소드마스터",
+      "first": 1.61,
+      "verified": 1.35,
+      "diff": -0.26
+    },
+    {
+      "jobName": "키메라",
+      "first": 3.02,
+      "verified": 2.78,
+      "diff": -0.24
+    },
+    {
+      "jobName": "소울브링어",
+      "first": 1.4,
+      "verified": 1.63,
+      "diff": 0.23
+    },
+    {
+      "jobName": "스페셜리스트",
+      "first": 0.49,
+      "verified": 0.27,
+      "diff": -0.22
+    },
+    {
+      "jobName": "레인저",
+      "first": 3.13,
+      "verified": 2.92,
+      "diff": -0.21
+    },
+    {
+      "jobName": "드래곤나이트",
+      "first": 0.95,
+      "verified": 0.75,
+      "diff": -0.2
+    },
+    {
+      "jobName": "쿠노이치",
+      "first": 0.88,
+      "verified": 0.69,
+      "diff": -0.19
+    },
+    {
+      "jobName": "아수라",
+      "first": 2.85,
+      "verified": 3.03,
+      "diff": 0.18
+    },
+    {
+      "jobName": "데몬슬레이어",
+      "first": 1.42,
+      "verified": 1.24,
+      "diff": -0.18
+    },
+    {
+      "jobName": "어썰트",
+      "first": 0.78,
+      "verified": 0.96,
+      "diff": 0.18
+    },
+    {
+      "jobName": "베가본드",
+      "first": 1.99,
+      "verified": 1.84,
+      "diff": -0.15
+    },
+    {
+      "jobName": "듀얼리스트",
+      "first": 0.4,
+      "verified": 0.55,
+      "diff": 0.15
+    },
+    {
+      "jobName": "퇴마사",
+      "first": 0.72,
+      "verified": 0.86,
+      "diff": 0.14
+    },
+    {
+      "jobName": "배틀메이지",
+      "first": 1.67,
+      "verified": 1.55,
+      "diff": -0.12
+    },
+    {
+      "jobName": "스트리트파이터",
+      "first": 1.4,
+      "verified": 1.52,
+      "diff": 0.12
+    },
+    {
+      "jobName": "이단심판관",
+      "first": 1.26,
+      "verified": 1.14,
+      "diff": -0.12
+    },
+    {
+      "jobName": "로그",
+      "first": 0.8,
+      "verified": 0.92,
+      "diff": 0.12
+    },
+    {
+      "jobName": "히트맨",
+      "first": 0.62,
+      "verified": 0.5,
+      "diff": -0.12
+    },
+    {
+      "jobName": "비질란테",
+      "first": 1.49,
+      "verified": 1.38,
+      "diff": -0.11
+    },
+    {
+      "jobName": "다크 랜서",
+      "first": 0.72,
+      "verified": 0.82,
+      "diff": 0.1
+    },
+    {
+      "jobName": "무녀",
+      "first": 0.7,
+      "verified": 0.8,
+      "diff": 0.1
+    },
+    {
+      "jobName": "엘레멘탈 바머",
+      "first": 0.68,
+      "verified": 0.58,
+      "diff": -0.1
+    },
+    {
+      "jobName": "넨마스터",
+      "first": 4.45,
+      "verified": 4.54,
+      "diff": 0.09
+    },
+    {
+      "jobName": "그래플러",
+      "first": 1.61,
+      "verified": 1.52,
+      "diff": -0.09
+    },
+    {
+      "jobName": "트러블 슈터",
+      "first": 0.7,
+      "verified": 0.61,
+      "diff": -0.09
+    },
+    {
+      "jobName": "어벤저",
+      "first": 0.46,
+      "verified": 0.37,
+      "diff": -0.09
+    },
+    {
+      "jobName": "사령술사",
+      "first": 0.81,
+      "verified": 0.73,
+      "diff": -0.08
+    },
+    {
+      "jobName": "디멘션워커",
+      "first": 0.42,
+      "verified": 0.34,
+      "diff": -0.08
+    },
+    {
+      "jobName": "뱅가드",
+      "first": 0.81,
+      "verified": 0.74,
+      "diff": -0.07
+    },
+    {
+      "jobName": "헌터",
+      "first": 1.6,
+      "verified": 1.66,
+      "diff": 0.06
+    },
+    {
+      "jobName": "소환사",
+      "first": 1.59,
+      "verified": 1.53,
+      "diff": -0.06
+    },
+    {
+      "jobName": "검귀",
+      "first": 1.3,
+      "verified": 1.35,
+      "diff": 0.05
+    },
+    {
+      "jobName": "섀도우댄서",
+      "first": 0.36,
+      "verified": 0.41,
+      "diff": 0.05
+    },
+    {
+      "jobName": "다크템플러",
+      "first": 2.92,
+      "verified": 2.96,
+      "diff": 0.04
+    },
+    {
+      "jobName": "팔라딘",
+      "first": 1.77,
+      "verified": 1.73,
+      "diff": -0.04
+    },
+    {
+      "jobName": "버서커",
+      "first": 1.89,
+      "verified": 1.92,
+      "diff": 0.03
+    },
+    {
+      "jobName": "스핏파이어",
+      "first": 1.85,
+      "verified": 1.82,
+      "diff": -0.03
+    },
+    {
+      "jobName": "메카닉",
+      "first": 1.79,
+      "verified": 1.76,
+      "diff": -0.03
+    },
+    {
+      "jobName": "미스트리스",
+      "first": 0.96,
+      "verified": 0.99,
+      "diff": 0.03
+    },
+    {
+      "jobName": "요원",
+      "first": 0.85,
+      "verified": 0.88,
+      "diff": 0.03
+    },
+    {
+      "jobName": "빙결사",
+      "first": 0.65,
+      "verified": 0.62,
+      "diff": -0.03
+    },
+    {
+      "jobName": "엘븐나이트",
+      "first": 0.56,
+      "verified": 0.53,
+      "diff": -0.03
+    },
+    {
+      "jobName": "블레이드",
+      "first": 2.52,
+      "verified": 2.5,
+      "diff": -0.02
+    },
+    {
+      "jobName": "카오스",
+      "first": 1.06,
+      "verified": 1.04,
+      "diff": -0.02
+    },
+    {
+      "jobName": "엘레멘탈마스터",
+      "first": 1.22,
+      "verified": 1.23,
+      "diff": 0.01
+    },
+    {
+      "jobName": "스위프트 마스터",
+      "first": 1.1,
+      "verified": 1.09,
+      "diff": -0.01
+    },
+    {
+      "jobName": "드래고니안 랜서",
+      "first": 0.97,
+      "verified": 0.96,
+      "diff": -0.01
+    },
+    {
+      "jobName": "블러드 메이지",
+      "first": 0.54,
+      "verified": 0.53,
+      "diff": -0.01
+    },
+    {
+      "jobName": "뮤즈",
+      "first": 3.33,
+      "verified": 3.33,
+      "diff": 0.0
+    }
+  ],
+  "job_tvd": 5.24,
+  "job_group_tvd": 3.83,
+  "job_compared": 59,
+  "dormancy": [
+    {
+      "bin": "레기온 미만",
+      "timeline": 77.5,
+      "subsampleN": 293,
+      "implied": 36.3,
+      "diff": -41.2
+    },
+    {
+      "bin": "아포칼립스 입장",
+      "timeline": 16.7,
+      "subsampleN": 102,
+      "implied": 2.8,
+      "diff": -13.8
+    },
+    {
+      "bin": "상급 던전권",
+      "timeline": 9.0,
+      "subsampleN": 67,
+      "implied": 2.0,
+      "diff": -6.9
+    },
+    {
+      "bin": "미카엘라 입장",
+      "timeline": 4.2,
+      "subsampleN": 72,
+      "implied": 0.0,
+      "diff": -4.2
+    },
+    {
+      "bin": "미카엘라 권장",
+      "timeline": 0.0,
+      "subsampleN": 53,
+      "implied": 8.1,
+      "diff": 8.1
+    },
+    {
+      "bin": "하드 권장 이상",
+      "timeline": 0.0,
+      "subsampleN": 13,
+      "implied": 7.7,
+      "diff": 7.7
+    }
+  ]
+}

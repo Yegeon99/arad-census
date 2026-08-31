@@ -83,6 +83,7 @@ export function Prose({ sections }) {
 export default function PageShell({
   id,
   question,
+  notice,
   statValue,
   statNumber,
   statFormat,
@@ -123,6 +124,7 @@ export default function PageShell({
           화면 {index + 1} <span style={{ opacity: 0.5 }}>/</span> {PAGES.length}
         </p>
         <h1 className="t-title mt-1 mb-0">{current.label}</h1>
+        {notice && <p className="t-small m-0 mt-3 max-w-[46rem]">{notice}</p>}
       </Stagger>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-10">

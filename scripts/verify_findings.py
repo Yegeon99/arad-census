@@ -74,8 +74,16 @@ CLAIMS = [
     (45.91, nk["coverage_holdout_pct"]["1000"], "흔한 조합 1000개 커버리지 예측"),
     (42.2, act2["overall"]["휴면"]["pct"], "2차 휴면율"),
     (40.2, round(next(x["pct"] for x in r1["activity"]["overall"] if x["label"] == "휴면"), 1), "1차 휴면율"),
-    (0.107662, llm["total_cost_usd"], "LLM 누적 비용"),
 ]
+
+# 모델 비용은 인사이트를 다시 만들 때마다 바뀐다. 상수로 박아 두면 곧 어긋나므로
+# 문서에 적힌 값을 그대로 읽어 산출물과 맞춘다.
+FINDINGS = (ROOT / "docs" / "findings.md").read_text(encoding="utf-8")
+m_cost = re.search(r"모델 비용 누적 \| ([\d.]+)달러 \(배치 (\d+)회\)", FINDINGS)
+if not m_cost:
+    raise SystemExit("findings.md 에서 모델 비용 줄을 찾지 못했습니다")
+CLAIMS.append((float(m_cost.group(1)), llm["total_cost_usd"], "LLM 누적 비용"))
+CLAIMS.append((int(m_cost.group(2)), len(llm["calls"]), "LLM 배치 횟수"))
 
 # 새로 드러난 캐릭터의 레기온 입장 전 비중은 phase2_sample.txt 에 있다
 txt = (D / "phase2_sample.txt").read_text(encoding="utf-8")

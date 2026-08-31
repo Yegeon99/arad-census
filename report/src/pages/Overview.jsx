@@ -4,8 +4,8 @@ import SearchExplainer from "../components/SearchExplainer.jsx";
 import SampleStageBars from "../components/charts/SampleStageBars.jsx";
 import { fmtInt, fmtPct, fmtPeople, fmtPp } from "../lib/format.js";
 import {
-  meta, dist, complete, MEASURED, fameCompare, fameSample, completeFameSample,
-  topJobs, finalSample, verify,
+  meta, MEASURED, capBins, capLowest, capGap, capEvidence,
+  topJobs, finalSample, verify, rounds,
 } from "../lib/data.js";
 
 const ICON = {
@@ -62,8 +62,8 @@ const BASICS = [
   },
   {
     icon: <AdjustIcon />,
-    title: "보정값",
-    body: "잘린 검색의 쏠림을 쏠림 없는 표본의 비율로 되돌려 다시 계산한 값입니다.",
+    title: "상한 보정값",
+    body: "검색이 200명에서 잘리며 가려진 몫을 되돌려 다시 계산한 값입니다. 실제로 쪼개 재본 결과를 근거로 삼았습니다.",
   },
 ];
 
@@ -98,14 +98,26 @@ function FindingCard({ href, kicker, title, body, index }) {
 }
 
 export default function Overview() {
-  const fullNote = `강한 캐릭터 쪽으로 쏠림 있음, ${fmtPeople(fameSample)}`;
-  const completeNote = `검색 한도에 안 걸려 전부 받은 ${fmtPeople(completeFameSample)}`;
-  const pyramidProps = { full: dist.fameBins, complete: complete.fameBins, fullNote, completeNote };
+  const observedBins = capBins.map((b) => ({ range: b.label, pct: b.observed, count: b.observedCount }));
+  const correctedBins = capBins.map((b) => ({
+    range: b.label,
+    pct: b.corrected,
+    count: Math.round((b.corrected / 100) * finalSample),
+  }));
+  const pyramidProps = {
+    full: observedBins,
+    complete: correctedBins,
+    fullLabel: "관측값",
+    completeLabel: "상한 보정값",
+    fullNote: `실제로 받아 센 값, 성장을 마친 ${fmtPeople(finalSample)}`,
+    completeNote: "검색이 잘리며 가려진 몫을 되돌린 값",
+  };
 
   return (
     <PageShell
       id="overview"
-      question="던파 캐릭터 3만 명은 지금 어디까지 성장해 있을까"
+      question="던파 캐릭터 130만 명은 지금 어디까지 성장해 있을까"
+      notice="이 리포트는 두 번째 조사 기준입니다. 처음 조사와 무엇이 달라졌는지는 조사 방법 화면에 있습니다."
       statNumber={meta.sampleSize}
       statFormat={(v) => fmtInt(Math.round(v))}
       statUnit="명"
@@ -141,7 +153,7 @@ export default function Overview() {
       visual={
         <Chart
           how="줄 하나가 성장 단계 하나입니다. 위가 높은 단계, 아래가 낮은 단계이고, 두 막대가 같은 가로축을 써서 길이를 그대로 견줄 수 있습니다."
-          so="쏠림 없는 표본은 열 명 중 여덟 명이 레이드 이전 단계입니다. 전체 표본에서는 열 명 중 네다섯 명입니다."
+          so={`상한을 되돌리면 가장 낮은 단계가 ${fmtPct(capLowest.observed)}에서 ${fmtPct(capLowest.corrected)}로 올라갑니다. 실제 유저는 관측값이 보여주는 것보다 아래쪽에 몰려 있습니다.`}
         >
           <SampleStageBars {...pyramidProps} />
         </Chart>
@@ -151,13 +163,14 @@ export default function Overview() {
           label: "조사한 것",
           body: [
             `던전앤파이터 캐릭터 표본을 서버 ${meta.servers.length}곳에서 뽑아 직업과 성장 단계, 접속 기록을 살펴봤습니다.`,
-            "표본은 캐릭터 이름에 한국어 두 글자를 넣어 검색하는 방식으로 모았습니다.",
+            `표본은 캐릭터 이름에 한국어 두 글자를 넣어 검색하는 방식으로 모았습니다. 두 글자 조합 ${fmtInt(meta.seedCount)}개를 써서 ${fmtPeople(meta.sampleSize)}을 모았고, 이름에 한글이 든 캐릭터의 ${fmtPct(rounds.second.coveragePct)}에 닿았습니다.`,
           ],
         },
         {
-          label: "표본을 둘로 나눈 이유",
+          label: "관측값과 보정값을 나란히 두는 이유",
           body: [
-            "잘린 검색은 강한 캐릭터 쪽으로 쏠립니다. 그 쏠림이 얼마나 큰지 재려고 쏠림 없는 표본을 따로 집계했습니다.",
+            "잘린 검색은 강한 캐릭터 쪽으로 쏠립니다. 관측값만 보여 주면 그 쏠림을 그대로 사실처럼 읽게 됩니다.",
+            "그래서 잘린 검색을 쪼개 다시 받아 무엇이 가려져 있었는지 직접 재고, 그 몫을 되돌린 값을 옆에 함께 두었습니다.",
           ],
         },
         {
@@ -175,24 +188,24 @@ export default function Overview() {
         <div className="grid gap-x-8 lg:grid-cols-3">
           <FindingCard
             index={0}
-            href="#jobs"
-            kicker="직업"
-            title={`가장 많은 직업은 ${topJobs[0].jobName}입니다`}
-            body={`성장을 마친 캐릭터 안에서 ${fmtPct(topJobs[0].pct)}를 차지합니다. 상위 5개 직업을 합치면 넷 중 하나에 가깝습니다.`}
+            href="#growth"
+            kicker="성장 단계"
+            title="실제 유저는 보이는 것보다 아래쪽에 몰려 있습니다"
+            body={`레기온 입장 전 구간이 관측값으로는 ${fmtPct(capLowest.observed)}이지만, 검색이 가린 몫을 되돌리면 ${fmtPct(capLowest.corrected)}입니다.`}
           />
           <FindingCard
             index={1}
             href="#growth"
-            kicker="성장 단계"
-            title="잘린 검색을 빼면 레이드 이전 단계가 두 배로 뜁니다"
-            body={`전체 표본에서는 ${fmtPct(fameCompare[0].full)}인데, 쏠림 없는 표본 보면 ${fmtPct(fameCompare[0].complete)}입니다.`}
+            kicker="검색 상한"
+            title="검색이 200명에서 잘릴 때 낮은 명성 캐릭터가 먼저 잘립니다"
+            body={`잘린 검색 ${fmtInt(capEvidence.sampledCombos)}개를 쪼개 다시 받아 보니, 새로 드러난 캐릭터의 ${fmtPct(capEvidence.stageSplit[0].revealed)}가 가장 낮은 단계였습니다.`}
           />
           <FindingCard
             index={2}
             href="#method"
-            kicker="스스로 검증"
-            title="같은 것을 두 방법으로 재봤습니다"
-            body={`성장 단계 분포는 ${fmtPp(verify.fameTvd)} 차이로 거의 같았고, 직업 구성은 ${fmtPp(verify.jobTvd)} 갈렸습니다. 대신 활성도 판정에서 더 큰 문제를 찾았습니다.`}
+            kicker="처음 조사와의 차이"
+            title="처음 조사는 이름 짓는 습관 때문에 직업 구성이 틀어져 있었습니다"
+            body={`시드 낱말이 직업과 맞물려 있었습니다. 시드를 바꿔 다시 모으자 직업 구성 차이가 ${fmtPp(rounds.first.jobTvd)}에서 ${fmtPp(rounds.second.jobTvd)}로 좁혀졌습니다.`}
           />
         </div>
       </Stagger>
@@ -220,17 +233,17 @@ export default function Overview() {
           <div className="mt-7 grid gap-x-10 gap-y-6 sm:grid-cols-2">
             {[
               {
-                label: "성장 단계 분포",
-                value: verify.fameTvd,
-                verdict: "거의 같았습니다",
-                body: "검색이 잘리는 문제가 이 축을 크게 왜곡하지는 않았습니다.",
+                label: "직업 구성",
+                value: verify.jobTvd,
+                verdict: "좁혀졌습니다",
+                body: `처음 조사에서는 ${fmtPp(rounds.first.jobTvd)} 갈렸습니다. 시드를 바꾸자 이만큼으로 줄었습니다.`,
                 tone: "var(--accent)",
               },
               {
-                label: "직업 구성",
-                value: verify.jobTvd,
-                verdict: "뚜렷이 갈렸습니다",
-                body: "이름으로 뽑는 방식이 직업 쪽으로 치우칠 수 있다는 뜻입니다.",
+                label: "성장 단계 분포",
+                value: verify.fameTvd,
+                verdict: "오히려 벌어졌습니다",
+                body: `처음 조사에서는 ${fmtPp(rounds.first.fameTvd)}로 잘 맞아 보였습니다. 잘 맞아서가 아니었습니다.`,
                 tone: "var(--gold-text)",
               },
             ].map((c) => (
@@ -248,12 +261,14 @@ export default function Overview() {
           </div>
 
           <p className="t-body m-0 mt-6 max-w-[52rem] text-[0.95rem]">
-            대신 활성도 판정에서 더 큰 문제를 찾았습니다.
-            최근 기록이 없으면 조용한 캐릭터로 봤는데, 명성이 낮은 캐릭터는 접속해도 기록에 남는 행동을 잘 하지 않습니다.
-            낮은 구간의 조용한 비중이 부풀었을 수 있습니다.
+            성장 단계는 상한을 걷어낼수록 명성 방식에서 더 멀어집니다.
+            {" "}{fmtPp(rounds.fameMethodTvd.firstObserved)}에서 {fmtPp(rounds.fameMethodTvd.secondObserved)},
+            상한을 보정하면 {fmtPp(rounds.fameMethodTvd.secondCapCorrected)}입니다.
+            명성 방식도 90일 넘게 접속하지 않은 캐릭터를 못 보는데, 검색 상한이 가리던 것이 바로 그 층이기 때문입니다.
+            처음 조사에서 잘 맞아 보이던 수치는 두 편향이 서로 상쇄된 결과였습니다.
           </p>
           <p className="m-0 mt-4 text-[0.95rem]">
-            <a href="#method">조사 방법과 한계 화면에서 자세히 보기</a>
+            <a href="#method">조사 방법 화면에서 처음 조사와 무엇이 달라졌는지 보기</a>
           </p>
         </section>
       </Stagger>

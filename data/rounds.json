@@ -1,0 +1,67 @@
+{
+  "note": "1차와 2차를 나란히 놓기 위한 대조 자료. 두 회차 산출물은 그대로 둔다.",
+  "first": {
+    "label": "처음 조사",
+    "surveyed_at": "2026-08-26T15:22:04+09:00",
+    "sample_size": 31523,
+    "final_stage_size": 29527,
+    "seeds": 36,
+    "seeds_common": 18,
+    "seeds_rare": 18,
+    "coverage_pct": 1.21,
+    "limited_pct": 45.83,
+    "job_tvd": 9.54,
+    "fame_tvd": 3.84
+  },
+  "second": {
+    "label": "두 번째 조사",
+    "surveyed_at": "2026-08-31T16:03:36+09:00",
+    "sample_size": 1301990,
+    "final_stage_size": 1228491,
+    "seeds": 1000,
+    "coverage_pct": 50.66,
+    "limited_pct": 90.53,
+    "job_tvd": 5.24,
+    "fame_tvd": 10.26
+  },
+  "seed_bias": {
+    "probe_sample": 18543,
+    "caught": 224,
+    "seed": "바람",
+    "seed_hits": 38,
+    "top_job": "스위프트 마스터",
+    "top_job_count": 24
+  },
+  "job_gap": [
+    {
+      "jobName": "스위프트 마스터",
+      "first": 2.65,
+      "second": 0.01
+    },
+    {
+      "jobName": "다크템플러",
+      "first": 2.31,
+      "second": -0.04
+    },
+    {
+      "jobName": "다크 랜서",
+      "first": 0.59,
+      "second": -0.1
+    }
+  ],
+  "coverage_by_seed_count": {
+    "36": 13.11,
+    "100": 22.07,
+    "300": 32.58,
+    "1000": 45.91
+  },
+  "fame_method_tvd": {
+    "first_observed": 3.84,
+    "second_observed": 10.26,
+    "second_cap_corrected": 29.97
+  },
+  "split_prediction": {
+    "expected": "직업군으로 쪼개도 인기 직업군은 다시 상한에 걸린다",
+    "still_limited_pct": 5.18
+  }
+}

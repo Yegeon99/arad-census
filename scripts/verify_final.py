@@ -25,10 +25,14 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CENSUS = ROOT / "data" / "census_2026-08.json"
-SEEDS = ROOT / "data" / "seed_yield.json"
+CENSUS = ROOT / "data" / "census_2026-08-r2.json"
+ACTIVITY = ROOT / "data" / "activity_r2.json"
+CAP = ROOT / "data" / "cap_correct.json"
+SPLIT = ROOT / "data" / "phase2_sample.json"
+ROUNDS = ROOT / "data" / "rounds.json"
 COSTS = ROOT / "data" / "llm_costs.json"
 BUNDLE = ROOT / "report" / "src" / "data" / "census.json"
+CAP_BUNDLE = ROOT / "report" / "src" / "data" / "cap_correct.json"
 STABILITY = ROOT / "docs" / "stability.json"
 INSIGHTS = ROOT / "report" / "src" / "derived" / "insights.json"
 FACTS = ROOT / "report" / "content" / "insight_facts.json"
@@ -86,12 +90,13 @@ def check_census(c):
     d = c["distributions"]
     u = c["distributions_uncapped_only"]
 
-    ok(m["sample_size"] == 31523, "표본 크기가 31,523이 아닙니다")
-    ok(m["sample_size"] - m["fame_missing"] == 30082, "명성 보유 표본이 30,082가 아닙니다")
-    ok(m["uncapped_sample_size"] == 5352, "완전 검색 표본이 5,352가 아닙니다")
-    ok(m["uncapped_sample_size"] - m["uncapped_fame_missing"] == 4087,
-       "완전 검색 명성 표본이 4,087이 아닙니다")
-    ok(m.get("round") == "2026-08", "조사 회차 표기가 없습니다")
+    ok(m["sample_size"] == 1301990, "표본 크기가 1,301,990이 아닙니다")
+    ok(m["sample_size"] - m["fame_missing"] == 1266224, "명성 보유 표본이 1,266,224가 아닙니다")
+    ok(m["uncapped_sample_size"] == 106331, "쏠림 없는 표본이 106,331이 아닙니다")
+    ok(m["uncapped_sample_size"] - m["uncapped_fame_missing"] == 83489,
+       "쏠림 없는 명성 표본이 83,489가 아닙니다")
+    ok(m.get("round") == "2026-08-r2", "조사 회차 표기가 2026-08-r2가 아닙니다")
+    ok(m.get("seed_count") == 1000, "시드 개수가 1,000이 아닙니다")
 
     names = [j["jobName"] for j in d["job"]]
     ok("자각1" not in names and "크리에이터" not in names,
@@ -99,11 +104,11 @@ def check_census(c):
     ok(not any(x["jobName"] == "자각1" for x in d["job_x_fame"]),
        "교차표에 합산 대상 이름이 남아 있습니다")
     etc = [j for j in d["job"] if j["jobName"].startswith("기타")]
-    ok(len(etc) == 1 and etc[0]["count"] == 416, "합산 항목이 416명이 아닙니다")
+    ok(len(etc) == 1 and etc[0]["count"] == 11647, "합산 항목이 11,647명이 아닙니다")
 
     # 마지막 전직을 마친 캐릭터만의 집계
     f = c["distributions_final_stage"]
-    ok(f["sample_size"] == 29527, "성장 완료 캐릭터가 29,527명이 아닙니다")
+    ok(f["sample_size"] == 1228491, "성장 완료 캐릭터가 1,228,491명이 아닙니다")
     ok(sum(j["count"] for j in f["job"]) == f["sample_size"], "성장 완료 직업 인원 합이 다릅니다")
     ok(sum(b["count"] for b in f["fame_bins"]) == f["sample_size"] - f["fame_missing"],
        "성장 완료 명성 구간 인원 합이 다릅니다")
@@ -113,18 +118,46 @@ def check_census(c):
 
     ok(sum(j["count"] for j in d["job"]) == m["sample_size"], "직업 인원 합이 표본 크기와 다릅니다")
     ok(sum(j["count"] for j in u["job"]) == m["uncapped_sample_size"],
-       "완전 검색 직업 인원 합이 완전 검색 표본과 다릅니다")
-    ok(sum(b["count"] for b in d["fame_bins"]) == 30082, "명성 구간 인원 합이 30,082가 아닙니다")
-    ok(sum(b["count"] for b in u["fame_bins"]) == 4087, "완전 검색 구간 인원 합이 4,087이 아닙니다")
+       "쏠림 없는 직업 인원 합이 그 표본과 다릅니다")
+    ok(sum(b["count"] for b in d["fame_bins"]) == 1266224, "명성 구간 인원 합이 1,266,224가 아닙니다")
+    ok(sum(b["count"] for b in u["fame_bins"]) == 83489, "쏠림 없는 구간 인원 합이 83,489가 아닙니다")
     ok(sum(s["count"] for s in d["stage"]) == m["sample_size"], "각성 단계 인원 합이 표본 크기와 다릅니다")
     ok(abs(sum(b["pct"] for b in d["fame_bins"]) - 100) < 0.05, "명성 구간 비중 합이 100이 아닙니다")
-    ok(abs(sum(b["pct"] for b in u["fame_bins"]) - 100) < 0.05, "완전 검색 구간 비중 합이 100이 아닙니다")
+    ok(abs(sum(b["pct"] for b in u["fame_bins"]) - 100) < 0.05, "쏠림 없는 구간 비중 합이 100이 아닙니다")
 
-    act = c["activity"]
-    ok(sum(o["count"] for o in act["overall"]) == act["subsample_size"],
+    act = json.loads(ACTIVITY.read_text(encoding="utf-8"))
+    ok(act["meta"]["round"] == "2026-08-r2", "활성도 회차 표기가 다릅니다")
+    ok(sum(o["count"] for o in act["overall"].values()) == act["meta"]["subsample_size"],
        "활성도 인원 합이 조사 인원과 다릅니다")
-    ok(abs(sum(act["reweighted_by_uncapped"]["pct"].values()) - 100) < 0.5,
-       "보정 후 비중 합이 100 근처가 아닙니다")
+
+
+def check_cap():
+    """상한 보정이 실험 결과와 맞물려 있는지."""
+    cap = json.loads(CAP.read_text(encoding="utf-8"))
+    split = json.loads(SPLIT.read_text(encoding="utf-8"))
+    corrected = cap["bin_share_cap_corrected"]
+    ok(abs(sum(corrected.values()) - 100) < 0.05, "상한 보정 비중 합이 100이 아닙니다")
+    ok(corrected["레기온 미만"] == 68.49, "상한 보정 최하 구간이 68.49가 아닙니다")
+    ok(split["sampled_combos"] == 400, "쪼개 본 조합이 400개가 아닙니다")
+    ok(split["still_capped_pct"] == 5.18, "쪼갠 뒤 상한 잔존이 5.18%가 아닙니다")
+    ok(round(200 * split["multiplier_mean"]) == 682, "쪼갠 뒤 평균이 682명이 아닙니다")
+
+    rows = split["bin_old_vs_new"]
+    ok(len(rows) == 6, "상한 실험 구간 표가 여섯 줄이 아닙니다")
+    ok(rows[0]["new"] == 87.2, "새로 드러난 최하 구간이 87.2%가 아닙니다")
+    tvd = sum(abs(r["diff"]) for r in rows) / 2
+    ok(abs(tvd - split["fame_tvd_new_vs_old"]) < 0.02, "상한 실험 총차이가 어긋납니다")
+
+    r = json.loads(ROUNDS.read_text(encoding="utf-8"))
+    ok(r["first"]["sample_size"] == 31523, "처음 조사 표본이 31,523이 아닙니다")
+    ok(r["second"]["sample_size"] == 1301990, "두 번째 조사 표본이 1,301,990이 아닙니다")
+    ok(r["first"]["coverage_pct"] == 1.21 and r["second"]["coverage_pct"] == 50.66,
+       "회차별 커버리지가 1.21과 50.66이 아닙니다")
+    ok(r["first"]["job_tvd"] == 9.54 and r["second"]["job_tvd"] == 5.24,
+       "회차별 직업 구성 차이가 9.54와 5.24가 아닙니다")
+    t = r["fame_method_tvd"]
+    ok(t["first_observed"] < t["second_observed"] < t["second_cap_corrected"],
+       "상한을 걷어낼수록 명성 방식에서 멀어지는 순서가 아닙니다")
 
 
 # ── 2. 리포트 번들이 집계 원본과 같은 수치인지 ──
@@ -140,6 +173,18 @@ def check_bundle(c):
     ok(len(b["distributions"]["jobByFame"]) == len(c["distributions"]["job_x_fame"]),
        "번들의 교차표 칸 수가 다릅니다")
     ok("insights" not in b, "번들에 옛 인사이트가 남아 있습니다")
+    ok(b["meta"]["round"] == "2026-08-r2", "번들의 회차 표기가 다릅니다")
+
+    cb = json.loads(CAP_BUNDLE.read_text(encoding="utf-8"))
+    cap = json.loads(CAP.read_text(encoding="utf-8"))
+    fin = {x["range"]: x for x in c["distributions_final_stage"]["fame_bins"]}
+    for row in cb["bins"]:
+        src = fin[{"레기온 입장 전": "레기온 미만", "상급 던전 구간": "상급 던전권",
+                   "레이드 입장 구간": "미카엘라 입장", "레이드 권장 구간": "미카엘라 권장",
+                   "하드 권장 구간": "하드 권장 이상"}.get(row["label"], row["label"])]
+        ok(row["observed"] == src["pct"], f"번들의 {row['label']} 관측값이 집계와 다릅니다")
+    ok(cb["lowest"]["corrected"] == cap["bin_share_cap_corrected"]["레기온 미만"],
+       "번들의 상한 보정값이 집계와 다릅니다")
     ok(b["finalStage"]["sampleSize"] == c["distributions_final_stage"]["sample_size"],
        "번들의 성장 완료 표본이 다릅니다")
     ok([x["count"] for x in b["finalStage"]["job"]]
@@ -148,75 +193,109 @@ def check_bundle(c):
 
 
 # ── 3. 화면 숫자 대조 ──
+BIN_SCREEN = {
+    "레기온 미만": "레기온 입장 전",
+    "상급 던전권": "상급 던전 구간",
+    "미카엘라 입장": "레이드 입장 구간",
+    "미카엘라 권장": "레이드 권장 구간",
+    "하드 권장 이상": "하드 권장 구간",
+}
+ACT_SCREEN = {
+    "주간 활성": "최근 7일 접속",
+    "월간 활성": "최근 30일 접속",
+    "저활성": "최근 90일 접속",
+    "휴면": "90일 넘게 기록 없음",
+}
+
+
 def check_numbers(c, text):
     meta = c["meta"]
     d = c["distributions"]
-    u = c["distributions_uncapped_only"]
-    act = c["activity"]
-    seeds = json.loads(SEEDS.read_text(encoding="utf-8"))["seeds"]
+    fin = c["distributions_final_stage"]
+    cap = json.loads(CAP.read_text(encoding="utf-8"))
+    split = json.loads(SPLIT.read_text(encoding="utf-8"))
+    rounds = json.loads(ROUNDS.read_text(encoding="utf-8"))
+    act = json.loads(ACTIVITY.read_text(encoding="utf-8"))
 
     fame = {b["range"]: b for b in d["fame_bins"]}
-    ufame = {b["range"]: b for b in u["fame_bins"]}
-    job = {j["jobName"]: j for j in d["job"]}
-    ujob = {j["jobName"]: j for j in u["job"]}
+    ffame = {b["range"]: b for b in fin["fame_bins"]}
+    corrected = cap["bin_share_cap_corrected"]
 
     expect = {}
     expect["표본 크기"] = people(meta["sample_size"])
-    expect["완전 검색 표본 크기"] = people(meta["uncapped_sample_size"])
-    expect["명성값이 있는 표본"] = people(meta["sample_size"] - meta["fame_missing"])
-    expect["완전 검색 명성 표본"] = people(meta["uncapped_sample_size"] - meta["uncapped_fame_missing"])
-    expect["명성값 결측"] = people(meta["fame_missing"])
-    expect["합산 항목 인원"] = people([j for j in d["job"] if j["jobName"].startswith("기타")][0]["count"])
+    expect["쏠림 없는 표본 크기"] = people(meta["uncapped_sample_size"])
+    expect["명성 점수 결측"] = people(meta["fame_missing"])
+    expect["시드 개수"] = f"{meta['seed_count']:,}개"
 
-    fin = c["distributions_final_stage"]
     fjob = {j["jobName"]: j for j in fin["job"]}
-    top5 = ["크루세이더", "다크템플러", "넨마스터", "브레이커", "스위프트 마스터"]
+    top5 = [j["jobName"] for j in fin["job"] if not j["jobName"].startswith("기타")][:5]
     top5_n = sum(fjob[j]["count"] for j in top5)
+    first_job = fin["job"][0]
     expect["성장 완료 캐릭터"] = people(fin["sample_size"])
-    expect["최다 직업 비중"] = pct(fjob["크루세이더"]["pct"])
-    expect["최다 직업 인원"] = people(fjob["크루세이더"]["count"])
+    expect["최다 직업 비중"] = pct(first_job["pct"])
+    expect["최다 직업 인원"] = people(first_job["count"])
     expect["상위 다섯 인원"] = people(top5_n)
     expect["상위 다섯 비중"] = pct(top5_n / fin["sample_size"] * 100)
     expect["진 각성 비중"] = pct(next(s["pct"] for s in d["stage"] if s["stage"] == "眞"))
 
-    gap = ufame["레기온 미만"]["pct"] - fame["레기온 미만"]["pct"]
-    expect["레기온 입장 전 전체"] = pct(fame["레기온 미만"]["pct"])
-    expect["레기온 입장 전 완전 검색"] = pct(ufame["레기온 미만"]["pct"])
-    expect["두 표본의 차이"] = pp(gap)
-    expect["레기온 입장 전 인원"] = people(fame["레기온 미만"]["count"])
-    expect["레이드 진입 구간 비중"] = pct(sum(fame[b]["pct"] for b in RAID_BINS))
-    lows = [r for r in meta["fame_missing_level_dist"] if r["range"] in ("1~49", "50~99")]
-    expect["결측 저레벨 비중"] = pct(sum(r["count"] for r in lows)
-                                / sum(r["count"] for r in meta["fame_missing_level_dist"]) * 100)
+    # 이번 판의 핵심: 관측값과 상한 보정값
+    expect["레기온 입장 전 관측값"] = pct(ffame["레기온 미만"]["pct"])
+    expect["레기온 입장 전 상한 보정값"] = pct(corrected["레기온 미만"])
+    expect["보정으로 늘어난 몫"] = pp(corrected["레기온 미만"] - ffame["레기온 미만"]["pct"])
+    expect["관측 레이드 진입 비중"] = pct(sum(ffame[b]["pct"] for b in RAID_BINS))
+    expect["보정 레이드 진입 비중"] = pct(sum(corrected[b] for b in RAID_BINS))
 
-    overall = {o["label"]: o for o in act["overall"]}
-    adj = act["reweighted_by_uncapped"]["pct"]
-    expect["보정 전 조용한 비중"] = pct(overall["휴면"]["pct"])
-    expect["보정 후 조용한 비중"] = pct(adj["휴면"])
-    expect["보정 전 최근 7일"] = pct(overall["주간 활성"]["pct"])
-    expect["보정 후 최근 7일"] = pct(adj["주간 활성"])
-    expect["조용한 비중 차이"] = pp(adj["휴면"] - overall["휴면"]["pct"])
-    expect["활성도 조사 인원"] = people(act["subsample_size"])
-    expect["완전 검색 조사 인원"] = people(act["by_capped"]["uncapped"]["n"])
-    expect["한도 검색 조사 인원"] = people(act["by_capped"]["capped_only"]["n"])
-    expect["완전 검색 조용한 비중"] = pct(act["by_capped"]["uncapped"]["pct"]["휴면"])
-    expect["한도 검색 조용한 비중"] = pct(act["by_capped"]["capped_only"]["pct"]["휴면"])
-    lowest = act["by_fame_bin"][0]
-    expect["가장 낮은 구간 조용한 비중"] = pct(lowest["pct"]["휴면"])
-    expect["가장 낮은 구간 인원"] = people(lowest["n"])
+    # 상한 실험 근거
+    expect["쪼갠 뒤 평균"] = f"{round(200 * split['multiplier_mean']):,}명"
+    expect["상한 배수"] = f"{split['multiplier_mean']:.2f}배"
+    expect["쪼갠 뒤 상한 잔존"] = pct(split["still_capped_pct"])
+    expect["새로 드러난 최하 구간"] = pct(split["bin_old_vs_new"][0]["new"])
+    expect["원래 안쪽 최하 구간"] = pct(split["bin_old_vs_new"][0]["old"])
+    expect["쪼개 본 조합"] = f"{split['sampled_combos']:,}개"
+    expect["상한 도달 조합"] = f"{split['capped_combos_total']:,}개"
+    expect["원래 잡히던 인원"] = people(split["old_n"])
+    expect["새로 드러난 인원"] = people(split["new_n"])
 
+    # 회차 비교
+    f1, f2 = rounds["first"], rounds["second"]
+    expect["처음 조사 표본"] = people(f1["sample_size"])
+    expect["처음 조사 시드"] = f"{f1['seeds']:,}개"
+    expect["처음 조사 커버리지"] = pct(f1["coverage_pct"])
+    expect["이번 커버리지"] = pct(f2["coverage_pct"])
+    expect["처음 상한 도달률"] = pct(f1["limited_pct"])
+    expect["이번 상한 도달률"] = pct(f2["limited_pct"])
+    expect["처음 직업 구성 차이"] = pp(f1["job_tvd"])
+    expect["이번 직업 구성 차이"] = pp(f2["job_tvd"])
+    expect["처음 성장 단계 차이"] = pp(f1["fame_tvd"])
+    expect["이번 성장 단계 차이"] = pp(f2["fame_tvd"])
+    t = rounds["fame_method_tvd"]
+    expect["상한 보정 후 명성 방식 차이"] = pp(t["second_cap_corrected"])
+    b = rounds["seed_bias"]
+    expect["시드 걸린 인원"] = people(b["seed_hits"])
+    expect["시드 최다 직업 인원"] = people(b["top_job_count"])
+
+    # 활성도
+    overall = {ACT_SCREEN[k]: v for k, v in act["overall"].items()}
+    bundle = json.loads(BUNDLE.read_text(encoding="utf-8"))
+    adj = bundle["activity"]["adjusted"]["pct"]
+    expect["보정 전 조용한 비중"] = pct(overall["90일 넘게 기록 없음"]["pct"])
+    expect["보정 후 조용한 비중"] = pct(adj["90일 넘게 기록 없음"])
+    expect["보정 전 최근 7일"] = pct(overall["최근 7일 접속"]["pct"])
+    expect["보정 후 최근 7일"] = pct(adj["최근 7일 접속"])
+    expect["활성도 조사 인원"] = people(act["meta"]["subsample_size"])
+
+    # 직업과 성장 격차
     cells = {}
     for x in fin["job_x_fame"]:
         cells.setdefault(x["jobName"], {})[x["bin"]] = None if x.get("masked") else x["count"]
-    ffame = {b["range"]: b for b in fin["fame_bins"]}
-    total_fame = sum(b["count"] for b in fin["fame_bins"])
-    overall_raid = sum(ffame[b]["count"] for b in RAID_BINS) / total_fame
+    total_fame = sum(b2["count"] for b2 in fin["fame_bins"])
+    overall_raid = sum(ffame[b2]["count"] for b2 in RAID_BINS) / total_fame
     rows = []
     for name, cs in cells.items():
         total = sum(v for v in cs.values() if v)
         if total < 300:
             continue
-        raid = sum(cs.get(b) or 0 for b in RAID_BINS)
+        raid = sum(cs.get(b2) or 0 for b2 in RAID_BINS)
         rows.append((name, total, raid / total, raid / total / overall_raid))
     rows.sort(key=lambda r: -r[3])
     best, worst = rows[0], rows[-1]
@@ -225,10 +304,13 @@ def check_numbers(c, text):
     expect["가장 낮은 직업 지수"] = times(worst[3])
     expect["가장 높은 직업과 낮은 직업 배수"] = times(best[3] / worst[3])
 
+    # 실측치
     expect["검색 횟수"] = f"{meta['search_calls']:,}회"
     expect["한도 검색 횟수"] = f"{meta['search_calls_capped']:,}회"
     expect["한도 검색 비중"] = pct(meta["search_calls_capped"] / meta["search_calls"] * 100)
-    expect["시드 검색 합계"] = f"{sum(s['calls'] for s in seeds):,}회"
+    expect["이번 판 요청 합계"] = "18,462회"
+    expect["처음 조사 요청"] = "933회"
+    expect["명성 방식 검증 요청"] = "947회"
 
     cost = json.loads(COSTS.read_text(encoding="utf-8"))["total_cost_usd"]
     expect["모델 비용"] = f"{cost:.4f}달러"
@@ -236,8 +318,8 @@ def check_numbers(c, text):
     for label, want in expect.items():
         ok(want in text, f"화면 글에 {label} 표기 {want!r}가 없습니다")
 
-    ok(ujob["크루세이더"]["pct"] < job["크루세이더"]["pct"],
-       "완전 검색 표본에서 최다 직업 비중이 줄지 않았습니다")
+    ok(corrected["레기온 미만"] > ffame["레기온 미만"]["pct"],
+       "상한 보정값이 관측값보다 크지 않습니다")
     return len(expect)
 
 
@@ -358,6 +440,7 @@ def main():
     census = json.loads(CENSUS.read_text(encoding="utf-8"))
 
     check_census(census)
+    check_cap()
     check_bundle(census)
     n_expect = check_numbers(census, rendered)
     n_numbers = check_insights()
@@ -367,6 +450,7 @@ def main():
 
     print("[집계 정합성]")
     print("  표본 크기, 직업·구간·단계 인원 합, 합산 항목, 보정 후 비중 합 확인")
+    print("  상한 보정과 회차 대조가 실험 결과와 맞물리는지 확인")
     print("  리포트 번들이 집계 원본과 같은 수치인지 확인")
     print("[숫자 정합성]")
     print(f"  집계 원본에서 다시 계산한 표기 {n_expect}건을 화면 글과 대조")

@@ -5,7 +5,7 @@
   {
    "view": "desktop",
    "page": "overview",
-   "textLength": 1479,
+   "textLength": 1835,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -20,7 +20,7 @@
   {
    "view": "desktop",
    "page": "jobs",
-   "textLength": 1117,
+   "textLength": 1090,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -35,7 +35,7 @@
   {
    "view": "desktop",
    "page": "growth",
-   "textLength": 996,
+   "textLength": 1503,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -50,7 +50,7 @@
   {
    "view": "desktop",
    "page": "activity",
-   "textLength": 1273,
+   "textLength": 1314,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -65,7 +65,7 @@
   {
    "view": "desktop",
    "page": "gap",
-   "textLength": 1273,
+   "textLength": 1290,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -80,7 +80,7 @@
   {
    "view": "desktop",
    "page": "insights",
-   "textLength": 2063,
+   "textLength": 2048,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -95,7 +95,7 @@
   {
    "view": "desktop",
    "page": "method",
-   "textLength": 1142,
+   "textLength": 1298,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -110,7 +110,7 @@
   {
    "view": "mobile",
    "page": "overview",
-   "textLength": 1501,
+   "textLength": 1857,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -125,7 +125,7 @@
   {
    "view": "mobile",
    "page": "jobs",
-   "textLength": 1117,
+   "textLength": 1090,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -140,7 +140,7 @@
   {
    "view": "mobile",
    "page": "growth",
-   "textLength": 996,
+   "textLength": 1503,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -155,7 +155,7 @@
   {
    "view": "mobile",
    "page": "activity",
-   "textLength": 1273,
+   "textLength": 1314,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -170,7 +170,7 @@
   {
    "view": "mobile",
    "page": "gap",
-   "textLength": 1295,
+   "textLength": 1312,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -185,7 +185,7 @@
   {
    "view": "mobile",
    "page": "insights",
-   "textLength": 2063,
+   "textLength": 2048,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -200,7 +200,7 @@
   {
    "view": "mobile",
    "page": "method",
-   "textLength": 1142,
+   "textLength": 1298,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,

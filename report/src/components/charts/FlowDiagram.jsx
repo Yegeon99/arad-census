@@ -7,7 +7,10 @@ export default function FlowDiagram({ steps }) {
   const [active, setActive] = useState(0);
   return (
     <div ref={ref}>
-      <ol className="m-0 grid list-none gap-0 p-0 lg:grid-cols-5">
+      <ol
+        className="m-0 grid list-none gap-0 p-0 sm:grid-cols-2 lg:grid-cols-3"
+        style={{ "--flow-steps": steps.length }}
+      >
         {steps.map((s, i) => {
           const on = active === i;
           return (

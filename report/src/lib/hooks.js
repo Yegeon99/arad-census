@@ -84,17 +84,39 @@ export function useInView(options) {
       setSeen(true);
       return undefined;
     }
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      setSeen(true);
+      obs.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+
+    // 한 번에 아래까지 건너뛰면 차트가 화면에 걸치는 순간이 아예 없다.
+    // 그때는 관찰자가 울리지 않아 차트가 0인 채로 남는다.
+    // 이미 지나쳐 위로 올라간 것도 그린 것으로 본다.
+    const onScroll = () => {
+      const r = el.getBoundingClientRect();
+      const inView = r.top < window.innerHeight && r.bottom > 0;
+      const passed = r.bottom <= 0;
+      if (inView || passed) finish();
+    };
+
     const obs = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setSeen(true);
-          obs.disconnect();
-        }
+        if (entries.some((e) => e.isIntersecting)) finish();
       },
       { rootMargin: "0px 0px -8% 0px", ...options }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      obs.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [options]);
   return [ref, seen];
 }

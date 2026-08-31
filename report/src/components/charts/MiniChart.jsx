@@ -1,6 +1,7 @@
 import {
-  topJobs, fameCompare, activity, dist, complete, jobFame, rowTotal, meta,
+  topJobs, capBins, activity, dist, complete, jobFame, rowTotal, meta,
   limitedRatio, actOverall, actAdjusted, dormantLabel, weeklyLabel,
+  capEvidence, rounds,
 } from "../../lib/data.js";
 import { ACT_ORDER, ACT_COLOR, BIN_COLOR, BIN_ORDER } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
@@ -53,16 +54,16 @@ export default function MiniChart({ focus }) {
     );
   }
 
-  if (focus === "famePyramid") {
-    const max = Math.max(...fameCompare.map((b) => Math.max(b.full, b.complete)));
+  if (focus === "capCorrection") {
+    const max = Math.max(...capBins.map((b) => Math.max(b.observed, b.corrected)));
     return (
       <ul className="m-0 list-none p-0">
-        {fameCompare.map((b, i) => (
+        {capBins.map((b, i) => (
           <li key={b.label} className="py-[3px]">
-            <Row label={b.label} value={b.full} max={max} color={i === 0 ? "var(--ink-6)" : "var(--ink-3)"}
-              note={`전체 ${fmtPct(b.full)}`} strong={i === 0} />
-            <Row label="" value={b.complete} max={max} color={i === 0 ? "var(--gold)" : "var(--ink-1)"}
-              note={`쏠림 없는 검색 ${fmtPct(b.complete)}`} />
+            <Row label={b.label} value={b.observed} max={max} color={i === 0 ? "var(--ink-6)" : "var(--ink-3)"}
+              note={`관측 ${fmtPct(b.observed)}`} strong={i === 0} />
+            <Row label="" value={b.corrected} max={max} color={i === 0 ? "var(--gold)" : "var(--ink-1)"}
+              note={`상한 보정 ${fmtPct(b.corrected)}`} />
           </li>
         ))}
       </ul>
@@ -82,21 +83,22 @@ export default function MiniChart({ focus }) {
     );
   }
 
-  if (focus === "jobCompare") {
-    const byName = Object.fromEntries(dist.job.map((j) => [j.jobName, j]));
-    const inComplete = Object.fromEntries(complete.job.map((j) => [j.jobName, j]));
-    const picks = ["사령술사", "크루세이더"];
-    const max = Math.max(...picks.flatMap((p) => [byName[p]?.pct ?? 0, inComplete[p]?.pct ?? 0]));
+  if (focus === "roundCompare") {
+    const rows = rounds.jobGap;
+    const max = Math.max(...rows.map((r) => Math.abs(r.first)));
     return (
       <ul className="m-0 list-none p-0">
-        {picks.map((p) => (
-          <li key={p} className="py-[3px]">
-            <Row label={p} value={byName[p].pct} max={max} color="var(--ink-4)" strong
-              note={`전체 ${fmtPct(byName[p].pct)}`} />
-            <Row label="" value={inComplete[p]?.pct ?? 0} max={max} color="var(--gold)"
-              note={`쏠림 없는 검색 ${fmtPct(inComplete[p]?.pct ?? 0)}`} />
+        {rows.map((r) => (
+          <li key={r.jobName} className="py-[3px]">
+            <Row label={r.jobName} value={Math.abs(r.first)} max={max} color="var(--ink-4)" strong
+              note={`처음 ${fmtPct(r.first)}`} />
+            <Row label="" value={Math.abs(r.second)} max={max} color="var(--gold)"
+              note={`두 번째 ${fmtPct(r.second)}`} />
           </li>
         ))}
+        <li className="pt-2">
+          <p className="t-small m-0">명성 방식과의 차이입니다. 0에 가까울수록 맞아떨어집니다.</p>
+        </li>
       </ul>
     );
   }
@@ -126,15 +128,15 @@ export default function MiniChart({ focus }) {
   }
 
   if (focus === "searchLimit") {
-    const d = activity.byDiscovery;
+    const split = capEvidence.stageSplit[0];
     return (
       <ul className="m-0 list-none p-0">
         <Row label="한도에 걸린 검색" value={limitedRatio} max={100} color="var(--gold)"
-          note={`${meta.searchCallsLimited}회 ${fmtPct(limitedRatio)}`} strong />
-        <Row label="잘린 검색에서만" value={(d.limited.n / activity.subsampleSize) * 100} max={100}
-          color="var(--ink-5)" note={`${fmtPeople(d.limited.n)}`} />
-        <Row label="쏠림 없는 검색에서도" value={(d.complete.n / activity.subsampleSize) * 100} max={100}
-          color="var(--ink-3)" note={`${fmtPeople(d.complete.n)}`} />
+          note={`${fmtPct(limitedRatio)}`} strong />
+        <Row label="원래 200명 안" value={split.inside} max={100} color="var(--ink-3)"
+          note={`레기온 입장 전 ${fmtPct(split.inside)}`} />
+        <Row label="쪼개서 새로 드러남" value={split.revealed} max={100} color="var(--ink-6)"
+          note={`레기온 입장 전 ${fmtPct(split.revealed)}`} strong />
       </ul>
     );
   }

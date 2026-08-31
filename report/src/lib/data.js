@@ -1,11 +1,14 @@
 // 화면이 쓰는 값을 한곳에서 만든다. 집계 파일의 수치를 그대로 쓰고
 // 여기서 새로 만드는 값은 비율 계산뿐이다.
+//
+// 화면에 나오는 수치는 모두 두 번째 조사 기준이다. 처음 조사 수치는 회차 대조
+// 자료(rounds)를 통해서만 들어오고, 조사 방법 화면의 회차 비교에서만 쓴다.
 import census from "../data/census.json";
-import seedYield from "../data/seed_yield.json";
 import verification from "../data/verification.json";
+import capCorrect from "../data/cap_correct.json";
+import roundsData from "../data/rounds.json";
+import costs from "../data/costs.json";
 import insights from "../derived/insights.json";
-import histogram from "../derived/fame_histogram.json";
-import jobTree from "../derived/job_tree.json";
 import { BIN_ORDER } from "./palette.js";
 
 export const meta = census.meta;
@@ -14,20 +17,44 @@ export const dist = census.distributions;
 export const finalStage = census.finalStage;
 export const complete = census.completeSearch;
 export const activity = census.activity;
-export { insights, histogram, jobTree };
+export { insights };
 
-/** 명성 점수로 다시 재본 검증 조사. 1차 조사 수치는 손대지 않고 나란히만 놓는다. */
+/** 명성 점수로 다시 재본 검증 조사. 회차 수치는 손대지 않고 나란히만 놓는다. */
 export const verify = verification;
 
-/** 파이프라인 실행 기록 (게이트 보고와 같은 실측치) */
+/** 상한이 가린 몫을 되돌려 다시 잡은 성장 단계 분포 */
+export const cap = capCorrect;
+
+/** 처음 조사와 두 번째 조사를 나란히 놓는 대조 자료 */
+export const rounds = roundsData;
+
+/** 파이프라인 실행 기록 (게이트 보고와 같은 실측치)
+ *
+ * 이번 판 조사는 여섯 항목 18,462회다. 처음 조사와 명성 방식 검증은 이번 판
+ * 이전에 쓴 것이라 합계에 넣지 않고 따로 적는다. */
 export const MEASURED = {
-  apiCalls: 1880,
-  llmCostUsd: 0.107662,
-  llmBatches: 5,
-  collectSec: 87,
-  timelineSec: 181,
-  surveyedAt: "2026년 8월 25일",
+  roundCalls: [
+    ["처음 조사 커버리지 측정", 867],
+    ["시드 고르기", 867],
+    ["커버리지 측정", 867],
+    ["표본 수집", 8001],
+    ["상한 우회", 7200],
+    ["활성도 조사", 660],
+  ],
+  earlierCalls: [
+    ["처음 조사", 933],
+    ["명성 방식 검증", 947],
+  ],
+  roundMinutes: 95,
+  failures: 0,
+  llmCostUsd: costs.totalUsd,
+  llmBatches: costs.batches,
+  surveyedAt: "2026년 8월 31일",
+  firstSurveyedAt: "2026년 8월 26일",
 };
+MEASURED.roundTotal = MEASURED.roundCalls.reduce((s, [, v]) => s + v, 0);
+MEASURED.earlierTotal = MEASURED.earlierCalls.reduce((s, [, v]) => s + v, 0);
+MEASURED.grandTotal = MEASURED.roundTotal + MEASURED.earlierTotal;
 
 export const RAID_BINS = ["레이드 입장 구간", "레이드 권장 구간", "하드 권장 구간"];
 
@@ -41,6 +68,12 @@ export const namedJobs = finalStage.job.filter((j) => !j.jobName.startsWith(ETC_
 export const etcJobs = finalStage.job.find((j) => j.jobName.startsWith(ETC_PREFIX));
 export const topJobs = namedJobs.slice(0, 15);
 export const allJobs = dist.job;
+
+/** 관측한 성장 단계 분포와 상한 보정 분포 */
+export const capBins = cap.bins;
+export const capLowest = cap.lowest;
+export const capGap = capLowest.corrected - capLowest.observed;
+export const capEvidence = cap.evidence;
 
 /** 전체 표본과 쏠림 없는 표본의 6구간 비교 */
 const completeByRange = Object.fromEntries(complete.fameBins.map((b) => [b.range, b]));
@@ -102,17 +135,7 @@ export const actAdjusted = activity.adjusted.pct;
 export const dormantLabel = "90일 넘게 기록 없음";
 export const weeklyLabel = "최근 7일 접속";
 
-/** 시드 검색 실측 */
-export const seedStats = (() => {
-  const s = seedYield.seeds;
-  return {
-    seeds: s.length,
-    common: s.filter((x) => x.class === "common").length,
-    rare: s.filter((x) => x.class === "rare").length,
-    calls: s.reduce((a, x) => a + x.calls, 0),
-    limited: s.reduce((a, x) => a + x.limitedCalls, 0),
-  };
-})();
+/** 검색이 상한에 걸린 비중 */
 export const limitedRatio = (meta.searchCallsLimited / meta.searchCalls) * 100;
 
 /** 명성 점수 결측 캐릭터 중 레벨 100 미만 비중 */

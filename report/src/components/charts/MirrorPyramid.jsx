@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { interpolateNumber } from "d3-interpolate";
 import { BIN_COLOR, BIN_ORDER } from "../../lib/palette.js";
-import { fmtPct, fmtPeople, fmtPp } from "../../lib/format.js";
+import { fmtPct, fmtPeople, fmtPp, asParticle } from "../../lib/format.js";
 import { useInView, useMediaQuery, useReducedMotion, ENTER_MS } from "../../lib/hooks.js";
 
 const WIDE = { w: 960, gutter: 168, row: 50, pad: 96, bar: 34, font: 13 };
 const NARROW = { w: 380, gutter: 0, row: 70, pad: 10, bar: 20, font: 12 };
 
 /** 좌우 대칭 피라미드. 반대쪽 표본은 점선 윤곽으로 겹쳐 보여 준다. */
-export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
+export default function MirrorPyramid({
+  bins, gapLabelBin, gapValue,
+  leftLabel = "전체 표본 (쏠림 있음)", rightLabel = "쏠림 없는 표본", gapText = "두 표본의 차이",
+}) {
   const [t, setT] = useState(0);
   const [ref, seen] = useInView();
   const reduced = useReducedMotion();
@@ -31,7 +34,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
   return (
     <div ref={ref}>
       <svg viewBox={`0 0 ${S.w} ${height}`} width="100%" style={{ display: "block" }} role="img"
-        aria-label="명성 구간 피라미드, 전체 표본과 쏠림 없는 표본 비교">
+        aria-label={`성장 단계 피라미드, ${leftLabel}과 ${rightLabel} 비교`}>
         {rows.map((b, i) => {
           const top = (narrow ? 4 : 16) + i * S.row;
           const barY = narrow ? top + 20 : top;
@@ -90,7 +93,7 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
                     stroke="var(--gold)" strokeWidth="2" style={{ transition: ease }} />
                   <text x={Math.max(4, cx - Math.max(half, ghostHalf))} y={barY + S.bar + 22}
                     fontSize="12" fontWeight="700" className="num" fill="var(--gold-text)" style={{ transition: ease }}>
-                    {`두 표본의 차이 ${fmtPp(gapValue)}`}
+                    {`${gapText} ${fmtPp(gapValue)}`}
                   </text>
                 </g>
               )}
@@ -103,8 +106,8 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
 
       <div className="mt-4 max-w-[680px]">
         <label htmlFor="pyramid-slider" className="t-small m-0 flex justify-between">
-          <span style={{ fontWeight: t < 0.5 ? 700 : 400, color: t < 0.5 ? "var(--text-primary)" : undefined }}>전체 표본 (쏠림 있음)</span>
-          <span style={{ fontWeight: t >= 0.5 ? 700 : 400, color: t >= 0.5 ? "var(--text-primary)" : undefined }}>쏠림 없는 표본</span>
+          <span style={{ fontWeight: t < 0.5 ? 700 : 400, color: t < 0.5 ? "var(--text-primary)" : undefined }}>{leftLabel}</span>
+          <span style={{ fontWeight: t >= 0.5 ? 700 : 400, color: t >= 0.5 ? "var(--text-primary)" : undefined }}>{rightLabel}</span>
         </label>
         <input
           id="pyramid-slider"
@@ -117,9 +120,9 @@ export default function MirrorPyramid({ bins, gapLabelBin, gapValue }) {
           aria-label="전체 표본과 쏠림 없는 표본 사이 전환"
         />
         <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
-          <button type="button" className="disclose" onClick={() => setT(0)}>전체 표본으로</button>
-          <button type="button" className="disclose" onClick={() => setT(1)}>쏠림 없는 표본으로</button>
-          <span className="t-small">채운 막대가 지금 고른 표본, 점선 윤곽이 반대쪽 표본입니다.</span>
+          <button type="button" className="disclose" onClick={() => setT(0)}>{asParticle(leftLabel)}</button>
+          <button type="button" className="disclose" onClick={() => setT(1)}>{asParticle(rightLabel)}</button>
+          <span className="t-small">채운 막대가 지금 고른 쪽, 점선 윤곽이 반대쪽입니다.</span>
         </div>
       </div>
     </div>
