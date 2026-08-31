@@ -50,10 +50,13 @@ for (const [id, label] of PAGES) {
 }
 
 await page.goto(URL, { waitUntil: "networkidle" });
-await page.waitForTimeout(600);
-const body = await page.textContent("body");
+// 첫 화면의 큰 숫자는 0에서 올라가며 센다. 정해진 시간만 기다리면 세는
+// 도중을 읽어 애먼 실패가 나므로, 값이 자리를 잡을 때까지 기다린다.
 for (const t of MUST) {
-  const found = body.includes(t);
+  const found = await page
+    .waitForFunction((needle) => document.body.innerText.includes(needle), t, { timeout: 8000 })
+    .then(() => true)
+    .catch(() => false);
   if (!found) bad += 1;
   console.log(`문구 확인 ${t}: ${found ? "정상" : "누락"}`);
 }
