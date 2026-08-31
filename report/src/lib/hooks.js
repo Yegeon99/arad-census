@@ -68,17 +68,6 @@ function hasWebGL() {
   }
   return webglChecked;
 }
-
-/** 입체 화면을 켜도 되는 기기인지 (모바일과 저사양, 그래픽 미지원은 평면으로 대체) */
-export function useCanRender3D() {
-  const narrow = useMediaQuery("(max-width: 900px)");
-  const coarse = useMediaQuery("(pointer: coarse)");
-  const reduced = useReducedMotion();
-  const weak = typeof navigator !== "undefined" && (navigator.hardwareConcurrency ?? 8) <= 4;
-  return !(narrow || coarse || reduced || weak) && hasWebGL();
-}
-
-/** 차트가 0에서 실제 값까지 차오르는 시간. 항목이 많아도 0.8초 안에 끝나게 잡는다. */
 export const ENTER_MS = 320;
 export const STAGGER_MS = 10;
 
@@ -135,19 +124,4 @@ export function useTween(target, { duration = 700, enabled = true } = {}) {
     return () => cancelAnimationFrame(raf);
   }, [target, duration, enabled]);
   return value;
-}
-
-/** 첫 화면이 그려진 뒤에 무거운 화면을 붙인다 (초기 로딩 보호) */
-export function useIdleMount(timeout = 400) {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    let id = 0;
-    if (typeof window.requestIdleCallback === "function") {
-      id = window.requestIdleCallback(() => setReady(true), { timeout });
-      return () => window.cancelIdleCallback(id);
-    }
-    id = window.setTimeout(() => setReady(true), 120);
-    return () => window.clearTimeout(id);
-  }, [timeout]);
-  return ready;
 }

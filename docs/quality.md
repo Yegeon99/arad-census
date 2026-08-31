@@ -78,5 +78,7 @@ v2.2와 같은 구간입니다. 모바일 점수가 회차마다 20점 넘게 �
   한 번에 내린 뒤에도 안 나온 요소 0개 (report/scripts/stability.mjs)
 - 움직임 최소화 설정에서 연출을 건너뛰고 곧바로 완성된 상태로 나오는지 7화면 통과
   (report/scripts/reduced-motion.mjs)
-- 화면 캡처 16장 (화면 7개 곱하기 2 + 입체 화면 2곳의 평면 상태)
+- 화면 캡처 14장 (화면 7개 곱하기 데스크톱·모바일)
+- 세리프로 그리는 글자가 폴백으로 떨어지지 않는지 7화면 336자 전부 통과
+  (report/scripts/font-check.mjs)
 - 금지 표현 스캔과 숫자 정합성 검사 134건 전부 통과 (scripts/verify_final.py)

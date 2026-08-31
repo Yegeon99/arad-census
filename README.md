@@ -29,16 +29,16 @@
 한눈에 보기에서 표본 피라미드로 조사 전체를 보여 준 다음, 직업과 성장 단계와
 활성도를 차례로 훑고, 직업과 성장 격차에서 둘을 교차해 봅니다. AI 인사이트는
 집계에서 읽어낸 것을 카드로 정리하고, 조사 방법과 한계는 표본 설계와 편향, 실측치를
-모아 둡니다. 입체 화면은 모두 나중에 불러오며, 좁은 화면과 움직임 최소화 설정,
-그래픽 미지원 환경에서는 자동으로 평면 화면으로 바뀝니다.
+모아 둡니다. 차트는 모두 평면입니다. 읽기 어려웠던 입체 화면 두 곳은 Bklit UI
+(visx + Motion) 가로 막대로 바꿨습니다.
 
 | 화면 | 주소 | 메인 시각화 |
 | --- | --- | --- |
-| 한눈에 보기 | `#overview` | 층 높이가 구간 비중인 표본 피라미드 두 개 |
+| 한눈에 보기 | `#overview` | 두 표본을 같은 가로축에 견주는 성장 단계 막대 |
 | 직업 | `#jobs` | 직업군에서 전직으로 내려가는 2단 선버스트와 상위 15 가로 바 |
 | 성장 단계 | `#growth` | 좌우 대칭 피라미드와 표본 전환 슬라이더, 명성 히스토그램 |
 | 활성도 | `#activity` | 보정 전후 모핑 스택 바, 구간별 스트림 |
-| 직업과 성장 격차 | `#gap` | 직업 20종과 구간 6개의 입체 지형, 평면은 히트맵 |
+| 직업과 성장 격차 | `#gap` | 직업 20종의 성장 단계 구성, 100% 누적 가로 막대 |
 | AI 인사이트 | `#insights` | 카드 8개와 확신도 필터, 카드별 미니 차트 |
 | 조사 방법과 한계 | `#method` | 표본 설계 흐름도, 편향 목록, 개인정보와 실측치 |
 
@@ -96,9 +96,10 @@ cd report
 npm install
 node scripts/derive.mjs        # 명성 히스토그램과 직업 트리 (체크포인트 필요, 로컬 1회)
 npm run build                  # 화면 용어 변환 후 빌드
-node scripts/serif-glyphs.mjs  # 세리프로 쓰는 글자만 골라 글꼴 주소 좁히기
-node scripts/capture.mjs       # 캡처 16장과 화면 글 모음
+node scripts/make-og.mjs       # 공유 카드 이미지 (report/public/og.png)
+node scripts/capture.mjs       # 캡처와 화면 글 모음
 node scripts/build-copy.mjs    # 화면 문구 전문
+node scripts/font-check.mjs    # 세리프 글자가 폴백으로 안 떨어지는지
 node scripts/stability.mjs     # 표시 안정성 (스크롤 연출이 다 도는지)
 node scripts/reduced-motion.mjs # 움직임 최소화 설정에서 곧바로 완성된 상태인지
 cd .. && python scripts/verify_final.py           # 숫자 정합성과 금지 표현 스캔

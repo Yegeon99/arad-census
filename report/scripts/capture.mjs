@@ -21,7 +21,6 @@ const PAGES = [
   ["insights", "AI 인사이트"],
   ["method", "조사 방법과 한계"],
 ];
-const SOLID_PAGES = new Set(["overview", "gap"]);
 
 const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml" };
 const server = createServer((req, res) => {
@@ -101,17 +100,6 @@ async function shoot(label, viewport, { withText }) {
     if (withText) {
       await collectText(page, `${label} ${id} ${name}`);
       await exerciseControls(page, `${label} ${id}`);
-    }
-    // 입체 화면이 있는 곳은 평면으로 바꾼 상태도 한 장 남긴다
-    if (withText && SOLID_PAGES.has(id)) {
-      const flat = page.getByRole("button", { name: "평면으로 보기" });
-      if (await flat.count()) {
-        await flat.first().click().catch(() => {});
-        await page.waitForTimeout(400);
-        await scrollThrough(page);
-        await shootWhole(page, join(outDir, `${label}-${id}-flat.png`), viewport.width);
-        await page.setViewportSize(viewport);
-      }
     }
   }
   await page.close();

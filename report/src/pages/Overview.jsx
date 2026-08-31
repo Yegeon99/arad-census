@@ -1,11 +1,7 @@
-import { useState } from "react";
 import PageShell, { CountUp, Stagger } from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
 import SearchExplainer from "../components/SearchExplainer.jsx";
-import ViewToggle from "../components/ViewToggle.jsx";
-import Pyramid2D from "../components/charts/Pyramid2D.jsx";
-import { LazySamplePyramid } from "../components/three/Lazy.jsx";
-import { useCanRender3D, useIdleMount } from "../lib/hooks.js";
+import SampleStageBars from "../components/charts/SampleStageBars.jsx";
 import { fmtInt, fmtPct, fmtPeople } from "../lib/format.js";
 import {
   meta, dist, complete, MEASURED, fameCompare, fameSample, completeFameSample,
@@ -102,21 +98,14 @@ function FindingCard({ href, kicker, title, body, index }) {
 }
 
 export default function Overview() {
-  const can3D = useCanRender3D();
-  const idle = useIdleMount();
-  const [mode, setMode] = useState("solid");
-  const effective = can3D && idle && mode === "solid" ? "solid" : "flat";
-
   const fullNote = `강한 캐릭터 쪽으로 쏠림 있음, ${fmtPeople(fameSample)}`;
   const completeNote = `검색 한도에 안 걸려 전부 받은 ${fmtPeople(completeFameSample)}`;
   const pyramidProps = { full: dist.fameBins, complete: complete.fameBins, fullNote, completeNote };
-  const flatPyramid = <Pyramid2D {...pyramidProps} />;
 
   return (
     <PageShell
       id="overview"
       question="던파 캐릭터 3만 명은 지금 어디까지 성장해 있을까"
-      visualFocus={effective === "solid"}
       statNumber={meta.sampleSize}
       statFormat={(v) => fmtInt(Math.round(v))}
       statUnit="명"
@@ -151,13 +140,10 @@ export default function Overview() {
       }
       visual={
         <Chart
-          how="한 층이 성장 단계 하나입니다. 층이 두꺼울수록 그 단계에 있는 캐릭터가 많습니다. 두 피라미드는 밑변과 전체 높이가 같고, 자른 위치만 다릅니다."
+          how="줄 하나가 성장 단계 하나입니다. 위가 높은 단계, 아래가 낮은 단계이고, 두 막대가 같은 가로축을 써서 길이를 그대로 견줄 수 있습니다."
           so="쏠림 없는 표본은 열 명 중 여덟 명이 레이드 이전 단계입니다. 전체 표본에서는 열 명 중 네다섯 명입니다."
         >
-          <ViewToggle mode={effective} setMode={setMode} available={can3D} />
-          {effective === "solid"
-            ? <LazySamplePyramid {...pyramidProps} fallback={flatPyramid} />
-            : flatPyramid}
+          <SampleStageBars {...pyramidProps} />
         </Chart>
       }
       explain={[

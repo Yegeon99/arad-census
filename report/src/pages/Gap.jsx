@@ -1,45 +1,25 @@
 import { useState } from "react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
-import ViewToggle from "../components/ViewToggle.jsx";
-import Heatmap from "../components/charts/Heatmap.jsx";
+import JobStageBars from "../components/charts/JobStageBars.jsx";
 import IndexBars from "../components/charts/IndexBars.jsx";
-import { LazyJobTerrain } from "../components/three/Lazy.jsx";
+import StageLegend from "../components/charts/StageLegend.jsx";
 import { BIN_ORDER } from "../lib/palette.js";
-import { useCanRender3D, useIdleMount } from "../lib/hooks.js";
 import { fmtPct, fmtPeople, fmtX, topicParticle, withParticle } from "../lib/format.js";
 import {
-  jobFameRows, cellCount, cellShare, rowTotal, raidIndex, overallRaidShare, meta,
+  jobFameRows, cellCount, cellShare, rowTotal, raidIndex, overallRaidShare,
 } from "../lib/data.js";
 
 export default function Gap() {
-  const can3D = useCanRender3D();
-  const idle = useIdleMount();
-  const [mode, setMode] = useState("solid");
   const [selected, setSelected] = useState(null);
-  const [hovered, setHovered] = useState(null);
-  const effective = can3D && idle && mode === "solid" ? "solid" : "flat";
 
   const best = raidIndex.top[0];
   const worst = raidIndex.bottom[0];
-
-  const flatHeatmap = (
-    <Heatmap
-      rows={jobFameRows}
-      cols={BIN_ORDER}
-      cellCount={cellCount}
-      cellShare={cellShare}
-      rowTotal={rowTotal}
-      selected={selected}
-      setSelected={setSelected}
-    />
-  );
 
   return (
     <PageShell
       id="gap"
       question="직업에 따라 레이드 진입률이 얼마나 다를까"
-      visualFocus={effective === "solid"}
       statNumber={best.index / worst.index}
       statFormat={(v) => v.toFixed(2)}
       statUnit="배"
@@ -47,26 +27,20 @@ export default function Gap() {
       statNote={`${best.job}는 3명 중 1명이 레이드 구간, ${worst.job}는 7명 중 1명입니다. 성장을 마친 캐릭터 기준입니다.`}
       visual={
         <Chart
-          how="가로가 직업, 세로가 성장 단계입니다. 앞줄이 낮은 단계, 뒷줄이 높은 단계이고, 막대가 높을수록 그 직업에서 그 단계의 비중이 큽니다."
+          how="한 줄이 직업 하나이고, 줄 전체가 그 직업의 100%입니다. 왼쪽이 낮은 단계, 오른쪽이 높은 단계이고, 칸이 넓을수록 그 단계의 비중이 큽니다."
           so={`같은 표본 안에서도 레이드 구간 비중은 직업에 따라 ${fmtX(best.index / worst.index)} 차이가 납니다.`}
         >
-          <ViewToggle mode={effective} setMode={setMode} available={can3D} />
-          {effective === "solid" ? (
-            <LazyJobTerrain
-              rows={jobFameRows}
-              cellCount={cellCount}
-              cellShare={cellShare}
-              selected={selected}
-              setSelected={setSelected}
-              hovered={hovered}
-              onHover={setHovered}
-              fallback={flatHeatmap}
-              placeholder={flatHeatmap}
-            />
-          ) : flatHeatmap}
+          <StageLegend />
+          <JobStageBars
+            rows={jobFameRows}
+            cellCount={cellCount}
+            cellShare={cellShare}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </Chart>
       }
-      visualCaption={`인원이 많은 직업 20종을 가로로, 성장 단계 여섯 구간을 세로로 놓았습니다. 막대 높이와 칸 색은 그 직업 안에서 해당 구간이 차지하는 비중입니다. ${selected ? `${selected}만 골라 놓았습니다. 다시 누르면 전체로 돌아갑니다.` : "직업을 누르면 그 줄만 남습니다."}`}
+      visualCaption={`인원이 많은 직업 20종을 레이드 진입 비중이 큰 차례로 세웠습니다. 한 줄 안에서 칸이 차지하는 너비가 그 직업 안에서 해당 구간의 비중입니다. ${selected ? `${selected}만 골라 놓았습니다. 다시 누르면 전체로 돌아갑니다.` : "직업을 누르면 그 줄만 남습니다."}`}
       explain={[
         {
           label: "견준 것",

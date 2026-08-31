@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 /* ─ 디자인 토큰 ─
    바탕 오프화이트, 잉크 네이비, 액센트 1색, 3D 강조용 보조 액센트(골드) 1색.
    상자 테두리 대신 헤어라인과 여백으로만 구획한다. */
@@ -24,6 +26,39 @@
   --ink-5: #2450A8;
   --ink-6: #16346B;
   --masked: #EDEBE5;
+  /* ─ Bklit UI 차트 토큰 ─
+     차트가 따로 놀지 않도록 리포트의 잉크 램프와 글자색을 그대로 물려준다. */
+  --chart-1: var(--ink-6);
+  --chart-2: var(--ink-5);
+  --chart-3: var(--ink-4);
+  --chart-4: var(--ink-3);
+  --chart-5: var(--ink-2);
+  --chart-background: var(--bg-base);
+  --chart-foreground: var(--text-primary);
+  --chart-foreground-muted: var(--text-secondary);
+  --chart-line-primary: var(--accent);
+  --chart-line-secondary: var(--ink-3);
+  --chart-crosshair: var(--hairline-strong);
+  --chart-grid: var(--hairline);
+  --chart-brush-border: var(--hairline);
+  --chart-tooltip-background: rgba(27, 33, 48, 0.94);
+  --chart-tooltip-foreground: #FFFFFF;
+  --chart-tooltip-muted: #B3BBCC;
+  --chart-marker-background: var(--bg-surface);
+  --chart-marker-border: var(--hairline-strong);
+  --chart-marker-foreground: var(--text-primary);
+  --chart-label: var(--text-secondary);
+  --chart-scale-01: var(--ink-1);
+  --chart-scale-02: var(--ink-2);
+  --chart-scale-03: var(--ink-3);
+  --chart-scale-04: var(--ink-4);
+  --chart-scale-05: var(--ink-5);
+  --chart-scale-pattern-color: var(--bg-base);
+  --legend: var(--bg-surface);
+  --legend-foreground: var(--text-primary);
+  --legend-muted: var(--bg-sunken);
+  --legend-muted-foreground: var(--text-muted);
+  --legend-track: var(--hairline);
 }
 
 html {
@@ -182,3 +217,37 @@ input[type="range"] { accent-color: var(--accent); width: 100%; }
 }
 
 svg text { user-select: none; }
+
+@theme inline {
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-background: var(--chart-background);
+  --color-chart-foreground: var(--chart-foreground);
+  --color-chart-foreground-muted: var(--chart-foreground-muted);
+  --chart-line-primary: var(--chart-line-primary);
+  --chart-line-secondary: var(--chart-line-secondary);
+  --color-chart-crosshair: var(--chart-crosshair);
+  --color-chart-grid: var(--chart-grid);
+  --chart-brush-border: var(--chart-brush-border);
+  --color-chart-tooltip-background: var(--chart-tooltip-background);
+  --color-chart-tooltip-foreground: var(--chart-tooltip-foreground);
+  --color-chart-tooltip-muted: var(--chart-tooltip-muted);
+  --color-chart-marker-background: var(--chart-marker-background);
+  --color-chart-marker-border: var(--chart-marker-border);
+  --color-chart-marker-foreground: var(--chart-marker-foreground);
+  --color-chart-label: var(--chart-label);
+  --color-chart-scale-01: var(--chart-scale-01);
+  --color-chart-scale-02: var(--chart-scale-02);
+  --color-chart-scale-03: var(--chart-scale-03);
+  --color-chart-scale-04: var(--chart-scale-04);
+  --color-chart-scale-05: var(--chart-scale-05);
+  --color-chart-scale-pattern-color: var(--chart-scale-pattern-color);
+  --color-legend-track: var(--legend-track);
+  --color-legend-muted-foreground: var(--legend-muted-foreground);
+  --color-legend-muted: var(--legend-muted);
+  --color-legend-foreground: var(--legend-foreground);
+  --color-legend: var(--legend);
+}

@@ -33,22 +33,11 @@ await new Promise((r) => server.listen(PORT, r));
 const browser = await chromium.launch();
 const results = [];
 
-const MODES = [
-  { key: "solid", tag: "" },
-  { key: "flat", tag: "-평면" },
-];
-
 for (const viewport of [{ width: 1440, height: 900, tag: "desktop" }, { width: 390, height: 844, tag: "mobile" }]) {
   for (const id of PAGES) {
-   for (const mode of MODES) {
-    if (mode.key === "flat" && !["overview", "gap"].includes(id)) continue;
     // 주소로 곧장 들어가는 상황을 그대로 만든다 (매번 새 탭)
     const page = await browser.newPage({ viewport: { width: viewport.width, height: viewport.height } });
     await page.goto(`http://localhost:${PORT}/#${id}`, { waitUntil: "load" });
-    if (mode.key === "flat") {
-      const flat = page.getByRole("button", { name: "평면으로 보기" });
-      if (await flat.count()) await flat.first().click().catch(() => {});
-    }
     await page.waitForTimeout(WAIT_MS);
     // 1단계: 첫 화면 안에서 안 보이는 요소
     const inViewFaded = await page.evaluate(() => {
@@ -139,7 +128,7 @@ for (const viewport of [{ width: 1440, height: 900, tag: "desktop" }, { width: 3
     const emptyCanvas = (r.canvases ?? []).filter((c) => c.empty).length;
     results.push({
       view: viewport.tag,
-      page: id + mode.tag,
+      page: id,
       textLength: r.textLength ?? 0,
       fadedCount: r.fadedCount ?? 0,
       faded: r.faded ?? [],
@@ -154,7 +143,6 @@ for (const viewport of [{ width: 1440, height: 900, tag: "desktop" }, { width: 3
         && emptyCanvas === 0 && (r.running ?? 1) === 0 && (r.overlapCount ?? 1) === 0,
     });
     await page.close();
-   }
   }
 }
 
