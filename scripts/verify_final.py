@@ -341,7 +341,8 @@ def check_stability():
         return None
     data = json.loads(STABILITY.read_text(encoding="utf-8"))
     rows = data["results"]
-    ok(len(rows) == 18, f"표시 안정성 검사 대상이 18개가 아닙니다 ({len(rows)}개)")
+    # 화면 7개 x 데스크톱·모바일. 평면과 입체 토글이 사라져 14개가 됐다.
+    ok(len(rows) == 14, f"표시 안정성 검사 대상이 14개가 아닙니다 ({len(rows)}개)")
     for r in rows:
         ok(r["ok"], f"표시 안정성 실패 {r['view']} {r['page']}: 글자 {r['textLength']}, "
                     f"안 보이는 요소 {r['fadedCount']}, 빈 캔버스 {r['emptyCanvas']}, "

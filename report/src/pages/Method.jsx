@@ -1,16 +1,47 @@
 import { useState } from "react";
 import PageShell, { Stagger } from "../components/PageShell.jsx";
 import FlowDiagram from "../components/charts/FlowDiagram.jsx";
-import { fmtInt, fmtPct, fmtPeople, pct1 } from "../lib/format.js";
+import { fmtInt, fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
 import {
-  meta, activity, seedStats, limitedRatio, MEASURED, fameCompare, missingLowLevel,
+  meta, activity, seedStats, limitedRatio, MEASURED, fameCompare, missingLowLevel, verify, dormGap,
 } from "../lib/data.js";
 
 const TABS = [
   { key: "design", label: "표본 설계" },
+  { key: "verify", label: "다시 재본 결과" },
   { key: "bias", label: "편향과 확인 불가 항목" },
   { key: "ethics", label: "개인정보와 실측치" },
 ];
+
+/** 두 방법을 나란히 놓는 대조표. 1차 조사 수치는 그대로 두고 옆에 붙이기만 한다. */
+function CompareTable({ head, rows, labelKey }) {
+  return (
+    <div className="scroll-x">
+      <table className="plain" style={{ minWidth: 460 }}>
+        <thead>
+          <tr>
+            <th>{head}</th>
+            <th className="text-right">이름으로 찾은 조사</th>
+            <th className="text-right">명성으로 훑은 조사</th>
+            <th className="text-right">차이</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r[labelKey]}>
+              <td style={{ color: "var(--text-primary)" }}>{r[labelKey]}</td>
+              <td className="num text-right">{fmtPct(r.first)}</td>
+              <td className="num text-right">{fmtPct(r.verified)}</td>
+              <td className="num text-right" style={{ color: Math.abs(r.diff) >= 2 ? "var(--gold-text)" : "var(--text-secondary)" }}>
+                {r.diff > 0 ? "+" : ""}{fmtPp(r.diff)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function Section({ title, children }) {
   return (
@@ -125,6 +156,80 @@ export default function Method() {
                     앞서 커 보이던 차이의 상당 부분이 성장 단계가 섞여 있던 탓일 수 있습니다.
                   </p>
                   <p className="m-0">모든 캐릭터를 포함한 수치는 직업 화면의 세부 데이터에 함께 두었습니다.</p>
+                </div>
+              </Section>
+            </Stagger>
+          )}
+
+          {tab === "verify" && (
+            <Stagger index={0}>
+              <Section title="다른 방법으로 다시 재봤습니다">
+                <div className="prose t-body text-[0.94rem]">
+                  <p className="m-0">
+                    이름으로 찾는 방식은 결과가 200명에서 잘리고, 잘린 자리에 어떤 캐릭터가 있었는지 알 수 없습니다.
+                    명성 점수로 직접 훑는 다른 방법이 따로 있어서, 같은 것을 두 번 재보고 결과를 맞춰 봤습니다.
+                  </p>
+                  <p className="m-0">
+                    명성 점수를 낮은 쪽부터 높은 쪽까지 일정한 간격으로 훑으면서 그 지점에 있는 캐릭터를 전부 받았습니다.
+                    요청 {fmtInt(verify.meta.apiCalls)}번, 캐릭터 {fmtPeople(verify.meta.sampleSize)}입니다.
+                  </p>
+                  <p className="m-0">
+                    이 방법은 레벨 110 이상이면서 최근 90일 안에 접속한 캐릭터만 보여 줍니다.
+                    그래서 1차 조사를 대신하지 못하고, 겹치는 부분만 견줄 수 있습니다.
+                  </p>
+                </div>
+              </Section>
+
+              <Section title="성장 단계 분포는 거의 같았습니다">
+                <CompareTable head="성장 단계" rows={verify.fameBins} labelKey="bin" />
+                <p className="t-body m-0 mt-3 text-[0.94rem]">
+                  두 분포를 맞추려면 {fmtPp(verify.fameTvd)}만 옮기면 됩니다.
+                  검색이 잘리는 문제가 명성 분포를 크게 왜곡하지는 않았습니다.
+                </p>
+              </Section>
+
+              <Section title="직업 구성은 뚜렷이 갈렸습니다">
+                <CompareTable head="직업" rows={verify.jobs} labelKey="jobName" />
+                <p className="t-body m-0 mt-3 text-[0.94rem]">
+                  차이가 큰 다섯 직업만 옮겼습니다. 공통으로 견준 {verify.jobCompared}개 직업 전체로 보면
+                  두 분포를 맞추는 데 {fmtPp(verify.jobTvd)}가 필요합니다.
+                  직업 구성은 두 방법이 뚜렷이 갈립니다. 이름으로 뽑는 방식이 직업 쪽으로 치우칠 수 있다는 뜻입니다.
+                </p>
+              </Section>
+
+              <Section title="재보는 과정에서 더 큰 문제를 찾았습니다">
+                <div className="prose t-body text-[0.94rem]">
+                  <p className="m-0">
+                    이 조사는 최근 기록이 없으면 조용한 캐릭터로 봤습니다.
+                    그런데 명성이 낮은 캐릭터는 접속해도 기록에 남는 행동을 잘 하지 않습니다.
+                  </p>
+                  <p className="m-0">
+                    명성으로 훑은 결과를 놓고 거꾸로 계산하면, 낮은 구간에서 90일 넘게 기록 없음으로 잡힌 비중이
+                    실제보다 크게 부풀었을 가능성이 나옵니다.
+                    가장 낮은 구간은 이 조사에서 {fmtPct(dormGap.timeline)}였는데 거꾸로 계산한 값은 {fmtPct(dormGap.implied)}입니다.
+                  </p>
+                  <p className="m-0">
+                    이 값은 확정이 아닙니다. 거꾸로 계산하려면 1차 조사의 표본이 명성 쪽으로 치우치지 않았다고 먼저 두어야 하는데,
+                    그 점이 바로 지금 재보고 있는 것이라 논리가 제자리를 돕니다.
+                    조용한 비중을 잰 표본도 구간마다 {verify.meta.subsampleMin}명에서 {verify.meta.subsampleMax}명으로 작습니다.
+                    그래서 실측이 예상을 벗어난 까닭이 1차 조사의 표본 치우침 때문인지, 조용한 비중을 잰 방식의 오차 때문인지
+                    이 자료만으로는 갈라낼 수 없습니다.
+                  </p>
+                </div>
+              </Section>
+
+              <Section title="처음 시도했다가 버린 방법">
+                <div className="prose t-body text-[0.94rem]">
+                  <p className="m-0">
+                    처음에는 구간마다 위에서부터 차례로 받아 오려 했습니다.
+                    그런데 이 조회는 한 번에 명성 폭 {fmtInt(verify.meta.windowCap)}만큼만 돌려줍니다.
+                    구간 하나가 그보다 훨씬 넓어서, 받아 온 캐릭터가 구간 맨 위쪽에만 쌓이고 구간 전체를 대표하지 못했습니다.
+                  </p>
+                  <p className="m-0">
+                    그래서 일정한 간격으로 훑는 방식으로 바꿨습니다.
+                    간격을 {fmtInt(verify.meta.coarseStep)}으로 두었을 때 곡선을 놓치는지 확인하려고,
+                    임의로 고른 스무 곳을 간격 {fmtInt(verify.meta.denseStep)}으로 다시 재서 값이 어긋나지 않는 것을 보았습니다.
+                  </p>
                 </div>
               </Section>
             </Stagger>

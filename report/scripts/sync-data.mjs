@@ -42,6 +42,18 @@ const KEY_MAP = {
   small_sample: "smallSample",
   capped_calls: "limitedCalls",
   generated_at: "generatedAt",
+  api_calls: "apiCalls",
+  grid_check_pct: "gridCheckPct",
+  coarse_step: "coarseStep",
+  dense_step: "denseStep",
+  window_cap: "windowCap",
+  subsample_min: "subsampleMin",
+  subsample_max: "subsampleMax",
+  fame_tvd: "fameTvd",
+  job_tvd: "jobTvd",
+  job_group_tvd: "jobGroupTvd",
+  job_compared: "jobCompared",
+  subsampleN: "subsampleN",
 };
 
 // 설명 문자열은 화면 문구를 따로 쓰므로 데이터에서 덜어낸다.
@@ -95,12 +107,16 @@ function guard(name, text) {
 
 const census = convert(JSON.parse(readFileSync(join(root, "data", "census_2026-08.json"), "utf-8")));
 const seeds = convert(JSON.parse(readFileSync(join(root, "data", "seed_yield.json"), "utf-8")));
+const verification = convert(JSON.parse(readFileSync(join(root, "data", "verification_2026-08.json"), "utf-8")));
 
 const censusText = JSON.stringify(census);
 const seedText = JSON.stringify(seeds);
+const verifyText = JSON.stringify(verification);
 guard("census.json", censusText);
 guard("seed_yield.json", seedText);
+guard("verification.json", verifyText);
 
 writeFileSync(join(dest, "census.json"), censusText, "utf-8");
 writeFileSync(join(dest, "seed_yield.json"), seedText, "utf-8");
+writeFileSync(join(dest, "verification.json"), verifyText, "utf-8");
 console.log(`sync-data: 표본 ${census.meta.sampleSize.toLocaleString()}명 기준 데이터 변환 완료`);

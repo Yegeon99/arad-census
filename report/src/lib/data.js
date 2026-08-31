@@ -2,6 +2,7 @@
 // 여기서 새로 만드는 값은 비율 계산뿐이다.
 import census from "../data/census.json";
 import seedYield from "../data/seed_yield.json";
+import verification from "../data/verification.json";
 import insights from "../derived/insights.json";
 import histogram from "../derived/fame_histogram.json";
 import jobTree from "../derived/job_tree.json";
@@ -15,11 +16,14 @@ export const complete = census.completeSearch;
 export const activity = census.activity;
 export { insights, histogram, jobTree };
 
+/** 명성 점수로 다시 재본 검증 조사. 1차 조사 수치는 손대지 않고 나란히만 놓는다. */
+export const verify = verification;
+
 /** 파이프라인 실행 기록 (게이트 보고와 같은 실측치) */
 export const MEASURED = {
-  apiCalls: 933,
-  llmCostUsd: 0.0966,
-  llmBatches: 4,
+  apiCalls: 1880,
+  llmCostUsd: 0.107662,
+  llmBatches: 5,
   collectSec: 87,
   timelineSec: 181,
   surveyedAt: "2026년 8월 25일",
@@ -121,3 +125,6 @@ export const missingLowLevel = (() => {
 })();
 
 export const binOrder = BIN_ORDER;
+
+/** 검증 조사에서 휴면 판정 차이가 가장 큰 구간 (역산 기준) */
+export const dormGap = [...verify.dormancy].sort((a, b) => a.diff - b.diff)[0];

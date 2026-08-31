@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "surveyed_at": "2026-08-31T10:38:54+09:00",
+    "api_calls": 947,
+    "sample_size": 18552,
+    "population": 3091600,
+    "coarse_step": 250,
+    "dense_step": 50,
+    "grid_check_pct": -3.487,
+    "window_cap": 2000,
+    "subsample_min": 11,
+    "subsample_max": 269
+  },
+  "fame_bins": [
+    {
+      "bin": "레기온 미만",
+      "first": 42.36,
+      "verified": 38.52,
+      "diff": -3.84
+    },
+    {
+      "bin": "아포칼립스 입장",
+      "first": 19.5,
+      "verified": 20.45,
+      "diff": 0.95
+    },
+    {
+      "bin": "상급 던전권",
+      "first": 13.53,
+      "verified": 13.58,
+      "diff": 0.05
+    },
+    {
+      "bin": "미카엘라 입장",
+      "first": 13.59,
+      "verified": 14.94,
+      "diff": 1.35
+    },
+    {
+      "bin": "미카엘라 권장",
+      "first": 9.12,
+      "verified": 10.04,
+      "diff": 0.92
+    },
+    {
+      "bin": "하드 권장 이상",
+      "first": 1.9,
+      "verified": 2.47,
+      "diff": 0.57
+    }
+  ],
+  "fame_tvd": 3.84,
+  "jobs": [
+    {
+      "jobName": "스위프트 마스터",
+      "first": 3.74,
+      "verified": 1.09,
+      "diff": -2.65
+    },
+    {
+      "jobName": "다크템플러",
+      "first": 5.27,
+      "verified": 2.96,
+      "diff": -2.31
+    },
+    {
+      "jobName": "인파이터",
+      "first": 3.0,
+      "verified": 4.48,
+      "diff": 1.48
+    },
+    {
+      "jobName": "런처",
+      "first": 1.95,
+      "verified": 2.7,
+      "diff": 0.75
+    },
+    {
+      "jobName": "인챈트리스",
+      "first": 3.06,
+      "verified": 2.31,
+      "diff": -0.75
+    }
+  ],
+  "job_tvd": 9.54,
+  "job_group_tvd": 7.34,
+  "job_compared": 59,
+  "dormancy": [
+    {
+      "bin": "레기온 미만",
+      "timeline": 78.4,
+      "subsampleN": 269,
+      "implied": 30.1,
+      "diff": -48.4
+    },
+    {
+      "bin": "아포칼립스 입장",
+      "timeline": 20.5,
+      "subsampleN": 112,
+      "implied": 19.3,
+      "diff": -1.2
+    },
+    {
+      "bin": "상급 던전권",
+      "timeline": 6.4,
+      "subsampleN": 78,
+      "implied": 22.8,
+      "diff": 16.4
+    },
+    {
+      "bin": "미카엘라 입장",
+      "timeline": 2.6,
+      "subsampleN": 78,
+      "implied": 15.4,
+      "diff": 12.9
+    },
+    {
+      "bin": "미카엘라 권장",
+      "timeline": 0.0,
+      "subsampleN": 52,
+      "implied": 15.3,
+      "diff": 15.3
+    },
+    {
+      "bin": "하드 권장 이상",
+      "timeline": 0.0,
+      "subsampleN": 11,
+      "implied": 0.0,
+      "diff": 0.0
+    }
+  ]
+}

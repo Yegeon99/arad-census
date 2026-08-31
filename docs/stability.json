@@ -5,7 +5,7 @@
   {
    "view": "desktop",
    "page": "overview",
-   "textLength": 1154,
+   "textLength": 1181,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -50,7 +50,7 @@
   {
    "view": "desktop",
    "page": "activity",
-   "textLength": 1134,
+   "textLength": 1273,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -80,7 +80,7 @@
   {
    "view": "desktop",
    "page": "insights",
-   "textLength": 1953,
+   "textLength": 1983,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -95,7 +95,7 @@
   {
    "view": "desktop",
    "page": "method",
-   "textLength": 1054,
+   "textLength": 1060,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -110,7 +110,7 @@
   {
    "view": "mobile",
    "page": "overview",
-   "textLength": 1176,
+   "textLength": 1203,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -155,7 +155,7 @@
   {
    "view": "mobile",
    "page": "activity",
-   "textLength": 1134,
+   "textLength": 1273,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -185,7 +185,7 @@
   {
    "view": "mobile",
    "page": "insights",
-   "textLength": 1953,
+   "textLength": 1983,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,
@@ -200,7 +200,7 @@
   {
    "view": "mobile",
    "page": "method",
-   "textLength": 1054,
+   "textLength": 1060,
    "fadedCount": 0,
    "faded": [],
    "inViewFadedCount": 0,

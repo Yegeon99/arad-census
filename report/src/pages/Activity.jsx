@@ -3,7 +3,7 @@ import Chart from "../components/Chart.jsx";
 import { ActivityMorph, ActivityStream } from "../components/charts/Activity.jsx";
 import { ACT_ORDER } from "../lib/palette.js";
 import { fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
-import { activity, actOverall, actAdjusted, dormantLabel, weeklyLabel } from "../lib/data.js";
+import { activity, actOverall, actAdjusted, dormantLabel, weeklyLabel, verify, dormGap } from "../lib/data.js";
 
 export default function Activity() {
   const before = Object.fromEntries(ACT_ORDER.map((k) => [k, actOverall[k].pct]));
@@ -21,6 +21,22 @@ export default function Activity() {
       statUnit="%"
       statLabel="90일 넘게 기록이 없는 비중, 보정값"
       statNote={`10명 중 6~7명은 90일 넘게 기록이 없습니다(보정값). 보정 전에는 ${fmtPct(before[dormantLabel])}입니다.`}
+      intro={
+        <aside
+          className="mb-10 px-5 py-4"
+          style={{ background: "var(--gold-soft)", borderLeft: "3px solid var(--gold)" }}
+        >
+          <p className="m-0 text-[0.95rem] font-bold" style={{ color: "var(--text-primary)" }}>
+            이 화면의 숫자는 나중에 다시 재보고 의심이 생겼습니다
+          </p>
+          <p className="t-body m-0 mt-2 text-[0.92rem]">
+            이 화면의 90일 넘게 기록 없음 비중은 실제보다 부풀었을 수 있습니다.
+            명성 점수로 훑는 다른 방법으로 캐릭터 {fmtPeople(verify.meta.sampleSize)}을 다시 재본 결과,
+            특히 명성이 낮은 구간에서 그렇습니다. 아래 수치는 고치지 않고 그대로 두었습니다.{" "}
+            <a href="#method">조사 방법과 한계 화면</a>에 자세히 적었습니다.
+          </p>
+        </aside>
+      }
       visual={
         <Chart
           how="막대 하나를 네 칸으로 나눈 것입니다. 왼쪽 칸일수록 최근에 접속한 캐릭터, 오른쪽 칸일수록 오래 접속하지 않은 캐릭터입니다."

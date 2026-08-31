@@ -2,10 +2,10 @@ import PageShell, { CountUp, Stagger } from "../components/PageShell.jsx";
 import Chart from "../components/Chart.jsx";
 import SearchExplainer from "../components/SearchExplainer.jsx";
 import SampleStageBars from "../components/charts/SampleStageBars.jsx";
-import { fmtInt, fmtPct, fmtPeople } from "../lib/format.js";
+import { fmtInt, fmtPct, fmtPeople, fmtPp } from "../lib/format.js";
 import {
   meta, dist, complete, MEASURED, fameCompare, fameSample, completeFameSample,
-  actOverall, actAdjusted, dormantLabel, topJobs, finalSample,
+  topJobs, finalSample, verify,
 } from "../lib/data.js";
 
 const ICON = {
@@ -189,10 +189,10 @@ export default function Overview() {
           />
           <FindingCard
             index={2}
-            href="#activity"
-            kicker="활성도"
-            title="보정하면 조용한 캐릭터가 훨씬 많아집니다"
-            body={`90일 넘게 기록이 없는 비중이 ${fmtPct(actOverall[dormantLabel].pct)}에서 ${fmtPct(actAdjusted[dormantLabel])}로 올라갑니다.`}
+            href="#method"
+            kicker="스스로 검증"
+            title="같은 것을 두 방법으로 재봤습니다"
+            body={`성장 단계 분포는 ${fmtPp(verify.fameTvd)} 차이로 거의 같았고, 직업 구성은 ${fmtPp(verify.jobTvd)} 갈렸습니다. 대신 활성도 판정에서 더 큰 문제를 찾았습니다.`}
           />
         </div>
       </Stagger>
