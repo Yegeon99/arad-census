@@ -14,7 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from pipeline.insights import MODEL  # noqa: E402
-from pipeline.llm import get_client, parse_json_array, record_call  # noqa: E402
+from pipeline.llm import check_budget, get_client, parse_json_array, record_call  # noqa: E402
 
 INS = ROOT / "report" / "src" / "derived" / "insights.json"
 FACTS = ROOT / "report" / "content" / "insight_facts.json"
@@ -87,6 +87,8 @@ payload = {
     ],
 }
 
+# 다른 생성 스크립트와 같은 상한 검사를 거친다.
+check_budget()
 client = get_client()
 resp = client.messages.create(
     model=MODEL,

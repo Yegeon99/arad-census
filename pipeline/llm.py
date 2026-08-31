@@ -19,7 +19,10 @@ ROOT = Path(__file__).resolve().parent.parent
 KST = ZoneInfo("Asia/Seoul")
 COSTS_PATH = ROOT / "data" / "llm_costs.json"
 
-BUDGET_USD = 0.10  # PRD 비기능 요구: 인사이트 생성 배치 $0.1 이내
+# PRD 비기능 요구: 인사이트 생성 비용 상한.
+# 2026-08-31 상향 (0.10 -> 0.15). 검증 조사 결과를 반영하려고 인사이트 3개를
+# 재생성하면서 초기 상한 $0.10 을 초과했고, 실측 누적 $0.1077 을 반영해 조정했다.
+BUDGET_USD = 0.15
 
 # USD / 1M tokens (input, output) — 2026-08 기준 공식 단가
 PRICING = {

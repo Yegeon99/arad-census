@@ -27,6 +27,7 @@ const server = createServer((req, res) => {
   res.setHeader("Content-Type", MIME[extname(p)] ?? "application/octet-stream");
   res.end(readFileSync(p));
 });
+const ENTER_MARGIN = 40;  // report/src/lib/reveal.js 의 같은 이름 상수와 맞춘다
 const PORT = 4183;
 await new Promise((r) => server.listen(PORT, r));
 
@@ -40,7 +41,7 @@ for (const viewport of [{ width: 1440, height: 900, tag: "desktop" }, { width: 3
     await page.goto(`http://localhost:${PORT}/#${id}`, { waitUntil: "load" });
     await page.waitForTimeout(WAIT_MS);
     // 1단계: 첫 화면 안에서 안 보이는 요소
-    const inViewFaded = await page.evaluate(() => {
+    const inViewFaded = await page.evaluate((enterMargin) => {
       const main = document.querySelector("main");
       if (!main) return ["본문 없음"];
       const out = [];
@@ -48,14 +49,16 @@ for (const viewport of [{ width: 1440, height: 900, tag: "desktop" }, { width: 3
         const rects = el.getClientRects();
         if (!rects.length) continue;
         const box = el.getBoundingClientRect();
-        if (box.bottom <= 0 || box.top >= window.innerHeight) continue; // 아직 화면 밖이면 안 나와 있어도 맞다
+        // 등장 연출은 요소가 화면 아래에서 ENTER_MARGIN 만큼 올라와야 켠다.
+        // 화면 끝에 그보다 적게 걸친 요소는 아직 안 나와 있는 것이 정상이다.
+        if (box.bottom <= 0 || box.top >= window.innerHeight - enterMargin) continue;
         const cs = getComputedStyle(el);
         if (Number(cs.opacity) < 0.05 || cs.visibility === "hidden") {
           out.push(String(el.className?.baseVal ?? el.className ?? el.tagName).slice(0, 40));
         }
       }
       return out;
-    });
+    }, ENTER_MARGIN);
 
     // 2단계: 맨 아래까지 한 번에 내려 빠른 스크롤에서도 연출이 다 도는지 본다
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
