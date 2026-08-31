@@ -192,16 +192,24 @@ table.plain th {
   text-align: left;
   font-weight: 600;
   color: var(--text-muted);
-  padding: 0.45rem 0.6rem 0.45rem 0;
+  padding: 0.5rem 0.9rem 0.5rem 0;
   border-bottom: 1px solid var(--hairline-strong);
   white-space: nowrap;
 }
 table.plain td {
-  padding: 0.45rem 0.6rem 0.45rem 0;
+  padding: 0.58rem 0.9rem 0.58rem 0;
   border-bottom: 1px solid var(--hairline);
   color: var(--text-secondary);
 }
+table.plain th:last-child, table.plain td:last-child { padding-right: 0; }
 table.plain tbody tr:last-child td { border-bottom: 0; }
+/* 머리글은 자기 열의 값과 같은 쪽으로 붙는다.
+   table.plain th 의 왼쪽 정렬이 유틸리티 클래스보다 세서, 예전에는 숫자 열
+   머리글이 값과 어긋난 자리에 떠 있었다. */
+table.plain th.text-right, table.plain td.text-right { text-align: right; }
+table.plain th.text-center, table.plain td.text-center { text-align: center; }
+/* 숫자 열은 자릿수가 흔들리지 않게 고정폭 숫자를 쓴다. */
+table.plain td.num, table.plain th.text-right { font-variant-numeric: tabular-nums; }
 
 /* 가로 스크롤 표 */
 .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }

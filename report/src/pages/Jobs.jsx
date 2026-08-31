@@ -110,7 +110,6 @@ export default function Jobs() {
               </table>
             </div>
           </div>
-          <div className="space-y-8">
             <div>
               <p className="t-eyebrow m-0 mb-2">직업군별 인원 (성장을 마친 캐릭터)</p>
               <table className="plain">
@@ -164,10 +163,9 @@ export default function Jobs() {
                 </tbody>
               </table>
             </div>
-            <p className="t-small m-0">
-              직업 이름은 전직 단계를 하나로 합쳐 최종 전직명으로 맞추었습니다. 합치는 규칙은 조사 방법과 한계 화면에 적어 두었습니다.
-            </p>
-          </div>
+          <p className="t-small m-0 lg:col-span-2">
+            직업 이름은 전직 단계를 하나로 합쳐 최종 전직명으로 맞추었습니다. 합치는 규칙은 조사 방법과 한계 화면에 적어 두었습니다.
+          </p>
         </div>
       }
     />

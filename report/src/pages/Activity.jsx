@@ -77,6 +77,7 @@ export default function Activity() {
         },
       ]}
       details={
+        <>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <p className="t-eyebrow m-0 mb-2">보정 전과 보정 후</p>
@@ -89,7 +90,10 @@ export default function Activity() {
                   <tr key={k}>
                     <td style={{ color: "var(--text-primary)" }}>{k}</td>
                     <td className="num text-right">
-                      {fmtPct(before[k])} <span style={{ color: "var(--text-muted)" }}>{fmtPeople(actOverall[k].count)}</span>
+                      {fmtPct(before[k])}
+                      <span className="block text-[0.8rem]" style={{ color: "var(--text-muted)" }}>
+                        {fmtPeople(actOverall[k].count)}
+                      </span>
                     </td>
                     <td className="num text-right" style={{ color: "var(--accent)", fontWeight: 600 }}>{fmtPct(after[k])}</td>
                   </tr>
@@ -121,31 +125,36 @@ export default function Activity() {
               </tbody>
             </table>
 
-            <p className="t-eyebrow m-0 mb-2 mt-8">구간별 인원과 접속 상태</p>
-            <div className="scroll-x">
-              <table className="plain">
-                <thead>
-                  <tr>
-                    <th>구간</th><th className="text-right">인원</th>
-                    {ACT_ORDER.map((k) => <th key={k} className="text-right">{k}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {activity.byFameBin.map((b) => (
-                    <tr key={b.bin}>
-                      <td style={{ color: "var(--text-primary)" }}>
-                        {b.bin}
-                        {b.smallSample && <span className="t-small" style={{ color: "var(--gold-text)" }}> 표본이 적어 참고용</span>}
-                      </td>
-                      <td className="num text-right">{fmtPeople(b.n)}</td>
-                      {ACT_ORDER.map((k) => <td key={k} className="num text-right">{fmtPct(b.pct[k])}</td>)}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
+
+        {/* 열이 여섯이라 반폭 칸에 넣으면 글자가 잘려 줄바꿈된다. 전체 폭으로 뺀다. */}
+        <div className="mt-10">
+          <p className="t-eyebrow m-0 mb-2">구간별 인원과 접속 상태</p>
+          <div className="scroll-x">
+            <table className="plain" style={{ minWidth: 720 }}>
+              <thead>
+                <tr>
+                  <th>구간</th><th className="text-right">인원</th>
+                  {ACT_ORDER.map((k) => <th key={k} className="text-right">{k}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {activity.byFameBin.map((b) => (
+                  <tr key={b.bin}>
+                    <td style={{ color: "var(--text-primary)" }}>
+                      {b.bin}
+                      {b.smallSample && <span className="t-small" style={{ color: "var(--gold-text)" }}> 표본이 적어 참고용</span>}
+                    </td>
+                    <td className="num text-right">{fmtPeople(b.n)}</td>
+                    {ACT_ORDER.map((k) => <td key={k} className="num text-right">{fmtPct(b.pct[k])}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </>
       }
     >
       <Stagger index={6}>

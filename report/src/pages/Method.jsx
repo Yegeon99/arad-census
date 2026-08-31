@@ -17,7 +17,7 @@ const TABS = [
 function CompareTable({ head, rows, labelKey }) {
   return (
     <div className="scroll-x">
-      <table className="plain" style={{ minWidth: 460 }}>
+      <table className="plain" style={{ minWidth: 460, maxWidth: 720 }}>
         <thead>
           <tr>
             <th>{head}</th>
@@ -46,7 +46,7 @@ function CompareTable({ head, rows, labelKey }) {
 function Section({ title, children }) {
   return (
     <section className="mt-8">
-      <h3 className="t-title m-0 mb-3 text-[1.12rem]">{title}</h3>
+      <h3 className="t-title m-0 mb-4 text-[1.12rem]">{title}</h3>
       {children}
     </section>
   );
@@ -108,12 +108,57 @@ export default function Method() {
       statNote="이 조사에서 가장 큰 편향의 출처입니다"
       visual={
         <div>
-          <div className="mb-6 flex flex-wrap gap-5">
+          {/* 검증 결과가 이 화면에서 제일 중요한 내용이라 탭 위에 한 줄로 먼저 알린다 */}
+          {tab !== "verify" && (
+            <button
+              type="button"
+              onClick={() => setTab("verify")}
+              className="mb-5 flex w-full items-center gap-4 rounded-lg px-5 py-4 text-left"
+              style={{ background: "var(--gold-soft)", borderLeft: "3px solid var(--gold)", cursor: "pointer" }}
+            >
+              <span className="min-w-0 flex-1">
+                <span className="block text-[0.95rem] font-bold" style={{ color: "var(--text-primary)" }}>
+                  같은 것을 다른 방법으로 한 번 더 재봤습니다
+                </span>
+                <span className="t-small m-0 mt-1 block">
+                  성장 단계 분포는 {fmtPp(verify.fameTvd)} 차이로 거의 같았고, 직업 구성은 {fmtPp(verify.jobTvd)} 갈렸습니다.
+                  활성도 판정에서는 더 큰 문제를 찾았습니다.
+                </span>
+              </span>
+              <span className="shrink-0 text-[0.9rem] font-bold" style={{ color: "var(--gold-text)" }}>보러 가기</span>
+            </button>
+          )}
+
+          <div
+            className="mb-8 flex flex-wrap gap-1.5 rounded-full p-1.5"
+            style={{ background: "var(--bg-sunken)" }}
+            aria-label="조사 방법 항목"
+          >
             {TABS.map((t) => {
               const on = tab === t.key;
+              const flag = t.key === "verify";
               return (
-                <button key={t.key} type="button" className="disclose" onClick={() => setTab(t.key)}
-                  style={{ color: on ? "var(--text-primary)" : "var(--accent)", fontWeight: on ? 700 : 450, textDecoration: on ? "none" : "underline" }}>
+                <button
+                  key={t.key}
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setTab(t.key)}
+                  className="flex min-h-[44px] items-center gap-2 rounded-full px-5 text-[0.95rem]"
+                  style={{
+                    background: on ? "var(--accent)" : "transparent",
+                    color: on ? "var(--bg-surface)" : flag ? "var(--gold-text)" : "var(--text-secondary)",
+                    fontWeight: on || flag ? 700 : 500,
+                    cursor: "pointer",
+                    transition: "background 0.18s, color 0.18s",
+                  }}
+                >
+                  {flag && (
+                    <span
+                      className="inline-block h-1.5 w-1.5 shrink-0 rounded-full"
+                      style={{ background: on ? "var(--bg-surface)" : "var(--gold)" }}
+                      aria-hidden="true"
+                    />
+                  )}
                   {t.label}
                 </button>
               );
