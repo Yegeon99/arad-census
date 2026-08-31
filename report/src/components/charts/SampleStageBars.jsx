@@ -4,7 +4,7 @@ import Bar from "./bar.tsx";
 import BarYAxis from "./bar-y-axis.tsx";
 import { BIN_ORDER } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
-import { useReducedMotion } from "../../lib/hooks.js";
+import { useReducedMotion, CHART_MS } from "../../lib/hooks.js";
 
 // 두 계열을 가르는 색. 한 계열 안의 명도 차가 아니라 색상 자체를 달리해
 // 색약에서도 갈린다 (ΔE 27.5 protan / 31.2 정상 시야).
@@ -74,7 +74,7 @@ export default function SampleStageBars({
             orientation="horizontal"
             barGap={0.22}
             margin={M}
-            animationDuration={reduced ? 0 : 1100}
+            animationDuration={reduced ? 0 : CHART_MS}
             className="!aspect-auto"
             style={{ height }}
           >

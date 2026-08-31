@@ -1,5 +1,5 @@
 ===== desktop overview 한눈에 보기 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -181,7 +181,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop jobs 직업 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -327,7 +327,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop jobs 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -650,7 +650,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop growth 성장 단계 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -782,7 +782,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop growth 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -914,7 +914,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop growth 조작 2 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1046,7 +1046,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop growth 조작 3 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1208,7 +1208,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop activity 활성도 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1325,7 +1325,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop activity 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1442,7 +1442,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop activity 조작 2 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1559,7 +1559,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop activity 조작 3 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1716,7 +1716,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop gap 직업과 성장 격차 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -1872,7 +1872,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop gap 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2055,7 +2055,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights AI 인사이트 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2238,7 +2238,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2421,7 +2421,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 2 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2540,7 +2540,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 3 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2659,7 +2659,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 4 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2806,7 +2806,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 5 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -2975,7 +2975,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 6 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3160,7 +3160,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop insights 조작 7 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3367,7 +3367,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조사 방법과 한계 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3491,7 +3491,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 1 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3546,25 +3546,25 @@ AI 인사이트
 
 31,523명
 →
-1,301,990명
+31,523명
 
 이름에 한글이 든 캐릭터 중 닿은 비율
 
 1.2%
 →
-50.7%
+1.2%
 
 명성 방식과의 직업 구성 차이
 
 9.5%포인트
 →
-5.2%포인트
+9.5%포인트
 
 스위프트 마스터 한 직업의 치우침
 
 2.7%포인트
 →
-0.0%포인트
+2.7%포인트
 
 시드를 바꾸자 가장 크게 벌어져 있던 직업들이 거의 맞아떨어졌습니다. 스위프트 마스터 2.7%포인트에서 0.0%포인트. 다크템플러 2.3%포인트에서 0.0%포인트. 다크 랜서 0.6%포인트에서 -0.1%포인트.
 
@@ -3578,7 +3578,7 @@ AI 인사이트
 
 45.8%
 →
-90.5%
+45.8%
 
 넓게 긁는 것과 잘리지 않는 것은 맞바꾸는 관계입니다.
 
@@ -3639,7 +3639,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 2 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3694,25 +3694,25 @@ AI 인사이트
 
 31,523명
 →
-1,301,990명
+31,523명
 
 이름에 한글이 든 캐릭터 중 닿은 비율
 
 1.2%
 →
-50.7%
+1.2%
 
 명성 방식과의 직업 구성 차이
 
 9.5%포인트
 →
-5.2%포인트
+9.5%포인트
 
 스위프트 마스터 한 직업의 치우침
 
 2.7%포인트
 →
-0.0%포인트
+2.7%포인트
 
 시드를 바꾸자 가장 크게 벌어져 있던 직업들이 거의 맞아떨어졌습니다. 스위프트 마스터 2.7%포인트에서 0.0%포인트. 다크템플러 2.3%포인트에서 0.0%포인트. 다크 랜서 0.6%포인트에서 -0.1%포인트.
 
@@ -3726,7 +3726,7 @@ AI 인사이트
 
 45.8%
 →
-90.5%
+45.8%
 
 넓게 긁는 것과 잘리지 않는 것은 맞바꾸는 관계입니다.
 
@@ -3787,7 +3787,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 3 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3879,7 +3879,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 4 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -3971,7 +3971,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 5 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계
@@ -4092,7 +4092,7 @@ GitHub 저장소 · Neople 오픈 API
 시리즈의 다른 프로젝트 · DNF Market · 경매장 시세 분석
 
 ===== desktop method 조작 6 =====
-DNF CENSUS
+ARAD CENSUS
 한눈에 보기
 직업
 성장 단계

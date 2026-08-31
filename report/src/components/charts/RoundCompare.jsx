@@ -1,9 +1,30 @@
+import { useEffect, useRef } from "react";
 import { fmtPp } from "../../lib/format.js";
+import { countOnScroll } from "../../lib/reveal.js";
 
 /**
  * 처음 조사 수치와 두 번째 조사 수치를 나란히 놓는 줄.
- * 왼쪽이 처음, 오른쪽이 두 번째다. 화살표는 방향만 알려 주고 좋고 나쁨은 말하지 않는다.
+ * 화면에 들어오면 오른쪽 숫자가 처음 값에서 두 번째 값으로 옮겨 간다.
+ * 두 값 모두 처음부터 화면에 있고, 옮겨 가는 것은 오른쪽 숫자뿐이다.
+ *
+ * 숫자는 글자만 직접 갈아 끼운다. 상태로 바꾸면 매 프레임 화면 전체를 다시 그린다.
  */
+function MovingNumber({ from, to, format, className, style }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    return countOnScroll(el, {
+      from,
+      to,
+      duration: 800,
+      onValue: (v) => { el.textContent = format(v); },
+    });
+  }, [from, to, format]);
+  // 자바스크립트가 아직 안 돌았을 때도 끝값이 보이게 둔다
+  return <span ref={ref} className={className} style={style}>{format(to)}</span>;
+}
+
 export default function RoundCompare({ rows }) {
   return (
     <ul className="m-0 grid list-none gap-x-10 gap-y-5 p-0 sm:grid-cols-2">
@@ -14,9 +35,17 @@ export default function RoundCompare({ rows }) {
           <li key={r.label} className="pt-3" style={{ borderTop: "1px solid var(--hairline)" }}>
             <p className="t-small m-0">{r.label}</p>
             <p className="m-0 mt-1 flex items-baseline gap-2">
-              <span className="num text-[1.15rem]" style={{ color: "var(--text-muted)" }}>{r.first}</span>
+              <span className="num text-[1.15rem]" style={{ color: "var(--text-muted)" }}>
+                {r.format(r.from)}
+              </span>
               <span aria-hidden="true" style={{ color: "var(--text-muted)" }}>&rarr;</span>
-              <span className="num text-[1.55rem] font-bold leading-none" style={{ color: tone }}>{r.second}</span>
+              <MovingNumber
+                from={r.from}
+                to={r.to}
+                format={r.format}
+                className="num text-[1.55rem] font-bold leading-none"
+                style={{ color: tone }}
+              />
             </p>
             {r.note && <p className="t-small m-0 mt-1">{r.note}</p>}
           </li>

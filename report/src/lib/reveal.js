@@ -1,7 +1,14 @@
 // 스크롤에 맞춘 등장 연출을 한곳에서 만든다.
-// 애니메이션은 Anime.js가 맡고, 화면에 들어왔는지 판정도 Anime.js 스크롤 관찰자가 한다.
-// 어떤 이유로든 관찰이 실패하면 요소를 즉시 보이게 되돌린다 (글이 사라지지 않게 하는 마지노선).
-import { animate, cubicBezier, onScroll, utils } from "animejs";
+// 애니메이션은 Anime.js가 맡는다. 화면에 들어왔는지 판정은 브라우저가 주는
+// 교차 관찰자 하나로 모아 처리한다.
+//
+// 판정을 요소마다 따로 두면 화면에 들어설 때 그 전부가 한꺼번에 위치를 재느라
+// 첫 화면이 늦게 잡힌다. 관찰자를 하나로 모으면 그 비용이 사라지고,
+// 위치를 묻는 일도 브라우저가 알아서 한가할 때 한다.
+//
+// 어떤 이유로든 관찰이 실패하면 요소를 즉시 보이게 되돌린다
+// (글이 사라지지 않게 하는 마지노선).
+import { animate, cubicBezier, utils } from "animejs";
 
 export const ENTER_MS = 380;   // 요소 하나가 나타나는 시간
 export const STEP_MS = 70;     // 요소 사이 간격
@@ -10,20 +17,114 @@ export const FAILSAFE_MS = 900; // 관찰이 안 걸렸을 때 무조건 보이�
 
 export const EASE = cubicBezier(0.22, 0.68, 0.31, 1);
 
-// 등장 연출이 도는 구간의 시작과 끝.
-// 시작은 요소 윗변이 화면 아래에서 40px 올라온 지점이다.
-// 끝은 사실상 없는 값으로 둔다. 한 번에 맨 아래까지 내려도 지나친 요소가
-// 건너뛰어지지 않고 반드시 한 번은 켜지게 하기 위해서다.
 // 요소 윗변이 화면 아래에서 이만큼 올라와야 등장 연출이 시작된다.
 // 화면 끝에 살짝 걸친 요소는 아직 켜지 않는 것이 이 리포트의 규칙이다.
 export const ENTER_MARGIN = 40;
-const ENTER_AT = `end-=${ENTER_MARGIN} start`;
-const NEVER_LEAVE = -1e9;
 
 export const reducedMotion = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const show = (el) => utils.set(el, { opacity: 1, translateY: 0 });
+
+/* 공용 감지 ------------------------------------------------------------------
+   화면에 들어왔거나, 한 번에 건너뛰어 이미 위로 지나갔으면 켠다.
+
+   교차 관찰자만 쓰면 한 번에 맨 아래까지 내렸을 때 걸치는 순간이 아예 없어
+   상태가 바뀌지 않고, 그래서 울리지도 않는다. 그 경우를 놓치면 글과 차트가
+   빈 채로 남는다.
+
+   그렇다고 스크롤마다 위치를 물으면 그때마다 레이아웃이 강제로 돈다.
+   그래서 위치는 등록할 때 한 번만 재서 적어 두고, 스크롤 중에는 셈만 한다.
+   듣는 자리도 하나뿐이고 볼 것이 없어지면 스스로 뗀다. */
+let sharedObserver = null;
+const jobs = new Map();      // 요소 -> { fn, top }
+let scrollBound = false;
+let framePending = false;
+
+const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+
+function runJob(el, passed) {
+  const job = jobs.get(el);
+  if (!job) return;
+  jobs.delete(el);
+  sharedObserver?.unobserve(el);
+  if (jobs.size === 0) unbindScroll();
+  job.fn(passed);
+}
+
+function sweep() {
+  framePending = false;
+  const line = window.scrollY + window.innerHeight - ENTER_MARGIN;
+  for (const [el, job] of [...jobs]) {
+    if (line >= job.top) runJob(el, false);
+  }
+}
+
+function onScrollTick() {
+  if (framePending) return;
+  framePending = true;
+  requestAnimationFrame(sweep);
+}
+
+function remeasure() {
+  for (const [el, job] of jobs) job.top = docTop(el);
+  onScrollTick();
+}
+
+function bindScroll() {
+  if (scrollBound) return;
+  scrollBound = true;
+  window.addEventListener("scroll", onScrollTick, { passive: true });
+  window.addEventListener("resize", remeasure, { passive: true });
+}
+
+function unbindScroll() {
+  if (!scrollBound) return;
+  scrollBound = false;
+  window.removeEventListener("scroll", onScrollTick);
+  window.removeEventListener("resize", remeasure);
+}
+
+function ensureObserver() {
+  if (sharedObserver || typeof IntersectionObserver === "undefined") return sharedObserver;
+  sharedObserver = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        const passed = !e.isIntersecting && e.boundingClientRect.bottom <= 0;
+        if (e.isIntersecting || passed) runJob(e.target, passed);
+      }
+    },
+    { rootMargin: `0px 0px -${ENTER_MARGIN}px 0px` }
+  );
+  return sharedObserver;
+}
+
+/**
+ * 요소가 화면에 들어오면 한 번만 부른다.
+ * @param {HTMLElement} el
+ * @param {(passed: boolean) => void} fn passed 가 참이면 걸치지 않고 지나쳐 버린 경우
+ * @returns 정리 함수
+ */
+export function whenInView(el, fn) {
+  if (typeof IntersectionObserver === "undefined" || typeof window === "undefined") {
+    fn(false);
+    return () => {};
+  }
+  jobs.set(el, { fn, top: docTop(el) });
+  ensureObserver()?.observe(el);
+  bindScroll();
+  return () => {
+    jobs.delete(el);
+    sharedObserver?.unobserve(el);
+    if (jobs.size === 0) unbindScroll();
+  };
+}
+
+/** 지금 화면 안에 있는지. 관찰자가 늦을 때만 쓴다. */
+const inViewNow = (el) => {
+  const rect = el.getBoundingClientRect();
+  return rect.bottom > 0 && rect.top <= window.innerHeight - ENTER_MARGIN;
+};
 
 /**
  * 화면에 들어올 때 한 번만 재생하는 등장 연출.
@@ -36,60 +137,46 @@ export function revealOnScroll(el, { delay = 0, distance = 10 } = {}) {
     return () => {};
   }
 
-  let entered = false;
-  let observer = null;
+  let done = false;
+  let stopWatch = () => {};
   let animation = null;
 
-  // 첫 화면에 이미 들어와 있는 요소는 기다릴 스크롤이 없다.
-  // 그런데도 스크롤 관찰자에 맡기면, 관찰자가 처음 판정하는 시점이
-  // 늦어질수록 글이 늦게 켜진다. 이미 들어와 있으면 바로 재생한다.
-  const alreadyInView = () => {
-    const rect = el.getBoundingClientRect();
-    return rect.bottom > 0 && rect.top <= window.innerHeight - ENTER_MARGIN;
+  const play = (instant) => {
+    if (done) return;
+    done = true;
+    stopWatch();
+    if (instant) { show(el); return; }
+    try {
+      animation = animate(el, {
+        opacity: [0, 1],
+        translateY: [distance, 0],
+        duration: ENTER_MS,
+        delay,
+        ease: EASE,
+      });
+    } catch {
+      show(el);
+    }
   };
 
   try {
     utils.set(el, { opacity: 0, translateY: distance });
-    const inView = alreadyInView();
-    if (inView) {
-      entered = true;
-    } else {
-      observer = onScroll({
-        target: el,
-        enter: ENTER_AT,
-        leave: NEVER_LEAVE,
-        repeat: false,
-        onEnter: () => { entered = true; },
-      });
-    }
-    animation = animate(el, {
-      opacity: [0, 1],
-      translateY: [distance, 0],
-      duration: ENTER_MS,
-      delay,
-      ease: EASE,
-      autoplay: inView ? true : observer,
-    });
+    stopWatch = whenInView(el, (passed) => play(passed));
   } catch {
     show(el);
     return () => {};
   }
 
-  // 관찰자가 붙지 않았는데 이미 화면 안에 있으면 그냥 보여 준다.
-  // 판정 기준은 등장 연출과 똑같은 문턱을 쓴다. 예전에는 화면에 1픽셀만
-  // 걸쳐도 여기서 켜 버려서, 아직 켜지 않기로 한 요소를 연출과 서로 다투었다.
+  // 관찰자가 어떤 까닭으로든 울리지 않았는데 이미 화면 안에 있으면 그냥 보여 준다.
   const failsafe = setTimeout(() => {
-    if (entered) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.top > window.innerHeight - ENTER_MARGIN) return;
-    observer?.revert();
-    animation?.revert();
-    show(el);
+    if (done) return;
+    if (!inViewNow(el)) return;
+    play(false);
   }, FAILSAFE_MS);
 
   return () => {
     clearTimeout(failsafe);
-    observer?.revert();
+    stopWatch();
     animation?.revert();
     show(el);
   };
@@ -103,34 +190,40 @@ export function drawRuleOnScroll(el) {
   if (!el) return () => {};
   if (reducedMotion()) return () => {};
 
-  let observer = null;
+  let done = false;
+  let stopWatch = () => {};
   let animation = null;
+  const finish = () => utils.set(el, { scaleX: 1 });
+
+  const play = (instant) => {
+    if (done) return;
+    done = true;
+    stopWatch();
+    if (instant) { finish(); return; }
+    try {
+      animation = animate(el, { scaleX: [0, 1], duration: 620, ease: EASE });
+    } catch {
+      finish();
+    }
+  };
+
   try {
     utils.set(el, { scaleX: 0, transformOrigin: "0% 50%" });
-    observer = onScroll({ target: el, enter: ENTER_AT, leave: NEVER_LEAVE, repeat: false });
-    animation = animate(el, {
-      scaleX: [0, 1],
-      duration: 620,
-      ease: EASE,
-      autoplay: observer,
-    });
+    stopWatch = whenInView(el, (passed) => play(passed));
   } catch {
-    utils.set(el, { scaleX: 1 });
+    finish();
     return () => {};
   }
 
   const failsafe = setTimeout(() => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top > window.innerHeight) return;
-    if (animation?.began) return;
-    observer?.revert();
-    animation?.revert();
-    utils.set(el, { scaleX: 1 });
+    if (done) return;
+    if (!inViewNow(el)) return;
+    play(false);
   }, FAILSAFE_MS);
 
   return () => {
     clearTimeout(failsafe);
-    observer?.revert();
+    stopWatch();
     animation?.revert();
     utils.set(el, { scaleX: 1, transformOrigin: "" });
   };
@@ -138,89 +231,79 @@ export function drawRuleOnScroll(el) {
 
 /**
  * 화면에 들어올 때 0에서 실제 값까지 세어 올라간다. 최초 1회만 돈다.
- * @param {HTMLElement} el 관찰 대상
- * @param {number} target 최종 값
- * @param {(v: number) => void} onValue 매 프레임 값 전달
  */
 export function countUpOnScroll(el, target, onValue) {
-  if (!el || !Number.isFinite(target)) return () => {};
+  return countOnScroll(el, { from: 0, to: target, onValue, duration: 1100 });
+}
+
+/**
+ * 화면에 들어올 때 시작값에서 끝값까지 옮겨 간다. 최초 1회만 돈다.
+ * 회차 비교처럼 앞 값에서 뒤 값으로 바뀌는 자리에 쓴다.
+ */
+export function countOnScroll(el, { from = 0, to, onValue, duration = 900 } = {}) {
+  if (!el || !Number.isFinite(to)) return () => {};
   if (reducedMotion()) {
-    onValue(target);
+    onValue(to);
     return () => {};
   }
 
-  const counter = { value: 0 };
-  let observer = null;
+  let done = false;
+  let stopWatch = () => {};
   let animation = null;
+  const counter = { value: from };
+
+  const play = (instant) => {
+    if (done) return;
+    done = true;
+    stopWatch();
+    if (instant) { onValue(to); return; }
+    try {
+      animation = animate(counter, {
+        value: to,
+        duration,
+        ease: "outExpo",
+        onUpdate: () => onValue(counter.value),
+        onComplete: () => onValue(to),
+      });
+    } catch {
+      onValue(to);
+    }
+  };
+
   try {
-    onValue(0);
-    observer = onScroll({ target: el, enter: ENTER_AT, leave: NEVER_LEAVE, repeat: false });
-    animation = animate(counter, {
-      value: target,
-      duration: 1100,
-      ease: "outExpo",
-      autoplay: observer,
-      onUpdate: () => onValue(counter.value),
-      onComplete: () => onValue(target),
-    });
+    onValue(from);
+    stopWatch = whenInView(el, (passed) => play(passed));
   } catch {
-    onValue(target);
+    onValue(to);
     return () => {};
   }
 
   const failsafe = setTimeout(() => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top > window.innerHeight) return;
-    if (animation?.began) return;
-    observer?.revert();
-    animation?.revert();
-    onValue(target);
+    if (done) return;
+    if (!inViewNow(el)) return;
+    play(false);
   }, FAILSAFE_MS);
 
   return () => {
     clearTimeout(failsafe);
-    observer?.revert();
+    stopWatch();
     animation?.revert();
   };
 }
 
 /**
- * 입체 시각화가 화면 가운데를 채울 때만 주변 글을 살짝 죽여 시선을 모은다.
- * 시각화가 화면에서 차지하는 높이가 이 값보다 작으면 (긴 화면 캡처처럼)
- * 굳이 죽이지 않는다. 글을 읽는 데 방해가 되기 때문이다.
+ * 시각화가 화면 가운데를 채울 때만 주변 글을 살짝 죽여 시선을 모은다.
+ * 지금은 쓰는 화면이 없다. 입체 시각화를 되살릴 때를 위해 남겨 둔다.
  */
-const FILLS_SCREEN = 0.3;
-
 export function dimAroundOnScroll(visualEl, dimEls, { level = 0.55 } = {}) {
   const targets = Array.from(dimEls ?? []).filter(Boolean);
   if (!visualEl || targets.length === 0) return () => {};
   if (reducedMotion()) return () => {};
 
-  let observer = null;
   const fade = (opacity) => animate(targets, { opacity, duration: 420, ease: EASE });
-  const fillsScreen = () =>
-    visualEl.getBoundingClientRect().height / window.innerHeight >= FILLS_SCREEN;
-  const dim = () => { if (fillsScreen()) fade(level); };
-
-  try {
-
-    observer = onScroll({
-      target: visualEl,
-      enter: "center+=60 center",
-      leave: "start end",
-      repeat: true,
-      onEnter: dim,
-      onLeave: () => fade(1),
-      onEnterBackward: dim,
-      onLeaveBackward: () => fade(1),
-    });
-  } catch {
-    utils.set(targets, { opacity: 1 });
-    return () => {};
-  }
-
+  const stop = whenInView(visualEl, () => fade(level));
   return () => {
-    observer?.revert();
+    stop();
     utils.set(targets, { opacity: 1 });
   };
 }

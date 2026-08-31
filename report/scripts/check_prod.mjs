@@ -18,10 +18,10 @@ const MUST = [
   "시리즈의 다른 프로젝트",
   "DNF Market",
 ];
-// 옛 프로젝트명(Arad Census)은 어느 화면에도 남으면 안 된다.
+// 사이트 이름은 Arad Census 로 통일했다. 되돌리기 전 이름이 화면에 남으면 안 된다.
 const NEVER = [
   "비상한", "레기온 미만", "가중 재추정", "capped", "uncapped",
-  "Arad", "ARAD", "arad-census", "아라드 센서스",
+  "DNF CENSUS", "DNF 센서스", "DNF Census",
 ];
 const LINKS = [
   ["https://dnf-market.vercel.app", "형제 프로젝트"],

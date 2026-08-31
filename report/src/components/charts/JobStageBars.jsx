@@ -4,7 +4,7 @@ import Bar from "./bar.tsx";
 import BarYAxis from "./bar-y-axis.tsx";
 import { BIN_COLOR, BIN_ORDER } from "../../lib/palette.js";
 import { fmtPct, fmtPeople } from "../../lib/format.js";
-import { useReducedMotion } from "../../lib/hooks.js";
+import { useReducedMotion, CHART_MS } from "../../lib/hooks.js";
 
 // 레이드 진입으로 치는 구간 (위 세 단계)
 const RAID_BINS = BIN_ORDER.slice(3);
@@ -47,7 +47,7 @@ export default function JobStageBars({ rows, cellCount, cellShare, selected, set
             stackGap={2}
             barGap={0.24}
             margin={M}
-            animationDuration={reduced ? 0 : 1200}
+            animationDuration={reduced ? 0 : CHART_MS}
             className="!aspect-auto"
             style={{ height }}
           >

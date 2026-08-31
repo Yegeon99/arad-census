@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PageShell, { Stagger } from "../components/PageShell.jsx";
+import PageShell from "../components/PageShell.jsx";
 import FlowDiagram from "../components/charts/FlowDiagram.jsx";
 import RoundCompare, { TvdRow } from "../components/charts/RoundCompare.jsx";
 import { fmtInt, fmtPct, fmtPeople, fmtPp, pct1 } from "../lib/format.js";
@@ -188,7 +188,7 @@ export default function Method() {
           </div>
 
           {tab === "design" && (
-            <Stagger index={0}>
+            <div>
               <FlowDiagram steps={steps} />
               <Section title="직업 이름을 맞춘 방법">
                 <div className="prose t-body text-[0.94rem]">
@@ -229,11 +229,11 @@ export default function Method() {
                   <p className="m-0">모든 캐릭터를 포함한 수치는 직업 화면의 세부 데이터에 함께 두었습니다.</p>
                 </div>
               </Section>
-            </Stagger>
+            </div>
           )}
 
           {tab === "rounds" && (
-            <Stagger index={0}>
+            <div>
               <p className="t-body m-0 max-w-[52rem] text-[0.95rem]">
                 같은 조사를 두 번 했습니다. 처음 조사를 검증해 보니 두 가지가 잘못돼 있었고, 고쳤더니 대신 다른 것이 나빠졌습니다.
                 순서대로 적습니다.
@@ -276,26 +276,30 @@ export default function Method() {
                   rows={[
                     {
                       label: "표본",
-                      first: `${fmtInt(first.sampleSize)}명`,
-                      second: `${fmtInt(second.sampleSize)}명`,
+                      from: first.sampleSize,
+                      to: second.sampleSize,
+                      format: (v) => `${fmtInt(Math.round(v))}명`,
                       better: true,
                     },
                     {
                       label: "이름에 한글이 든 캐릭터 중 닿은 비율",
-                      first: fmtPct(first.coveragePct),
-                      second: fmtPct(second.coveragePct),
+                      from: first.coveragePct,
+                      to: second.coveragePct,
+                      format: fmtPct,
                       better: true,
                     },
                     {
                       label: "명성 방식과의 직업 구성 차이",
-                      first: fmtPp(first.jobTvd),
-                      second: fmtPp(second.jobTvd),
+                      from: first.jobTvd,
+                      to: second.jobTvd,
+                      format: fmtPp,
                       better: true,
                     },
                     {
                       label: `${bias.topJob} 한 직업의 치우침`,
-                      first: fmtPp(rounds.jobGap[0].first),
-                      second: fmtPp(rounds.jobGap[0].second),
+                      from: rounds.jobGap[0].first,
+                      to: rounds.jobGap[0].second,
+                      format: fmtPp,
                       better: true,
                     },
                   ]}
@@ -317,8 +321,9 @@ export default function Method() {
                     rows={[
                       {
                         label: "200명 한도에 걸린 검색의 비중",
-                        first: fmtPct(first.limitedPct),
-                        second: fmtPct(second.limitedPct),
+                        from: first.limitedPct,
+                        to: second.limitedPct,
+                        format: fmtPct,
                         better: false,
                         note: "넓게 긁는 것과 잘리지 않는 것은 맞바꾸는 관계입니다.",
                       },
@@ -390,11 +395,11 @@ export default function Method() {
                   틀린 쪽을 지우면 무엇이 어떻게 틀렸는지 다시 볼 수 없기 때문입니다.
                 </p>
               </Section>
-            </Stagger>
+            </div>
           )}
 
           {tab === "verify" && (
-            <Stagger index={0}>
+            <div>
               <Section title="다른 방법으로 다시 재봤습니다">
                 <div className="prose t-body text-[0.94rem]">
                   <p className="m-0">
@@ -465,11 +470,11 @@ export default function Method() {
                   </p>
                 </div>
               </Section>
-            </Stagger>
+            </div>
           )}
 
           {tab === "bias" && (
-            <Stagger index={0}>
+            <div>
               <Section title="실측 근거가 있는 편향">
                 <Bullets
                   items={[
@@ -526,11 +531,11 @@ export default function Method() {
                   </p>
                 </div>
               </Section>
-            </Stagger>
+            </div>
           )}
 
           {tab === "ethics" && (
-            <Stagger index={0}>
+            <div>
               <Section title="개인정보 원칙">
                 <Bullets
                   items={[
@@ -599,7 +604,7 @@ export default function Method() {
                   </tbody>
                 </table>
               </Section>
-            </Stagger>
+            </div>
           )}
         </div>
       }

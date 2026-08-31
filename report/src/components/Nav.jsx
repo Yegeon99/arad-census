@@ -13,7 +13,7 @@ export function TopNav({ page }) {
     >
       <div className="mx-auto flex max-w-[1200px] items-center gap-6 px-6 py-3">
         <a href="#overview" className="no-underline" style={{ color: "var(--text-primary)" }}>
-          <span className="t-wordmark" style={{ color: "var(--accent)" }}>DNF CENSUS</span>
+          <span className="t-wordmark" style={{ color: "var(--accent)" }}>ARAD CENSUS</span>
         </a>
         <nav className="flex flex-1 items-center gap-1" aria-label="화면 이동">
           {PAGES.map((p) => {

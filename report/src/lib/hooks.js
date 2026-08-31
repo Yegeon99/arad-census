@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { whenInView } from "./reveal.js";
 
 export const PAGES = [
   { id: "overview", label: "한눈에 보기" },
@@ -70,54 +71,22 @@ function hasWebGL() {
 }
 export const ENTER_MS = 320;
 export const STAGGER_MS = 10;
+/** 분포 차트가 0에서 실제 값까지 차오르는 데 쓰는 시간. 전체가 이 안에 끝난다. */
+export const CHART_MS = 800;
 
 /**
  * 화면에 들어왔는지 (차트 그려지는 애니메이션 시작점).
  * 관찰 기능이 없는 환경에서는 기다리지 않고 바로 그린다.
  */
-export function useInView(options) {
+export function useInView() {
   const ref = useRef(null);
   const [seen, setSeen] = useState(false);
   useEffect(() => {
     const el = ref.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setSeen(true);
-      return undefined;
-    }
-
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      setSeen(true);
-      obs.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-
-    // 한 번에 아래까지 건너뛰면 차트가 화면에 걸치는 순간이 아예 없다.
-    // 그때는 관찰자가 울리지 않아 차트가 0인 채로 남는다.
-    // 이미 지나쳐 위로 올라간 것도 그린 것으로 본다.
-    const onScroll = () => {
-      const r = el.getBoundingClientRect();
-      const inView = r.top < window.innerHeight && r.bottom > 0;
-      const passed = r.bottom <= 0;
-      if (inView || passed) finish();
-    };
-
-    const obs = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) finish();
-      },
-      { rootMargin: "0px 0px -8% 0px", ...options }
-    );
-    obs.observe(el);
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      obs.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [options]);
+    if (!el) { setSeen(true); return undefined; }
+    // 등장 연출과 같은 감지를 쓴다. 판정 방식이 갈라지면 한쪽만 안 켜진다.
+    return whenInView(el, () => setSeen(true));
+  }, []);
   return [ref, seen];
 }
 

@@ -1,4 +1,4 @@
-# DNF Census 비주얼 업그레이드 지침서
+# Arad Census 비주얼 업그레이드 지침서
 
 이 문서는 dnf-census 저장소 전용입니다. 저장소 루트에 넣고 Claude Code에 "이 문서를 읽고 Phase 1부터 시작해"라고 지시하면 됩니다.
 

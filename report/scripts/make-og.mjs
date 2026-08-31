@@ -20,9 +20,9 @@ const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8" />
   .bars { display: flex; align-items: flex-end; gap: 10px; height: 60px; }
   .bars i { display: block; width: 18px; border-radius: 3px; background: #2450A8; }
 </style></head><body><div class="card">
-  <div class="wordmark">DNF CENSUS</div>
+  <div class="wordmark">ARAD CENSUS</div>
   <div>
-    <h1>DNF 센서스,<br />던파 캐릭터 표본조사</h1>
+    <h1>Arad 센서스,<br />던파 캐릭터 표본조사</h1>
     <p class="lede">캐릭터 130만 1,990명 표본으로 읽는 직업과 성장 단계, 접속 기록. 검색이 무엇을 가리는지 직접 재서 보정값을 함께 놓았습니다.</p>
   </div>
   <div class="foot">
