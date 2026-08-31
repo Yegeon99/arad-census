@@ -1,0 +1,48 @@
+{
+  "bin_tvd": {
+    "레기온 미만": 15.55,
+    "아포칼립스 입장": 14.73,
+    "상급 던전권": 16.57,
+    "미카엘라 입장": 15.13,
+    "미카엘라 권장": 15.86,
+    "하드 권장 이상": 32.93
+  },
+  "bin_tvd_weighted_mean": 15.92,
+  "tvd_total": 9.87,
+  "tvd_mix": 0.62,
+  "tvd_within": 10.09,
+  "within_share_pct": 102.2,
+  "masked_cells": 53,
+  "top_jobs": [
+    {
+      "jobName": "스위프트 마스터",
+      "diff": -2.81,
+      "mix": 0.12,
+      "within": -2.93
+    },
+    {
+      "jobName": "다크템플러",
+      "diff": -2.5,
+      "mix": 0.06,
+      "within": -2.57
+    },
+    {
+      "jobName": "인파이터",
+      "diff": 1.43,
+      "mix": 0.02,
+      "within": 1.41
+    },
+    {
+      "jobName": "인챈트리스",
+      "diff": -0.8,
+      "mix": 0.03,
+      "within": -0.84
+    },
+    {
+      "jobName": "런처",
+      "diff": 0.72,
+      "mix": -0.01,
+      "within": 0.73
+    }
+  ]
+}

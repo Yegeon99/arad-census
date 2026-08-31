@@ -1,0 +1,17 @@
+{
+  "sampled_combos": 400,
+  "capped_combos_total": 7242,
+  "split_calls": 7200,
+  "still_capped": 373,
+  "still_capped_pct": 5.18,
+  "multiplier_mean": 3.409,
+  "multiplier_ci95": [
+    3.126,
+    3.693
+  ],
+  "old_n": 79692,
+  "new_n": 193053,
+  "fame_tvd_new_vs_old": 38.95,
+  "job_tvd_new_vs_old": 13.43,
+  "random_seed": 20260831
+}
