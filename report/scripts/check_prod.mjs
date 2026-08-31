@@ -15,8 +15,18 @@ const MUST = [
   "31,523명",
   "비공식 팬메이드",
   "Neople 오픈 API에서 제공받은 데이터",
+  "시리즈의 다른 프로젝트",
+  "DNF Market",
 ];
-const NEVER = ["비상한", "레기온 미만", "가중 재추정", "capped", "uncapped"];
+// 옛 프로젝트명(Arad Census)은 어느 화면에도 남으면 안 된다.
+const NEVER = [
+  "비상한", "레기온 미만", "가중 재추정", "capped", "uncapped",
+  "Arad", "ARAD", "arad-census", "아라드 센서스",
+];
+const LINKS = [
+  ["https://dnf-market.vercel.app", "형제 프로젝트"],
+  ["https://github.com/Yegeon99/dnf-census", "GitHub 저장소"],
+];
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
@@ -46,6 +56,12 @@ for (const t of MUST) {
   const found = body.includes(t);
   if (!found) bad += 1;
   console.log(`문구 확인 ${t}: ${found ? "정상" : "누락"}`);
+}
+
+for (const [href, label] of LINKS) {
+  const found = (await page.locator(`a[href="${href}"]`).count()) > 0;
+  if (!found) bad += 1;
+  console.log(`링크 확인 ${label} ${href}: ${found ? "정상" : "누락"}`);
 }
 
 console.log(`콘솔 오류: ${errs.length}건`);
