@@ -12,8 +12,19 @@ import {
  *
  * 그리는 차례도 여기서 갈린다. 한 화면을 한 번에 다 그리지 않고 묶음 하나씩
  * 한 프레임에 들여보낸다. 까닭은 lib/admit.js 에 적어 두었다.
+ *
+ * `noReveal` 을 주면 등장 연출을 걸지 않는다. 그리는 차례는 그대로 기다린다.
+ *
+ * 등장 연출은 요소를 먼저 투명하게 만들어 두고 화면에 들 때 380밀리초에 걸쳐
+ * 띄운다. 화면 하나가 통째로 그런 요소로만 차 있으면, 빠르게 내리는 순간
+ * 그 화면이 잠깐 비어 보인다. 인사이트 화면이 그 자리였다. 카드 여덟 장이
+ * 화면을 가득 채우는데 여덟 장 모두 연출 대상이라, 스크롤 첫 걸음에서
+ * 화면 안 글자가 전부 투명한 순간이 생겼다 (40회 중 15회, 실측).
+ *
+ * 그래서 이런 자리는 연출에서 뺀다. 임계값을 늘리는 쪽은 같은 일이 다른
+ * 화면에서 또 생길 뿐이라 쓰지 않았다.
  */
-export function Stagger({ index = 0, children, className = "", style }) {
+export function Stagger({ index = 0, children, className = "", style, noReveal = false }) {
   const ref = useRef(null);
   const seat = useRef(null);
   if (seat.current === null) seat.current = takeSeat();
@@ -24,9 +35,9 @@ export function Stagger({ index = 0, children, className = "", style }) {
     return onAdmit(seat.current, () => setOpen(true));
   }, [open]);
   useEffect(() => {
-    if (!open) return undefined;
+    if (!open || noReveal) return undefined;
     return revealOnScroll(ref.current, { delay: Math.min(index, MAX_STEPS) * STEP_MS });
-  }, [open, index]);
+  }, [open, index, noReveal]);
 
   return (
     <div ref={ref} className={className} style={style}>
@@ -110,6 +121,9 @@ export default function PageShell({
   visual,
   visualCaption,
   visualFocus = false,
+  // 시각화 덩어리가 화면보다 클 때 참으로 준다. 화면보다 큰 덩어리를 통째로
+  // 투명하게 만들었다 띄우면, 띄우는 동안 화면에 아무것도 없는 순간이 생긴다.
+  visualNoReveal = false,
   explain,
   details,
   detailsLabel = "세부 데이터 펼치기",
@@ -172,7 +186,7 @@ export default function PageShell({
       )}
 
       {visual && (
-        <Stagger index={4}>
+        <Stagger index={4} noReveal={visualNoReveal}>
           <figure ref={figureRef} className="m-0">
             {visual}
             {visualCaption && <figcaption className="t-small prose mt-3">{visualCaption}</figcaption>}

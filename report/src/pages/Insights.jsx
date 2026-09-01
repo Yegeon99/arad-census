@@ -24,7 +24,9 @@ function Block({ label, children, accent }) {
 function Card({ item, open, onToggle, index }) {
   const confirmed = item.confidence === "데이터에서 확인됨";
   return (
-    <Stagger index={index}>
+    // 카드는 등장 연출에서 뺀다. 여덟 장이 화면을 가득 채우는데 모두 연출
+    // 대상이면, 빠르게 내리는 첫 걸음에서 화면 안 글자가 전부 투명해진다.
+    <Stagger index={index} noReveal>
       <div className="flex h-full min-w-0 flex-col py-6" style={{ borderTop: "1px solid var(--hairline-strong)" }}>
         <p className="t-eyebrow m-0" style={{ color: confirmed ? "var(--accent)" : "var(--gold-text)" }}>
           <span className="term" title={confirmed ? "집계 수치 그대로" : "해석이라 더 확인이 필요함"}>
@@ -80,6 +82,8 @@ export default function Insights() {
       statUnit="개"
       statLabel="생성한 인사이트 수"
       statNote={`데이터에서 확인됨 ${confirmedCount}개, 추가 검증 필요 ${insights.length - confirmedCount}개`}
+      // 카드 여덟 장은 화면보다 큰 덩어리라 통째로 띄우면 그동안 화면이 빈다
+      visualNoReveal
       visual={
         <div>
           <div className="mb-2 flex flex-wrap items-center gap-x-5 gap-y-1">

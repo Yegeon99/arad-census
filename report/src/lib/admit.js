@@ -86,6 +86,12 @@ function listenForScroll() {
   }
 }
 
+// 검사용 상태 창구. 빈 화면이 잡힌 그 순간 무엇이 밀려 있었는지 보려면 이것이 필요하다.
+// 화면 코드는 쓰지 않는다. report/scripts/probe-insights.mjs 가 읽는다.
+if (typeof window !== "undefined") {
+  window.__admit = () => ({ seq, admitted, waiting: waiting.size, rushing: rushing(), rushLeft: Math.round(rushUntil - now()) });
+}
+
 /** 묶음 하나가 자리를 받는다. 화면을 그리는 중에 부른다. */
 export function takeSeat() {
   if (!canDefer()) return -1;

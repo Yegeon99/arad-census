@@ -171,6 +171,11 @@ function ensureObserver() {
   return sharedObserver;
 }
 
+// 검사용 상태 창구. admit.js 의 같은 이름과 짝이다.
+if (typeof window !== "undefined") {
+  window.__reveal = () => ({ watching: jobs.size, deadlines: hardJobs.size });
+}
+
 /**
  * 요소가 화면 가까이 오면 soft 를, 정말로 화면 안에 들면 hard 를 한 번씩 부른다.
  * @param {HTMLElement} el

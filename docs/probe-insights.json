@@ -1,0 +1,214 @@
+{
+ "viewport": {
+  "width": 390,
+  "height": 844
+ },
+ "screensPerSec": 3,
+ "sampleMs": 100,
+ "cpuSlowdown": 4,
+ "runs": 40,
+ "failedRuns": 0,
+ "totalBlanks": 0,
+ "detail": [
+  {
+   "run": 1,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 2,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 3,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 4,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 5,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 6,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 7,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 8,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 9,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 10,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 11,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 12,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 13,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 14,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 15,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 16,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 17,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 18,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 19,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 20,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 21,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 22,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 23,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 24,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 25,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 26,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 27,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 28,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 29,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 30,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 31,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 32,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 33,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 34,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 35,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 36,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 37,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 38,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 39,
+   "samples": 23,
+   "blanks": []
+  },
+  {
+   "run": 40,
+   "samples": 23,
+   "blanks": []
+  }
+ ]
+}
