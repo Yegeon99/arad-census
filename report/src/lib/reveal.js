@@ -90,7 +90,6 @@ function whenVisible(el, onDeadline) {
 let sharedObserver = null;
 const jobs = new Map();      // 요소 -> { soft, hard, top, started }
 let scrollBound = false;
-let framePending = false;
 
 const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
 
@@ -115,7 +114,6 @@ function runHard(el) {
 }
 
 function sweep() {
-  framePending = false;
   // 재는 일을 먼저 몰아서 끝낸다. 재기와 켜기를 번갈아 하면 그때마다 배치가
   // 다시 돌기 때문에, 잴 것을 다 재고 나서 켜는 순서를 지킨다.
   for (const [el, job] of jobs) {
@@ -202,37 +200,6 @@ const inViewNow = (el) => {
   return rect.bottom > 0 && rect.top <= window.innerHeight + ENTER_LEAD;
 };
 
-/* 지금 내리는 중인가 --------------------------------------------------------- */
-let lastScrollAt = -Infinity;
-if (typeof window !== "undefined") {
-  window.addEventListener("scroll", () => { lastScrollAt = performance.now(); }, { passive: true });
-}
-const SCROLLING_MS = 400;  // 마지막으로 내린 뒤 이만큼은 내리는 중으로 본다
-const NEAR_SCREENS = 1.5;  // 화면 이만큼 앞까지를 곧 볼 자리로 본다
-
-/**
- * 숨겼다 켜면 안 되는 자리인가.
- *
- * 숨긴 것을 켜 주는 일은 관찰자와 다음 그림에 기댄다. 느린 기기에서 한꺼번에
- * 그리는 중이면 그 차례가 수백 밀리초 뒤로 밀리고, 그동안 그 자리는 빈 채로
- * 남는다. 빠르게 내릴 때 화면이 통째로 비어 보이던 것이 이 경우였다.
- *
- * 그래서 두 경우에는 숨기지 않고 그냥 보여 준다.
- *   - 이미 화면 안에 들어와 있다
- *   - 내리는 중이고, 곧 볼 자리(화면 1.5개 앞)에 있다
- *
- * 아직 한 번도 안 내린 상태(막 들어온 첫 화면)는 뺀다. 그때는 순서대로
- * 나타나는 연출이 있어야 하고, 어차피 늦을 일도 없다.
- */
-const showRightAway = (el) => {
-  if (typeof window === "undefined" || window.scrollY <= 0) return false;
-  const rect = el.getBoundingClientRect();
-  if (rect.bottom <= 0) return true;
-  if (rect.top < window.innerHeight) return true;
-  const scrolling = performance.now() - lastScrollAt < SCROLLING_MS;
-  return scrolling && rect.top < window.innerHeight * (1 + NEAR_SCREENS);
-};
-
 /**
  * 화면에 들어올 때 한 번만 재생하는 등장 연출.
  * @returns 정리 함수
@@ -240,11 +207,6 @@ const showRightAway = (el) => {
 export function revealOnScroll(el, { delay = 0, distance = 10 } = {}) {
   if (!el) return () => {};
   if (reducedMotion()) {
-    show(el);
-    return () => {};
-  }
-
-  if (showRightAway(el)) {
     show(el);
     return () => {};
   }
@@ -318,8 +280,6 @@ export function revealOnScroll(el, { delay = 0, distance = 10 } = {}) {
 export function drawRuleOnScroll(el) {
   if (!el) return () => {};
   if (reducedMotion()) return () => {};
-
-  if (showRightAway(el)) return () => {};
 
   let done = false;
   let stopWatch = () => {};

@@ -20,25 +20,12 @@
 // 한동안을 두는 까닭: 묶음 안에 다시 묶음이 든 자리가 있다. 바깥이 열려야
 // 안쪽이 자리를 받으므로, 한 번 몰아넣는 것만으로는 안쪽이 다시 밀린다.
 
-// 한 프레임에 몇 개씩 들여보낼지. 처음에는 하나씩, 시간이 갈수록 여러 개씩.
-// 첫 배치가 무거운 것은 처음 몇 프레임뿐이고, 그 뒤로는 이미 자리를 잡아
-// 여러 개를 한꺼번에 넣어도 한 번에 붙잡는 시간이 짧다. 이렇게 두면 화면이
-// 다 차기까지 걸리는 시간에 위가 생긴다. 느린 기기에서 한 프레임에 하나씩만
-// 넣으면 긴 화면이 다 차는 데 1초를 넘겨, 빠르게 내릴 때 아래가 비어 보였다.
-const PACE = [
-  { after: 0, each: 1 },
-  { after: 200, each: 2 },
-  { after: 400, each: 4 },
-  { after: 700, each: Infinity },
-];
-
 const RUSH_MS = 1200;  // 스크롤 뒤 이만큼은 기다리지 않고 곧바로 그린다
 const DEAF_MS = 150;   // 화면을 옮기며 스스로 올린 스크롤은 이만큼 못 들은 척한다
 
 let seq = 0;        // 지금까지 자리를 받은 묶음 수
 let admitted = 0;   // 이 번호 앞까지는 그려도 된다
 let rushUntil = 0;  // 이 시각까지는 밀린 것을 곧바로 들여보낸다
-let backlogAt = 0;  // 지금 밀린 줄이 생긴 시각
 let deafUntil = 0;  // 이 시각까지 들어온 스크롤은 사람이 낸 것이 아니다
 let pumping = false;
 const waiting = new Set(); // { seat, fn }
@@ -46,26 +33,15 @@ const waiting = new Set(); // { seat, fn }
 const canDefer = () =>
   typeof window !== "undefined" && typeof window.requestAnimationFrame === "function";
 
-/** 지금 한 프레임에 몇 개까지 들여보낼 수 있나 */
-function quota() {
-  const elapsed = now() - backlogAt;
-  let each = 1;
-  for (const p of PACE) if (elapsed >= p.after) each = p.each;
-  return each;
-}
-
 function pump() {
   pumping = false;
-  // 차례가 이른 것부터, 이번 프레임 몫만큼 들여보낸다.
-  const order = [...waiting].sort((a, b) => a.seat - b.seat);
-  let room = quota();
-  for (const one of order) {
-    if (room <= 0) break;
-    room -= 1;
+  // 차례가 이른 것부터 한 프레임에 하나씩 들여보낸다.
+  const next = [...waiting].sort((a, b) => a.seat - b.seat)[0];
+  if (next) {
     // 버려진 번호는 건너뛴다. 화면을 옮기면 차례를 못 받은 채 내려간 묶음이 생긴다.
-    admitted = Math.max(admitted, one.seat + 1);
-    waiting.delete(one);
-    one.fn();
+    admitted = Math.max(admitted, next.seat + 1);
+    waiting.delete(next);
+    next.fn();
   }
   if (waiting.size > 0) schedule();
 }
@@ -96,7 +72,6 @@ function rush() {
  */
 export function calmDown() {
   rushUntil = 0;
-  backlogAt = now();
   deafUntil = now() + DEAF_MS;
 }
 
@@ -139,7 +114,6 @@ export function onAdmit(mine, fn) {
     fn();
     return () => {};
   }
-  if (waiting.size === 0) backlogAt = now();
   const one = { seat: mine, fn };
   waiting.add(one);
   schedule();
