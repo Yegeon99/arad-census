@@ -34,10 +34,17 @@ const show = (el) => utils.set(el, { opacity: 1, translateY: 0 });
    빈 채로 남는다.
 
    그렇다고 스크롤마다 위치를 물으면 그때마다 레이아웃이 강제로 돈다.
-   그래서 위치는 등록할 때 한 번만 재서 적어 두고, 스크롤 중에는 셈만 한다.
-   듣는 자리도 하나뿐이고 볼 것이 없어지면 스스로 뗀다. */
+   그래서 위치는 한 번만 재고, 스크롤 중에는 셈만 한다.
+   듣는 자리도 하나뿐이고 볼 것이 없어지면 스스로 뗀다.
+
+   재는 시점도 등록할 때가 아니라 스크롤이 실제로 일어난 뒤로 미룬다.
+   등록은 화면이 뜨는 순간 요소마다 한 번씩 일어나는데, 그 사이사이에
+   등장 연출이 요소의 모양을 손댄다. 손댄 직후에 위치를 물으면 브라우저가
+   그 자리에서 배치를 다시 계산한다. 요소 수만큼 되풀이되면 첫 화면이
+   그만큼 늦게 잡힌다. 미뤄 두면 잴 일이 한 번에 몰려 배치 계산도 한 번이면
+   끝나고, 화면에 걸쳐 있는 요소는 어차피 관찰자가 알려 주므로 잴 일조차 없다. */
 let sharedObserver = null;
-const jobs = new Map();      // 요소 -> { fn, top }
+const jobs = new Map();      // 요소 -> { fn, top } (top 이 null 이면 아직 안 잰 것)
 let scrollBound = false;
 let framePending = false;
 
@@ -54,6 +61,11 @@ function runJob(el, passed) {
 
 function sweep() {
   framePending = false;
+  // 재는 일을 먼저 몰아서 끝낸다. 재기와 켜기를 번갈아 하면 그때마다 배치가
+  // 다시 돌기 때문에, 잴 것을 다 재고 나서 켜는 순서를 지킨다.
+  for (const [el, job] of jobs) {
+    if (job.top === null) job.top = docTop(el);
+  }
   const line = window.scrollY + window.innerHeight - ENTER_MARGIN;
   for (const [el, job] of [...jobs]) {
     if (line >= job.top) runJob(el, false);
@@ -67,7 +79,9 @@ function onScrollTick() {
 }
 
 function remeasure() {
-  for (const [el, job] of jobs) job.top = docTop(el);
+  // 창 크기가 바뀌면 적어 둔 위치가 틀어진다. 지워만 두고 다시 재는 일은
+  // 다음 차례에 맡긴다.
+  for (const job of jobs.values()) job.top = null;
   onScrollTick();
 }
 
@@ -110,7 +124,7 @@ export function whenInView(el, fn) {
     fn(false);
     return () => {};
   }
-  jobs.set(el, { fn, top: docTop(el) });
+  jobs.set(el, { fn, top: null });
   ensureObserver()?.observe(el);
   bindScroll();
   return () => {

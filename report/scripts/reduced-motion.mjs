@@ -1,6 +1,9 @@
 // 움직임 최소화 설정에서 연출을 건너뛰고 처음부터 완성된 상태인지 본다.
-// 화면 일곱 개에 곧장 들어가 250밀리초 뒤를 보고, 첫 화면 안에 안 나온 요소가
-// 하나라도 있으면 실패로 잡는다.
+// 화면 일곱 개에 곧장 들어가, 글이 올라온 뒤 250밀리초 시점을 보고
+// 첫 화면 안에 안 나온 요소가 하나라도 있으면 실패로 잡는다.
+//
+// 글이 올라오기를 기다리는 까닭: 첫 화면 말고는 화면 몫을 따로 받아 온다.
+// 문서가 다 읽힌 시점을 그대로 재면 아직 받는 중이라 늘 비어 있다.
 // 실행: node scripts/reduced-motion.mjs
 import { chromium } from "playwright";
 import { createServer } from "node:http";
@@ -23,6 +26,11 @@ const page = await ctx.newPage();
 let bad = 0;
 for (const id of ["overview", "jobs", "growth", "activity", "gap", "insights", "method"]) {
   await page.goto(`http://localhost:4184/#${id}`, { waitUntil: "load" });
+  await page.waitForFunction(
+    () => (document.querySelector("main")?.innerText.length ?? 0) > 400,
+    null,
+    { timeout: 8000 }
+  );
   await page.waitForTimeout(250); // 연출을 건너뛴다면 이 시점에 이미 전부 보여야 한다
   const r = await page.evaluate(() => {
     let faded = 0;

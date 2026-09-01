@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { PAGES } from "../lib/hooks.js";
+import { isAdmitted, onAdmit, takeSeat } from "../lib/admit.js";
 import {
   countUpOnScroll, dimAroundOnScroll, drawRuleOnScroll, revealOnScroll, MAX_STEPS, STEP_MS,
 } from "../lib/reveal.js";
@@ -8,13 +9,28 @@ import {
 /**
  * 화면에 들어오면 차례로 뜬다.
  * 제목이 먼저, 그다음 핵심 수치, 그다음 본문 순서가 되도록 index를 준다.
+ *
+ * 그리는 차례도 여기서 갈린다. 한 화면을 한 번에 다 그리지 않고 묶음 하나씩
+ * 한 프레임에 들여보낸다. 까닭은 lib/admit.js 에 적어 두었다.
  */
 export function Stagger({ index = 0, children, className = "", style }) {
   const ref = useRef(null);
-  useEffect(() => revealOnScroll(ref.current, { delay: Math.min(index, MAX_STEPS) * STEP_MS }), [index]);
+  const seat = useRef(null);
+  if (seat.current === null) seat.current = takeSeat();
+  const [open, setOpen] = useState(() => isAdmitted(seat.current));
+
+  useEffect(() => {
+    if (open) return undefined;
+    return onAdmit(seat.current, () => setOpen(true));
+  }, [open]);
+  useEffect(() => {
+    if (!open) return undefined;
+    return revealOnScroll(ref.current, { delay: Math.min(index, MAX_STEPS) * STEP_MS });
+  }, [open, index]);
+
   return (
     <div ref={ref} className={className} style={style}>
-      {children}
+      {open ? children : null}
     </div>
   );
 }
