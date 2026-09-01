@@ -13,7 +13,7 @@ const FILTERS = [
 function Block({ label, children, accent }) {
   return (
     <div className="mt-4">
-      <p className="t-kicker m-0" style={{ fontSize: "0.72rem", letterSpacing: "0.14em" }}>{label}</p>
+      <p className="t-kicker m-0" style={{ fontSize: "0.8125rem", letterSpacing: "0.14em" }}>{label}</p>
       <p className="t-body m-0 mt-2 text-[0.9rem]" style={accent ? { color: "var(--accent)" } : undefined}>
         {children}
       </p>
@@ -48,7 +48,7 @@ function Card({ item, open, onToggle, index }) {
               <Block label="이렇게 확인할 수 있습니다">{item.validation}</Block>
               <Block label="다음 질문" accent>{item.nextQuestion}</Block>
               <div className="mt-5">
-                <p className="t-kicker m-0 mb-2" style={{ fontSize: "0.72rem", letterSpacing: "0.14em" }}>관련 수치</p>
+                <p className="t-kicker m-0 mb-2" style={{ fontSize: "0.8125rem", letterSpacing: "0.14em" }}>관련 수치</p>
                 <MiniChart focus={item.focus} />
               </div>
             </motion.div>

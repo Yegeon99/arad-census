@@ -5,7 +5,7 @@ import { fmtPct, fmtPeople, fmtPp, asParticle } from "../../lib/format.js";
 import { useInView, useMediaQuery, useReducedMotion, ENTER_MS } from "../../lib/hooks.js";
 
 const WIDE = { w: 960, gutter: 168, row: 50, pad: 96, bar: 34, font: 13 };
-const NARROW = { w: 380, gutter: 0, row: 70, pad: 10, bar: 20, font: 12 };
+const NARROW = { w: 380, gutter: 0, row: 70, pad: 10, bar: 20, font: 13 };
 
 /** 좌우 대칭 피라미드. 반대쪽 표본은 점선 윤곽으로 겹쳐 보여 준다. */
 export default function MirrorPyramid({
@@ -53,7 +53,7 @@ export default function MirrorPyramid({
                   <text x={4} y={top + 12} fontSize={S.font} fontWeight="600" fill="var(--text-primary)">
                     {b.label}
                   </text>
-                  <text x={S.w - 4} y={top + 12} textAnchor="end" fontSize="11" className="num" fill="var(--text-muted)">
+                  <text x={S.w - 4} y={top + 12} textAnchor="end" fontSize="13" className="num" fill="var(--text-muted)">
                     {fmtPeople(countAt(b))}
                   </text>
                 </>
@@ -70,19 +70,19 @@ export default function MirrorPyramid({
                 style={{ transition: ease }} />
 
               {wideEnough ? (
-                <text x={cx} y={mid} textAnchor="middle" fontSize="12.5" className="num"
+                <text x={cx} y={mid} textAnchor="middle" fontSize="13" className="num"
                   fill={BIN_ORDER.indexOf(b.label) >= 4 ? "#FFFFFF" : "var(--text-primary)"} style={{ transition: ease }}>
                   {fmtPct(v)}
                 </text>
               ) : (
-                <text x={cx + half + 8} y={mid} fontSize="12" className="num" fill="var(--text-secondary)"
+                <text x={cx + half + 8} y={mid} fontSize="13" className="num" fill="var(--text-secondary)"
                   style={{ transition: ease }}>
                   {fmtPct(v)}
                 </text>
               )}
 
               {!narrow && (
-                <text x={S.w - 6} y={mid} textAnchor="end" fontSize="12" className="num" fill="var(--text-muted)">
+                <text x={S.w - 6} y={mid} textAnchor="end" fontSize="13" className="num" fill="var(--text-muted)">
                   {fmtPeople(countAt(b))}
                 </text>
               )}
@@ -92,7 +92,7 @@ export default function MirrorPyramid({
                   <line x1={cx - half} x2={cx - ghostHalf} y1={barY + S.bar + 7} y2={barY + S.bar + 7}
                     stroke="var(--gold)" strokeWidth="2" style={{ transition: ease }} />
                   <text x={Math.max(4, cx - Math.max(half, ghostHalf))} y={barY + S.bar + 22}
-                    fontSize="12" fontWeight="700" className="num" fill="var(--gold-text)" style={{ transition: ease }}>
+                    fontSize="13" fontWeight="700" className="num" fill="var(--gold-text)" style={{ transition: ease }}>
                     {`${gapText} ${fmtPp(gapValue)}`}
                   </text>
                 </g>

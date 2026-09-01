@@ -8,7 +8,7 @@ import { fmtPct, fmtPeople } from "../../lib/format.js";
 
 function Row({ label, value, max, color, note, strong }) {
   return (
-    <li className="flex items-center gap-2 py-[2px] text-[0.76rem]">
+    <li className="flex items-center gap-2 py-[2px] text-[0.8125rem]">
       <span className="w-[6.4rem] shrink-0 truncate" style={{ color: strong ? "var(--text-primary)" : "var(--text-secondary)", fontWeight: strong ? 700 : 450 }}>
         {label}
       </span>
@@ -23,7 +23,7 @@ function Row({ label, value, max, color, note, strong }) {
 function Stacked({ label, parts, order, colors }) {
   return (
     <div className="py-1">
-      <p className="m-0 text-[0.76rem]" style={{ color: "var(--text-secondary)" }}>{label}</p>
+      <p className="m-0 text-[0.8125rem]" style={{ color: "var(--text-secondary)" }}>{label}</p>
       <div className="mt-1 flex h-[16px] overflow-hidden" style={{ background: "var(--bg-sunken)" }}>
         {order.map((k) => (
           <div key={k} style={{ width: `${parts[k]}%`, background: colors[k] }} title={`${k} ${fmtPct(parts[k])}`} />

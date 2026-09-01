@@ -7,7 +7,8 @@ import { capEvidence } from "../lib/data.js";
  * 줄 하나가 캐릭터 하나이고, 줄이 짙을수록 강한 캐릭터다.
  */
 const W = 170;
-const H = 150;
+const H = 158;
+const CAP = 26;   // 맨 아래 캡션이 쓰는 띠. 그림은 이 위에서 끝난다.
 const ROW_H = 9;
 const ROW_GAP = 3;
 const LEFT = 18;
@@ -25,7 +26,7 @@ function SearchBox({ y }) {
   return (
     <g>
       <rect x={LEFT} y={y} width={ROW_W} height={18} rx="2" fill="none" stroke="var(--hairline-strong)" strokeWidth="1.1" />
-      <text x={LEFT + 8} y={y + 13} fontSize="10.5" fill="var(--text-primary)" fontWeight="600">가나</text>
+      <text x={LEFT + 8} y={y + 13} fontSize="13" fill="var(--text-primary)" fontWeight="600">가나</text>
       <circle cx={LEFT + ROW_W - 16} cy={y + 8} r="4.2" fill="none" stroke="var(--text-muted)" strokeWidth="1.2" />
       <path d={`M${LEFT + ROW_W - 13} ${y + 11}l3.5 3.5`} stroke="var(--text-muted)" strokeWidth="1.2" strokeLinecap="round" />
     </g>
@@ -41,7 +42,7 @@ function Panel1() {
       {TONES.slice(0, 6).map((t, i) => (
         <Row key={i} y={40 + i * (ROW_H + ROW_GAP)} tone={t} />
       ))}
-      <text x={LEFT} y={H - 6} fontSize="9" fill="var(--text-muted)">줄 하나가 캐릭터 하나</text>
+      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--text-muted)">줄 하나가 캐릭터 하나</text>
     </svg>
   );
 }
@@ -53,14 +54,14 @@ function Panel2() {
       {TONES.slice(0, 3).map((t, i) => (
         <Row key={i} y={40 + i * (ROW_H + ROW_GAP)} tone={t} />
       ))}
-      <line x1={LEFT - 4} x2={LEFT + ROW_W + 4} y1={40 + 3 * (ROW_H + ROW_GAP) - 2} y2={40 + 3 * (ROW_H + ROW_GAP) - 2}
+      <line x1={LEFT - 4} x2={LEFT + ROW_W - 26} y1={40 + 3 * (ROW_H + ROW_GAP) - 2} y2={40 + 3 * (ROW_H + ROW_GAP) - 2}
         stroke="var(--gold)" strokeWidth="1.6" strokeDasharray="5 3" />
-      <text x={LEFT + ROW_W + 6} y={40 + 3 * (ROW_H + ROW_GAP) + 2} fontSize="8.5" fill="var(--gold-text)" fontWeight="700"
+      <text x={LEFT + ROW_W + 4} y={40 + 3 * (ROW_H + ROW_GAP) + 3} fontSize="13" fill="var(--gold-text)" fontWeight="700"
         textAnchor="end">200</text>
       {TONES.slice(3, 6).map((t, i) => (
         <Row key={i} y={40 + (i + 3) * (ROW_H + ROW_GAP) + 4} tone={t} dim />
       ))}
-      <text x={LEFT} y={H - 6} fontSize="9" fill="var(--text-muted)">아래쪽은 잘려 나감</text>
+      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--text-muted)">아래쪽은 잘려 나감</text>
     </svg>
   );
 }
@@ -73,7 +74,7 @@ function Panel3() {
         <Row key={i} y={40 + i * (ROW_H + ROW_GAP)} tone={t} />
       ))}
       <path d={`M${LEFT - 6} 40v${6 * (ROW_H + ROW_GAP) - ROW_GAP}`} stroke="var(--accent)" strokeWidth="2" />
-      <text x={LEFT} y={H - 6} fontSize="9" fill="var(--text-muted)">잘린 곳 없음</text>
+      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--text-muted)">잘린 곳 없음</text>
     </svg>
   );
 }
@@ -82,15 +83,15 @@ function Panel4() {
   const groups = [0, 1, 2];
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="전부 보인 검색만 모은 것이 쏠림 없는 표본">
-      <rect x={6} y={8} width={W - 12} height={H - 26} rx="3" fill="none" stroke="var(--accent)" strokeWidth="1.4" />
+      <rect x={6} y={8} width={W - 12} height={H - CAP - 14} rx="3" fill="none" stroke="var(--accent)" strokeWidth="1.4" />
       {groups.map((g) => (
         <g key={g}>
           {TONES.slice(0, 4).map((t, i) => (
-            <Row key={i} y={18 + g * 42 + i * 8} tone={t} width={ROW_W - 14} />
+            <Row key={i} y={16 + g * 37 + i * 8} tone={t} width={ROW_W - 14} />
           ))}
         </g>
       ))}
-      <text x={LEFT} y={H - 6} fontSize="9" fill="var(--accent)" fontWeight="700">쏠림 없는 표본</text>
+      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--accent)" fontWeight="700">쏠림 없는 표본</text>
     </svg>
   );
 }

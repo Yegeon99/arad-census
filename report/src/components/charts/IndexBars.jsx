@@ -7,10 +7,10 @@ export default function IndexBars({ title, rows, maxDeviation = 1.0 }) {
   return (
     <div ref={ref}>
       <p className="t-eyebrow m-0 mb-1">{title}</p>
-      <div className="mb-1 flex items-center gap-3 text-[0.72rem]" style={{ color: "var(--text-muted)" }}>
-        <span className="w-[9.4rem] shrink-0" />
+      <div className="mb-1 flex items-center gap-2 text-[0.8125rem] sm:gap-3" style={{ color: "var(--text-muted)" }}>
+        <span className="w-[5.6rem] shrink-0 sm:w-[9.4rem]" />
         <span className="relative flex-1 text-center">표본 평균 1.00</span>
-        <span className="w-[3.6rem] shrink-0" />
+        <span className="w-[3.2rem] shrink-0 sm:w-[3.6rem]" />
         <span className="w-[7.8rem] shrink-0" />
       </div>
       <ul className="m-0 list-none p-0">
@@ -19,8 +19,8 @@ export default function IndexBars({ title, rows, maxDeviation = 1.0 }) {
           const w = Math.min(50, (Math.abs(dev) / maxDeviation) * 50);
           const right = dev >= 0;
           return (
-            <li key={r.job} className="flex items-center gap-3 py-[3px] text-[0.84rem]">
-              <span className="w-[9.4rem] shrink-0 truncate" style={{ color: "var(--text-primary)" }}>{r.job}</span>
+            <li key={r.job} className="flex items-center gap-2 py-[3px] text-[0.84rem] sm:gap-3">
+              <span className="w-[5.6rem] shrink-0 truncate sm:w-[9.4rem]" style={{ color: "var(--text-primary)" }}>{r.job}</span>
               <span className="relative h-[15px] flex-1" style={{ background: "var(--bg-sunken)" }}>
                 <span className="absolute inset-y-0" style={{ left: "50%", width: 1, background: "var(--hairline-strong)" }} />
                 <span
@@ -33,7 +33,7 @@ export default function IndexBars({ title, rows, maxDeviation = 1.0 }) {
                   }}
                 />
               </span>
-              <span className="num w-[3.6rem] shrink-0 text-right font-semibold"
+              <span className="num w-[3.2rem] shrink-0 text-right font-semibold sm:w-[3.6rem]"
                 style={{ color: right ? "var(--ink-5)" : "var(--gold-text)" }}>{fmtX(r.index)}</span>
               <span className="num w-[7.8rem] shrink-0 text-right" style={{ color: "var(--text-muted)" }}>
                 {fmtPct(r.raidShare * 100)} · {fmtPeople(r.total)}

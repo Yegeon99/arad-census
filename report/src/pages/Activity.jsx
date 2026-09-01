@@ -90,7 +90,7 @@ export default function Activity() {
                     <td style={{ color: "var(--text-primary)" }}>{k}</td>
                     <td className="num text-right">
                       {fmtPct(before[k])}
-                      <span className="block text-[0.8rem]" style={{ color: "var(--text-muted)" }}>
+                      <span className="block text-[0.8125rem]" style={{ color: "var(--text-muted)" }}>
                         {fmtPeople(actOverall[k].count)}
                       </span>
                     </td>

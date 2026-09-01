@@ -64,7 +64,7 @@ export function BottomNav({ page }) {
               key={p.id}
               href={`#${p.id}`}
               aria-current={on ? "page" : undefined}
-              className="relative shrink-0 px-3.5 py-3 text-center text-[0.78rem] no-underline"
+              className="relative shrink-0 px-3.5 py-3 text-center text-[0.8125rem] no-underline"
               style={{
                 color: on ? "var(--accent)" : "var(--text-muted)",
                 fontWeight: on ? 700 : 450,

@@ -40,7 +40,7 @@ export default function JobGroupBars({ groups, total }) {
                   }}
                 />
               </span>
-              <span className="num w-[7.6rem] shrink-0 text-right text-[0.78rem]" style={{ color: "var(--text-muted)" }}>
+              <span className="num w-[7.6rem] shrink-0 text-right text-[0.8125rem]" style={{ color: "var(--text-muted)" }}>
                 {fmtPeople(g.count)} {fmtPct((g.count / total) * 100)}
               </span>
             </li>

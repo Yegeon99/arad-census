@@ -40,7 +40,7 @@ export function ActivityMorph({ before, after, subsample }) {
         ))}
       </div>
 
-      <div className="mt-1 flex justify-between text-[0.72rem]" style={{ color: "var(--text-muted)" }}>
+      <div className="mt-1 flex justify-between text-[0.8125rem]" style={{ color: "var(--text-muted)" }}>
         <span>왼쪽일수록 최근 접속</span>
         <span>오른쪽일수록 오래 미접속</span>
       </div>
@@ -61,8 +61,8 @@ export function ActivityMorph({ before, after, subsample }) {
   );
 }
 
-const WIDE = { w: 900, row: 62, left: 128, right: 66, font: 12.5 };
-const NARROW = { w: 380, row: 54, left: 92, right: 44, font: 10.5 };
+const WIDE = { w: 900, row: 62, left: 128, right: 66, font: 13 };
+const NARROW = { w: 380, row: 54, left: 114, right: 44, font: 13 };
 
 /** 명성 구간을 아래에서 위로 쌓은 스트림. 위로 갈수록 최근 접속 비중이 짙어진다. */
 export function ActivityStream({ bins }) {
@@ -96,9 +96,12 @@ export function ActivityStream({ bins }) {
     <div ref={ref}>
       <svg viewBox={`0 0 ${S.w} ${H}`} width="100%" style={{ display: "block" }} role="img"
         aria-label="명성 구간별 접속 기록 구성">
-        <text x={S.left} y={12} fontSize={narrow ? 9 : 10.5} fill="var(--text-muted)">왼쪽일수록 최근 접속</text>
-        <text x={S.w - S.right} y={12} textAnchor="end" fontSize={narrow ? 9 : 10.5} fill="var(--text-muted)">
-          오른쪽일수록 오래 미접속
+        {/* 좁은 화면에서는 13픽셀로 키운 두 머리말이 가운데서 맞부딪는다. 짧게 줄여 쓴다. */}
+        <text x={S.left} y={12} fontSize={13} fill="var(--text-muted)">
+          {narrow ? "← 최근 접속" : "왼쪽일수록 최근 접속"}
+        </text>
+        <text x={S.w - S.right} y={12} textAnchor="end" fontSize={13} fill="var(--text-muted)">
+          {narrow ? "오래 미접속 →" : "오른쪽일수록 오래 미접속"}
         </text>
         <g opacity={seen ? 1 : 0} style={{ transition: `opacity ${ENTER_MS}ms ease` }}>
           {bands.map((b) => (
@@ -112,14 +115,14 @@ export function ActivityStream({ bins }) {
               fill="var(--text-primary)">
               {b.bin}
             </text>
-            <text x={S.w - S.right + 8} y={yOf(i) + 4} fontSize={narrow ? 9.5 : 11.5} className="num" fill="var(--text-muted)">
+            <text x={S.w - S.right + 8} y={yOf(i) + 4} fontSize={13} className="num" fill="var(--text-muted)">
               {fmtPeople(b.n)}
             </text>
             {b.smallSample && (
               <>
                 <rect x={S.left - 4} y={28 + i * S.row + 5} width={innerW + 8} height={S.row - 10}
                   fill="none" stroke="var(--gold)" strokeWidth="1.2" strokeDasharray="5 4" />
-                <text x={S.left - 10} y={yOf(i) + 18} textAnchor="end" fontSize={narrow ? 8.5 : 10.5}
+                <text x={S.left - 10} y={yOf(i) + 23} textAnchor="end" fontSize={13}
                   fill="var(--gold-text)" fontWeight="700">
                   표본이 적어 참고용
                 </text>

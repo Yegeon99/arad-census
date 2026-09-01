@@ -4,7 +4,7 @@ function Swatches({ items, colors, note }) {
   return (
     <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
       {items.map((k) => (
-        <span key={k} className="flex items-center gap-1.5 text-[0.78rem]" style={{ color: "var(--text-secondary)" }}>
+        <span key={k} className="flex items-center gap-1.5 text-[0.8125rem]" style={{ color: "var(--text-secondary)" }}>
           <span className="inline-block h-[9px] w-[9px] shrink-0" style={{ background: colors[k] }} />
           {k}
         </span>

@@ -121,7 +121,7 @@ export default function Growth() {
                   {capBins.map((b, i) => (
                     <tr key={b.label}>
                       <td style={{ color: "var(--text-primary)" }}>{b.label}</td>
-                      <td className="num text-[0.78rem]">{CUT_NOTE[i][1]}</td>
+                      <td className="num text-[0.8125rem]">{CUT_NOTE[i][1]}</td>
                       <td className="num text-right">{fmtPct(b.observed)}<br /><span style={{ color: "var(--text-muted)" }}>{fmtPeople(b.observedCount)}</span></td>
                       <td className="num text-right" style={{ color: "var(--gold-text)", fontWeight: 600 }}>{fmtPct(b.corrected)}</td>
                     </tr>

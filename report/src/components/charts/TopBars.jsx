@@ -17,7 +17,7 @@ export default function TopBars({ items, hover, setHover }) {
             onMouseLeave={() => setHover(null)}
             style={{ cursor: "default" }}
           >
-            <span className="num w-5 shrink-0 text-right text-[0.76rem]" style={{ color: "var(--text-muted)" }}>{i + 1}</span>
+            <span className="num w-5 shrink-0 text-right text-[0.8125rem]" style={{ color: "var(--text-muted)" }}>{i + 1}</span>
             <span className="w-[7.2rem] shrink-0 truncate text-[0.86rem]"
               style={{ color: on ? "var(--text-primary)" : "var(--text-secondary)", fontWeight: on ? 700 : 450 }}>
               {d.jobName}
