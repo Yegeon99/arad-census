@@ -10,28 +10,62 @@
 //
 // 첫 묶음까지 한 프레임 미룬다. 곧바로 그려 두면 첫 배치에 제목 글꼴 처리까지
 // 함께 걸려 다시 무거워진다 (실측 136 -> 188밀리초). 사람 눈에는 한 프레임이다.
+//
+// 다만 사람이 스크롤을 시작하면 남은 묶음을 그 자리에서 전부 들여보내고,
+// 이어서 한동안은 새로 올라오는 묶음도 기다리지 않고 곧바로 그린다.
+// 한 프레임에 하나는 화면이 뜨는 동안에만 넉넉한 속도다. 빠르게 내리면
+// 그리는 속도가 내리는 속도를 못 따라가 아래쪽이 한동안 비어 보인다.
+// 스크롤이 시작됐다는 것은 화면 뜨는 일이 이미 끝났다는 뜻이기도 하다.
+//
+// 한동안을 두는 까닭: 묶음 안에 다시 묶음이 든 자리가 있다. 바깥이 열려야
+// 안쪽이 자리를 받으므로, 한 번 몰아넣는 것만으로는 안쪽이 다시 밀린다.
+
+// 한 프레임에 몇 개씩 들여보낼지. 처음에는 하나씩, 시간이 갈수록 여러 개씩.
+// 첫 배치가 무거운 것은 처음 몇 프레임뿐이고, 그 뒤로는 이미 자리를 잡아
+// 여러 개를 한꺼번에 넣어도 한 번에 붙잡는 시간이 짧다. 이렇게 두면 화면이
+// 다 차기까지 걸리는 시간에 위가 생긴다. 느린 기기에서 한 프레임에 하나씩만
+// 넣으면 긴 화면이 다 차는 데 1초를 넘겨, 빠르게 내릴 때 아래가 비어 보였다.
+const PACE = [
+  { after: 0, each: 1 },
+  { after: 200, each: 2 },
+  { after: 400, each: 4 },
+  { after: 700, each: Infinity },
+];
+
+const RUSH_MS = 1200;  // 스크롤 뒤 이만큼은 기다리지 않고 곧바로 그린다
+const DEAF_MS = 150;   // 화면을 옮기며 스스로 올린 스크롤은 이만큼 못 들은 척한다
 
 let seq = 0;        // 지금까지 자리를 받은 묶음 수
 let admitted = 0;   // 이 번호 앞까지는 그려도 된다
+let rushUntil = 0;  // 이 시각까지는 밀린 것을 곧바로 들여보낸다
+let backlogAt = 0;  // 지금 밀린 줄이 생긴 시각
+let deafUntil = 0;  // 이 시각까지 들어온 스크롤은 사람이 낸 것이 아니다
 let pumping = false;
 const waiting = new Set(); // { seat, fn }
 
 const canDefer = () =>
   typeof window !== "undefined" && typeof window.requestAnimationFrame === "function";
 
+/** 지금 한 프레임에 몇 개까지 들여보낼 수 있나 */
+function quota() {
+  const elapsed = now() - backlogAt;
+  let each = 1;
+  for (const p of PACE) if (elapsed >= p.after) each = p.each;
+  return each;
+}
+
 function pump() {
   pumping = false;
-  // 차례가 가장 이른 것 하나만 들여보낸다. 밀린 것이 여럿이어도 한꺼번에
-  // 풀지 않는다. 한꺼번에 풀면 배치가 다시 한 덩어리가 된다.
-  let next = null;
-  for (const one of waiting) {
-    if (next === null || one.seat < next.seat) next = one;
-  }
-  if (next !== null) {
+  // 차례가 이른 것부터, 이번 프레임 몫만큼 들여보낸다.
+  const order = [...waiting].sort((a, b) => a.seat - b.seat);
+  let room = quota();
+  for (const one of order) {
+    if (room <= 0) break;
+    room -= 1;
     // 버려진 번호는 건너뛴다. 화면을 옮기면 차례를 못 받은 채 내려간 묶음이 생긴다.
-    admitted = Math.max(admitted, next.seat + 1);
-    waiting.delete(next);
-    next.fn();
+    admitted = Math.max(admitted, one.seat + 1);
+    waiting.delete(one);
+    one.fn();
   }
   if (waiting.size > 0) schedule();
 }
@@ -42,6 +76,41 @@ function schedule() {
   window.requestAnimationFrame(pump);
 }
 
+const now = () => (typeof performance === "undefined" ? Date.now() : performance.now());
+const rushing = () => now() < rushUntil;
+
+/** 밀린 묶음을 한꺼번에 들여보낸다. 사람이 스크롤을 시작하면 부른다. */
+function rush() {
+  if (now() < deafUntil) return;
+  rushUntil = now() + RUSH_MS;
+  for (const one of [...waiting].sort((a, b) => a.seat - b.seat)) {
+    admitted = Math.max(admitted, one.seat + 1);
+    waiting.delete(one);
+    one.fn();
+  }
+}
+
+/**
+ * 화면을 옮길 때 부른다. 몰아넣기를 끄고, 이어서 스스로 올리는 스크롤은
+ * 사람이 낸 것으로 치지 않는다. 새 화면은 다시 한 프레임에 하나씩 그린다.
+ */
+export function calmDown() {
+  rushUntil = 0;
+  backlogAt = now();
+  deafUntil = now() + DEAF_MS;
+}
+
+let listening = false;
+function listenForScroll() {
+  if (listening || typeof window === "undefined") return;
+  listening = true;
+  // 화면을 옮길 때마다 다시 밀리므로 한 번 듣고 마는 것이 아니라 계속 듣는다.
+  // 밀린 것이 없으면 rush 는 아무 일도 하지 않는다.
+  for (const kind of ["wheel", "touchmove", "keydown", "scroll"]) {
+    window.addEventListener(kind, rush, { passive: true });
+  }
+}
+
 /** 묶음 하나가 자리를 받는다. 화면을 그리는 중에 부른다. */
 export function takeSeat() {
   if (!canDefer()) return -1;
@@ -50,7 +119,7 @@ export function takeSeat() {
   return mine;
 }
 
-export const isAdmitted = (mine) => mine < 0 || mine < admitted;
+export const isAdmitted = (mine) => mine < 0 || mine < admitted || rushing();
 
 /**
  * 아직 차례가 안 된 묶음이 자기 차례를 기다린다.
@@ -64,6 +133,13 @@ export function onAdmit(mine, fn) {
     fn();
     return () => {};
   }
+  listenForScroll();
+  if (rushing()) {
+    admitted = Math.max(admitted, mine + 1);
+    fn();
+    return () => {};
+  }
+  if (waiting.size === 0) backlogAt = now();
   const one = { seat: mine, fn };
   waiting.add(one);
   schedule();

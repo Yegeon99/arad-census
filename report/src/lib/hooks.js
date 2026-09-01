@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { whenInView } from "./reveal.js";
+import { calmDown } from "./admit.js";
 
 export const PAGES = [
   { id: "overview", label: "한눈에 보기" },
@@ -22,6 +23,9 @@ export function useHashRoute() {
   const [page, setPage] = useState(readHash);
   useEffect(() => {
     const onHash = () => {
+      // 새 화면은 다시 한 프레임에 하나씩 그린다. 이어지는 맨 위로 올리기는
+      // 사람이 낸 스크롤이 아니므로 몰아넣기를 부르지 않아야 한다.
+      calmDown();
       setPage(readHash());
       window.scrollTo({ top: 0, behavior: "instant" });
     };
