@@ -1,11 +1,11 @@
-# Arad Census, 던파 캐릭터 표본조사
+# DNF Census, 던파 캐릭터 표본조사
 
 던전앤파이터 캐릭터를 표본조사 방법론으로 조사하고, 그 방법이 무엇을 놓치는지까지
 같이 재서 공개한 리포트입니다.
 
 **리포트**: https://dnf-census.vercel.app
 
-사이트 이름은 Arad Census입니다. 주소는 Vercel 프로젝트 이름을 따라가는데 프로젝트명을 되돌리지 못해 dnf-census 주소를 정 주소로 씁니다. 옛 주소 arad-census.vercel.app 은 이 주소로 넘겨 보냅니다.
+사이트 이름은 DNF Census입니다. 저장소는 https://github.com/Yegeon99/dnf-census, 배포 주소는 https://dnf-census.vercel.app 입니다. 옛 주소 arad-census.vercel.app 은 이 주소로 넘겨 보냅니다.
 
 ![한눈에 보기 화면](docs/captures/desktop-overview.png)
 
