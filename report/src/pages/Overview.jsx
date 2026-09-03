@@ -214,7 +214,7 @@ export default function Overview() {
         <div className="mt-14 grid gap-6 sm:grid-cols-3">
           <BigNumber index={0} value={finalSample} suffix="명" label="성장을 마친 캐릭터" note="직업 순위는 이 기준으로 셉니다" />
           <BigNumber index={1} value={meta.servers.length} suffix="곳" label="조사한 서버" note="공개된 서버 전부" />
-          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="쏠림 없는 표본" note="200명에 걸리지 않은 검색에서 발견" />
+          <BigNumber index={2} value={meta.completeSampleSize} suffix="명" label="쏠림 없는 표본" note="200명에 걸리지 않은 검색에서 발견, 참고용" />
         </div>
       </Stagger>
 

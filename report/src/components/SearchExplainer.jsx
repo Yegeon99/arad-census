@@ -3,7 +3,7 @@ import { fmtInt, fmtPct } from "../lib/format.js";
 import { capEvidence } from "../lib/data.js";
 
 /**
- * 검색이 어떻게 잘리는지, 쏠림 없는 표본이 무엇인지 네 칸 그림으로 보여 준다.
+ * 검색이 어떻게 잘리는지, 잘린 검색을 어떻게 쪼개 다시 받는지 네 칸 그림으로 보여 준다.
  * 줄 하나가 캐릭터 하나이고, 줄이 짙을수록 강한 캐릭터다.
  */
 const W = 170;
@@ -18,8 +18,8 @@ const STRONG = BIN_COLOR[BIN_ORDER[5]];
 const MID = BIN_COLOR[BIN_ORDER[3]];
 const WEAK = BIN_COLOR[BIN_ORDER[0]];
 
-function Row({ y, tone, width = ROW_W, dim }) {
-  return <rect x={LEFT} y={y} width={width} height={ROW_H} rx="1.5" fill={tone} opacity={dim ? 0.28 : 1} />;
+function Row({ y, tone, width = ROW_W, dim, x = LEFT, h = ROW_H }) {
+  return <rect x={x} y={y} width={width} height={h} rx="1.5" fill={tone} opacity={dim ? 0.28 : 1} />;
 }
 
 function SearchBox({ y }) {
@@ -79,19 +79,44 @@ function Panel3() {
   );
 }
 
+// 잘린 목록 하나가 직업군 여러 갈래로 나뉘고, 갈래마다 잘림 없이 전부 보인다.
+const SRC_X = 53;
+const SRC_W = 64;
+const SRC_H = 7;
+const CUT_Y = 39;
+const COL_CX = [27, 85, 143];
+const COL_W = 44;
+const SPLIT_H = 7;
+const SPLIT_GAP = 3;
+const SPLIT_TOP = 62;
+
 function Panel4() {
-  const groups = [0, 1, 2];
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="전부 보인 검색만 모은 것이 쏠림 없는 표본">
-      <rect x={6} y={8} width={W - 12} height={H - CAP - 14} rx="3" fill="none" stroke="var(--accent)" strokeWidth="1.4" />
-      {groups.map((g) => (
-        <g key={g}>
-          {TONES.slice(0, 4).map((t, i) => (
-            <Row key={i} y={16 + g * 37 + i * 8} tone={t} width={ROW_W - 14} />
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
+      aria-label="잘린 목록 하나를 직업군 세 갈래로 쪼개면 갈래마다 잘림 없이 전부 보인다">
+      {[STRONG, STRONG, MID].map((t, i) => (
+        <Row key={i} x={SRC_X} y={10 + i * (SRC_H + 2)} width={SRC_W} h={SRC_H} tone={t} />
+      ))}
+      <line x1={SRC_X - 5} x2={SRC_X + SRC_W + 5} y1={CUT_Y} y2={CUT_Y}
+        stroke="var(--gold)" strokeWidth="1.6" strokeDasharray="5 3" />
+
+      {COL_CX.map((cx) => (
+        <path key={cx} d={`M85 ${CUT_Y + 4}V${CUT_Y + 10}H${cx}V${SPLIT_TOP - 4}`}
+          fill="none" stroke="var(--accent)" strokeWidth="1.2" />
+      ))}
+
+      {COL_CX.map((cx) => (
+        <g key={cx}>
+          <path d={`M${cx - COL_W / 2 - 5} ${SPLIT_TOP}v${4 * (SPLIT_H + SPLIT_GAP) - SPLIT_GAP}`}
+            stroke="var(--accent)" strokeWidth="2" />
+          {[STRONG, MID, WEAK, WEAK].map((t, i) => (
+            <Row key={i} x={cx - COL_W / 2} y={SPLIT_TOP + i * (SPLIT_H + SPLIT_GAP)}
+              width={COL_W} h={SPLIT_H} tone={t} />
           ))}
         </g>
       ))}
-      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--accent)" fontWeight="700">쏠림 없는 표본</text>
+
+      <text x={LEFT} y={H - 6} fontSize="13" fill="var(--accent)" fontWeight="700">직업군으로 쪼개 다시</text>
     </svg>
   );
 }
@@ -102,8 +127,14 @@ const PANELS = [
     node: <Panel2 />,
     caption: `200명이 넘는 글자는 잘립니다. 잘릴 때 낮은 명성 캐릭터가 먼저 잘립니다. 잘린 검색 ${fmtInt(capEvidence.sampledCombos)}개를 쪼개 다시 받아 보니 새로 드러난 캐릭터의 ${fmtPct(capEvidence.stageSplit[0].revealed)}가 가장 낮은 단계였습니다.`,
   },
-  { node: <Panel3 />, caption: "200명이 안 되는 글자는 전부 보입니다." },
-  { node: <Panel4 />, caption: "이렇게 전부 보인 검색만 모은 것이 쏠림 없는 표본입니다. 실제 분포에 더 가깝습니다." },
+  {
+    node: <Panel3 />,
+    caption: "200명이 안 되는 글자는 전부 보입니다. 다만 이런 검색은 드문 이름에 몰려 있어 그 자체를 기준으로 쓰지는 않았습니다.",
+  },
+  {
+    node: <Panel4 />,
+    caption: "잘린 검색을 직업군으로 쪼개 다시 받으면 가려진 몫이 보입니다. 그 몫을 되돌린 값이 상한 보정값입니다.",
+  },
 ];
 
 export default function SearchExplainer() {
